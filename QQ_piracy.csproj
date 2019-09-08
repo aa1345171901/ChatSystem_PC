@@ -53,75 +53,75 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatForm.cs">
+    <Compile Include="Form\ChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChatForm.Designer.cs">
+    <Compile Include="Form\ChatForm.Designer.cs">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBHelper.cs" />
-    <Compile Include="FacesForm.cs">
+    <Compile Include="Helper\DBHelper.cs" />
+    <Compile Include="Form\FacesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FacesForm.Designer.cs">
+    <Compile Include="Form\FacesForm.Designer.cs">
       <DependentUpon>FacesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginingForm.cs">
+    <Compile Include="Form\LoginingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginingForm.Designer.cs">
+    <Compile Include="Form\LoginingForm.Designer.cs">
       <DependentUpon>LoginingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChooseForm.cs">
+    <Compile Include="Form\ChooseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChooseForm.Designer.cs">
+    <Compile Include="Form\ChooseForm.Designer.cs">
       <DependentUpon>ChooseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Form\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Form\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonalInfoForm.cs">
+    <Compile Include="Form\PersonalInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonalInfoForm.Designer.cs">
+    <Compile Include="Form\PersonalInfoForm.Designer.cs">
       <DependentUpon>PersonalInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegisterForm.cs">
+    <Compile Include="Form\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegisterForm.Designer.cs">
+    <Compile Include="Form\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Form\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Form\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RequestForm.cs">
+    <Compile Include="Form\RequestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RequestForm.Designer.cs">
+    <Compile Include="Form\RequestForm.Designer.cs">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchFriendForm.cs">
+    <Compile Include="Form\SearchFriendForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchFriendForm.Designer.cs">
+    <Compile Include="Form\SearchFriendForm.Designer.cs">
       <DependentUpon>SearchFriendForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserHelper.cs" />
+    <Compile Include="Helper\UserHelper.cs" />
     <Compile Include="WinAPI\Enums.cs" />
     <Compile Include="WinAPI\Structs.cs" />
     <Compile Include="WinAPI\Win32API.cs" />
-    <Compile Include="XGMessageForm.cs">
+    <Compile Include="Form\XGMessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="XGMessageForm.Designer.cs">
+    <Compile Include="Form\XGMessageForm.Designer.cs">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="计算器.cs">
@@ -132,37 +132,37 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChatForm.resx">
+    <EmbeddedResource Include="Form\ChatForm.resx">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FacesForm.resx">
+    <EmbeddedResource Include="Form\FacesForm.resx">
       <DependentUpon>FacesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Form\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginingForm.resx">
+    <EmbeddedResource Include="Form\LoginingForm.resx">
       <DependentUpon>LoginingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChooseForm.resx">
+    <EmbeddedResource Include="Form\ChooseForm.resx">
       <DependentUpon>ChooseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonalInfoForm.resx">
+    <EmbeddedResource Include="Form\PersonalInfoForm.resx">
       <DependentUpon>PersonalInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegisterForm.resx">
+    <EmbeddedResource Include="Form\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RequestForm.resx">
+    <EmbeddedResource Include="Form\RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchFriendForm.resx">
+    <EmbeddedResource Include="Form\SearchFriendForm.resx">
       <DependentUpon>SearchFriendForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="XGMessageForm.resx">
+    <EmbeddedResource Include="Form\XGMessageForm.resx">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="计算器.resx">
