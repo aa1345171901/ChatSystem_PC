@@ -202,6 +202,7 @@
             this.Controls.Add(this.ageLabel);
             this.Controls.Add(this.age);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ChooseForm";
             this.Text = "选填信息";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;

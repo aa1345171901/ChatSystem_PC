@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchFriendForm));
             this.dgvBasicResult = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -37,10 +41,6 @@
             this.lblAge = new System.Windows.Forms.Label();
             this.lblSex = new System.Windows.Forms.Label();
             this.cboSex = new System.Windows.Forms.ComboBox();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBasicResult)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +70,34 @@
             this.dgvBasicResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBasicResult.Size = new System.Drawing.Size(543, 267);
             this.dgvBasicResult.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "id";
+            this.Column1.HeaderText = "账号";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "NickName";
+            this.Column2.HeaderText = "昵称";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "age";
+            this.Column3.HeaderText = "年龄";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "sex";
+            this.Column4.HeaderText = "性别";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // tbSearch
             // 
@@ -159,34 +187,6 @@
             this.cboSex.Name = "cboSex";
             this.cboSex.Size = new System.Drawing.Size(121, 20);
             this.cboSex.TabIndex = 8;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "id";
-            this.Column1.HeaderText = "账号";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "NickName";
-            this.Column2.HeaderText = "昵称";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "age";
-            this.Column3.HeaderText = "年龄";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "sex";
-            this.Column4.HeaderText = "性别";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
             // 
             // btnClose
             // 

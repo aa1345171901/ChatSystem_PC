@@ -168,6 +168,7 @@
             this.Controls.Add(this.Pswlabel);
             this.Controls.Add(this.textPsw);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "RegisterForm";
             this.Text = "Register";
             this.Load += new System.EventHandler(this.RegisterForm_Load);

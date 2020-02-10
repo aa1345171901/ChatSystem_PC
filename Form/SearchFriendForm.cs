@@ -103,7 +103,7 @@ namespace QQ_piracy
                 int result = AddFriend(friendId);
                 if (result == 1)
                 {
-                    MessageBox.Show("添加成功，请刷新好友列表！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("添加成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -132,7 +132,7 @@ namespace QQ_piracy
                     dataAdapter.SelectCommand.CommandText = sql;
                     dataAdapter.Fill(dataSet, "userdata,user");
 
-                    sql += string.Format(" WHERE user.id={0} and user.dataid=userdata.id", int.Parse(tbSearch.Text.Trim()));
+                    sql = "SELECT user.Id,NickName,Age,Sex FROM Userdata,user"+string.Format(" WHERE user.id={0} and user.dataid=userdata.id", int.Parse(tbSearch.Text.Trim()));
                     dataAdapter.SelectCommand.CommandText = sql;
                     dataAdapter.Fill(dataSet, "userdata,user");
 

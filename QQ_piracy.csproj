@@ -124,10 +124,10 @@
     <Compile Include="Form\XGMessageForm.Designer.cs">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="计算器.cs">
+    <Compile Include="Calculator\计算器.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="计算器.Designer.cs">
+    <Compile Include="Calculator\计算器.Designer.cs">
       <DependentUpon>计算器.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -165,7 +165,7 @@
     <EmbeddedResource Include="Form\XGMessageForm.resx">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="计算器.resx">
+    <EmbeddedResource Include="Calculator\计算器.resx">
       <DependentUpon>计算器.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -191,7 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="图标.ico" />
-    <Content Include="陈建国.ico" />
+    <Content Include="Calculator\陈建国.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -201,8 +201,8 @@ namespace QQ_piracy
             ShowFriendList();       // 刷新好友列表
             int messageTypeId = 1;  // 消息类型 2代表添加好友，1代表好友消息
             int messageState = 1;   // 消息状态 1表示已读，0表示未读
-            int havePlayAdiuo = -1;   //声音只能播放一次
-            int AdiuoType = -1;      //0播放消息，1播放系统
+            //int havePlayAdiuo = -1;   //声音只能播放一次
+            //int AdiuoType = -1;      //0播放消息，1播放系统
 
             MySqlCommand cmd=null;
             // 消息有两种类型：聊天消息、添加好友消息
@@ -222,15 +222,25 @@ namespace QQ_piracy
                     messageState = dataReader.GetInt32("MessageState");
                     if (dataReader.GetInt32("havePlayAdiuo") == 0)
                     {
-                        havePlayAdiuo = 0;
-                        if ((AdiuoType == 1 && messageTypeId == 1) || (AdiuoType == 0 && messageTypeId == 2))
+                        //havePlayAdiuo = 0;
+                        //if ((AdiuoType == 1 && messageTypeId == 1) || (AdiuoType == 0 && messageTypeId == 2))
+                        //{
+                        //    AdiuoType = 2;
+                        //}
+                        //if (messageTypeId == 1&& AdiuoType != 2)
+                        //    AdiuoType = 0;
+                        //if (messageTypeId == 2 && AdiuoType != 2)
+                        //    AdiuoType = 1;
+                        SoundPlayer player=null;
+                        if (messageTypeId == 1)
                         {
-                            AdiuoType = 2;
+                            player = new SoundPlayer("msg.wav");
                         }
-                        if (messageTypeId == 1&& AdiuoType != 2)
-                            AdiuoType = 0;
-                        if (messageTypeId == 2 && AdiuoType != 2)
-                            AdiuoType = 1;
+                        if(messageTypeId == 2)
+                        {
+                            player = new SoundPlayer("system.wav");
+                        }
+                        player.Play();
                     }
                     // 判断消息类型，如果是添加好友消息，就启动喇叭timer，让小喇叭闪烁
                     if (messageTypeId == 2 && messageState == 0)
@@ -272,21 +282,21 @@ namespace QQ_piracy
             {
                 DBHelper.Connect().Close();
             }
-            if (havePlayAdiuo == 0)
-            {
-                SoundPlayer player;
-                if (AdiuoType == 0)
-                    player = new SoundPlayer("msg.wav");
-                else if(AdiuoType == 1)
-                    player = new SoundPlayer("system.wav");
-                else
-                {
-                    player = new SoundPlayer("system.wav");
-                    player.Play();
-                    player = new SoundPlayer("msg.wav");
-                }
-                player.Play();
-            }
+            //if (havePlayAdiuo == 0)
+            //{
+            //    SoundPlayer player;
+            //    if (AdiuoType == 0)
+            //        player = new SoundPlayer("msg.wav");
+            //    else if(AdiuoType == 1)
+            //        player = new SoundPlayer("system.wav");
+            //    else
+            //    {
+            //        player = new SoundPlayer("system.wav");
+            //        player.Play();
+            //        player = new SoundPlayer("msg.wav");
+            //    }
+            //    player.Play();
+            //}
         }
 
         // 控制喇叭闪烁
@@ -460,15 +470,9 @@ namespace QQ_piracy
             }
         }
 
-        int c = 0;
         // 可见组发生变化时，发出声音
         private void sbFriends_VisibleGroupChanged(SbGroupEventArgs e)
         {
-            if (c == 0)
-            {
-                c++;
-                return;
-            }
             SoundPlayer player = new SoundPlayer("folder.wav");
             player.Play();
         }

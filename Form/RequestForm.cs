@@ -96,9 +96,10 @@ namespace QQ_piracy
                     cmd.ExecuteNonQuery();
 
                     //相互添加
-                    cmd.CommandText = "insert into friend set hostfriendid=@hostfriendid,accetfriendid=@accetfriendid";
+                    cmd = new MySqlCommand("insert into friend set hostFriendid=@hostFriendId,AccetFriendId=@AccetFriendId", DBHelper.Connect());
                     cmd.Parameters.AddWithValue("hostfriendid", UserHelper.loginId);
                     cmd.Parameters.AddWithValue("accetfriendid", fromUserId);
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
