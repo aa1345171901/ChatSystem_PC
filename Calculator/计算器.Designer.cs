@@ -67,7 +67,6 @@ namespace 数据库实训
             // 
             // button1
             // 
-            this.button1.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button1.Location = new System.Drawing.Point(60, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 46);
@@ -78,7 +77,6 @@ namespace 数据库实训
             // 
             // button2
             // 
-            this.button2.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button2.Location = new System.Drawing.Point(160, 109);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 46);
@@ -89,7 +87,6 @@ namespace 数据库实训
             // 
             // button3
             // 
-            this.button3.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button3.Location = new System.Drawing.Point(260, 109);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(83, 46);
@@ -100,7 +97,6 @@ namespace 数据库实训
             // 
             // button4
             // 
-            this.button4.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button4.Location = new System.Drawing.Point(360, 109);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(83, 46);
@@ -111,7 +107,6 @@ namespace 数据库实训
             // 
             // button5
             // 
-            this.button5.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button5.Location = new System.Drawing.Point(360, 182);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(83, 46);
@@ -122,7 +117,6 @@ namespace 数据库实训
             // 
             // button6
             // 
-            this.button6.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button6.Location = new System.Drawing.Point(260, 182);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(83, 46);
@@ -133,7 +127,6 @@ namespace 数据库实训
             // 
             // button7
             // 
-            this.button7.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button7.Location = new System.Drawing.Point(160, 182);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(83, 46);
@@ -144,7 +137,6 @@ namespace 数据库实训
             // 
             // button8
             // 
-            this.button8.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button8.Location = new System.Drawing.Point(60, 182);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(83, 46);
@@ -155,7 +147,6 @@ namespace 数据库实训
             // 
             // button9
             // 
-            this.button9.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button9.Location = new System.Drawing.Point(360, 254);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(83, 46);
@@ -166,7 +157,6 @@ namespace 数据库实训
             // 
             // button10
             // 
-            this.button10.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button10.Location = new System.Drawing.Point(260, 254);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(83, 46);
@@ -177,7 +167,6 @@ namespace 数据库实训
             // 
             // button11
             // 
-            this.button11.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button11.Location = new System.Drawing.Point(160, 254);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(83, 46);
@@ -188,7 +177,6 @@ namespace 数据库实训
             // 
             // button12
             // 
-            this.button12.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button12.Location = new System.Drawing.Point(60, 254);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(83, 46);
@@ -199,7 +187,6 @@ namespace 数据库实训
             // 
             // button13
             // 
-            this.button13.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button13.Location = new System.Drawing.Point(360, 329);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(83, 46);
@@ -210,7 +197,6 @@ namespace 数据库实训
             // 
             // button14
             // 
-            this.button14.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button14.Location = new System.Drawing.Point(260, 329);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(83, 46);
@@ -221,7 +207,6 @@ namespace 数据库实训
             // 
             // button15
             // 
-            this.button15.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button15.Location = new System.Drawing.Point(160, 329);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(83, 46);
@@ -232,7 +217,6 @@ namespace 数据库实训
             // 
             // button16
             // 
-            this.button16.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button16.Location = new System.Drawing.Point(60, 329);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(83, 46);
@@ -243,7 +227,6 @@ namespace 数据库实训
             // 
             // button17
             // 
-            this.button17.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button17.Location = new System.Drawing.Point(479, 329);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(83, 46);
@@ -254,7 +237,6 @@ namespace 数据库实训
             // 
             // button18
             // 
-            this.button18.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button18.Location = new System.Drawing.Point(479, 254);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(83, 46);
@@ -265,7 +247,6 @@ namespace 数据库实训
             // 
             // button19
             // 
-            this.button19.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button19.Location = new System.Drawing.Point(479, 182);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(83, 46);
@@ -276,7 +257,6 @@ namespace 数据库实训
             // 
             // button20
             // 
-            this.button20.Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标3.ico");
             this.button20.Location = new System.Drawing.Point(479, 109);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(83, 46);

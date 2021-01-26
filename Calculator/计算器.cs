@@ -21,7 +21,7 @@ namespace 数据库实训
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\数据库实训\素材\鼠标2.ico");
+            Cursor = new Cursor(@"F:\visual studio 2017 Project\Projects\QQ_piracy\素材\鼠标2.ico");
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -14,8 +14,12 @@ namespace QQ_piracy
     public partial class LoginingForm : Form
     {
         public static bool isLogin = true;
-        public LoginingForm()
+
+        public Form loginForm;
+
+        public LoginingForm(Form loginForm)
         {
+            this.loginForm = loginForm; 
             InitializeComponent();
             // 创建主窗体
         }
@@ -34,6 +38,8 @@ namespace QQ_piracy
         {
             this.Close();                 //关闭窗体
 
+            loginForm.Close();
+
             this.Dispose();               //释放资源
 
             Application.Exit();           //关闭应用程序窗体
@@ -42,7 +48,6 @@ namespace QQ_piracy
         private void giveupButton_Click(object sender, EventArgs e)
         {
             isLogin = false;
-            LoginForm loginForm = new LoginForm();
             loginForm.Show();
             this.Close();
         }

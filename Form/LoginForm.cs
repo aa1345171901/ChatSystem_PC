@@ -128,7 +128,7 @@ namespace QQ_piracy
 
                 if (!error &&flag)  // 验证通过
                 {
-                    LoginingForm loginingForm = new LoginingForm();
+                    LoginingForm loginingForm = new LoginingForm(this);
                     loginingForm.Show();
                     this.Visible = false;
                     if (LoginingForm.Delay(2))
