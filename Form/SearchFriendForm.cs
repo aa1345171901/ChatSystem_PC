@@ -30,7 +30,7 @@ namespace QQ_piracy
             dataAdapter.Fill(dataSet, "userdata,user");
 
             // 指定DataGridView的数据源
-            dgvBasicResult.DataSource = dataSet.Tables[0];
+            //dgvBasicResult.DataSource = dataSet.Tables[0];
             dataSet.Tables[0].Clear();
             //dgvAdvancedResult.DataSource = dataSet.Tables[0];
         }
@@ -214,12 +214,12 @@ namespace QQ_piracy
             sql = "SELECT user.id,nickname,age,sex FROM userdata,user where user.dataid=userdata.id ORDER BY RAND() LIMIT 10";
 
                     // 重新填充DataSet
-                    dataSet.Tables[0].Clear();
+            dataSet.Tables[0].Clear();
 
-                    dataAdapter.SelectCommand.CommandText = sql;
-                    dataAdapter.Fill(dataSet, "userdata,user");
-
-                btnAdd.Visible = true;  //“加为好友”按钮可见
+            dataAdapter.SelectCommand.CommandText = sql;
+            dataAdapter.Fill(dataSet, "userdata,user");
+            dgvBasicResult.DataSource = dataSet.Tables[0];
+            btnAdd.Visible = true;  //“加为好友”按钮可见
         }
 
         /// <summary>
