@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -524,6 +525,13 @@ namespace QQ_piracy
                 // 在窗体标题显示登录的昵称、号码
                 this.Text = UserHelper.loginId.ToString();
                 this.selfMessage.Image = ilFaces.Images[faceId];
+                string appPath = Application.StartupPath + @"\" + faceId + ".jpg";
+                //if (File.Exists(appPath)) //图片需跟exe同一路径下
+                //{
+                //    Image img = Image.FromFile(appPath);
+                //    this.selfMessage.Image = img;
+                //}
+
                 this.nickName.Text = nickName;
                 this.notifyIcon1.Text = "QQ:" + nickName + "(" + UserHelper.loginId.ToString() + ")" + "\n声音：开启" + "\n消息提醒框：关闭" + "\n会话消息：任务栏头像不闪动";
             }

@@ -23,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>QQ_piracy.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>QQ_piracy.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>图标.ico</ApplicationIcon>
@@ -124,12 +126,6 @@
     <Compile Include="Form\XGMessageForm.Designer.cs">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Calculator\计算器.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Calculator\计算器.Designer.cs">
-      <DependentUpon>计算器.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\ChatForm.resx">
@@ -165,9 +161,6 @@
     <EmbeddedResource Include="Form\XGMessageForm.resx">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Calculator\计算器.resx">
-      <DependentUpon>计算器.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -179,6 +172,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -188,11 +182,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="QQ_piracy.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="图标.ico" />
-    <Content Include="Calculator\陈建国.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\..\ChatSystemServer\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
