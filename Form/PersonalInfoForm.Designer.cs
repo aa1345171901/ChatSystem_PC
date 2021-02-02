@@ -441,6 +441,9 @@ namespace QQ_piracy
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.pictureBox1.MouseMove += PictureBox1_MouseMove;
+            this.panel1.MouseMove += PictureBox1_MouseMove;
+
         }
 
         //this.pictureBox1.MouseMove += PictureBox1_MouseMove;
