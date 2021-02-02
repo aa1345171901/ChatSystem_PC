@@ -491,7 +491,7 @@ namespace QQ_piracy
             {
                 // 取得当前用户的昵称、头像
                 MySqlCommand cmd = new MySqlCommand("SELECT NickName, FaceId FROM UserData WHERE id=@id", DBHelper.Connect());
-                cmd.Parameters.AddWithValue("id", UserHelper.dataId);
+                cmd.Parameters.AddWithValue("id", UserHelper.DataId);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 if (dataReader.Read())

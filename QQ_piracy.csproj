@@ -40,6 +40,9 @@
     <ApplicationIcon>图标.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\ChatSystemServer\Common\bin\Debug\Common.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>C:\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\v4.5\MySql.Data.dll</HintPath>
     </Reference>
@@ -55,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ManagerController.cs" />
     <Compile Include="Form\ChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +121,10 @@
       <DependentUpon>SearchFriendForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\UserHelper.cs" />
+    <Compile Include="Manager\BaseManager.cs" />
+    <Compile Include="Manager\Net\ClientManager.cs" />
+    <Compile Include="Manager\Net\Message.cs" />
+    <Compile Include="Manager\RequestManager.cs" />
     <Compile Include="WinAPI\Enums.cs" />
     <Compile Include="WinAPI\Structs.cs" />
     <Compile Include="WinAPI\Win32API.cs" />
@@ -184,6 +192,7 @@
     </Compile>
     <None Include="QQ_piracy.ruleset" />
     <None Include="stylecop.json" />
+    <None Include="stylecop1.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="图标.ico" />
@@ -192,5 +201,6 @@
     <Analyzer Include="..\..\ChatSystemServer\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

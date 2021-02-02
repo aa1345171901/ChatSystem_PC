@@ -1,4 +1,8 @@
-﻿namespace QQ_piracy
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace QQ_piracy
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +21,7 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm()); 
+            Application.Run(new LoginForm());
         }
     }
 }
