@@ -1,9 +1,9 @@
 ﻿namespace QQ_piracy.Manager
 {
-    using Common;
-    using QQ_piracy.Manager.Net;
     using System;
     using System.Net.Sockets;
+    using Common;
+    using QQ_piracy.Manager.Net;
 
     /// <summary>
     /// 用于连接管理服务器
@@ -24,7 +24,7 @@
         /// <summary>
         /// Client初始化
         /// </summary>
-        public void Init()
+        public override void Init()
         {
             base.Init();
             msg = new Message();
@@ -41,11 +41,22 @@
         }
 
         /// <summary>
+        /// 将数据打包发送给sever
+        /// </summary>
+        public void SendRequest(RequestCode requestCode, ActionCode actionCode, string data)
+        {
+            if (clientSocket != null)
+            {
+                clientSocket.Send(Message.PackData(requestCode, actionCode, data));
+            }
+        }
+
+        /// <summary>
         /// 开始异步接收服务器数据
         /// </summary>
         private void StartReceive()
         {
-            clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize, SocketFlags.None,);
+            clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize, SocketFlags.None, ReceiveCallBack, null);
         }
 
         /// <summary>
@@ -71,6 +82,9 @@
             }
         }
 
+        /// <summary>
+        /// 将处理好的信息通过managerController进行处理
+        /// </summary>
         private void OnProcessCallBack(ActionCode actionCode, string data)
         {
             managerController.HandleResponse(actionCode, data);

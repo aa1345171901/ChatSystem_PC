@@ -1,8 +1,9 @@
-﻿using Common;
-using QQ_piracy.Manager;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using Common;
+    using QQ_piracy.Form.Request;
+    using QQ_piracy.Manager;
+
     /// <summary>
     /// 用于管理所有Manager
     /// </summary>
@@ -36,6 +37,30 @@ namespace QQ_piracy
         public void HandleResponse(ActionCode actionCode, string data)
         {
             requestManager.HandleResponse(actionCode, data);
+        }
+
+        /// <summary>
+        /// 通过clientManager向服务器发送请求
+        /// </summary>
+        public void SendRequest(RequestCode requestCode, ActionCode actionCode, string data)
+        {
+            clientManager.SendRequest(requestCode, actionCode, data);
+        }
+
+        /// <summary>
+        /// 通过单例增加request字典
+        /// </summary>
+        public void AddRequest(ActionCode actionCode, BaseRequest baseRequest)
+        {
+            requestManager.AddRequestDic(actionCode, baseRequest);
+        }
+
+        /// <summary>
+        /// 通过单例移除request字典
+        /// </summary>
+        public void RemoveRequest(ActionCode actionCode)
+        {
+            requestManager.RemoveRequest(actionCode);
         }
     }
 }

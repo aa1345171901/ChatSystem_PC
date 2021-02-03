@@ -1,7 +1,7 @@
-﻿using Common;
-
-namespace QQ_piracy.Manager
+﻿namespace QQ_piracy.Manager
 {
+    using Common;
+
     /// <summary>
     /// Manager的基类
     /// </summary>
@@ -14,11 +14,7 @@ namespace QQ_piracy.Manager
             this.managerController = managerController;
         }
 
-        public void Init()
-        {
-        }
-
-        public void OnResponse(string data)
+        public virtual void Init()
         {
         }
     }
