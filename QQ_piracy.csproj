@@ -125,6 +125,7 @@
     <Compile Include="Manager\Net\ClientManager.cs" />
     <Compile Include="Manager\Net\Message.cs" />
     <Compile Include="Manager\RequestManager.cs" />
+    <Compile Include="Manager\Request\BaseRequest.cs" />
     <Compile Include="WinAPI\Enums.cs" />
     <Compile Include="WinAPI\Structs.cs" />
     <Compile Include="WinAPI\Win32API.cs" />
