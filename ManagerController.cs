@@ -1,15 +1,15 @@
 ﻿namespace QQ_piracy
 {
     using Common;
-    using QQ_piracy.Form.Request;
     using QQ_piracy.Manager;
+    using QQ_piracy.Manager.Request;
 
     /// <summary>
     /// 用于管理所有Manager
     /// </summary>
     public class ManagerController
     {
-        private ManagerController instance;
+        private static ManagerController instance;
 
         private ClientManager clientManager;
         private RequestManager requestManager;
@@ -17,13 +17,15 @@
         /// <summary>
         /// 单例模式，是全局只有一个ManagerController
         /// </summary>
-        public ManagerController Instance
+        public static ManagerController Instance
         {
             get { return instance; }
         }
 
         public void Init()
         {
+            instance = this;
+
             clientManager = new ClientManager(this);
             requestManager = new RequestManager(this);
 

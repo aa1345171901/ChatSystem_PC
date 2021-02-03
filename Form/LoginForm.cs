@@ -1,30 +1,76 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using System;
+    using System.Windows.Forms;
+    using MySql.Data.MySqlClient;
+    using QQ_piracy.Manager.Request;
+
     public partial class LoginForm : Form
     {
+        private LoginRequest loginRequest;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginForm"/> class.
+        /// 初始化Form
+        /// </summary>
         public LoginForm()
         {
             InitializeComponent();
+            loginRequest = new LoginRequest(this);
+            loginRequest.Init();
         }
 
+        public void ResponseLogin(bool logined)
+        {
+            if (logined)
+            {
+                LoginingForm loginingForm = new LoginingForm(this);
+                loginingForm.Show();
+                this.Visible = false;
+                if (LoginingForm.Delay(2))
+                {
+                    MainForm mainForm = new MainForm();
+                    mainForm.Show();  // 显示窗体
+                    loginingForm.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("输入的用户名或密码有误！", "登录提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // 登录按钮
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            // 如果输入验证成功，就验证身份，并转到相应的窗体
+            if (ValidateInput())
+            {
+                try
+                {
+                    int id = int.Parse(textBox1.Text.Trim());
+                    string password = textBox2.Text.Trim();
+                    string data = id + "," + password;
+                    loginRequest.SendRequest(data);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("连接服务器出错，请检查你的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 隐藏窗体边框,在Form出现时
+        /// </summary>
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;    //隐藏窗体边框
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
+        /// <summary>
+        /// 账号的文本显示
+        /// </summary>
         private void label1_Click(object sender, EventArgs e)
         {
             userLabel.Visible = false;
@@ -35,7 +81,9 @@ namespace QQ_piracy
             }
         }
 
-        //显示密码的label
+        /// <summary>
+        /// 显示密码的label
+        /// </summary>
         private void label2_Click(object sender, EventArgs e)
         {
             PasswordLabel.Visible = false;
@@ -46,106 +94,68 @@ namespace QQ_piracy
             }
         }
 
-        //找回密码
+        /// <summary>
+        /// 找回密码，todo
+        /// </summary>
         private void getPsw_Click(object sender, EventArgs e)
         {
             MessageBox.Show("该功能尚未开通！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        //关闭
+        /// <summary>
+        /// 关闭按钮
+        /// </summary>
         private void close_Click(object sender, EventArgs e)
         {
-            this.Close();                 //关闭窗体
+            this.Close();                 // 关闭窗体
 
-            this.Dispose();               //释放资源
+            this.Dispose();               // 释放资源
 
-            Application.Exit();           //关闭应用程序窗体
+            Application.Exit();           // 关闭应用程序窗体
         }
 
-        //最小化
+        /// <summary>
+        /// 最小化
+        /// </summary>
         private void min_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        //注册按钮点击
+        /// <summary>
+        /// 注册按钮点击
+        /// </summary>
         private void register_Click(object sender, EventArgs e)
         {
             RegisterForm register = new RegisterForm();
             if (!CheckFormIsOpen("RegisterForm"))
+            {
                 register = new RegisterForm();
+            }
             else
+            {
                 register = (RegisterForm)Application.OpenForms["RegisterForm"];
+            }
+
             register.Show();
         }
 
-        //判断form是否出现
-        private bool CheckFormIsOpen(string Forms)
+        /// <summary>
+        /// 判断form是否出现
+        /// </summary>
+        private bool CheckFormIsOpen(string form)
         {
             bool bResult = false;
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == Forms)
+                if (frm.Name == form)
                 {
                     bResult = true;
                     break;
                 }
             }
+
             return bResult;
-        }
-
-        //登录按钮
-        private void loginButton_Click(object sender, EventArgs e)
-        {
-            bool error = false;   // 标志在执行数据库操作的过程中是否出错
-            bool flag = false;    //标志用户账号密码是否匹配
-            // 如果输入验证成功，就验证身份，并转到相应的窗体
-            if (ValidateInput())
-            {            
-
-                try
-                {
-
-                    MySqlCommand cmd = new MySqlCommand("select count(*),dataid from user where id=@id and password=@password", DBHelper.Connect());
-                    cmd.Parameters.AddWithValue("id", textBox1.Text.Trim());
-                    cmd.Parameters.AddWithValue("password", textBox2.Text.Trim());
-                    MySqlDataReader reader= cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        UserHelper.dataId = reader.GetInt32("dataid");
-                        flag = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    error = true;
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    DBHelper.CloseConnection(DBHelper.Connect());  // 关闭数据库连接
-                }
-
-                if (!error &&flag)  // 验证通过
-                {
-                    LoginingForm loginingForm = new LoginingForm(this);
-                    loginingForm.Show();
-                    this.Visible = false;
-                    if (LoginingForm.Delay(2))
-                    {
-                        UserHelper.loginId = int.Parse(textBox1.Text.Trim());
-                        MainForm mainForm = new MainForm();
-                        mainForm.Show();  // 显示窗体
-                        loginingForm.Close();
-                    }
-                    //Thread.Sleep(3000);
-                    // 设置登录的用户号码
-                }
-                else
-                {
-                    MessageBox.Show("输入的用户名或密码有误！", "登录提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         // 用户输入验证
@@ -164,6 +174,7 @@ namespace QQ_piracy
                 textBox2.Focus();
                 return false;
             }
+
             return true;
         }
     }

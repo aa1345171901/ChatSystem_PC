@@ -65,7 +65,6 @@
     <Compile Include="Form\ChatForm.Designer.cs">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\DBHelper.cs" />
     <Compile Include="Form\FacesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +125,7 @@
     <Compile Include="Manager\Net\Message.cs" />
     <Compile Include="Manager\RequestManager.cs" />
     <Compile Include="Manager\Request\BaseRequest.cs" />
+    <Compile Include="Manager\Request\LoginRequest.cs" />
     <Compile Include="WinAPI\Enums.cs" />
     <Compile Include="WinAPI\Structs.cs" />
     <Compile Include="WinAPI\Win32API.cs" />
@@ -192,8 +192,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="QQ_piracy.ruleset" />
-    <None Include="stylecop.json" />
-    <None Include="stylecop1.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="图标.ico" />

@@ -9,41 +9,51 @@
     /// <summary>
     /// 记录登录的用户Id及用户信息
     /// </summary>
-    public class UserHelper
+    public static class UserHelper
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserHelper"/> class.
-        /// </summary>
-        public UserHelper(int id, int dataId, string nickName)
-        {
-            LoginId = id;
-            DataId = dataId;
-            NickName = nickName;
-        }
-
         /// <summary>
         /// 用于记录用户的id
         /// </summary>
-        public int LoginId { get; set; }
+        public static int LoginId { get; set; }
 
         /// <summary>
         /// 用于记录用户数据的id，方便获取信息
         /// </summary>
-        public int DataId { get; set; }
+        public static int DataId { get; set; }
 
         /// <summary>
         /// 获取用户昵称
         /// </summary>
-        public string NickName { get; set; }
+        public static string NickName { get; set; }
 
         /// <summary>
-        /// 用户头像Id
+        /// 设置的性别
         /// </summary>
-        public int FaceId { get; set; }
+        public static string Sex { get; set; }
 
         /// <summary>
-        /// 用户的真实姓名
+        /// 年龄
         /// </summary>
-        public string Name { get; set; }
+        public static int Age { get; set; }
+
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        public static string Name { get; set; }
+
+        /// <summary>
+        /// 星座,对应数据库Star表
+        /// </summary>
+        public static int StarId { get; set; }
+
+        /// <summary>
+        /// 血型,对应数据库BloodType表
+        /// </summary>
+        public static int BloodTypeId { get; set; }
+
+        /// <summary>
+        /// 头像Id
+        /// </summary>
+        public static int FaceId { get; set; }
     }
 }

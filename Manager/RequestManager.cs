@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Common;
-    using QQ_piracy.Form.Request;
+    using QQ_piracy.Manager.Request;
 
     /// <summary>
     /// 管理客户端的各种请求以及响应

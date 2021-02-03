@@ -1,4 +1,4 @@
-﻿namespace QQ_piracy.Form.Request
+﻿namespace QQ_piracy.Manager.Request
 {
     using Common;
 
@@ -8,10 +8,7 @@
         protected ActionCode actionCode = ActionCode.None;
         protected ManagerController managerController;
 
-        /// <summary>
-        /// 获取managerController的全局变量
-        /// </summary>
-        public ManagerController ManagerController
+        protected ManagerController ManagerController
         {
             get
             {
@@ -29,7 +26,7 @@
         /// </summary>
         public virtual void Init()
         {
-            managerController.AddRequest(actionCode, this);
+            ManagerController.AddRequest(actionCode, this);
         }
 
         /// <summary>
@@ -37,22 +34,17 @@
         /// </summary>
         public virtual void Close()
         {
-            managerController.RemoveRequest(actionCode);
+            ManagerController.RemoveRequest(actionCode);
         }
 
         /// <summary>
         /// 对收到的信息进行处理
         /// </summary>
-        public virtual void OnResponse(string data)
-        {
-        }
+        public abstract void OnResponse(string data);
 
         /// <summary>
         /// 项服务器发送请求，通过managerController发送
         /// </summary>
-        public virtual void SendRequest(string data)
-        {
-            managerController.SendRequest(requestCode, actionCode, data);
-        }
+        public abstract void SendRequest(string data);
     }
 }
