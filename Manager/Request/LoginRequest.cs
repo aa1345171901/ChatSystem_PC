@@ -6,11 +6,19 @@
     {
         private LoginForm loginForm;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginRequest"/> class.
+        /// 构造函数，将form传递进来
+        /// </summary>
         public LoginRequest(LoginForm loginForm)
         {
             this.loginForm = loginForm;
+            Init();
         }
 
+        /// <summary>
+        /// 设置requestCode和ActionCode
+        /// </summary>
         public override void Init()
         {
             requestCode = RequestCode.User;
@@ -18,6 +26,9 @@
             base.Init();
         }
 
+        /// <summary>
+        /// 对服务器传递的消息响应
+        /// </summary>
         public override void OnResponse(string data)
         {
             string[] strs = data.Split(',');
@@ -40,6 +51,9 @@
             }
         }
 
+        /// <summary>
+        /// 发送请求给服务器
+        /// </summary>
         public override void SendRequest(string data)
         {
             ManagerController.SendRequest(requestCode, actionCode, data);

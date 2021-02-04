@@ -2,7 +2,6 @@
 {
     using System;
     using System.Windows.Forms;
-    using MySql.Data.MySqlClient;
     using QQ_piracy.Manager.Request;
 
     public partial class LoginForm : Form
@@ -17,9 +16,11 @@
         {
             InitializeComponent();
             loginRequest = new LoginRequest(this);
-            loginRequest.Init();
         }
 
+        /// <summary>
+        /// 对服务器的登录反馈进行下一步操作
+        /// </summary>
         public void ResponseLogin(bool logined)
         {
             if (logined)
@@ -31,6 +32,7 @@
                 {
                     MainForm mainForm = new MainForm();
                     mainForm.Show();  // 显示窗体
+                    loginRequest.Close();
                     loginingForm.Close();
                 }
             }
@@ -40,7 +42,9 @@
             }
         }
 
-        // 登录按钮
+        /// <summary>
+        /// 登录按钮，向服务器发送请求
+        /// </summary>
         private void loginButton_Click(object sender, EventArgs e)
         {
             // 如果输入验证成功，就验证身份，并转到相应的窗体
@@ -107,6 +111,8 @@
         /// </summary>
         private void close_Click(object sender, EventArgs e)
         {
+            loginRequest.Close();
+
             this.Close();                 // 关闭窗体
 
             this.Dispose();               // 释放资源

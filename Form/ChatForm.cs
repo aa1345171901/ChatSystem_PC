@@ -175,7 +175,7 @@ namespace QQ_piracy
 
         private void ChatForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainForm.chatForms.Remove(friendId);
+            mainForm.ChatForms.Remove(friendId);
         }
 
         private void showmsg_Tick(object sender, EventArgs e)

@@ -1,139 +1,67 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using System;
+    using System.Windows.Forms;
+    using QQ_piracy.Manager.Request;
+
     public partial class RegisterForm : Form
     {
+        private RegisterRequest registerRequest;
 
-        public static long dataId = -1;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RegisterForm"/> class.
+        /// 初始化form
+        /// </summary>
         public RegisterForm()
         {
             InitializeComponent();
+            registerRequest = new RegisterRequest(this);
         }
 
-        private void RegisterForm_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 对注册的请求服务器的反馈做下一步操作
+        /// </summary>
+        public void ResponseRegister(bool isRegister)
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-        }
-
-        private void userLabel_Click(object sender, EventArgs e)
-        {
-            userLabel.Visible = false;
-            textNick.Select();
-            if (string.IsNullOrEmpty(textPsw.Text))
+            if (isRegister)
             {
-                Pswlabel.Visible = true;
+                ChooseForm chooseForm = new ChooseForm();
+                chooseForm.Show();
+                registerRequest.Close();
+                this.Close();
+                MessageBox.Show(string.Format("注册成功！请小心保管您的账号\n您的MyQQ号码是{0}", UserHelper.LoginId), "提示", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-            if (string.IsNullOrEmpty(textPswR.Text))
+            else
             {
-                PswRLabel.Visible = true;
+                MessageBox.Show("服务器没有响应，请稍后再试", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
         }
 
-        private void Pswlabel_Click(object sender, EventArgs e)
-        {
-            Pswlabel.Visible = false;
-            textPsw.Select();
-            if (string.IsNullOrEmpty(textNick.Text))
-            {
-                userLabel.Visible = true;
-            }
-            if (string.IsNullOrEmpty(textPswR.Text))
-            {
-                PswRLabel.Visible = true;
-            }
-        }
-
-        private void PswRLabel_Click(object sender, EventArgs e)
-        {
-            PswRLabel.Visible = false;
-            textPswR.Select();
-            if (string.IsNullOrEmpty(textNick.Text))
-            {
-                userLabel.Visible = true;
-            }
-            if (string.IsNullOrEmpty(textPsw.Text))
-            {
-                Pswlabel.Visible = true;
-            }
-        }
-
+        /// <summary>
+        /// 注册按钮点击
+        /// </summary>
         private void registerButton_Click(object sender, EventArgs e)
         {
-            // 输入验证通过，就插入记录到数据库
+            // 输入验证通过，发送请求给服务器
             if (ValidateInput())
             {
-                long myQQNum = 0;     // QQ号码
-                long dataid = 0;      //与QQ关联的数据表id
-                string message;      // 弹出的消息
-                //string sex = rdoMale.Checked ? rdoMale.Text : rdoFemale.Text; // 获得选中的性别
-                string sql;
-                //int starId;          // 星座Id
-                //int bloodTypeId;     // 血型Id   
-                bool error = false;  // 操作数据库是否出错
-
                 try
                 {
-                    // 创建数据biao
-                    MySqlCommand cmd = new MySqlCommand("Insert into userdata set nickname=@nickname", DBHelper.Connect());
-                    cmd.Parameters.AddWithValue("nickname", textNick.Text.Trim());
-                    int result = cmd.ExecuteNonQuery();
-                    if(result==1)
-                    dataid =cmd.LastInsertedId;
-
-                    // 创建账户并与数据表相连
-                    sql = "Insert into user set password=@password,dataid=@dataid";
-                    cmd.CommandText = sql;
-                    cmd.Parameters.AddWithValue("password", textPsw.Text.Trim());
-                    cmd.Parameters.AddWithValue("dataid", dataid);
-                    result=cmd.ExecuteNonQuery();
-                    if (result==1)
-                    {
-                        myQQNum = cmd.LastInsertedId;
-                        message = string.Format("注册成功！请小心保管您的账号\n您的MyQQ号码是{0}", myQQNum);
-                    }
-                    else
-                    {
-                        message = "注册失败，请重试！";
-                    }
+                    string nickName = textNick.Text.Trim();
+                    string password = textPsw.Text.Trim();
+                    string data = nickName + "," + password;
+                    registerRequest.SendRequest(data);
                 }
                 catch (Exception ex)
                 {
-                    error = true;
-                    message = "服务器出现意外错误！请稍候再试！";
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("连接服务器出错，请检查你的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                finally
-                {
-                    DBHelper.CloseConnection(DBHelper.Connect());  // 关闭数据库连接
-                }
-
-                // 显示注册结果
-                if (error)
-                {
-                    MessageBox.Show(message, "注册失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(message, "注册结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                ChooseForm chooseForm = new ChooseForm();
-                dataId = dataid;
-                chooseForm.Show();
-                this.Close();
             }
         }
 
         /// <summary>
         /// 验证用户的输入
-        /// </summary>        
+        /// </summary>
         private bool ValidateInput()
         {
             if (textNick.Text.Trim() == "")
@@ -142,25 +70,91 @@ namespace QQ_piracy
                 textNick.Focus();
                 return false;
             }
+
             if (textPsw.Text.Trim() == "")
             {
                 MessageBox.Show("请输入密码！", "输入提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textPsw.Focus();
                 return false;
             }
+
             if (textPswR.Text.Trim() == "")
             {
                 MessageBox.Show("请输入确认密码！", "输入提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textPswR.Focus();
                 return false;
             }
+
             if (textPsw.Text.Trim() != textPswR.Text.Trim())
             {
                 MessageBox.Show("两次输入的密码不一样！", "输入提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textPswR.Focus();
                 return false;
             }
+
             return true;
-        }      
+        }
+
+        /// <summary>
+        /// 加载主界面
+        /// </summary>
+        private void RegisterForm_Load(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+
+        /// <summary>
+        /// 用于判断昵称是否点击的lable
+        /// </summary>
+        private void userLabel_Click(object sender, EventArgs e)
+        {
+            userLabel.Visible = false;
+            textNick.Select();
+            if (string.IsNullOrEmpty(textPsw.Text))
+            {
+                Pswlabel.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(textPswR.Text))
+            {
+                PswRLabel.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// 用于判断密码文本框是否点击的lable
+        /// </summary>
+        private void Pswlabel_Click(object sender, EventArgs e)
+        {
+            Pswlabel.Visible = false;
+            textPsw.Select();
+            if (string.IsNullOrEmpty(textNick.Text))
+            {
+                userLabel.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(textPswR.Text))
+            {
+                PswRLabel.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// 用于判断重复密码文本框是否点击的lable
+        /// </summary>
+        private void PswRLabel_Click(object sender, EventArgs e)
+        {
+            PswRLabel.Visible = false;
+            textPswR.Select();
+            if (string.IsNullOrEmpty(textNick.Text))
+            {
+                userLabel.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(textPsw.Text))
+            {
+                Pswlabel.Visible = true;
+            }
+        }
     }
 }

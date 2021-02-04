@@ -1,189 +1,101 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using System;
+    using System.Windows.Forms;
+    using QQ_piracy.Helper;
+    using QQ_piracy.Manager.Request;
+
     public partial class ChooseForm : Form
     {
+        private ChooseRequest chooseRequest;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChooseForm"/> class.
+        /// 选填界面初始化
+        /// </summary>
         public ChooseForm()
         {
             InitializeComponent();
+            chooseRequest = new ChooseRequest(this);
         }
 
+        public void ResponseChoose(bool isChoose)
+        {
+            if (isChoose)
+            {
+                chooseRequest.Close();
+                this.Close();
+            }
+            else
+            {
+                chooseRequest.Close();
+                this.Close();
+                MessageBox.Show("服务器无法响应", "请稍后重试", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 确定按钮，向服务器发送填写的数据
+        /// </summary>
+        private void sureButton_Click(object sender, EventArgs e)
+        {
+            string trueName = name.Text;
+            int age = 0;
+            if (!string.IsNullOrEmpty(this.age.Text))
+            {
+                age = int.Parse(this.age.Text.Trim());
+            }
+
+            string sex = male.Checked ? male.Text : fmale.Text;
+            int startId = start.SelectedIndex;
+            int bloodTypeId = blood.SelectedIndex;
+            string data = UserHelper.DataId + "," + sex + "," + age + "," + name + "," + startId + "," + bloodTypeId;
+            try
+            {
+                chooseRequest.SendRequest(data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("无法连接网络，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 主窗口初始化
+        /// </summary>
         private void ChooseForm_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;    //修改窗体边框
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;    // 修改窗体边框
             ApplyForm_Load();
         }
 
         // 窗体加载时，添加星座和血型组合框中的项
         private void ApplyForm_Load()
         {
-            bool error = false;   // 标识操作数据库是否会出错
-            string sql;
-            try
+            string[] star = DataListHelper.StarList;
+            string[] bloodType = DataListHelper.BloodTypeList;
+            for (int i = 0; i < star.Length; i++)
             {
-                // 添加星座组合框中的项                
-                MySqlCommand cmd = new MySqlCommand("select start from start", DBHelper.Connect());
-                MySqlDataReader reader = cmd.ExecuteReader();  // 执行查询
-
-                while(reader.Read())
-                {
-                    start.Items.Add(reader.GetString("start"));
-                }
-                reader.Close();
-
-                // 添加血型组合框中的项
-                sql = "select bloodtype from bloodtype";  // 修改查询语句，查询血型
-                cmd.CommandText = sql;
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    blood.Items.Add(reader.GetString("bloodtype"));
-                }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                DBHelper.CloseConnection(DBHelper.Connect());
+                start.Items.Add(star[i]);
             }
 
-            // 出错了
-            if (error)
+            for (int i = 0; i < bloodType.Length; i++)
             {
-                MessageBox.Show("服务器出现以外错误！", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void sureButton_Click(object sender, EventArgs e)
-        {
-            string trueName = name.Text;
-            int age=0;
-            if (!string.IsNullOrEmpty(this.age.Text))
-                age= int.Parse(this.age.Text.Trim());
-            string sex = male.Checked ? male.Text : fmale.Text;
-            int startId = GetStarId();
-            int bloodTypeId = GetBloodType();
-            try
-            {
-                MySqlCommand cmd = new MySqlCommand("update userdata set age=@age,sex=@sex where id=@id", DBHelper.Connect());
-
-                cmd.Parameters.AddWithValue("age", age);
-                cmd.Parameters.AddWithValue("sex", sex);
-                cmd.Parameters.AddWithValue("id", RegisterForm.dataId);
-                cmd.ExecuteNonQuery();
-                if (!string.IsNullOrEmpty(trueName))
-                {
-                    cmd.CommandText = "update userdata set name=@tureName where id=@id";
-                    cmd.Parameters.AddWithValue("tureName", trueName);
-                    cmd.ExecuteNonQuery();
-                }
-                if (bloodTypeId != -1)
-                {
-                    cmd.CommandText = "update userdata set bloodtypeid=@bloodtypeid where id=@id";
-                    cmd.Parameters.AddWithValue("bloodtypeid", bloodTypeId);
-                    cmd.ExecuteNonQuery();
-                }
-                if (startId != -1)
-                {
-                    cmd.CommandText = "update userdata set startid=@startid where id=@id";
-                    cmd.Parameters.AddWithValue("startid", startId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                MessageBox.Show(ex.ToString(),"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                DBHelper.Connect().Close();  // 关闭数据库连接
-            }
-            this.Close();
-        }
-
-        /// <summary>
-        /// 取得星座的 Id
-        /// </summary>        
-        private int GetStarId()
-        {
-            int starId = -1;  // 返回值
-            try
-            {
-                // 创建 Command 对象
-                MySqlCommand cmd = new MySqlCommand("select id from start where start=@start", DBHelper.Connect());
-                starId = Convert.ToInt32(cmd.ExecuteScalar());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                DBHelper.Connect().Close();
-            }
-
-            if (starId > 0)
-            {
-                return starId;
-            }
-            else
-            {
-                return -1;
+                blood.Items.Add(bloodType);
             }
         }
 
         /// <summary>
-        /// 取得血型的 Id
-        /// </summary>        
-        private int GetBloodType()
-        {
-            int bloodTypeId = -1;  // 返回值
-
-          try
-            {
-                // 创建 Command 对象
-                MySqlCommand cmd = new MySqlCommand("select id from bloodtype where bloodtype=@bloodtype", DBHelper.Connect());
-                bloodTypeId = Convert.ToInt32(cmd.ExecuteScalar());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                DBHelper.Connect().Close();
-            }
-            if (bloodTypeId > 0)
-            {
-                return bloodTypeId;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
+        /// 进入登录界面
+        /// </summary>
         private void goLoginButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 判断真实名字文本框是否点击的lable
+        /// </summary>
         private void trueNameLabel_Click(object sender, EventArgs e)
         {
             trueNameLabel.Visible = false;
@@ -194,6 +106,9 @@ namespace QQ_piracy
             }
         }
 
+        /// <summary>
+        /// 判断年龄文本框是否点击的lable
+        /// </summary>
         private void ageLabel_Click(object sender, EventArgs e)
         {
             ageLabel.Visible = false;

@@ -1,52 +1,51 @@
-﻿using Aptech.UI;
-using Lordeo.Framework;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Drawing;
+    using System.Media;
+    using System.Windows.Forms;
+    using Aptech.UI;
+
     public partial class MainForm : Form
     {
         int fromUserId;  　// 消息的发起者
-        int friendFaceId;  // 发消息的好友的头像Id  
+        int friendFaceId;  // 发消息的好友的头像Id
 
         int messageImageIndex = 0;  // 工具栏中的消息图标的索引
 
         bool haveMessage = false;
 
-        bool isXF=true;              //在最小化的时候设定不能启用悬浮 //需要在designer里更改状态
+        bool isXF = true;              // 在最小化的时候设定不能启用悬浮 //需要在designer里更改状态
 
-        public List<int> chatForms = new List<int>();  //用于判断chat是否重复
+        private List<int> chatForms = new List<int>();  // 用于判断chat是否重复
 
         Icon icon1 = null;
         Icon icon2 = null;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// 初始化，设置好各种request
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
             icon1 = new Icon("1.ico");
-            icon2 = new Icon("2.ico");          
+            icon2 = new Icon("2.ico");
         }
 
+        /// <summary>
+        /// 主界面显示
+        /// </summary>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;    //隐藏窗体边框
-                                                            // 工具栏的消息图标
-            notifyIcon1.Icon = icon1;
-            this.ShowInTaskbar = false;                     //隐藏任务栏
+            this.FormBorderStyle = FormBorderStyle.None;    // 隐藏窗体边框
+            notifyIcon1.Icon = icon1;                        // 工具栏的消息图标
+            this.ShowInTaskbar = false;                     // 隐藏任务栏
             this.WindowState = FormWindowState.Normal;
 
-
-            // 显示个人的信息            
+            // 显示个人的信息
             ShowSelfInfo();
 
             // 添加 SideBar 的两个组
@@ -55,16 +54,21 @@ namespace QQ_piracy
 
             // 向我的好友组中添加我的好友列表
             ShowFriendList();
-
         }
 
+        /// <summary>
+        /// 最小化
+        /// </summary>
         private void min_Click(object sender, EventArgs e)
         {
-            this.Hide();                     //隐藏窗体
+            this.Hide();                     // 隐藏窗体
             this.WindowState = FormWindowState.Minimized;
             isXF = false;
         }
 
+        /// <summary>
+        /// 关闭按钮
+        /// </summary>
         private void close_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -75,104 +79,134 @@ namespace QQ_piracy
             MessageBox.Show("抱歉！该功能尚未开通！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// 退出
+        /// </summary>
         private void toolStripMenuItem11_Click(object sender, EventArgs e)
         {
-            notifyIcon1.Visible = false;  //设置图标不可见
+            notifyIcon1.Visible = false;  // 设置图标不可见
 
-            this.Close();                 //关闭窗体
+            this.Close();                 // 关闭窗体
 
-            this.Dispose();               //释放资源
+            this.Dispose();               // 释放资源
 
-            Application.Exit();           //关闭应用程序窗体
+            Application.Exit();           // 关闭应用程序窗体
         }
 
+        /// <summary>
+        /// 最小化图标右键菜单的打开主界面
+        /// </summary>
         private void toolStripMenuItem12_Click(object sender, EventArgs e)
         {
-            this.Show();                               //窗体显示
+            this.Show();                               // 窗体显示
 
-            this.WindowState= FormWindowState.Normal;  //窗体状态默认大小
+            this.WindowState = FormWindowState.Normal;  // 窗体状态默认大小
 
-            this.Activate();                           //激活窗体给予焦点
+            this.Activate();                           // 激活窗体给予焦点
         }
 
+        /// <summary>
+        /// 最小化图标右键菜单的最小化按钮
+        /// </summary>
         private void toolStripMenuItem13_Click(object sender, EventArgs e)
         {
-            this.Hide();                     //隐藏窗体
+            this.Hide();                     // 隐藏窗体
         }
 
-        //悬浮即时器
+        // 悬浮即时器
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (isXF)
             {
-                //如果鼠标在窗体边缘附近  
+                // 如果鼠标在窗体边缘附近
                 if (Cursor.Position.X > Location.X && (Cursor.Position.X < (Location.X + 310)) && (Cursor.Position.Y < 5 && Cursor.Position.Y > -5))
                 {
-                    this.Show();                               //窗体显示
+                    this.Show();                               // 窗体显示
 
-                    this.WindowState = FormWindowState.Normal;  //窗体状态默认大小
+                    this.WindowState = FormWindowState.Normal;  // 窗体状态默认大小
 
-                    this.Activate();                           //激活窗体给予焦点
+                    this.Activate();                           // 激活窗体给予焦点
                 }
-                //Console.WriteLine(Cursor.Position.X+"+"+ Cursor.Position.Y);
-                //如果鼠标在窗体外面则隐藏  并且top在屏幕top
+
+                // Console.WriteLine(Cursor.Position.X+"+"+ Cursor.Position.Y);
+                // 如果鼠标在窗体外面则隐藏  并且top在屏幕top
                 if ((Cursor.Position.Y > 710 || Cursor.Position.X < Location.X || (Cursor.Position.X > (Location.X + 310)))
                     && (Location.Y < 5 && Location.Y > -5))
                 {
-                    this.Hide();                     //隐藏窗体
+                    this.Hide();                     // 隐藏窗体
                 }
             }
         }
 
+        /// <summary>
+        /// 最小化图标右键菜单的退出按钮
+        /// </summary>
         private void toolStripMenuItem14_Click(object sender, EventArgs e)
         {
-            notifyIcon1.Visible= false;  //设置图标不可见
+            notifyIcon1.Visible= false;  // 设置图标不可见
 
-            this.Close();                 //关闭窗体
+            this.Close();                 // 关闭窗体
 
-            this.Dispose();               //释放资源
+            this.Dispose();               // 释放资源
 
-            Application.Exit();           //关闭应用程序窗体
+            Application.Exit();           // 关闭应用程序窗体
         }
 
+        /// <summary>
+        /// 点击自己的头像用于跳转到显示个人信息
+        /// </summary>
         private void selfMessage_Click(object sender, EventArgs e)
         {
             PersonalInfoForm personalInfoForm;
             if (!CheckFormIsOpen("PersonalInfoForm"))
+            {
                 personalInfoForm = new PersonalInfoForm();
+            }
             else
-                personalInfoForm= (PersonalInfoForm)Application.OpenForms["PersonalInfoForm"];
+            {
+                personalInfoForm = (PersonalInfoForm)Application.OpenForms["PersonalInfoForm"];
+            }
+
             personalInfoForm.mainForm = this;  // 将当前窗体本身传给个人信息窗体
             this.Hide();
             personalInfoForm.Show();
         }
 
-        //判断form是否出现
-        private bool CheckFormIsOpen(string Forms)
+        // 判断form是否出现
+        private bool CheckFormIsOpen(string form)
         {
             bool bResult = false;
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == Forms)
+                if (frm.Name == form)
                 {
                     bResult = true;
                     break;
                 }
             }
+
             return bResult;
         }
 
+        /// <summary>
+        /// 添加好友按钮，搜索好友
+        /// </summary>
         private void addFriendButton_Click(object sender, EventArgs e)
         {
             SearchFriendForm searchFriendForm;
             if (!CheckFormIsOpen("SearchFriendForm"))
+            {
                 searchFriendForm = new SearchFriendForm();
+            }
             else
+            {
                 searchFriendForm = (SearchFriendForm)Application.OpenForms["SearchFriendForm"];
+            }
+
             searchFriendForm.Show();
         }
 
-        // 双击一项，弹出聊天窗体        
+        // 双击好友头像，弹出聊天窗体
         private void sbFriends_ItemDoubleClick(SbItemEventArgs e)
         {
             // 消息timer停止运行
@@ -196,14 +230,14 @@ namespace QQ_piracy
             }
         }
 
-        // 定时扫描数据库，找到未读消息
+        /// <summary>
+        /// 定时向服务器发送请求，找到未读消息
+        /// </summary>
         private void tmrMessage_Tick(object sender, EventArgs e)
         {
             ShowFriendList();       // 刷新好友列表
             int messageTypeId = 1;  // 消息类型 2代表添加好友，1代表好友消息
             int messageState = 1;   // 消息状态 1表示已读，0表示未读
-            //int havePlayAdiuo = -1;   //声音只能播放一次
-            //int AdiuoType = -1;      //0播放消息，1播放系统
 
             MySqlCommand cmd=null;
             // 消息有两种类型：聊天消息、添加好友消息
@@ -346,13 +380,14 @@ namespace QQ_piracy
                     {
                         if (sbFriends.Groups[i].Items[j].ImageIndex < 100)
                         {
-                            sbFriends.Groups[i].Items[j].ImageIndex = 100;// 索引为100的图片是一个空白图片
+                            sbFriends.Groups[i].Items[j].ImageIndex = 100; // 索引为100的图片是一个空白图片
                         }
                         else
                         {
                             sbFriends.Groups[i].Items[j].ImageIndex = this.friendFaceId;
                         }
-                        sbFriends.Invalidate();  //
+
+                        sbFriends.Invalidate();
                     }
                 }
             }
