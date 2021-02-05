@@ -55,5 +55,10 @@
         /// 头像Id
         /// </summary>
         public static int FaceId { get; set; }
+
+        /// <summary>
+        /// 添加好友策略Id
+        /// </summary>
+        public static int FriendshipPolicyId { get; set; }
     }
 }

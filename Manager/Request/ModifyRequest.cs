@@ -2,16 +2,17 @@
 {
     using Common;
 
-    /// <summary>
-    /// 选填消息的request
-    /// </summary>
-    public class ChooseRequest : BaseRequest
+    public class ModifyRequest : BaseRequest
     {
-        private ChooseForm chooseForm;
+        private XGMessageForm xGMessageForm;
 
-        public ChooseRequest(ChooseForm chooseForm)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModifyRequest"/> class.
+        /// 构造函数，将form传递进来
+        /// </summary>
+        public ModifyRequest(XGMessageForm xGMessageForm)
         {
-            this.chooseForm = chooseForm;
+            this.xGMessageForm = xGMessageForm;
             Init();
         }
 
@@ -20,8 +21,8 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.User;
-            actionCode = ActionCode.Optional;
+            requestCode = RequestCode.Friend;
+            actionCode = ActionCode.Modify;
             base.Init();
         }
 
@@ -32,13 +33,13 @@
         {
             string[] strs = data.Split(',');
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
-            if (returnCode == ReturnCode.Success)
+            if (returnCode == ReturnCode.Fail)
             {
-                chooseForm.ResponseChoose(true);
+                xGMessageForm.ResponseModify(false);
             }
             else
             {
-                chooseForm.ResponseChoose(false);
+                xGMessageForm.ResponseModify(true);
             }
         }
 

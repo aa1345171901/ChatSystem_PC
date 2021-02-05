@@ -1,17 +1,22 @@
-﻿namespace QQ_piracy.Manager.Request
+﻿using ChatSystemServer.Helper;
+using Common;
+
+namespace QQ_piracy.Manager.Request
 {
-    using Common;
-
     /// <summary>
-    /// 选填消息的request
+    /// 获取好友列表的request
     /// </summary>
-    public class ChooseRequest : BaseRequest
+    public class GetFriendListRequest : BaseRequest
     {
-        private ChooseForm chooseForm;
+        private MainForm mainForm;
 
-        public ChooseRequest(ChooseForm chooseForm)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetFriendListRequest"/> class.
+        /// 构造函数，将form传递进来
+        /// </summary>
+        public GetFriendListRequest(MainForm mainForm)
         {
-            this.chooseForm = chooseForm;
+            this.mainForm = mainForm;
             Init();
         }
 
@@ -20,8 +25,8 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.User;
-            actionCode = ActionCode.Optional;
+            requestCode = RequestCode.Friend;
+            actionCode = ActionCode.GetFriendList;
             base.Init();
         }
 
@@ -32,13 +37,14 @@
         {
             string[] strs = data.Split(',');
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
-            if (returnCode == ReturnCode.Success)
+            if (returnCode == ReturnCode.Fail)
             {
-                chooseForm.ResponseChoose(true);
+                mainForm.ResponseGetFriends(false, null);
             }
             else
             {
-                chooseForm.ResponseChoose(false);
+                string str = data.Substring(2);
+                mainForm.ResponseGetFriends(true, DataHelper.StringToDic(str));
             }
         }
 

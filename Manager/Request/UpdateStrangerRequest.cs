@@ -2,16 +2,17 @@
 {
     using Common;
 
-    /// <summary>
-    /// 选填消息的request
-    /// </summary>
-    public class ChooseRequest : BaseRequest
+    public class UpdateStrangerRequest : BaseRequest
     {
-        private ChooseForm chooseForm;
+        private MainForm mainForm;
 
-        public ChooseRequest(ChooseForm chooseForm)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateStrangerRequest"/> class.
+        /// 构造函数，将form传递进来
+        /// </summary>
+        public UpdateStrangerRequest(MainForm mainForm)
         {
-            this.chooseForm = chooseForm;
+            this.mainForm = mainForm;
             Init();
         }
 
@@ -20,8 +21,8 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.User;
-            actionCode = ActionCode.Optional;
+            requestCode = RequestCode.Friend;
+            actionCode = ActionCode.UpdateStrangerList;
             base.Init();
         }
 
@@ -32,13 +33,16 @@
         {
             string[] strs = data.Split(',');
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
-            if (returnCode == ReturnCode.Success)
+            if (returnCode == ReturnCode.Fail)
             {
-                chooseForm.ResponseChoose(true);
+                mainForm.ResponseStrangerUpdate(false, 0, "", 0);
             }
             else
             {
-                chooseForm.ResponseChoose(false);
+                int id = int.Parse(strs[1]);
+                string nickName = strs[2];
+                int faceId = int.Parse(strs[3]);
+                mainForm.ResponseStrangerUpdate(true, id, nickName, faceId);
             }
         }
 

@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="Helper\DataListHelper.cs" />
     <Compile Include="ManagerController.cs" />
     <Compile Include="Form\ChatForm.cs">
@@ -122,10 +123,17 @@
     <Compile Include="Manager\Net\ClientManager.cs" />
     <Compile Include="Manager\Net\Message.cs" />
     <Compile Include="Manager\RequestManager.cs" />
+    <Compile Include="Manager\Request\AddStrangerRequest.cs" />
     <Compile Include="Manager\Request\BaseRequest.cs" />
     <Compile Include="Manager\Request\ChooseRequest.cs" />
+    <Compile Include="Manager\Request\DeleteFriendRequest.cs" />
+    <Compile Include="Manager\Request\GetFriendListRequest.cs" />
+    <Compile Include="Manager\Request\GetUnreadMessageRequest.cs" />
     <Compile Include="Manager\Request\LoginRequest.cs" />
+    <Compile Include="Manager\Request\ModifyRequest.cs" />
     <Compile Include="Manager\Request\RegisterRequest.cs" />
+    <Compile Include="Manager\Request\SetSystemFaceRequest.cs" />
+    <Compile Include="Manager\Request\UpdateStrangerRequest.cs" />
     <Compile Include="WinAPI\Enums.cs" />
     <Compile Include="WinAPI\Structs.cs" />
     <Compile Include="WinAPI\Win32API.cs" />
