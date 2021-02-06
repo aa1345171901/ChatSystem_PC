@@ -2,17 +2,17 @@
 {
     using Common;
 
-    public class SetSystemFaceRequest : BaseRequest
+    class SendByChatRequest : BaseRequest
     {
-        private FacesForm faceForm;
+        private ChatForm chatForm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SetSystemFaceRequest"/> class.
+        /// Initializes a new instance of the <see cref="SendByChatRequest"/> class.
         /// 构造函数，将form传递进来
         /// </summary>
-        public SetSystemFaceRequest(FacesForm faceForm)
+        public SendByChatRequest(ChatForm chatForm)
         {
-            this.faceForm = faceForm;
+            this.chatForm = chatForm;
             Init();
         }
 
@@ -21,8 +21,8 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.User;
-            actionCode = ActionCode.SetSystemFace;
+            requestCode = RequestCode.Message;
+            actionCode = ActionCode.SendByChat;
             base.Init();
         }
 
@@ -35,11 +35,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                faceForm.ResponseSetFaceSystem(false, 0);
+                searchFriendForm.ResponseAddFriend(false, strs[1]);
             }
             else
             {
-                faceForm.ResponseSetFaceSystem(true, int.Parse(strs[1]));
+                searchFriendForm.ResponseAddFriend(true, "");
             }
         }
 

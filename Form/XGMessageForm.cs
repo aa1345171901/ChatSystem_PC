@@ -20,6 +20,9 @@
             this.personalInfoForm = personalInfoForm;
         }
 
+        /// <summary>
+        /// 对修改信息做出响应
+        /// </summary>
         public void ResponseModify(bool isModify)
         {
             if (isModify)
@@ -47,6 +50,7 @@
 
         /// <summary>
         /// 修改信息请求
+        /// <summary>
         private void save_Click(object sender, EventArgs e)
         {
             if (ValidataInput())
@@ -70,6 +74,9 @@
             }
         }
 
+        /// <summary>
+        /// 主界面加载
+        /// </summary>
         private void XGMessageForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.Sizable;    // 修改窗体边框

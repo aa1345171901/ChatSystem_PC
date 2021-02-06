@@ -1,18 +1,19 @@
 ﻿namespace QQ_piracy.Manager.Request
 {
+    using System.Text;
     using Common;
 
-    public class SetSystemFaceRequest : BaseRequest
+    public class AddFriendRequest : BaseRequest
     {
-        private FacesForm faceForm;
+        private SearchFriendForm searchFriendForm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SetSystemFaceRequest"/> class.
+        /// Initializes a new instance of the <see cref="AddFriendRequest"/> class.
         /// 构造函数，将form传递进来
         /// </summary>
-        public SetSystemFaceRequest(FacesForm faceForm)
+        public AddFriendRequest(SearchFriendForm searchFriendForm)
         {
-            this.faceForm = faceForm;
+            this.searchFriendForm = searchFriendForm;
             Init();
         }
 
@@ -21,8 +22,8 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.User;
-            actionCode = ActionCode.SetSystemFace;
+            requestCode = RequestCode.Friend;
+            actionCode = ActionCode.AddFriend;
             base.Init();
         }
 
@@ -35,11 +36,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                faceForm.ResponseSetFaceSystem(false, 0);
+                searchFriendForm.ResponseAddFriend(false, strs[1]);
             }
             else
             {
-                faceForm.ResponseSetFaceSystem(true, int.Parse(strs[1]));
+                searchFriendForm.ResponseAddFriend(true, "");
             }
         }
 

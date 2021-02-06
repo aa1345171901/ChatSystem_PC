@@ -123,8 +123,10 @@
     <Compile Include="Manager\Net\ClientManager.cs" />
     <Compile Include="Manager\Net\Message.cs" />
     <Compile Include="Manager\RequestManager.cs" />
+    <Compile Include="Manager\Request\AddFriendRequest.cs" />
     <Compile Include="Manager\Request\AddStrangerRequest.cs" />
     <Compile Include="Manager\Request\BaseRequest.cs" />
+    <Compile Include="Manager\Request\ChatByReceiveReqeust.cs" />
     <Compile Include="Manager\Request\ChooseRequest.cs" />
     <Compile Include="Manager\Request\DeleteFriendRequest.cs" />
     <Compile Include="Manager\Request\GetFriendListRequest.cs" />
@@ -132,6 +134,8 @@
     <Compile Include="Manager\Request\LoginRequest.cs" />
     <Compile Include="Manager\Request\ModifyRequest.cs" />
     <Compile Include="Manager\Request\RegisterRequest.cs" />
+    <Compile Include="Manager\Request\SearchFriendRequest.cs" />
+    <Compile Include="Manager\Request\SendByChatRequest.cs" />
     <Compile Include="Manager\Request\SetSystemFaceRequest.cs" />
     <Compile Include="Manager\Request\UpdateStrangerRequest.cs" />
     <Compile Include="WinAPI\Enums.cs" />

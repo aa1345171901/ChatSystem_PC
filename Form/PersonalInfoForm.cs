@@ -148,6 +148,7 @@
             {
                 faceform = (FacesForm)Application.OpenForms["FacesForm"];
             }
+
             this.Enabled = false;
             faceform.Show();
         }

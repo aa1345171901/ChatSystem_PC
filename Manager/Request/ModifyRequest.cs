@@ -21,7 +21,7 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.Friend;
+            requestCode = RequestCode.User;
             actionCode = ActionCode.Modify;
             base.Init();
         }

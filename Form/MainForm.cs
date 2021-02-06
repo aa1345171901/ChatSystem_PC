@@ -512,12 +512,12 @@
                 }
 
                 ChatForm chatForm = new ChatForm();
-                chatForm.friendId = Convert.ToInt32(e.Item.Tag); // 号码
+                chatForm.FriendId = Convert.ToInt32(e.Item.Tag); // 号码
                 chatForms.Add(Convert.ToInt32(e.Item.Tag));
-                chatForm.nickName = e.Item.Text;  // 昵称
-                chatForm.faceId = e.Item.ImageIndex;  // 头像
-                chatForm.selfnickName = nickName.Text;
-                chatForm.mainForm = this;
+                chatForm.NickName = e.Item.Text;  // 昵称
+                chatForm.FaceId = e.Item.ImageIndex;  // 头像
+                chatForm.SelfnickName = nickName.Text;
+                chatForm.MainForm = this;
                 chatForm.Show();
             }
         }
