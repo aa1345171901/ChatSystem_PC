@@ -12,6 +12,8 @@
 
     public partial class MainForm : Form
     {
+        public List<int> ChatForms = new List<int>();  // 用于判断chat是否重复
+
         private GetUnreadMessageRequest getUnreadRequest;
         private GetFriendListRequest getFriends;
         private DeleteFriendRequest deleteFriend;
@@ -24,8 +26,6 @@
         int messageImageIndex = 0;  // 工具栏中的消息图标的索引
 
         bool isXF = true;              // 在最小化的时候设定不能启用悬浮 //需要在designer里更改状态
-
-        private List<int> chatForms = new List<int>();  // 用于判断chat是否重复
 
         Icon icon1 = null;
         Icon icon2 = null;
@@ -503,7 +503,7 @@
             }
 
             // 显示聊天窗体
-            if (!chatForms.Contains(Convert.ToInt32(e.Item.Tag)))
+            if (!ChatForms.Contains(Convert.ToInt32(e.Item.Tag)))
             {
                 // 将未读消息的该好友去掉
                 if (userFaceIdDic.ContainsKey((int)e.Item.Tag))
@@ -513,7 +513,7 @@
 
                 ChatForm chatForm = new ChatForm();
                 chatForm.FriendId = Convert.ToInt32(e.Item.Tag); // 号码
-                chatForms.Add(Convert.ToInt32(e.Item.Tag));
+                ChatForms.Add(Convert.ToInt32(e.Item.Tag));
                 chatForm.NickName = e.Item.Text;  // 昵称
                 chatForm.FaceId = e.Item.ImageIndex;  // 头像
                 chatForm.SelfnickName = nickName.Text;
@@ -550,9 +550,16 @@
                 messageImageIndex = 0;
                 notifyIcon1.Icon = icon1;
 
-                // 显示系统消息窗体
-                RequestForm requestForm = new RequestForm();
-                requestForm.Show();
+                foreach (var item in systemMsgDic)
+                {
+                    // 显示系统消息窗体
+                    RequestForm requestForm = new RequestForm();
+                    requestForm.FromUserId = item.Key;
+                    requestForm.FaceId = item.Value;
+                    requestForm.Show();
+                }
+
+                systemMsgDic.Clear();
             }
             else
             {// 么有未读系统信息  双击打开面版

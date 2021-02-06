@@ -35,11 +35,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                searchFriendForm.ResponseAddFriend(false, strs[1]);
+                chatForm.ResponseSend(false);
             }
             else
             {
-                searchFriendForm.ResponseAddFriend(true, "");
+                chatForm.ResponseSend(true);
             }
         }
 

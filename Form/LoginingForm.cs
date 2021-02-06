@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using System;
+    using System.Windows.Forms;
+
     public partial class LoginingForm : Form
     {
-        public static bool isLogin = true;
+        public static bool IsLogin = true;
 
-        public Form loginForm;
+        public Form LoginForm;
 
         public LoginingForm(Form loginForm)
         {
-            this.loginForm = loginForm; 
+            this.LoginForm = loginForm;
             InitializeComponent();
+
             // 创建主窗体
         }
 
         private void LoginingForm_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;    //隐藏窗体边框
+            this.FormBorderStyle = FormBorderStyle.None;    // 隐藏窗体边框
         }
 
         private void min_Click(object sender, EventArgs e)
@@ -36,23 +29,23 @@ namespace QQ_piracy
 
         private void close_Click(object sender, EventArgs e)
         {
-            this.Close();                 //关闭窗体
+            this.Close();                 // 关闭窗体
 
-            loginForm.Close();
+            LoginForm.Close();
 
-            this.Dispose();               //释放资源
+            this.Dispose();               // 释放资源
 
-            Application.Exit();           //关闭应用程序窗体
+            Application.Exit();           // 关闭应用程序窗体
         }
 
         private void giveupButton_Click(object sender, EventArgs e)
         {
-            isLogin = false;
-            loginForm.Show();
+            IsLogin = false;
+            LoginForm.Show();
             this.Close();
         }
 
-        //延时
+        // 延时
         public static bool Delay(int delayTime)
         {
             DateTime now = DateTime.Now;
@@ -64,7 +57,7 @@ namespace QQ_piracy
                 Application.DoEvents();
             }
             while (s < delayTime);
-            return isLogin;
+            return IsLogin;
         }
     }
 }

@@ -123,8 +123,10 @@
     <Compile Include="Manager\Net\ClientManager.cs" />
     <Compile Include="Manager\Net\Message.cs" />
     <Compile Include="Manager\RequestManager.cs" />
+    <Compile Include="Manager\Request\AddFriendMessageRequest.cs" />
     <Compile Include="Manager\Request\AddFriendRequest.cs" />
     <Compile Include="Manager\Request\AddStrangerRequest.cs" />
+    <Compile Include="Manager\Request\AgreeAddFriendRequest.cs" />
     <Compile Include="Manager\Request\BaseRequest.cs" />
     <Compile Include="Manager\Request\ChatByReceiveReqeust.cs" />
     <Compile Include="Manager\Request\ChooseRequest.cs" />

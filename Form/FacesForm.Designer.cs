@@ -157,7 +157,6 @@
             this.lvFace.TabIndex = 0;
             this.lvFace.UseCompatibleStateImageBehavior = false;
             this.lvFace.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvIcons_MouseClick);
-            this.lvFace.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvIcons_MouseDoubleClick);
             // 
             // sure
             // 

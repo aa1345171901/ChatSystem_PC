@@ -2,17 +2,17 @@
 {
     using Common;
 
-    class ChatByReceiveReqeust : BaseRequest
+    public class AgreeAddFriendRequest : BaseRequest
     {
-        private ChatForm chatForm;
+        private RequestForm requestForm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChatByReceiveReqeust"/> class.
+        /// Initializes a new instance of the <see cref="AgreeAddFriendRequest"/> class.
         /// 构造函数，将form传递进来
         /// </summary>
-        public ChatByReceiveReqeust(ChatForm chatForm)
+        public AgreeAddFriendRequest(RequestForm requestForm)
         {
-            this.chatForm = chatForm;
+            this.requestForm = requestForm;
             Init();
         }
 
@@ -21,8 +21,8 @@
         /// </summary>
         public override void Init()
         {
-            requestCode = RequestCode.Message;
-            actionCode = ActionCode.ChatByReceive;
+            requestCode = RequestCode.Friend;
+            actionCode = ActionCode.AgreeAddFriend;
             base.Init();
         }
 
@@ -35,13 +35,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                chatForm.ResponseReceive(false, 0, "");
+                requestForm.ResponseAgree(false);
             }
             else
             {
-                string message = strs[1];
-                long ticks = long.Parse(strs[2]);
-                chatForm.ResponseReceive(true, ticks, message);
+                requestForm.ResponseAgree(true);
             }
         }
 

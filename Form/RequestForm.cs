@@ -1,78 +1,97 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace QQ_piracy
+﻿namespace QQ_piracy
 {
+    using System;
+    using System.Drawing;
+    using System.IO;
+    using System.Windows.Forms;
+    using QQ_piracy.Manager.Request;
+
     public partial class RequestForm : Form
     {
-        int fromUserId = 0;
+        public int FromUserId = 0;
+        public int FaceId;
 
+        private AddFriendMessageRequest addFriendRequest;
+        private AgreeAddFriendRequest agreeAddRequest;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequestForm"/> class.
+        /// 界面加载
+        /// </summary>
         public RequestForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 对设置消息为未读做响应
+        /// </summary>
+        public void ResponseRequest(bool isRequest, string nickName)
+        {
+            if (isRequest)
+            {
+                // this.pbFace.BackgroundImage = ilFaces.Images[FaceId];
+                string appPath = Application.StartupPath + @"\" + FaceId + ".jpg";
+
+                // 图片需跟exe同一路径下
+                if (File.Exists(appPath))
+                {
+                    Image img = Image.FromFile(appPath);
+                    this.pbFace.BackgroundImage = img;
+                }
+
+                this.userMsg.Text = nickName + "     (" + FromUserId + ")";
+                this.systemMsg.Text = "请求添加您为好友";
+                this.btnAllow.Visible = true;
+            }
+            else
+            {
+                this.Close();  // 关闭窗体
+                MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 同意添加好友的反馈，这里如果服务器错误需要重新更改消息为已读//todo
+        /// </summary>
+        public void ResponseAgree(bool isAgree)
+        {
+            this.Close();  // 关闭窗体
+            if (isAgree)
+            {
+            }
+            else
+            {
+                MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 界面初始化
+        /// </summary>
         private void RequestForm_Load(object sender, EventArgs e)
         {
-            int messageId = 0; // 消息的Id
+            addFriendRequest = new AddFriendMessageRequest(this);
+            agreeAddRequest = new AgreeAddFriendRequest(this);
 
-            // 找到发给当前用户的请求消息
-            string sql;
-            try
+            if (FromUserId == 0)
             {
-                // 查找一个未读消息
-                MySqlCommand cmd = new MySqlCommand("select msgid,FromUserId from messages where touserid=@loginid and messagetype=2 and messagestate=0", DBHelper.Connect());
-                cmd.Parameters.AddWithValue("loginid",UserHelper.loginId);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                if (dataReader.Read())
-                {
-                    messageId = (int)dataReader["msgid"];
-                    this.fromUserId = (int)dataReader["FromUserId"];
-                }
-                dataReader.Close();
-
-                // 将消息状态置为已读
-                sql = "UPDATE Messages SET MessageState =1 WHERE msgid=@messageid";
-                cmd.CommandText = sql;
-                cmd.Parameters.AddWithValue("messageid", messageId);
-                cmd.ExecuteNonQuery();
-
-                // 读取请求人的信息，显示在窗体上
-                sql = "SELECT NickName, FaceId FROM Userdata,user WHERE user.Id=@fromuserid and user.dataid=userdata.id";
-                cmd.CommandText = sql;
-                cmd.Parameters.AddWithValue("fromuserid", fromUserId);
-                dataReader = cmd.ExecuteReader();
-                if (dataReader.Read())
-                {
-                    int faceId = (int)dataReader["FaceId"];
-                    string nickName = (string)dataReader["NickName"];
-                    this.pbFace.BackgroundImage = ilFaces.Images[faceId];
-                    this.userMsg.Text = nickName + "     (" + fromUserId + ")";
-                    this.systemMsg.Text ="请求添加您为好友";
-                    this.btnAllow.Visible = true;
-                }
-                else
-                {
-                    this.systemMsg.Text = "没有系统消息";
-                    this.btnAllow.Visible = false;
-                }
+                this.systemMsg.Text = "没有系统消息";
+                this.btnAllow.Visible = false;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                DBHelper.Connect().Close();
+            else
+            {// 将该系统消息置为已读
+                try
+                {
+                    int id = UserHelper.LoginId;
+                    int fromUserId = FromUserId;
+                    string data = id + "," + fromUserId;
+                    addFriendRequest.SendRequest(data);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("无法连接服务器，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -82,39 +101,21 @@ namespace QQ_piracy
             // 先查找是否已经添加过了，防止重复添加
             try
             {
-                MySqlCommand cmd = new MySqlCommand("select count(*) from friend where hostFriendId=@hostFriendId and AccetFriendId=@AccetFriendId", DBHelper.Connect());
-                cmd.Parameters.AddWithValue("hostFriendId", fromUserId);
-                cmd.Parameters.AddWithValue("AccetFriendId", UserHelper.loginId);
-                int num = Convert.ToInt32(cmd.ExecuteScalar());
-
-                if (num <= 0)  // 没有好友记录
-                {
-                    cmd = new MySqlCommand("insert into friend set hostFriendid=@hostFriendId,AccetFriendId=@AccetFriendId", DBHelper.Connect());
-                    cmd.Parameters.AddWithValue("hostFriendId", fromUserId);
-                    cmd.Parameters.AddWithValue("AccetFriendId", UserHelper.loginId);
-                    // 执行添加操作 
-                    cmd.ExecuteNonQuery();
-
-                    //相互添加
-                    cmd = new MySqlCommand("insert into friend set hostFriendid=@hostFriendId,AccetFriendId=@AccetFriendId", DBHelper.Connect());
-                    cmd.Parameters.AddWithValue("hostfriendid", UserHelper.loginId);
-                    cmd.Parameters.AddWithValue("accetfriendid", fromUserId);
-                    cmd.ExecuteNonQuery();
-                }
+                int hostFriendId = FromUserId;
+                int accetFriendId = UserHelper.LoginId;
+                string data = hostFriendId + "," + accetFriendId;
+                agreeAddRequest.SendRequest(data);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show("无法连接服务器，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                DBHelper.Connect().Close();
-            }
-            this.Close();  // 关闭窗体
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            agreeAddRequest.Close();
+            addFriendRequest.Close();
             this.Dispose();
 
             this.Close();

@@ -26,6 +26,36 @@
         }
 
         /// <summary>
+        /// 发送成功执行的操作
+        /// </summary>
+        public void ResponseSend(bool isSend)
+        {
+            if (isSend)
+            {
+                messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", SelfnickName, DateTime.Now, tbMessage.Text);
+                tbMessage.Text = "";  // 输入消息清空
+            }
+            else
+            {
+                MessageBox.Show("服务器未响应，请稍后再试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 接收消息响应
+        /// </summary>
+        public void ResponseReceive(bool isReceive, long messageTimeTicks, string message)
+        {
+            // 将消息添加到窗体上
+            if (isReceive)
+            {
+                DateTime sendTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+                sendTime = sendTime.AddMilliseconds(messageTimeTicks);
+                messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", NickName, sendTime, message);
+            }
+        }
+
+        /// <summary>
         /// 初始化主界面
         /// </summary>
         private void ChatForm_Load(object sender, EventArgs e)
@@ -62,33 +92,41 @@
             }
             else
             { // 发送消息，向服务器发送请求
-                int result = -1; // 表示操作数据库的结果
-
                 try
                 {
-                    MySqlCommand cmd = new MySqlCommand("insert into messages  set fromuserid=@fromuserid,touserid=@touserid,message=@message,sendtime=@sendtime,messagetype=1,messagestate=0", DBHelper.Connect());
-                    cmd.Parameters.AddWithValue("fromuserid", UserHelper.loginId);
-                    cmd.Parameters.AddWithValue("touserid", FriendId);
-                    cmd.Parameters.AddWithValue("message", tbMessage.Text);
+                    int id = UserHelper.LoginId;
+                    int friendId = FriendId;
+                    string message = tbMessage.Text;
                     DateTime datetime = DateTime.Now;
-                    cmd.Parameters.AddWithValue("sendtime", datetime);
-
-                    result = cmd.ExecuteNonQuery();
+                    DateTime epoc = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+                    TimeSpan delta = default(TimeSpan);
+                    delta = datetime.Subtract(epoc);
+                    long ticks = (long)delta.TotalMilliseconds;
+                    string data = id + "," + friendId + "," + message + "," + ticks;
+                    chatSendRequest.SendRequest(data);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("连接错误，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                finally
-                {
-                    DBHelper.Connect().Close();
-                }
-                if (result != 1)
-                {
-                    MessageBox.Show("服务器出现意外错误！", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", SelfnickName, DateTime.Now, tbMessage.Text);
-                tbMessage.Text = "";  // 输入消息清空
+            }
+        }
+
+        /// <summary>
+        /// 读取所有的未读消息，显示在窗体中
+        /// </summary>
+        private void ShowMessage()
+        {
+            try
+            {
+                int id = UserHelper.LoginId;
+                int friendId = FriendId;
+                string data = id + "," + friendId;
+                chatReceiveRequest.SendRequest(data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("连接错误，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -111,82 +149,18 @@
         }
 
         /// <summary>
-        /// 读取所有的未读消息，显示在窗体中
+        /// 关闭聊天窗口时，移除主窗口的列表对应的chatForm
         /// </summary>
-        private void ShowMessage()
-        {
-            string messageIdsString = "";  // 消息的Id组成的字符串
-            string message;         // 消息内容
-            string messageTime;     // 消息发出的时间
-
-            try
-            {
-                MySqlCommand cmd = new MySqlCommand("select msgid,message,sendtime from messages where fromuserid=@fromuserid and touserid=@touserid and messagetype=1 and messagestate=0",DBHelper.Connect());
-                cmd.Parameters.AddWithValue("fromuserid", FriendId);
-                cmd.Parameters.AddWithValue("touserid", UserHelper.loginId);
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                // 循环将消息添加到窗体上
-                while (reader.Read())
-                {
-                    messageIdsString += Convert.ToString(reader["msgid"]) + "_";
-                    message = Convert.ToString(reader["message"]);
-                    messageTime = Convert.ToDateTime(reader["sendtime"]).ToString(); 
-
-                    messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", NickName, messageTime, message);
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                DBHelper.Connect().Close();
-            }
-            // 把显示出的消息置为已读
-            if (messageIdsString.Length > 1)
-            {
-                messageIdsString.Remove(messageIdsString.Length - 1);
-                SetMessageRead(messageIdsString, '_');
-            }
-        }
-
-        /// <summary>
-        /// 把显示出的消息置为已读
-        /// </summary>        
-        private void SetMessageRead(string messageIdsString, char separator)
-        {
-            string[] messageIds = messageIdsString.Split(separator);     // 分割出每个消息Id
-            try
-            {
-                foreach (string id in messageIds)
-                {
-                    if (id != "")
-                    {
-                        MySqlCommand cmd = new MySqlCommand("update messages set messagestate=1 where msgid=@id", DBHelper.Connect());
-                        cmd.Parameters.AddWithValue("id", id);
-                        int result = cmd.ExecuteNonQuery();  // 执行命令
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                DBHelper.Connect().Close();
-            }
-        }
-
         private void ChatForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            chatSendRequest.Close();
+            chatReceiveRequest.Close();
             MainForm.ChatForms.Remove(FriendId);
         }
 
+        /// <summary>
+        /// 计时器用于接收消息
+        /// </summary>
         private void showmsg_Tick(object sender, EventArgs e)
         {
             ShowMessage();
