@@ -69,7 +69,7 @@
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("操作失败，请检查您的网络！", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(ex.Message, "操作失败，请检查您的网络！", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

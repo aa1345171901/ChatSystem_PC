@@ -181,7 +181,7 @@
             }
             else
             {
-                MessageBox.Show("添加失败，请稍候再试！", result, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(result, "添加失败，请稍候再试！", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -226,7 +226,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("更新好友发生意外错误！请检查网络，稍后重试", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "更新好友发生意外错误！请检查网络，稍后重试", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
@@ -254,7 +254,7 @@
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("连接服务器出错，请检查您的网络", "提示：" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("提示：" + ex.Message, "连接服务器出错，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -280,7 +280,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接服务器出错，请检查您的网络", "提示：" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("提示：" + ex.Message, "连接服务器出错，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -295,7 +295,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("更新陌生人列表发生意外错误！请检查网络，稍后重试", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "更新陌生人列表发生意外错误！请检查网络，稍后重试", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

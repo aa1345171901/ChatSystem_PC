@@ -90,7 +90,7 @@
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("无法连接服务器，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "无法连接服务器，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -108,7 +108,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("无法连接服务器，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "无法连接服务器，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

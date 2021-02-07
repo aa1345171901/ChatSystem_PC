@@ -15,6 +15,14 @@
         private RequestManager requestManager;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ManagerController"/> class.
+        /// </summary>
+        public ManagerController()
+        {
+            Init();
+        }
+
+        /// <summary>
         /// 单例模式，是全局只有一个ManagerController
         /// </summary>
         public static ManagerController Instance

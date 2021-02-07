@@ -107,7 +107,7 @@
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("连接错误，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "连接错误，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -126,7 +126,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接错误，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "连接错误，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

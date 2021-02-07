@@ -21,7 +21,7 @@ namespace QQ_piracy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ManagerController managerController = new ManagerController();
+            ManagerController manager = new ManagerController();
             Application.Run(new LoginForm());
         }
     }

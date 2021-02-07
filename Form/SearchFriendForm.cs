@@ -105,7 +105,7 @@
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("连接服务器失败，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(ex.Message, "连接服务器失败，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 btnAdd.Visible = true;  // “加为好友”按钮可见
@@ -171,7 +171,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接服务器错误，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "连接服务器错误，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             btnAdd.Visible = true;  // “加为好友”按钮可见
@@ -192,7 +192,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接服务器错误，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "连接服务器错误，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -51,7 +51,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show("更换头像失败，请检查您的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "更换头像失败，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

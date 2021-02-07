@@ -54,7 +54,7 @@
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("连接服务器出错，请检查你的网络", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "连接服务器出错，请检查你的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
