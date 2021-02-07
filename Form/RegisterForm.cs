@@ -156,5 +156,10 @@
                 Pswlabel.Visible = true;
             }
         }
+
+        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            registerRequest.Close();
+        }
     }
 }

@@ -8,11 +8,10 @@
 
     public partial class RequestForm : Form
     {
+        public MainForm MainForm;
+
         public int FromUserId = 0;
         public int FaceId;
-
-        private AddFriendMessageRequest addFriendRequest;
-        private AgreeAddFriendRequest agreeAddRequest;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestForm"/> class.
@@ -71,9 +70,6 @@
         /// </summary>
         private void RequestForm_Load(object sender, EventArgs e)
         {
-            addFriendRequest = new AddFriendMessageRequest(this);
-            agreeAddRequest = new AgreeAddFriendRequest(this);
-
             if (FromUserId == 0)
             {
                 this.systemMsg.Text = "没有系统消息";
@@ -86,7 +82,7 @@
                     int id = UserHelper.LoginId;
                     int fromUserId = FromUserId;
                     string data = id + "," + fromUserId;
-                    addFriendRequest.SendRequest(data);
+                    MainForm.AddFriendRequest.SendRequest(data);
                 }
                 catch (Exception ex)
                 {
@@ -104,7 +100,7 @@
                 int hostFriendId = FromUserId;
                 int accetFriendId = UserHelper.LoginId;
                 string data = hostFriendId + "," + accetFriendId;
-                agreeAddRequest.SendRequest(data);
+                MainForm.AgreeAddRequest.SendRequest(data);
             }
             catch (Exception ex)
             {
@@ -114,11 +110,14 @@
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            agreeAddRequest.Close();
-            addFriendRequest.Close();
             this.Dispose();
 
             this.Close();
+        }
+
+        private void RequestForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainForm.UserRequestDict.Remove(FromUserId);
         }
     }
 }

@@ -4,15 +4,15 @@
 
     public class AgreeAddFriendRequest : BaseRequest
     {
-        private RequestForm requestForm;
+        private MainForm mainForm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AgreeAddFriendRequest"/> class.
         /// 构造函数，将form传递进来
         /// </summary>
-        public AgreeAddFriendRequest(RequestForm requestForm)
+        public AgreeAddFriendRequest(MainForm mainForm)
         {
-            this.requestForm = requestForm;
+            this.mainForm = mainForm;
             Init();
         }
 
@@ -35,11 +35,17 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                requestForm.ResponseAgree(false);
+                int friendId = int.Parse(strs[1]);
+                RequestForm request;
+                mainForm.UserRequestDict.TryGetValue(friendId, out request);
+                request.ResponseAgree(false);
             }
             else
             {
-                requestForm.ResponseAgree(true);
+                int friendId = int.Parse(strs[1]);
+                RequestForm request;
+                mainForm.UserRequestDict.TryGetValue(friendId, out request);
+                request.ResponseAgree(true);
             }
         }
 

@@ -2,17 +2,17 @@
 {
     using Common;
 
-    class SendByChatRequest : BaseRequest
+    public class SendByChatRequest : BaseRequest
     {
-        private ChatForm chatForm;
+        private MainForm mainForm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SendByChatRequest"/> class.
         /// 构造函数，将form传递进来
         /// </summary>
-        public SendByChatRequest(ChatForm chatForm)
+        public SendByChatRequest(MainForm mainForm)
         {
-            this.chatForm = chatForm;
+            this.mainForm = mainForm;
             Init();
         }
 
@@ -35,10 +35,16 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
+                int friendId = int.Parse(strs[1]);
+                ChatForm chatForm;
+                mainForm.UserChatDict.TryGetValue(friendId, out chatForm);
                 chatForm.ResponseSend(false);
             }
             else
             {
+                int friendId = int.Parse(strs[1]);
+                ChatForm chatForm;
+                mainForm.UserChatDict.TryGetValue(friendId, out chatForm);
                 chatForm.ResponseSend(true);
             }
         }

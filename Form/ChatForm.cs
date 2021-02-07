@@ -13,9 +13,6 @@
         public int FaceId;       // 当前聊天的好友头像Id
         public MainForm MainForm;
 
-        private ChatByReceiveReqeust chatReceiveRequest;
-        private SendByChatRequest chatSendRequest;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ChatForm"/> class.
         /// 加载界面
@@ -64,9 +61,6 @@
             this.ShowInTaskbar = true;                     // 显示任务栏
             this.Icon = new Icon("1.ico");
 
-            chatSendRequest = new SendByChatRequest(this);
-            chatReceiveRequest = new ChatByReceiveReqeust(this);
-
             // 设置窗体标题
             this.Text = "         " + NickName + " (" + FriendId + ")";
 
@@ -103,7 +97,7 @@
                     delta = datetime.Subtract(epoc);
                     long ticks = (long)delta.TotalMilliseconds;
                     string data = id + "," + friendId + "," + message + "," + ticks;
-                    chatSendRequest.SendRequest(data);
+                    MainForm.ChatSendRequest.SendRequest(data);
                 }
                 catch (Exception ex)
                 {
@@ -122,7 +116,7 @@
                 int id = UserHelper.LoginId;
                 int friendId = FriendId;
                 string data = id + "," + friendId;
-                chatReceiveRequest.SendRequest(data);
+                MainForm.ChatReceiveRequest.SendRequest(data);
             }
             catch (Exception ex)
             {
@@ -153,8 +147,7 @@
         /// </summary>
         private void ChatForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            chatSendRequest.Close();
-            chatReceiveRequest.Close();
+            MainForm.UserChatDict.Remove(FriendId);
             MainForm.ChatForms.Remove(FriendId);
         }
 

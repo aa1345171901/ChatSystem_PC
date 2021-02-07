@@ -14,10 +14,21 @@
     {
         public List<int> ChatForms = new List<int>();  // 用于判断chat是否重复
 
+        // 管理 requestFrom的回传消息
+        public AddFriendMessageRequest AddFriendRequest;
+        public AgreeAddFriendRequest AgreeAddRequest;
+
+        // 管理 chatFrom的回传消息
+        public ChatByReceiveReqeust ChatReceiveRequest;
+        public SendByChatRequest ChatSendRequest;
+
+        public Dictionary<int, RequestForm> UserRequestDict = new Dictionary<int, RequestForm>(); // 管理用户的requestForm
+        public Dictionary<int, ChatForm> UserChatDict = new Dictionary<int, ChatForm>(); // 管理用户的chatForm 使消息能正确传达到指定form
+
         private GetUnreadMessageRequest getUnreadRequest;
         private GetFriendListRequest getFriends;
         private DeleteFriendRequest deleteFriend;
-        private AddStrangerRequest addFriendRequest;
+        private AddStrangerRequest addStrangerRequest;
         private UpdateStrangerRequest updateStrangerList;
 
         Dictionary<int, int> userFaceIdDic = new Dictionary<int, int>(); // 消息的发起者与发消息的好友的头像Id
@@ -276,7 +287,7 @@
                 int hostFriendId = UserHelper.LoginId;
                 int accetFriendId = (int)sbFriends.SeletedItem.Tag;
                 string data = hostFriendId.ToString() + "," + accetFriendId.ToString();
-                addFriendRequest.SendRequest(data);
+                addStrangerRequest.SendRequest(data);
             }
             catch (Exception ex)
             {
@@ -312,8 +323,14 @@
             getUnreadRequest = new GetUnreadMessageRequest(this);
             getFriends = new GetFriendListRequest(this);
             deleteFriend = new DeleteFriendRequest(this);
-            addFriendRequest = new AddStrangerRequest(this);
+            addStrangerRequest = new AddStrangerRequest(this);
             updateStrangerList = new UpdateStrangerRequest(this);
+
+            AddFriendRequest = new AddFriendMessageRequest(this);
+            AgreeAddRequest = new AgreeAddFriendRequest(this);
+
+            ChatSendRequest = new SendByChatRequest(this);
+            ChatReceiveRequest = new ChatByReceiveReqeust(this);
 
             // 显示个人的信息
             ShowSelfInfo();
@@ -334,8 +351,11 @@
             getUnreadRequest.Close();
             getFriends.Close();
             deleteFriend.Close();
-            addFriendRequest.Close();
+            addStrangerRequest.Close();
             updateStrangerList.Close();
+
+            AgreeAddRequest.Close();
+            AddFriendRequest.Close();
         }
 
         /// <summary>
@@ -518,6 +538,7 @@
                 chatForm.FaceId = e.Item.ImageIndex;  // 头像
                 chatForm.SelfnickName = nickName.Text;
                 chatForm.MainForm = this;
+                UserChatDict.Add(Convert.ToInt32(e.Item.Tag), chatForm);
                 chatForm.Show();
             }
         }
@@ -556,6 +577,7 @@
                     RequestForm requestForm = new RequestForm();
                     requestForm.FromUserId = item.Key;
                     requestForm.FaceId = item.Value;
+                    UserRequestDict.Add(item.Key, requestForm);
                     requestForm.Show();
                 }
 

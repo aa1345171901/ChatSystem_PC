@@ -1,8 +1,8 @@
 ﻿namespace QQ_piracy.Manager.Request
 {
-    using Common;
     using System;
     using System.Collections.Generic;
+    using Common;
 
     /// <summary>
     /// 获取未读消息的request

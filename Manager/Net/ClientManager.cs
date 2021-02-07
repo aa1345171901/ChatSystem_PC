@@ -11,7 +11,7 @@
     public class ClientManager : BaseManager
     {
         private const string Ip = "127.0.0.1";
-        private const int Port = 6688;
+        private const int Port = 8888;
 
         private Socket clientSocket;
         private Message msg;

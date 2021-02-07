@@ -2,17 +2,17 @@
 {
     using Common;
 
-    class AddFriendMessageRequest : BaseRequest
+    public class AddFriendMessageRequest : BaseRequest
     {
-        private RequestForm requestForm;
+        private MainForm mainForm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddFriendMessageRequest"/> class.
         /// 构造函数，将form传递进来
         /// </summary>
-        public AddFriendMessageRequest(RequestForm requestForm)
+        public AddFriendMessageRequest(MainForm mainForm)
         {
-            this.requestForm = requestForm;
+            this.mainForm = mainForm;
             Init();
         }
 
@@ -35,12 +35,18 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                requestForm.ResponseRequest(false, "");
+                int fromUserId = int.Parse(strs[1]);
+                RequestForm request;
+                mainForm.UserRequestDict.TryGetValue(fromUserId, out request);
+                request.ResponseRequest(false, "");
             }
             else
             {
-                string nickName = strs[1];
-                requestForm.ResponseRequest(true, nickName);
+                int fromUserId = int.Parse(strs[1]);
+                RequestForm request;
+                mainForm.UserRequestDict.TryGetValue(fromUserId, out request);
+                string nickName = strs[2];
+                request.ResponseRequest(true, nickName);
             }
         }
 

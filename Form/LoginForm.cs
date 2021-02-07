@@ -133,7 +133,7 @@
         /// </summary>
         private void register_Click(object sender, EventArgs e)
         {
-            RegisterForm register = new RegisterForm();
+            RegisterForm register = null;
             if (!CheckFormIsOpen("RegisterForm"))
             {
                 register = new RegisterForm();
