@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChooseForm));
             this.sureButton = new System.Windows.Forms.Button();
             this.goLoginButton = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.blood = new System.Windows.Forms.ComboBox();
             this.ageLabel = new System.Windows.Forms.Label();
             this.trueNameLabel = new System.Windows.Forms.Label();
+            this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -186,6 +188,10 @@
             this.trueNameLabel.Text = "真实姓名";
             this.trueNameLabel.Click += new System.EventHandler(this.trueNameLabel_Click);
             // 
+            // SyncTimer
+            // 
+            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
+            // 
             // ChooseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -228,5 +234,6 @@
         private System.Windows.Forms.ComboBox blood;
         private System.Windows.Forms.Label ageLabel;
         private System.Windows.Forms.Label trueNameLabel;
+        private System.Windows.Forms.Timer SyncTimer;
     }
 }

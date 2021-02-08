@@ -7,6 +7,13 @@
 
     public partial class ChatForm : Form
     {
+        // 用于异步接收发送的标识，使用timer处理
+        public int IsSend = 0;   // 发送是否成功，1为成功，2为失败，0为不是回调发送
+        public int IsReceive = 0;   // 接收是否成功，1为成功，2为失败，0为不是回调发送
+
+        public long MessageTimeTicks; // 用于异步设置发送时间
+        public string Message; // 用于异步设置发送的信息
+
         public int FriendId;     // 当前聊天的好友号码
         public string NickName;  // 当前聊天的好友昵称
         public string SelfnickName;  // 当前聊天的好友昵称
@@ -25,15 +32,17 @@
         /// <summary>
         /// 发送成功执行的操作
         /// </summary>
-        public void ResponseSend(bool isSend)
+        public void ResponseSend()
         {
-            if (isSend)
+            if (IsSend == 1)
             {
+                IsSend = 0;
                 messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", SelfnickName, DateTime.Now, tbMessage.Text);
                 tbMessage.Text = "";  // 输入消息清空
             }
-            else
+            else if (IsSend == 2)
             {
+                IsSend = 0;
                 MessageBox.Show("服务器未响应，请稍后再试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -41,14 +50,15 @@
         /// <summary>
         /// 接收消息响应
         /// </summary>
-        public void ResponseReceive(bool isReceive, long messageTimeTicks, string message)
+        public void ResponseReceive()
         {
             // 将消息添加到窗体上
-            if (isReceive)
+            if (IsReceive == 1)
             {
+                IsReceive = 0;
                 DateTime sendTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-                sendTime = sendTime.AddMilliseconds(messageTimeTicks);
-                messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", NickName, sendTime, message);
+                sendTime = sendTime.AddMilliseconds(MessageTimeTicks);
+                messageLabel.Text += string.Format("\r\n{0}  {1}\r\n  {2}", NickName, sendTime, Message);
             }
         }
 
@@ -157,6 +167,8 @@
         private void showmsg_Tick(object sender, EventArgs e)
         {
             ShowMessage();
+            ResponseSend();
+            ResponseReceive();
         }
     }
 }

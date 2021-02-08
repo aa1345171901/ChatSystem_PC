@@ -34,11 +34,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Success)
             {
-                chooseForm.ResponseChoose(true);
+                chooseForm.IsChoose = 1;
             }
             else
             {
-                chooseForm.ResponseChoose(false);
+                chooseForm.IsChoose = 2;
             }
         }
 

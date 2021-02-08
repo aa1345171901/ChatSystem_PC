@@ -40,10 +40,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                mainForm.ResponseGetUnreadMsg(false, null);
+                mainForm.IsGetMsgs = 2;
             }
             else
             {
+                mainForm.IsGetMsgs = 1;
                 string strList = data.Substring(2);
                 string[] listString = strList.Split('-');
                 List<string> list = new List<string>();
@@ -52,7 +53,7 @@
                     list.Add(listString[i]);
                 }
 
-                mainForm.ResponseGetUnreadMsg(true, list);
+                mainForm.MsgLists = list;
             }
         }
 

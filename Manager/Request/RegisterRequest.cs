@@ -33,11 +33,11 @@
             {
                 UserHelper.LoginId = int.Parse(strs[1]);
                 UserHelper.DataId = int.Parse(strs[2]);
-                registerForm.ResponseRegister(true);
+                registerForm.IsRegister = 1;
             }
             else
             {
-                registerForm.ResponseRegister(false);
+                registerForm.IsRegister = 2;
             }
         }
 

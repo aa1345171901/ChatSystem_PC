@@ -8,6 +8,13 @@
 
     public partial class RequestForm : Form
     {
+        // 用于异步回调标识
+        public int IsRequest = 0;
+        public int IsAgree = 0;
+
+        // 用于异步回调昵称设置
+        public string NickName;
+
         public MainForm MainForm;
 
         public int FromUserId = 0;
@@ -25,10 +32,12 @@
         /// <summary>
         /// 对设置消息为未读做响应
         /// </summary>
-        public void ResponseRequest(bool isRequest, string nickName)
+        public void ResponseRequest()
         {
-            if (isRequest)
+            if (IsRequest == 1)
             {
+                IsRequest = 0;
+
                 // this.pbFace.BackgroundImage = ilFaces.Images[FaceId];
                 string appPath = Application.StartupPath + @"\" + FaceId + ".jpg";
 
@@ -39,12 +48,13 @@
                     this.pbFace.BackgroundImage = img;
                 }
 
-                this.userMsg.Text = nickName + "     (" + FromUserId + ")";
+                this.userMsg.Text = NickName + "     (" + FromUserId + ")";
                 this.systemMsg.Text = "请求添加您为好友";
                 this.btnAllow.Visible = true;
             }
-            else
+            else if (IsRequest == 2)
             {
+                IsRequest = 0;
                 this.Close();  // 关闭窗体
                 MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -53,14 +63,16 @@
         /// <summary>
         /// 同意添加好友的反馈，这里如果服务器错误需要重新更改消息为已读//todo
         /// </summary>
-        public void ResponseAgree(bool isAgree)
+        public void ResponseAgree()
         {
             this.Close();  // 关闭窗体
-            if (isAgree)
+            if (IsAgree == 1)
             {
+                IsAgree = 0;
             }
-            else
+            else if (IsAgree == 2)
             {
+                IsAgree = 0;
                 MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -70,6 +82,7 @@
         /// </summary>
         private void RequestForm_Load(object sender, EventArgs e)
         {
+            SyncTimer.Start();
             if (FromUserId == 0)
             {
                 this.systemMsg.Text = "没有系统消息";
@@ -118,6 +131,12 @@
         private void RequestForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainForm.UserRequestDict.Remove(FromUserId);
+        }
+
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseAgree();
+            ResponseRequest();
         }
     }
 }

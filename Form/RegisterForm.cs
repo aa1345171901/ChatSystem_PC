@@ -6,6 +6,8 @@
 
     public partial class RegisterForm : Form
     {
+        public int IsRegister = 0; // 用于标识异步调用
+
         private RegisterRequest registerRequest;
 
         /// <summary>
@@ -21,18 +23,20 @@
         /// <summary>
         /// 对注册的请求服务器的反馈做下一步操作
         /// </summary>
-        public void ResponseRegister(bool isRegister)
+        public void ResponseRegister()
         {
-            if (isRegister)
+            if (IsRegister == 1)
             {
+                IsRegister = 0;
                 ChooseForm chooseForm = new ChooseForm();
                 chooseForm.Show();
                 registerRequest.Close();
                 this.Close();
                 MessageBox.Show(string.Format("注册成功！请小心保管您的账号\n您的MyQQ号码是{0}", UserHelper.LoginId), "提示", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-            else
+            else if (IsRegister == 2)
             {
+                IsRegister = 0;
                 MessageBox.Show("服务器没有响应，请稍后再试", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
         }
@@ -101,6 +105,7 @@
         private void RegisterForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            SyncTimer.Start();
         }
 
         /// <summary>
@@ -160,6 +165,11 @@
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             registerRequest.Close();
+        }
+
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseRegister();
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,6 +39,7 @@
             this.Pswlabel = new System.Windows.Forms.Label();
             this.PswRLabel = new System.Windows.Forms.Label();
             this.registerButton = new System.Windows.Forms.Button();
+            this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -152,6 +154,10 @@
             this.registerButton.UseVisualStyleBackColor = false;
             this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
             // 
+            // SyncTimer
+            // 
+            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -189,5 +195,6 @@
         private System.Windows.Forms.Label Pswlabel;
         private System.Windows.Forms.Label PswRLabel;
         private System.Windows.Forms.Button registerButton;
+        private System.Windows.Forms.Timer SyncTimer;
     }
 }

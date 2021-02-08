@@ -378,7 +378,6 @@
             this.shiping.Click += sorry_Click;
             this.ToolStripMenuItem.Click += sorry_Click;
             this.ToolStripMenuItem2.Click += sorry_Click;
-
         }
 
         //this.toolStripButton1.Click += sorry_Click;

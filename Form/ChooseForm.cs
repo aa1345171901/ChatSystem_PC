@@ -7,6 +7,8 @@
 
     public partial class ChooseForm : Form
     {
+        public int IsChoose = 0; // 用于处理异步回调的标识，0为正常，1为接收成功标识，2为接收失败标识
+
         private ChooseRequest chooseRequest;
 
         /// <summary>
@@ -19,15 +21,17 @@
             chooseRequest = new ChooseRequest(this);
         }
 
-        public void ResponseChoose(bool isChoose)
+        public void ResponseChoose()
         {
-            if (isChoose)
+            if (IsChoose == 1)
             {
+                IsChoose = 0;
                 chooseRequest.Close();
                 this.Close();
             }
-            else
+            else if (IsChoose == 2)
             {
+                IsChoose = 0;
                 chooseRequest.Close();
                 this.Close();
                 MessageBox.Show("服务器无法响应", "请稍后重试", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -67,6 +71,7 @@
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;    // 修改窗体边框
             ApplyForm_Load();
+            SyncTimer.Start();
         }
 
         // 窗体加载时，添加星座和血型组合框中的项
@@ -117,6 +122,14 @@
             {
                 trueNameLabel.Visible = true;
             }
+        }
+
+        /// <summary>
+        /// 用于异步处理
+        /// </summary>
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseChoose();
         }
     }
 }

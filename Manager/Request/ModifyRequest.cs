@@ -35,11 +35,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                xGMessageForm.ResponseModify(false);
+                xGMessageForm.IsModify = 2;
             }
             else
             {
-                xGMessageForm.ResponseModify(true);
+                xGMessageForm.IsModify = 1;
             }
         }
 

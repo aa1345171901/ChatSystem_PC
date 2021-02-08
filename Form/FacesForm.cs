@@ -6,6 +6,9 @@
 
     public partial class FacesForm : Form
     {
+        public int IsSet = 0; // 用于设置异步回调的标识，0正常，1成功，2失败
+        public int FaceId;   // 回调的头像ID
+
         private PersonalInfoForm personalInfoForm;  // 个人信息窗体
         private SetSystemFaceRequest setSystemFaceRequest;
 
@@ -22,17 +25,19 @@
         /// <summary>
         /// 对发送的更换头像请求做出响应
         /// </summary>
-        public void ResponseSetFaceSystem(bool isSet, int faceId)
+        public void ResponseSetFaceSystem()
         {
-            if (isSet)
+            if (IsSet == 1)
             {
-                UserHelper.FaceId = faceId;
+                IsSet = 0;
+                UserHelper.FaceId = this.FaceId;
                 personalInfoForm.PersonalInfoForm_Load(null, null);  // 设置个人信息窗体和主窗体中显示的头像
                 personalInfoForm.Enabled = true;
                 this.Close();
             }
-            else
+            else if (IsSet == 2)
             {
+                IsSet = 0;
                 MessageBox.Show("更换头像失败，服务器无响应", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -58,6 +63,8 @@
         private void FacesForm_Load(object sender, EventArgs e)
         {
             setSystemFaceRequest = new SetSystemFaceRequest(this);
+
+            SyncTimer.Start();
 
             for (int i = 0; i < ilFaces.Images.Count; i++)
             {
@@ -101,6 +108,14 @@
         private void FacesForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             personalInfoForm.Enabled = true;
+        }
+
+        /// <summary>
+        /// 用于异步调用
+        /// </summary>
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseSetFaceSystem();
         }
     }
 }

@@ -35,14 +35,17 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                mainForm.ResponseStrangerUpdate(false, 0, "", 0);
+                mainForm.IsUpdate = 2;
             }
             else
             {
+                mainForm.IsUpdate = 1;
                 int id = int.Parse(strs[1]);
                 string nickName = strs[2];
                 int faceId = int.Parse(strs[3]);
-                mainForm.ResponseStrangerUpdate(true, id, nickName, faceId);
+                mainForm.StrangerId = id;
+                mainForm.NickName = nickName;
+                mainForm.FaceId = faceId;
             }
         }
 

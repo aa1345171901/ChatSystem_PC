@@ -36,11 +36,12 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                searchFriendForm.ResponseAddFriend(false, strs[1]);
+                searchFriendForm.IsAdd = 2;
+                searchFriendForm.Result = strs[1];
             }
             else
             {
-                searchFriendForm.ResponseAddFriend(true, "");
+                searchFriendForm.IsAdd = 1;
             }
         }
 

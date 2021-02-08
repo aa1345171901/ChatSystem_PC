@@ -38,14 +38,14 @@
                 int friendId = int.Parse(strs[1]);
                 RequestForm request;
                 mainForm.UserRequestDict.TryGetValue(friendId, out request);
-                request.ResponseAgree(false);
+                request.IsAgree = 2;
             }
             else
             {
                 int friendId = int.Parse(strs[1]);
                 RequestForm request;
                 mainForm.UserRequestDict.TryGetValue(friendId, out request);
-                request.ResponseAgree(true);
+                request.IsAgree = 1;
             }
         }
 

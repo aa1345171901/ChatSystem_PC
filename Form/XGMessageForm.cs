@@ -7,6 +7,8 @@
 
     public partial class XGMessageForm : Form
     {
+        public int IsModify = 0; // 用于回调异步标识
+
         private PersonalInfoForm personalInfoForm;
 
         private ModifyRequest modifyRequest;
@@ -23,10 +25,11 @@
         /// <summary>
         /// 对修改信息做出响应
         /// </summary>
-        public void ResponseModify(bool isModify)
+        public void ResponseModify()
         {
-            if (isModify)
+            if (IsModify == 1)
             {
+                IsModify = 0;
                 UserHelper.NickName = tbNick.Text;
                 UserHelper.Sex = cbsex.Text;
                 UserHelper.Age = int.Parse(tbAge.Text);
@@ -42,8 +45,9 @@
 
                 personalInfoForm.PersonalInfoForm_Load(null, null);
             }
-            else
+            else if (IsModify == 2)
             {
+                IsModify = 0;
                 MessageBox.Show("服务器未响应", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -82,6 +86,8 @@
             this.FormBorderStyle = FormBorderStyle.Sizable;    // 修改窗体边框
 
             modifyRequest = new ModifyRequest(this);
+
+            SyncTimer.Start();
 
             save.Enabled = false;                          // 信息未变动不能修改
             cbsex.Items.Add("男");
@@ -197,6 +203,11 @@
         {
             modifyRequest.Close();
             personalInfoForm.Enabled = true;
+        }
+
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseModify();
         }
     }
 }

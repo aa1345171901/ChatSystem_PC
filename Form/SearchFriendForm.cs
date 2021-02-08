@@ -7,7 +7,12 @@
 
     public partial class SearchFriendForm : Form
     {
-        private DataSet dataSet;  // 数据集
+        // 用于异步回调标识
+        public int IsSearch = 0;
+        public int IsAdd = 0;
+
+        public DataSet DataSet;  // 异步设置数据集
+        public string Result; // 用于设置异步回调错误消息
 
         private SearchFriendRequest searchFriendRequest;
         private AddFriendRequest addFriendRequest;
@@ -24,30 +29,31 @@
         /// <summary>
         /// 查找好友的数据响应
         /// </summary>
-        public void ResponseSearch(bool isSearch, DataSet dataSet)
+        public void ResponseSearch()
         {
-            if (isSearch)
+            if (IsSearch == 1)
             {
-                // 重新填充DataSet
-                dataSet.Tables[0].Clear();
-                this.dataSet = dataSet;
-                dgvBasicResult.DataSource = dataSet.Tables[0];
+                IsSearch = 0;
+                dgvBasicResult.DataSource = DataSet.Tables[0];
             }
-            else
+            else if (IsSearch == 2)
             {
+                IsSearch = 0;
                 MessageBox.Show("服务器无法响应，请稍后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        public void ResponseAddFriend(bool isAdd, string result)
+        public void ResponseAddFriend()
         {
-            if (isAdd)
+            if (IsAdd == 1)
             {
+                IsAdd = 0;
                 MessageBox.Show("添加好友成功：已发送好友请求", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
+            else if (IsAdd == 2)
             {
-                MessageBox.Show("添加好友失败：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                IsAdd = 0;
+                MessageBox.Show("添加好友失败：" + Result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -59,11 +65,13 @@
             searchFriendRequest = new SearchFriendRequest(this);
             addFriendRequest = new AddFriendRequest(this);
 
-            dataSet = new DataSet("❀");
+            SyncTimer.Start();
+
+            DataSet = new DataSet("❀");
 
             // 指定DataGridView的数据源
-            dgvBasicResult.DataSource = dataSet.Tables[0];
-            dataSet.Tables[0].Clear();
+            dgvBasicResult.DataSource = DataSet.Tables[0];
+            DataSet.Tables[0].Clear();
         }
 
         /// <summary>
@@ -225,6 +233,12 @@
             searchFriendRequest.Close();
             this.Dispose();
             this.Close();
+        }
+
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseAddFriend();
+            ResponseSearch();
         }
     }
 }

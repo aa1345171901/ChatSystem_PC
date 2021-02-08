@@ -36,6 +36,7 @@
             this.btnAllow = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.ilFaces = new System.Windows.Forms.ImageList(this.components);
+            this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,6 +201,10 @@
             this.ilFaces.Images.SetKeyName(99, "100.bmp");
             this.ilFaces.Images.SetKeyName(100, "`0@$}L(Y_LIHD~M4B2682C4.png");
             // 
+            // SyncTimer
+            // 
+            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
+            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -231,5 +236,6 @@
         private System.Windows.Forms.Button btnAllow;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ImageList ilFaces;
+        private System.Windows.Forms.Timer SyncTimer;
     }
 }

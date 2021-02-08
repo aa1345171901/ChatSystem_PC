@@ -35,11 +35,12 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                faceForm.ResponseSetFaceSystem(false, 0);
+                faceForm.IsSet = 2;
             }
             else
             {
-                faceForm.ResponseSetFaceSystem(true, int.Parse(strs[1]));
+                faceForm.IsSet = 1;
+                faceForm.FaceId = int.Parse(strs[1]);
             }
         }
 

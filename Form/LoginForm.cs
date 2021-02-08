@@ -6,6 +6,9 @@
 
     public partial class LoginForm : Form
     {
+        // 控制异步回调的，使用计时器调用控制该线程的form,0表示没有更改，1表示返回成功，2表示返回失败
+        public int IsLogin = 0;
+
         private LoginRequest loginRequest;
 
         /// <summary>
@@ -21,10 +24,11 @@
         /// <summary>
         /// 对服务器的登录反馈进行下一步操作
         /// </summary>
-        public void ResponseLogin(bool logined)
+        public void ResponseLogin()
         {
-            if (logined)
+            if (IsLogin == 1)
             {
+                IsLogin = 0;
                 LoginingForm loginingForm = new LoginingForm(this);
                 loginingForm.Show();
                 this.Visible = false;
@@ -36,8 +40,9 @@
                     loginingForm.Close();
                 }
             }
-            else
+            else if (IsLogin == 2)
             {
+                IsLogin = 0;
                 MessageBox.Show("输入的用户名或密码有误！", "登录提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -70,6 +75,7 @@
         private void LoginForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
+            AsynTimer.Start();
         }
 
         /// <summary>
@@ -182,6 +188,11 @@
             }
 
             return true;
+        }
+
+        private void AsynTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseLogin();
         }
     }
 }

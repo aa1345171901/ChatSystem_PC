@@ -38,14 +38,14 @@
                 int friendId = int.Parse(strs[1]);
                 ChatForm chatForm;
                 mainForm.UserChatDict.TryGetValue(friendId, out chatForm);
-                chatForm.ResponseSend(false);
+                chatForm.IsSend = 2;
             }
             else
             {
                 int friendId = int.Parse(strs[1]);
                 ChatForm chatForm;
                 mainForm.UserChatDict.TryGetValue(friendId, out chatForm);
-                chatForm.ResponseSend(true);
+                chatForm.IsSend = 1;
             }
         }
 

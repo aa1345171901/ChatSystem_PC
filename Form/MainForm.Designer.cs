@@ -74,6 +74,7 @@ namespace QQ_piracy
             this.sbFriends = new Aptech.UI.SideBar();
             this.nickName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.cmsFriendList.SuspendLayout();
@@ -544,6 +545,10 @@ namespace QQ_piracy
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // SyncTimer
+            // 
+            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -586,7 +591,6 @@ namespace QQ_piracy
             this.toolStripButton2.Click += Sorry_Click;
             this.toolStripButton3.Click += Sorry_Click;
             this.pictureBox1.MouseMove += PictureBox1_MouseMove;
-
         }
 
 
@@ -664,5 +668,6 @@ namespace QQ_piracy
         private Label nickName;
         private ToolStripMenuItem fresh;
         private Timer timer1;
+        private Timer SyncTimer;
     }
 }

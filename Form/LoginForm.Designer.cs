@@ -33,6 +33,7 @@ namespace QQ_piracy
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@ namespace QQ_piracy
             this.close = new System.Windows.Forms.Button();
             this.min = new System.Windows.Forms.Button();
             this.register = new System.Windows.Forms.Label();
+            this.AsynTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -221,6 +223,11 @@ namespace QQ_piracy
             this.register.Text = "注册账号";
             this.register.Click += new System.EventHandler(this.register_Click);
             // 
+            // AsynTimer
+            // 
+            this.AsynTimer.Enabled = true;
+            this.AsynTimer.Tick += new System.EventHandler(this.AsynTimer_Tick);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -287,5 +294,6 @@ namespace QQ_piracy
         private System.Windows.Forms.Button close;
         private System.Windows.Forms.Button min;
         private Label register;
+        private Timer AsynTimer;
     }
 }

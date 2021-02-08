@@ -35,7 +35,7 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                loginForm.ResponseLogin(false);
+                loginForm.IsLogin = 2;
             }
             else
             {
@@ -47,7 +47,7 @@
                 UserHelper.StarId = int.Parse(strs[6]);
                 UserHelper.BloodTypeId = int.Parse(strs[7]);
                 UserHelper.FaceId = int.Parse(strs[8]);
-                loginForm.ResponseLogin(true);
+                loginForm.IsLogin = 1;
             }
         }
 

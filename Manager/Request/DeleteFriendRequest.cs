@@ -35,11 +35,11 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                mainForm.ResponseDelete(false);
+                mainForm.IsDel = 2;
             }
             else
             {
-                mainForm.ResponseDelete(true);
+                mainForm.IsDel = 1;
             }
         }
 

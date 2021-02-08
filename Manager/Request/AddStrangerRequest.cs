@@ -35,11 +35,12 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                mainForm.ResponseAddStranger(false, strs[1]);
+                mainForm.IsAdd = 2;
+                mainForm.Result = strs[1];
             }
             else
             {
-                mainForm.ResponseAddStranger(true, strs[1]);
+                mainForm.IsAdd = 1;
             }
         }
 

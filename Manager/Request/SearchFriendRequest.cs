@@ -39,12 +39,13 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                searchFriendForm.ResponseSearch(false, null);
+                searchFriendForm.IsSearch = 2;
             }
             else
             {
+                searchFriendForm.IsSearch = 2;
                 DataSet dataSet = DataHelper.RetrieveDataSet(Encoding.UTF8.GetBytes(strs[1]));
-                searchFriendForm.ResponseSearch(true, dataSet);
+                searchFriendForm.DataSet = dataSet;
             }
         }
 

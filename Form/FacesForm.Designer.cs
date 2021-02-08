@@ -34,6 +34,7 @@
             this.lvFace = new System.Windows.Forms.ListView();
             this.sure = new System.Windows.Forms.Button();
             this.giveup = new System.Windows.Forms.Button();
+            this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // ilFaces
@@ -149,6 +150,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvFace.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("lvFace.BackgroundImage")));
             this.lvFace.BackgroundImageTiled = true;
+            this.lvFace.HideSelection = false;
             this.lvFace.LargeImageList = this.ilFaces;
             this.lvFace.Location = new System.Drawing.Point(0, -1);
             this.lvFace.MultiSelect = false;
@@ -189,6 +191,10 @@
             this.giveup.UseVisualStyleBackColor = false;
             this.giveup.Click += new System.EventHandler(this.button2_Click);
             // 
+            // SyncTimer
+            // 
+            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
+            // 
             // FacesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -216,5 +222,6 @@
         private System.Windows.Forms.ListView lvFace;
         private System.Windows.Forms.Button sure;
         private System.Windows.Forms.Button giveup;
+        private System.Windows.Forms.Timer SyncTimer;
     }
 }

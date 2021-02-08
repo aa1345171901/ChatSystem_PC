@@ -1,8 +1,8 @@
-﻿using ChatSystemServer.Helper;
-using Common;
-
-namespace QQ_piracy.Manager.Request
+﻿namespace QQ_piracy.Manager.Request
 {
+    using ChatSystemServer.Helper;
+    using Common;
+
     /// <summary>
     /// 获取好友列表的request
     /// </summary>
@@ -39,12 +39,13 @@ namespace QQ_piracy.Manager.Request
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                mainForm.ResponseGetFriends(false, null);
+                mainForm.IsGetFriends = 2;
             }
             else
             {
+                mainForm.IsGetFriends = 2;
                 string str = data.Substring(2);
-                mainForm.ResponseGetFriends(true, DataHelper.StringToDic(str));
+                mainForm.FriendDic = DataHelper.StringToDic(str);
             }
         }
 

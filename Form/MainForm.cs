@@ -12,6 +12,20 @@
 
     public partial class MainForm : Form
     {
+        // 用于异步标识，0为正常，1为 成功，2为失败
+        public int IsGetMsgs = 0;
+        public int IsGetFriends = 0;
+        public int IsDel = 0;
+        public int IsAdd = 0;
+        public int IsUpdate = 0;
+
+        public List<string> MsgLists;        // 用于异步设置接收的消息
+        public Dictionary<int, (string, int)> FriendDic;   // 用于异步设置好友列表
+        public string Result;                   // 用于异步设置添加陌生人好友的失败反馈
+        public int StrangerId;          // 用于异步设置陌生人信息
+        public string NickName;
+        public int FaceId;
+
         public List<int> ChatForms = new List<int>();  // 用于判断chat是否重复
 
         // 管理 requestFrom的回传消息
@@ -78,11 +92,12 @@
             this.notifyIcon1.Text = "QQ:" + nickName + "(" + id + ")" + "\n声音：开启" + "\n消息提醒框：关闭" + "\n会话消息：任务栏头像不闪动";
         }
 
-        public void ResponseGetUnreadMsg(bool isGet, List<string> list)
+        public void ResponseGetUnreadMsg()
         {
-            if (isGet)
+            if (IsGetMsgs == 1)
             {
-                foreach (var item in list)
+                IsGetMsgs = 0;
+                foreach (var item in MsgLists)
                 {
                     int messageTypeId = -1;
                     int messageState = -1;
@@ -138,8 +153,9 @@
 
                 tmrChatRequest.Start();  // 启动闪烁头像定时器
             }
-            else
+            else if (IsGetMsgs == 2)
             {
+                IsGetMsgs = 0;
                 tmrChatRequest.Stop();
                 MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -148,11 +164,12 @@
         /// <summary>
         /// 对发送的获取好友列表进行响应
         /// </summary>
-        public void ResponseGetFriends(bool isGet, Dictionary<int, (string, int)> friendsDic)
+        public void ResponseGetFriends()
         {
-            if (isGet)
+            if (IsGetFriends == 1)
             {
-                foreach (var it in friendsDic)
+                IsGetFriends = 0;
+                foreach (var it in FriendDic)
                 {
                     // 创建一个SideBar项
                     SbItem item = new SbItem(it.Value.Item1, it.Value.Item2);
@@ -163,45 +180,51 @@
                     sbFriends.Groups[0].Items.Add(item); // 向SideBar的“我的好友”组中添加项
                 }
             }
-            else
+            else if (IsGetFriends == 2)
             {
+                IsGetFriends = 0;
                 MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public void ResponseDelete(bool isDel)
+        public void ResponseDelete()
         {
-            if (isDel)
+            if (IsDel == 1)
             {
+                IsDel = 0;
                 MessageBox.Show("好友已删除", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 sbFriends.SeletedItem.Parent.Items.Remove(sbFriends.SeletedItem);
             }
-            else
+            else if (IsDel == 2)
             {
+                IsDel = 0;
                 MessageBox.Show("服务器发生意外错误！稍后重试", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public void ResponseAddStranger(bool isAdd, string result)
+        public void ResponseAddStranger()
         {
-            if (isAdd)
+            if (IsAdd == 1)
             {
+                IsAdd = 0;
                 MessageBox.Show("添加成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 sbFriends.SeletedItem.Parent.Items.Remove(sbFriends.SeletedItem);
                 ShowFriendList();   // 更新好友列表
             }
-            else
+            else if (IsAdd == 2)
             {
-                MessageBox.Show(result, "添加失败，请稍候再试！", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                IsAdd = 0;
+                MessageBox.Show(Result, "添加失败，请稍候再试！", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        public void ResponseStrangerUpdate(bool isUpdate, int strangerId, string nickName, int faceId)
+        public void ResponseStrangerUpdate()
         {
-            if (isUpdate)
+            if (IsUpdate == 1)
             {
-                SbItem item = new SbItem(nickName, faceId);
-                item.Tag = strangerId;           // 将Id记录在Tag属性中
+                IsUpdate = 0;
+                SbItem item = new SbItem(NickName, FaceId);
+                item.Tag = StrangerId;           // 将Id记录在Tag属性中
                 sbFriends.Groups[1].Items.Add(item);  // 向陌生人组中添加项
                 sbFriends.VisibleGroup = sbFriends.Groups[1];  // 设定陌生人组为可见组
             }
@@ -319,6 +342,7 @@
             notifyIcon1.Icon = icon1;                        // 工具栏的消息图标
             this.ShowInTaskbar = false;                     // 隐藏任务栏
             this.WindowState = FormWindowState.Normal;
+            SyncTimer.Start();
 
             getUnreadRequest = new GetUnreadMessageRequest(this);
             getFriends = new GetFriendListRequest(this);
@@ -701,6 +725,18 @@
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             isXF = true;
+        }
+
+        /// <summary>
+        /// 用于异步调用窗口
+        /// </summary>
+        private void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            ResponseAddStranger();
+            ResponseDelete();
+            ResponseGetFriends();
+            ResponseGetUnreadMsg();
+            ResponseStrangerUpdate();
         }
     }
 }

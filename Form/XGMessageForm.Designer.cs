@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XGMessageForm));
             this.nicklabel = new System.Windows.Forms.Label();
             this.tbNick = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.sexlabel = new System.Windows.Forms.Label();
             this.cbsex = new System.Windows.Forms.ComboBox();
+            this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // nicklabel
@@ -190,6 +192,10 @@
             this.cbsex.Size = new System.Drawing.Size(170, 27);
             this.cbsex.TabIndex = 14;
             // 
+            // SyncTimer
+            // 
+            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
+            // 
             // XGMessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -225,7 +231,6 @@
             this.star.Click += Button_Click;
             this.bloodtype.Click += Button_Click;
             this.cbsex.Click += Button_Click;
-
         }
 
         #endregion
@@ -251,5 +256,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label sexlabel;
         private System.Windows.Forms.ComboBox cbsex;
+        private System.Windows.Forms.Timer SyncTimer;
     }
 }
