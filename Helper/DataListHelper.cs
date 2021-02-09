@@ -8,8 +8,8 @@
         private static string[] starList = null;
         private static string[] bloodTypeList = null;
 
-        private static string starTextPath = System.IO.Directory.GetCurrentDirectory() + "star.txt";
-        private static string bloodTypeTextPath = System.IO.Directory.GetCurrentDirectory() + "bloodtype.txt";
+        private static string starTextPath = System.IO.Directory.GetCurrentDirectory() + @"\star.txt";
+        private static string bloodTypeTextPath = System.IO.Directory.GetCurrentDirectory() + @"\bloodtype.txt";
 
         /// <summary>
         /// 获取星座列表

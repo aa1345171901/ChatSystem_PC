@@ -72,6 +72,8 @@
                 touxiang.Image = img;
             }
 
+            touxiang.Image = ilFaces.Images[currentFaceId];
+
             touxiang.Tag = currentFaceId;
         }
 

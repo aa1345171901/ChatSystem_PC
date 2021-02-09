@@ -47,13 +47,13 @@
             int age = 0;
             if (!string.IsNullOrEmpty(this.age.Text))
             {
-                age = int.Parse(this.age.Text.Trim());
+                int.TryParse(this.age.Text.Trim(), out age);
             }
 
             string sex = male.Checked ? male.Text : fmale.Text;
             int startId = start.SelectedIndex;
             int bloodTypeId = blood.SelectedIndex;
-            string data = UserHelper.DataId + "," + sex + "," + age + "," + name + "," + startId + "," + bloodTypeId;
+            string data = UserHelper.DataId + "," + sex + "," + age + "," + trueName + "," + startId + "," + bloodTypeId;
             try
             {
                 chooseRequest.SendRequest(data);

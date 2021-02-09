@@ -130,6 +130,7 @@
             }
             catch (Exception ex)
             {
+                showmsg.Stop();
                 MessageBox.Show(ex.Message, "连接错误，请检查您的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

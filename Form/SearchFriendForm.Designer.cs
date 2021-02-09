@@ -183,6 +183,7 @@
             this.cboSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSex.FormattingEnabled = true;
             this.cboSex.Items.AddRange(new object[] {
+            "不限",
             "男",
             "女"});
             this.cboSex.Location = new System.Drawing.Point(255, 46);

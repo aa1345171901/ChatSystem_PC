@@ -40,13 +40,14 @@
             else
             {
                 UserHelper.LoginId = int.Parse(strs[1]);
-                UserHelper.NickName = strs[2];
-                UserHelper.Sex = strs[3];
-                UserHelper.Age = int.Parse(strs[4]);
-                UserHelper.Name = strs[5];
-                UserHelper.StarId = int.Parse(strs[6]);
-                UserHelper.BloodTypeId = int.Parse(strs[7]);
-                UserHelper.FaceId = int.Parse(strs[8]);
+                UserHelper.DataId = int.Parse(strs[2]);
+                UserHelper.NickName = strs[3];
+                UserHelper.Sex = strs[4];
+                UserHelper.Age = int.Parse(strs[5]);
+                UserHelper.Name = strs[6];
+                UserHelper.StarId = int.Parse(strs[7]);
+                UserHelper.BloodTypeId = int.Parse(strs[8]);
+                UserHelper.FaceId = int.Parse(strs[9]);
                 loginForm.IsLogin = 1;
             }
         }

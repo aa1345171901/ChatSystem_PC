@@ -78,16 +78,17 @@
             // 在窗体标题显示登录的昵称、号码
             this.Text = UserHelper.LoginId.ToString();
 
-            // this.selfMessage.Image = ilFaces.Images[faceId];
-            string appPath = Application.StartupPath + @"\" + faceId + ".jpg";
+            this.selfMessage.Image = ilFaces.Images[faceId];
 
-            // 图片需跟exe同一路径下
-            if (File.Exists(appPath))
-            {
-                Image img = Image.FromFile(appPath);
-                this.selfMessage.Image = img;
-            }
+            // string appPath = Application.StartupPath + @"\" + faceId + ".jpg";
 
+            // // 图片需跟exe同一路径下
+            // if (File.Exists(appPath))
+            // {
+            //    Image img = Image.FromFile(appPath);
+            //    this.selfMessage.Image = img;
+            // }
+            // }
             this.nickName.Text = nickName;
             this.notifyIcon1.Text = "QQ:" + nickName + "(" + id + ")" + "\n声音：开启" + "\n消息提醒框：关闭" + "\n会话消息：任务栏头像不闪动";
         }
@@ -157,7 +158,6 @@
             {
                 IsGetMsgs = 0;
                 tmrChatRequest.Stop();
-                MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -179,11 +179,6 @@
                     // Groups[0]表示SideBar中的第一个组，也就是“我的好友”组
                     sbFriends.Groups[0].Items.Add(item); // 向SideBar的“我的好友”组中添加项
                 }
-            }
-            else if (IsGetFriends == 2)
-            {
-                IsGetFriends = 0;
-                MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -243,6 +238,7 @@
             }
             catch (Exception ex)
             {
+                tmrMessage.Stop();
                 Console.WriteLine(ex.Message);
             }
         }
@@ -260,6 +256,7 @@
             }
             catch (Exception ex)
             {
+                tmrMessage.Stop();
                 MessageBox.Show(ex.Message, "更新好友发生意外错误！请检查网络，稍后重试", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }

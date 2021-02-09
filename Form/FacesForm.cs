@@ -107,6 +107,7 @@
 
         private void FacesForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            setSystemFaceRequest.Close();
             personalInfoForm.Enabled = true;
         }
 

@@ -70,8 +70,8 @@
             DataSet = new DataSet("❀");
 
             // 指定DataGridView的数据源
-            dgvBasicResult.DataSource = DataSet.Tables[0];
-            DataSet.Tables[0].Clear();
+            // dgvBasicResult.DataSource = DataSet.Tables[0];
+            // DataSet.Tables[0].Clear();
         }
 
         /// <summary>
@@ -84,7 +84,7 @@
                 // 搜索栏非空就按昵称和id查找
                 BasicallySearch();
             }
-            else if (!string.IsNullOrEmpty(cboAge.Text) || !string.IsNullOrEmpty(cboSex.Text))
+            else if ((!string.IsNullOrEmpty(cboAge.Text) && cboAge.Text != "不限") || (!string.IsNullOrEmpty(cboSex.Text) && cboSex.Text != "不限"))
             {
                 // 搜索栏为空，但是age和sex不为空
                 AdvancedSearch();

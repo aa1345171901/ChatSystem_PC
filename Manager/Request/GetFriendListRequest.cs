@@ -43,7 +43,7 @@
             }
             else
             {
-                mainForm.IsGetFriends = 2;
+                mainForm.IsGetFriends = 1;
                 string str = data.Substring(2);
                 mainForm.FriendDic = DataHelper.StringToDic(str);
             }

@@ -34,8 +34,8 @@
                 UserHelper.Sex = cbsex.Text;
                 UserHelper.Age = int.Parse(tbAge.Text);
                 UserHelper.Name = tbname.Text;
-                UserHelper.StarId = star.SelectedIndex + 1;
-                UserHelper.BloodTypeId = bloodtype.SelectedIndex + 1;
+                UserHelper.StarId = star.SelectedIndex;
+                UserHelper.BloodTypeId = bloodtype.SelectedIndex;
 
                 modifyRequest.Close();
 
@@ -66,8 +66,8 @@
                     string sex = cbsex.Text;
                     int age = int.Parse(tbAge.Text);
                     string name = tbname.Text;
-                    int starid = star.SelectedIndex + 1;
-                    int bloodtypeid = bloodtype.SelectedIndex + 1;
+                    int starid = star.SelectedIndex;
+                    int bloodtypeid = bloodtype.SelectedIndex;
                     string data = dataId + "," + nickName + "," + sex + "," + age + "," + name + "," + starid + "," + bloodtypeid;
                     modifyRequest.SendRequest(data);
                 }
@@ -128,7 +128,7 @@
             for (int i = 0; i < stars.Length; i++)
             {
                 star.Items.Add(stars[i]);
-                if (currentStarId == i + 1)
+                if (currentStarId == i)
                 {
                     star.SelectedIndex = i;
                 }
@@ -144,7 +144,7 @@
             for (int i = 0; i < bloodTypes.Length; i++)
             {
                 bloodtype.Items.Add(bloodTypes[i]);
-                if (currentBloodTypeId == i + 1)
+                if (currentBloodTypeId == i)
                 {
                     bloodtype.SelectedIndex = i;
                 }

@@ -543,6 +543,7 @@ namespace QQ_piracy
             // timer1
             // 
             this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // SyncTimer
@@ -591,6 +592,7 @@ namespace QQ_piracy
             this.toolStripButton2.Click += Sorry_Click;
             this.toolStripButton3.Click += Sorry_Click;
             this.pictureBox1.MouseMove += PictureBox1_MouseMove;
+
         }
 
 
