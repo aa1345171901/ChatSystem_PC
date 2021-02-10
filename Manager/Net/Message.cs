@@ -56,7 +56,8 @@
         }
 
         /// <summary>
-        /// 解析数据或者叫做读取数据,服务器发送的数据为 |数据长度+actionCode+data|
+        /// 解析数据或者叫做读取数据,服务器发送的数据为 |数据长度+actionCode+data|,
+        /// 修改为可接收大数据而不是限定数组长度
         /// </summary>
         public void ReadMessage(int newDataAmount, Action<ActionCode, string> processDataCallback)
         {
