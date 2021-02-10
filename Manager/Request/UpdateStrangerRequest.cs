@@ -39,13 +39,13 @@
             }
             else
             {
-                mainForm.IsUpdate = 1;
                 int id = int.Parse(strs[1]);
                 string nickName = strs[2];
                 int faceId = int.Parse(strs[3]);
                 mainForm.StrangerId = id;
                 mainForm.NickName = nickName;
                 mainForm.FaceId = faceId;
+                mainForm.IsUpdate = 1;
             }
         }
 

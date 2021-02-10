@@ -5,6 +5,7 @@
     using System.IO;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Text;
 
     /// <summary>
     /// 用于将DataSet转换成byte数组，或者数组转换成DataSet数据集
@@ -99,6 +100,45 @@
             }
 
             return returnDic;
+        }
+
+        /// <summary>
+        /// string 转dataset
+        /// </summary>
+        /// <param name="s">dataset字符串</param>
+        /// <returns>转换后的dataset</returns>
+        public static DataSet DataSetFromString(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return null;
+            }
+
+            byte[] bytes = Encoding.UTF8.GetBytes(s);
+
+            Stream inStream = null;
+            DataSet ds = new DataSet();
+            try
+            {
+                inStream = new MemoryStream(bytes);
+                ds.ReadXml(inStream);
+            }
+            finally
+            {
+                inStream.Close();
+            }
+
+            return ds;
+        }
+
+        /// <summary>
+        /// 将dataset转string
+        /// </summary>
+        /// <param name="ds">dataset数据</param>
+        /// <returns>转换的string</returns>
+        public static string GetStringFromTable(DataSet ds)
+        {
+            return ds.GetXml();
         }
     }
 }

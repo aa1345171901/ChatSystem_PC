@@ -47,9 +47,9 @@
                 mainForm.UserChatDict.TryGetValue(friendId, out chatForm);
                 string message = strs[2];
                 long ticks = long.Parse(strs[3]);
-                chatForm.IsReceive = 1;
                 chatForm.MessageTimeTicks = ticks;
                 chatForm.Message = message;
+                chatForm.IsReceive = 1;
             }
         }
 

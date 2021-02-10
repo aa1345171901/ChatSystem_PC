@@ -43,9 +43,9 @@
             }
             else
             {
-                searchFriendForm.IsSearch = 2;
-                DataSet dataSet = DataHelper.RetrieveDataSet(Encoding.UTF8.GetBytes(strs[1]));
+                DataSet dataSet = DataHelper.DataSetFromString(strs[1]);
                 searchFriendForm.DataSet = dataSet;
+                searchFriendForm.IsSearch = 1;
             }
         }
 
