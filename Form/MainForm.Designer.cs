@@ -403,7 +403,7 @@ namespace QQ_piracy
             // tmrMessage
             // 
             this.tmrMessage.Enabled = true;
-            this.tmrMessage.Interval = 2000;
+            this.tmrMessage.Interval = 200;
             this.tmrMessage.Tick += new System.EventHandler(this.tmrMessage_Tick);
             // 
             // tmrAddFriend
@@ -592,7 +592,6 @@ namespace QQ_piracy
             this.toolStripButton2.Click += Sorry_Click;
             this.toolStripButton3.Click += Sorry_Click;
             this.pictureBox1.MouseMove += PictureBox1_MouseMove;
-
         }
 
 

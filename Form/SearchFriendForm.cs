@@ -39,7 +39,10 @@
             else if (IsSearch == 2)
             {
                 IsSearch = 0;
-                MessageBox.Show("服务器无法响应，请稍后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataSet.Tables[0].Clear();
+                dgvBasicResult.DataSource = DataSet.Tables[0];
+
+                // MessageBox.Show("服务器无法响应，请稍后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -126,7 +129,7 @@
         private void AdvancedSearch()
         {
             string ageCondition = "";  // 年龄条件
-            string sexCondition = cboSex.Text;  // 性别条件
+            string sexCondition = cboSex.Text == "不限" ? "" : cboSex.Text;  // 性别条件
 
             // 确定年龄的范围
             switch (cboAge.SelectedIndex)

@@ -47,7 +47,7 @@
                 string strList = data.Substring(2);
                 string[] listString = strList.Split('-');
                 List<string> list = new List<string>();
-                for (int i = 0; i < listString.Length; i++)
+                for (int i = 0; i < listString.Length - 1; i++)
                 {
                     list.Add(listString[i]);
                 }

@@ -19,7 +19,7 @@
         public int IsAdd = 0;
         public int IsUpdate = 0;
 
-        public List<string> MsgLists;        // 用于异步设置接收的消息
+        public Dictionary<int, string> MsgDics;        // 用于异步设置接收的消息
         public Dictionary<int, (string, int)> FriendDic;   // 用于异步设置好友列表
         public string Result;                   // 用于异步设置添加陌生人好友的失败反馈
         public int StrangerId;          // 用于异步设置陌生人信息
@@ -98,12 +98,11 @@
             if (IsGetMsgs == 1)
             {
                 IsGetMsgs = 0;
-                foreach (var item in MsgLists)
+                foreach (var item in MsgDics)
                 {
                     int messageTypeId = -1;
                     int messageState = -1;
-                    string[] strs = item.Split(',');
-                    userFaceIdDic.Add(int.Parse(strs[0]), 0);
+                    string[] strs = item.Value.Split(',');
                     messageTypeId = int.Parse(strs[1]);
                     messageState = int.Parse(strs[2]);
                     if (int.Parse(strs[3]) == 0)
@@ -134,7 +133,7 @@
                     {
                         try
                         {
-                            userFaceIdDic[int.Parse(strs[0])] = int.Parse(strs[4]);   // 设置发消息的好友的头像索引
+                            userFaceIdDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));   // 设置发消息的好友的头像索引
                         }
                         catch (Exception ex)
                         {
@@ -230,17 +229,17 @@
         /// </summary>
         private void tmrMessage_Tick(object sender, EventArgs e)
         {
-            //ShowFriendList();       // 刷新好友列表
-            //try
-            //{
-            //    // 获取一条未读消息
-            //    getUnreadRequest.SendRequest(UserHelper.LoginId.ToString());
-            //}
-            //catch (Exception ex)
-            //{
-            //    tmrMessage.Stop();
-            //    Console.WriteLine(ex.Message);
-            //}
+            ShowFriendList();       // 刷新好友列表
+            try
+            {
+                // 获取一条未读消息
+                getUnreadRequest.SendRequest(UserHelper.LoginId.ToString());
+            }
+            catch (Exception ex)
+            {
+                tmrMessage.Stop();
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -717,7 +716,7 @@
         }
 
         /// <summary>
-        /// 鼠标点击上方拖动的box，设置自动悬浮无效
+        /// 鼠标点击上方拖动的box，设置自动悬浮
         /// </summary>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
