@@ -44,7 +44,6 @@
             }
             else
             {
-                mainForm.IsGetMsgs = 1;
                 string strList = data.Substring(2);
                 string[] listString = strList.Split('-');
                 List<string> list = new List<string>();
@@ -54,6 +53,7 @@
                 }
 
                 mainForm.MsgLists = list;
+                mainForm.IsGetMsgs = 1;
             }
         }
 

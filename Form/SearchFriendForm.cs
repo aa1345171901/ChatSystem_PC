@@ -67,7 +67,7 @@
 
             SyncTimer.Start();
 
-            DataSet = new DataSet("❀");
+            // DataSet = new DataSet("❀");
 
             // 指定DataGridView的数据源
             // dgvBasicResult.DataSource = DataSet.Tables[0];
@@ -239,6 +239,12 @@
         {
             ResponseAddFriend();
             ResponseSearch();
+        }
+
+        private void SearchFriendForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            addFriendRequest.Close();
+            searchFriendRequest.Close();
         }
     }
 }

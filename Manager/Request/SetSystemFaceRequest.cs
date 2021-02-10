@@ -39,8 +39,8 @@
             }
             else
             {
-                faceForm.IsSet = 1;
                 faceForm.FaceId = int.Parse(strs[1]);
+                faceForm.IsSet = 1;
             }
         }
 

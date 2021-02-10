@@ -228,6 +228,7 @@
             this.Name = "SearchFriendForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "查找好友";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SearchFriendForm_FormClosed);
             this.Load += new System.EventHandler(this.SearchFriendForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBasicResult)).EndInit();
             this.ResumeLayout(false);

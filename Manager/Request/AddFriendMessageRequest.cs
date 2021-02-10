@@ -46,8 +46,8 @@
                 RequestForm request;
                 mainForm.UserRequestDict.TryGetValue(fromUserId, out request);
                 string nickName = strs[2];
-                request.IsRequest = 1;
                 request.NickName = nickName;
+                request.IsRequest = 1;
             }
         }
 

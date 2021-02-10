@@ -230,17 +230,17 @@
         /// </summary>
         private void tmrMessage_Tick(object sender, EventArgs e)
         {
-            ShowFriendList();       // 刷新好友列表
-            try
-            {
-                // 获取一条未读消息
-                getUnreadRequest.SendRequest(UserHelper.LoginId.ToString());
-            }
-            catch (Exception ex)
-            {
-                tmrMessage.Stop();
-                Console.WriteLine(ex.Message);
-            }
+            //ShowFriendList();       // 刷新好友列表
+            //try
+            //{
+            //    // 获取一条未读消息
+            //    getUnreadRequest.SendRequest(UserHelper.LoginId.ToString());
+            //}
+            //catch (Exception ex)
+            //{
+            //    tmrMessage.Stop();
+            //    Console.WriteLine(ex.Message);
+            //}
         }
 
         /// <summary>

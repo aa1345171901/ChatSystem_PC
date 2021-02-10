@@ -35,8 +35,8 @@
             ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
             if (returnCode == ReturnCode.Fail)
             {
-                mainForm.IsAdd = 2;
                 mainForm.Result = strs[1];
+                mainForm.IsAdd = 2;
             }
             else
             {
