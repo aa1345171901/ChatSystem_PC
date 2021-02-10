@@ -10,11 +10,6 @@
         private byte[] data = new byte[1024];
         private int startIndex = 0;
 
-        private int count = 0; // 用于保存本次数据的长度
-        private int allCount = 0; // 用于保存本次数据的总长度
-        private string dataStr = "";  // 用于保存回传数据
-        private ActionCode actionCode = ActionCode.None; // 用于设置actionCode
-
         /// <summary>
         /// 返回数据
         /// </summary>
@@ -61,41 +56,26 @@
         public void ReadMessage(int newDataAmount, Action<ActionCode, string> processDataCallback)
         {
             startIndex += newDataAmount;
-            int newCount = newDataAmount;
-            if (startIndex <= 4)
+            while (true)
             {
-                return;
-            }
-
-            if (startIndex >= 8 && count == 0)
-            {
-                count = BitConverter.ToInt32(data, 0);
-                actionCode = (ActionCode)BitConverter.ToInt32(data, 4);
-                Array.Copy(data, 8, data, 0, newCount - 8); // 剩余的数据往前移动
-                startIndex -= 8;
-                newCount -= 8;
-                allCount += 4;
-            }
-
-            if (startIndex >= 0)
-            {
-                allCount += newCount;
-                dataStr += Encoding.UTF8.GetString(data, 0, newCount);
-                if (startIndex - newCount != 0)
+                if (startIndex <= 4)
                 {
-                    Array.Copy(data, newCount, data, 0, startIndex - newCount);
+                    return;
                 }
 
-                startIndex -= newCount;
-            }
-
-            if (allCount == count)
-            {
-                processDataCallback(actionCode, dataStr);
-                actionCode = ActionCode.None;
-                allCount = 0;
-                count = 0;
-                dataStr = "";
+                int count = BitConverter.ToInt32(data, 0);
+                if ((startIndex - 4) >= count)
+                {
+                    ActionCode actionCode = (ActionCode)BitConverter.ToInt32(data, 4);
+                    string s = Encoding.UTF8.GetString(data, 8, count - 4);
+                    processDataCallback(actionCode, s);
+                    Array.Copy(data, count + 4, data, 0, startIndex - 4 - count);
+                    startIndex -= count + 4;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }
