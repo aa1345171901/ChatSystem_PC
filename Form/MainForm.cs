@@ -124,8 +124,11 @@
                     // 判断消息类型，如果是添加好友消息，就启动喇叭timer，让小喇叭闪烁
                     if (messageTypeId == 2 && messageState == 0)
                     {
-                        systemMsgDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));
-                        tmrAddFriend.Start();
+                        if (!systemMsgDic.ContainsKey(int.Parse(strs[0])))
+                        {
+                            systemMsgDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));
+                            tmrAddFriend.Start();
+                        }
                     }
 
                     // 如果是聊天消息，就启动聊天timer，让好友头像闪烁
@@ -133,7 +136,10 @@
                     {
                         try
                         {
-                            userFaceIdDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));   // 设置发消息的好友的头像索引
+                            if (userFaceIdDic.ContainsKey(int.Parse(strs[0])))
+                            {
+                                userFaceIdDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));   // 设置发消息的好友的头像索引
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -142,6 +148,7 @@
                     }
                 }
 
+                MsgDics.Clear();
                 foreach (var item in userFaceIdDic)
                 {
                     // 如果发消息的人没有在列表中就添加到陌生人列表中

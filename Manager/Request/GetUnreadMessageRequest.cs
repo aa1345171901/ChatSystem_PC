@@ -46,13 +46,17 @@
             {
                 string strList = data.Substring(2);
                 string[] listString = strList.Split('-');
-                List<string> list = new List<string>();
+                Dictionary<int, string> dict = new Dictionary<int, string>();
                 for (int i = 0; i < listString.Length - 1; i++)
                 {
-                    list.Add(listString[i]);
+                    string[] strs1 = listString[i].Split('_');
+                    if (!dict.ContainsKey(int.Parse(strs1[0])))
+                    {
+                        dict.Add(int.Parse(strs1[0]), strs1[1]);
+                    }
                 }
 
-                mainForm.MsgLists = list;
+                mainForm.MsgDics = dict;
                 mainForm.IsGetMsgs = 1;
             }
         }
