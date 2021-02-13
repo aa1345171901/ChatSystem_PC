@@ -600,12 +600,21 @@
 
                 foreach (var item in systemMsgDic)
                 {
-                    // 显示系统消息窗体
-                    RequestForm requestForm = new RequestForm();
-                    requestForm.FromUserId = item.Key;
-                    requestForm.FaceId = item.Value;
-                    UserRequestDict.Add(item.Key, requestForm);
-                    requestForm.Show();
+                    if (!UserRequestDict.ContainsKey(item.Key))
+                    {
+                        // 显示系统消息窗体
+                        RequestForm requestForm = new RequestForm();
+                        requestForm.MainForm = this;
+                        requestForm.FromUserId = item.Key;
+                        requestForm.FaceId = item.Value;
+                        requestForm.Show();
+                        UserRequestDict.Add(item.Key, requestForm);
+                    }
+                    else
+                    {
+                        int id = item.Key;
+                        UserRequestDict[id].Show();
+                    }
                 }
 
                 systemMsgDic.Clear();

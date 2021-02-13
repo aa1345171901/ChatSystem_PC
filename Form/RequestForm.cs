@@ -27,6 +27,7 @@
         public RequestForm()
         {
             InitializeComponent();
+            SyncTimer.Start();
         }
 
         /// <summary>
@@ -39,15 +40,15 @@
                 IsRequest = 0;
 
                 // this.pbFace.BackgroundImage = ilFaces.Images[FaceId];
-                string appPath = Application.StartupPath + @"\" + FaceId + ".jpg";
+
+                // string appPath = Application.StartupPath + @"\" + FaceId + ".jpg";
 
                 // 图片需跟exe同一路径下
-                if (File.Exists(appPath))
-                {
-                    Image img = Image.FromFile(appPath);
-                    this.pbFace.BackgroundImage = img;
-                }
-
+                // if (File.Exists(appPath))
+                // {
+                //    Image img = Image.FromFile(appPath);
+                //    this.pbFace.BackgroundImage = img;
+                // }
                 this.userMsg.Text = NickName + "     (" + FromUserId + ")";
                 this.systemMsg.Text = "请求添加您为好友";
                 this.btnAllow.Visible = true;
@@ -55,8 +56,8 @@
             else if (IsRequest == 2)
             {
                 IsRequest = 0;
-                this.Close();  // 关闭窗体
                 MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();  // 关闭窗体
             }
         }
 
@@ -65,7 +66,6 @@
         /// </summary>
         public void ResponseAgree()
         {
-            this.Close();  // 关闭窗体
             if (IsAgree == 1)
             {
                 IsAgree = 0;
@@ -82,7 +82,6 @@
         /// </summary>
         private void RequestForm_Load(object sender, EventArgs e)
         {
-            SyncTimer.Start();
             if (FromUserId == 0)
             {
                 this.systemMsg.Text = "没有系统消息";
@@ -114,6 +113,8 @@
                 int accetFriendId = UserHelper.LoginId;
                 string data = hostFriendId + "," + accetFriendId;
                 MainForm.AgreeAddRequest.SendRequest(data);
+                MessageBox.Show("添加成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             catch (Exception ex)
             {
