@@ -10,7 +10,6 @@
     {
         // 用于异步回调标识
         public int IsRequest = 0;
-        public int IsAgree = 0;
 
         // 用于异步回调昵称设置
         public string NickName;
@@ -39,7 +38,7 @@
             {
                 IsRequest = 0;
 
-                // this.pbFace.BackgroundImage = ilFaces.Images[FaceId];
+                this.pbFace.BackgroundImage = ilFaces.Images[FaceId];
 
                 // string appPath = Application.StartupPath + @"\" + FaceId + ".jpg";
 
@@ -58,22 +57,6 @@
                 IsRequest = 0;
                 MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();  // 关闭窗体
-            }
-        }
-
-        /// <summary>
-        /// 同意添加好友的反馈，这里如果服务器错误需要重新更改消息为已读//todo
-        /// </summary>
-        public void ResponseAgree()
-        {
-            if (IsAgree == 1)
-            {
-                IsAgree = 0;
-            }
-            else if (IsAgree == 2)
-            {
-                IsAgree = 0;
-                MessageBox.Show("服务器发生意外错误！稍后重试", "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -113,7 +96,6 @@
                 int accetFriendId = UserHelper.LoginId;
                 string data = hostFriendId + "," + accetFriendId;
                 MainForm.AgreeAddRequest.SendRequest(data);
-                MessageBox.Show("添加成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
@@ -136,7 +118,6 @@
 
         private void SyncTimer_Tick(object sender, EventArgs e)
         {
-            ResponseAgree();
             ResponseRequest();
         }
     }
