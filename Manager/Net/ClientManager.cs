@@ -36,6 +36,7 @@
             }
             catch (Exception e)
             {
+                Close();
                 Console.WriteLine("无法连接服务器，请减查您的网络:" + e.Message);
             }
         }
@@ -48,6 +49,23 @@
             if (clientSocket != null)
             {
                 clientSocket.Send(Message.PackData(requestCode, actionCode, data));
+            }
+        }
+
+        public bool ConnectNetAgain()
+        {
+            msg = new Message();
+            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+            try
+            {
+                clientSocket.Connect(Ip, Port);
+                StartReceive();
+                return true;
+            }
+            catch (Exception)
+            {
+                Close();
+                return false;
             }
         }
 
@@ -78,6 +96,7 @@
             }
             catch (Exception e)
             {
+                Close();
                 Console.WriteLine("异步回调出错:" + e.Message);
             }
         }
@@ -88,6 +107,17 @@
         private void OnProcessCallBack(ActionCode actionCode, string data)
         {
             managerController.HandleResponse(actionCode, data);
+        }
+
+        /// <summary>
+        /// 关闭时释放资源
+        /// </summary>
+        private void Close()
+        {
+            if (clientSocket != null)
+            {
+                clientSocket.Close();
+            }
         }
     }
 }

@@ -56,6 +56,9 @@
 
         Icon icon1 = null;
         Icon icon2 = null;
+        Icon icon3 = null;
+
+        int timerRun = 0; // 获取自动连接的时间
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
@@ -66,6 +69,7 @@
             InitializeComponent();
             icon1 = new Icon("1.ico");
             icon2 = new Icon("2.ico");
+            icon3 = new Icon("3.ico");
         }
 
         /// <summary>
@@ -263,7 +267,10 @@
             }
             catch (Exception ex)
             {
-                tmrMessage.Stop();
+                timerRun += 200;
+                notifyIcon1.Text = "断开网络，将在" + (10 - (this.timerRun / 1000.0)) + "秒后连接";
+                notifyIcon1.Icon = icon3;
+                ConnectNet.Start();
                 Console.WriteLine(ex.Message);
             }
         }
@@ -283,7 +290,6 @@
             {
                 tmrMessage.Stop();
                 MessageBox.Show(ex.Message, "更新好友发生意外错误！请检查网络，稍后重试", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
             }
         }
 
@@ -574,6 +580,7 @@
                 // 将未读消息的该好友去掉
                 if (userFaceIdDic.ContainsKey((int)e.Item.Tag))
                 {
+                    e.Item.ImageIndex = userFaceIdDic[Convert.ToInt32(e.Item.Tag)];
                     userFaceIdDic.Remove((int)e.Item.Tag);
                 }
 
@@ -769,6 +776,21 @@
             ResponseGetUnreadMsg();
             ResponseStrangerUpdate();
             ShowMessage();
+        }
+
+        private void ConnectNet_Tick(object sender, EventArgs e)
+        {
+            if (ManagerController.Instance.ConnectNetAgain())
+            {
+                ConnectNet.Stop();
+                notifyIcon1.Icon = icon1;
+                this.notifyIcon1.Text = "QQ:" + UserHelper.NickName + "(" + UserHelper.LoginId + ")" + "\n声音：开启" + "\n消息提醒框：关闭" + "\n会话消息：任务栏头像不闪动";
+            }
+            else
+            {
+                this.notifyIcon1.Text = "正在重连，请稍后";
+                timerRun = 0;
+            }
         }
     }
 }

@@ -75,6 +75,7 @@ namespace QQ_piracy
             this.nickName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SyncTimer = new System.Windows.Forms.Timer(this.components);
+            this.ConnectNet = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.cmsFriendList.SuspendLayout();
@@ -550,6 +551,11 @@ namespace QQ_piracy
             // 
             this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
             // 
+            // ConnectNet
+            // 
+            this.ConnectNet.Interval = 10000;
+            this.ConnectNet.Tick += new System.EventHandler(this.ConnectNet_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -580,18 +586,6 @@ namespace QQ_piracy
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            this.toolStripMenuItem2.Click += Sorry_Click;
-            this.toolStripMenuItem3.Click += Sorry_Click;
-            this.toolStripMenuItem4.Click += Sorry_Click;
-            this.toolStripM3enuItem5.Click += Sorry_Click;
-            this.toolStripMenuItem6.Click += Sorry_Click;
-            this.toolStripMenuItem7.Click += Sorry_Click;
-            this.toolStripMenuItem8.Click += Sorry_Click;
-            this.toolStripMenuItem5.Click += Sorry_Click;
-            this.toolStripMenuItem9.Click += Sorry_Click;
-            this.toolStripButton2.Click += Sorry_Click;
-            this.toolStripButton3.Click += Sorry_Click;
-            this.pictureBox1.MouseMove += PictureBox1_MouseMove;
         }
 
 
@@ -670,5 +664,6 @@ namespace QQ_piracy
         private ToolStripMenuItem fresh;
         private Timer timer1;
         private Timer SyncTimer;
+        private Timer ConnectNet;
     }
 }
