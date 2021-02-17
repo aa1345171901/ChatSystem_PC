@@ -58,6 +58,15 @@
         }
 
         /// <summary>
+        /// 断开网络后用于重新连接
+        /// </summary>
+        /// <returns>返回重连是否成功</returns>
+        public bool ConnectNetAgain()
+        {
+            return clientManager.ConnectNetAgain();
+        }
+
+        /// <summary>
         /// 通过单例增加request字典
         /// </summary>
         public void AddRequest(ActionCode actionCode, BaseRequest baseRequest)
