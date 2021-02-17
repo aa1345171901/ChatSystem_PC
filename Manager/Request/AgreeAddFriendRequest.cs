@@ -36,14 +36,16 @@
             if (returnCode == ReturnCode.Fail)
             {
                 int friendId = int.Parse(strs[1]);
-                mainForm.ResultValue = "添加失败，服务器出错";
-                mainForm.IsShow = 2;
+                RequestForm request;
+                mainForm.UserRequestDict.TryGetValue(friendId, out request);
+                request.IsAgree = 2;
             }
             else
             {
                 int friendId = int.Parse(strs[1]);
-                mainForm.ResultValue = "添加成功";
-                mainForm.IsShow = 1;
+                RequestForm request;
+                mainForm.UserRequestDict.TryGetValue(friendId, out request);
+                request.IsAgree = 1;
             }
         }
 
