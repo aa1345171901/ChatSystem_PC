@@ -18,6 +18,7 @@
         public int IsDel = 0;
         public int IsAdd = 0;
         public int IsUpdate = 0;
+        public int IsShow = 0;
 
         public Dictionary<int, string> MsgDics;        // 用于异步设置接收的消息
         public Dictionary<int, (string, int)> FriendDic;   // 用于异步设置好友列表
@@ -25,6 +26,7 @@
         public int StrangerId;          // 用于异步设置陌生人信息
         public string NickName;
         public int FaceId;
+        public string ResultValue;     // 用于异步设置消息盒
 
         public List<int> ChatForms = new List<int>();  // 用于判断chat是否重复
 
@@ -140,10 +142,12 @@
                     {
                         try
                         {
-                            if (userFaceIdDic.ContainsKey(int.Parse(strs[0])))
+                            if (!userFaceIdDic.ContainsKey(int.Parse(strs[0])))
                             {
                                 userFaceIdDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));   // 设置发消息的好友的头像索引
                             }
+
+                            tmrChatRequest.Start();  // 启动闪烁头像定时器
                         }
                         catch (Exception ex)
                         {
@@ -236,11 +240,27 @@
         }
 
         /// <summary>
+        /// 用于显示消息反馈
+        /// </summary>
+        public void ShowMessage()
+        {
+            if (IsShow == 1)
+            {
+                IsShow = 0;
+                MessageBox.Show(ResultValue, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (IsShow == 2)
+            {
+                IsShow = 0;
+                MessageBox.Show(ResultValue, "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
         /// 定时向服务器发送请求，找到未读消息
         /// </summary>
         private void tmrMessage_Tick(object sender, EventArgs e)
         {
-            ShowFriendList();       // 刷新好友列表
             try
             {
                 // 获取一条未读消息
@@ -614,8 +634,8 @@
                         requestForm.MainForm = this;
                         requestForm.FromUserId = item.Key;
                         requestForm.FaceId = item.Value;
-                        requestForm.Show();
                         UserRequestDict.Add(item.Key, requestForm);
+                        requestForm.Show();
                     }
                     else
                     {
@@ -756,6 +776,7 @@
             ResponseGetFriends();
             ResponseGetUnreadMsg();
             ResponseStrangerUpdate();
+            ShowMessage();
         }
 
         private void ConnectNet_Tick(object sender, EventArgs e)
@@ -771,6 +792,30 @@
                 this.notifyIcon1.Text = "正在重连，请稍后";
                 timerRun = 0;
             }
+        }
+
+        /// <summary>
+        /// 鼠标点击应用管理时弹出控件
+        /// </summary>
+        private void toolStripButton3_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolStrip2.Visible = true;
+        }
+
+        /// <summary>
+        /// 鼠标离开时消失
+        /// </summary>
+        private void toolStrip2_MouseLeave(object sender, EventArgs e)
+        {
+            toolStrip2.Visible = false;
+        }
+
+        /// <summary>
+        /// 点击音乐按钮时弹出窗口
+        /// </summary>
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

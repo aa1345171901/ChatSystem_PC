@@ -76,11 +76,14 @@ namespace QQ_piracy
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SyncTimer = new System.Windows.Forms.Timer(this.components);
             this.ConnectNet = new System.Windows.Forms.Timer(this.components);
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.cmsFriendList.SuspendLayout();
             this.minSystem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selfMessage)).BeginInit();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // min
@@ -287,6 +290,7 @@ namespace QQ_piracy
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(32, 35);
             this.toolStripButton3.Text = "应用管理";
+            this.toolStripButton3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStripButton3_MouseDown);
             // 
             // IlMessage
             // 
@@ -556,12 +560,42 @@ namespace QQ_piracy
             this.ConnectNet.Interval = 10000;
             this.ConnectNet.Tick += new System.EventHandler(this.ConnectNet_Tick);
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.toolStrip2.CanOverflow = false;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(35, 35);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip2.Location = new System.Drawing.Point(221, 588);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(73, 42);
+            this.toolStrip2.TabIndex = 22;
+            this.toolStrip2.Text = "toolStrip2";
+            this.toolStrip2.Visible = false;
+            this.toolStrip2.MouseLeave += new System.EventHandler(this.toolStrip2_MouseLeave);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(39, 39);
+            this.toolStripButton1.Text = "音乐";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(294, 671);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.nickName);
             this.Controls.Add(this.selfMessage);
             this.Controls.Add(this.toolStrip1);
@@ -583,6 +617,8 @@ namespace QQ_piracy
             this.cmsFriendList.ResumeLayout(false);
             this.minSystem.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.selfMessage)).EndInit();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -665,5 +701,7 @@ namespace QQ_piracy
         private Timer timer1;
         private Timer SyncTimer;
         private Timer ConnectNet;
+        private ToolStrip toolStrip2;
+        private ToolStripButton toolStripButton1;
     }
 }
