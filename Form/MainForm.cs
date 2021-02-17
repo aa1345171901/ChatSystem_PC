@@ -18,7 +18,6 @@
         public int IsDel = 0;
         public int IsAdd = 0;
         public int IsUpdate = 0;
-        public int IsShow = 0;
 
         public Dictionary<int, string> MsgDics;        // 用于异步设置接收的消息
         public Dictionary<int, (string, int)> FriendDic;   // 用于异步设置好友列表
@@ -26,7 +25,6 @@
         public int StrangerId;          // 用于异步设置陌生人信息
         public string NickName;
         public int FaceId;
-        public string ResultValue;     // 用于异步设置消息盒
 
         public List<int> ChatForms = new List<int>();  // 用于判断chat是否重复
 
@@ -138,12 +136,10 @@
                     {
                         try
                         {
-                            if (!userFaceIdDic.ContainsKey(int.Parse(strs[0])))
+                            if (userFaceIdDic.ContainsKey(int.Parse(strs[0])))
                             {
                                 userFaceIdDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));   // 设置发消息的好友的头像索引
                             }
-
-                            tmrChatRequest.Start();  // 启动闪烁头像定时器
                         }
                         catch (Exception ex)
                         {
@@ -161,11 +157,12 @@
                         UpdateStranger(item.Key);
                     }
                 }
+
+                tmrChatRequest.Start();  // 启动闪烁头像定时器
             }
             else if (IsGetMsgs == 2)
             {
                 IsGetMsgs = 0;
-                tmrChatRequest.Stop();
                 tmrChatRequest.Stop();
             }
         }
@@ -235,27 +232,11 @@
         }
 
         /// <summary>
-        /// 用于显示消息反馈
-        /// </summary>
-        public void ShowMessage()
-        {
-            if (IsShow == 1)
-            {
-                IsShow = 0;
-                MessageBox.Show(ResultValue, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else if (IsShow == 2)
-            {
-                IsShow = 0;
-                MessageBox.Show(ResultValue, "抱歉", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
         /// 定时向服务器发送请求，找到未读消息
         /// </summary>
         private void tmrMessage_Tick(object sender, EventArgs e)
         {
+            ShowFriendList();       // 刷新好友列表
             try
             {
                 // 获取一条未读消息
@@ -626,8 +607,8 @@
                         requestForm.MainForm = this;
                         requestForm.FromUserId = item.Key;
                         requestForm.FaceId = item.Value;
-                        UserRequestDict.Add(item.Key, requestForm);
                         requestForm.Show();
+                        UserRequestDict.Add(item.Key, requestForm);
                     }
                     else
                     {
@@ -768,7 +749,6 @@
             ResponseGetFriends();
             ResponseGetUnreadMsg();
             ResponseStrangerUpdate();
-            ShowMessage();
         }
     }
 }
