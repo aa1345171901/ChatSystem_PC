@@ -232,6 +232,8 @@
     <Content Include="Resources\DefaultAlbum.png" />
     <Content Include="Resources\defaultSmallAblum.png" />
     <Content Include="Resources\favorite.png" />
+    <None Include="Resources\HiFi.png" />
+    <None Include="Resources\HiFihover.png" />
     <Content Include="Resources\list.png" />
     <Content Include="Resources\message.png" />
     <Content Include="Resources\musicLibrary.png" />
@@ -248,6 +250,8 @@
     <Content Include="Resources\下一首hover.png" />
     <Content Include="Resources\关闭.png" />
     <Content Include="Resources\关闭hoover.png" />
+    <None Include="Resources\列表.png" />
+    <None Include="Resources\列表hover.png" />
     <Content Include="Resources\列表循环.png" />
     <Content Include="Resources\删除.png" />
     <Content Include="Resources\删除hoover.png" />
@@ -259,6 +263,8 @@
     <Content Include="Resources\播放.ico" />
     <Content Include="Resources\播放.png" />
     <Content Include="Resources\播放hover.png" />
+    <None Include="Resources\收藏.png" />
+    <None Include="Resources\收藏hover.png" />
     <Content Include="Resources\文件.png" />
     <Content Include="Resources\文件hoover.png" />
     <Content Include="Resources\暂停.ico" />
@@ -270,9 +276,13 @@
     <Content Include="Resources\最小化hoover.png" />
     <Content Include="Resources\添加hoover.png" />
     <Content Include="Resources\添加音乐.png" />
+    <None Include="Resources\词.png" />
+    <None Include="Resources\词hover.png" />
     <Content Include="Resources\详情.png" />
     <Content Include="Resources\详情hoover.png" />
     <Content Include="Resources\随机播放.png" />
+    <None Include="Resources\音效.png" />
+    <None Include="Resources\音效hover.png" />
     <Content Include="图标.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -103,6 +103,26 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap HiFi {
+            get {
+                object obj = ResourceManager.GetObject("HiFi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap HiFihover {
+            get {
+                object obj = ResourceManager.GetObject("HiFihover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap list {
             get {
                 object obj = ResourceManager.GetObject("list", resourceCulture);
@@ -243,6 +263,26 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 列表 {
+            get {
+                object obj = ResourceManager.GetObject("列表", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 列表hover {
+            get {
+                object obj = ResourceManager.GetObject("列表hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 列表循环 {
             get {
                 object obj = ResourceManager.GetObject("列表循环", resourceCulture);
@@ -336,6 +376,26 @@ namespace QQ_piracy.Properties {
         internal static System.Drawing.Bitmap 播放hover {
             get {
                 object obj = ResourceManager.GetObject("播放hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 收藏 {
+            get {
+                object obj = ResourceManager.GetObject("收藏", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 收藏hover {
+            get {
+                object obj = ResourceManager.GetObject("收藏hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -443,6 +503,26 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 词 {
+            get {
+                object obj = ResourceManager.GetObject("词", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 词hover {
+            get {
+                object obj = ResourceManager.GetObject("词hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 详情 {
             get {
                 object obj = ResourceManager.GetObject("详情", resourceCulture);
@@ -466,6 +546,26 @@ namespace QQ_piracy.Properties {
         internal static System.Drawing.Bitmap 随机播放 {
             get {
                 object obj = ResourceManager.GetObject("随机播放", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 音效 {
+            get {
+                object obj = ResourceManager.GetObject("音效", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 音效hover {
+            get {
+                object obj = ResourceManager.GetObject("音效hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
