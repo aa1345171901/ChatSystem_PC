@@ -9,6 +9,7 @@
     using System.Windows.Forms;
     using Aptech.UI;
     using QQ_piracy.Manager.Request;
+    using QQ_piracy.MusicForms;
 
     public partial class MainForm : Form
     {
@@ -815,7 +816,17 @@
         /// </summary>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            MusicMainForm musicForm;
+            if (!CheckFormIsOpen("MusicMainForm"))
+            {
+                musicForm = new MusicMainForm();
+            }
+            else
+            {
+                musicForm = (MusicMainForm)Application.OpenForms["MusicMainForm"];
+            }
 
+            musicForm.Show();
         }
     }
 }

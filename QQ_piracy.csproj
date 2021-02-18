@@ -43,6 +43,14 @@
     <Reference Include="Common">
       <HintPath>..\..\ChatSystemServer\Common\bin\Debug\Common.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\..\SimpleMediePlayer\SimpleMediaPlayer\bin\Debug\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\SimpleMediePlayer\SimpleMediaPlayer\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="SideBar, Version=1.0.2813.28543, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\SideBar.dll</HintPath>
@@ -53,6 +61,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp">
+      <HintPath>..\..\SimpleMediePlayer\SimpleMediaPlayer\bin\Debug\taglib-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\DataHelper.cs" />
@@ -140,6 +151,17 @@
     <Compile Include="Manager\Request\SendByChatRequest.cs" />
     <Compile Include="Manager\Request\SetSystemFaceRequest.cs" />
     <Compile Include="Manager\Request\UpdateStrangerRequest.cs" />
+    <Compile Include="MusicForms\MusicMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusicForms\MusicMainForm.Designer.cs">
+      <DependentUpon>MusicMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="WinAPI\Enums.cs" />
     <Compile Include="WinAPI\Structs.cs" />
     <Compile Include="WinAPI\Win32API.cs" />
@@ -184,16 +206,14 @@
     <EmbeddedResource Include="Form\XGMessageForm.resx">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MusicForms\MusicMainForm.resx">
+      <DependentUpon>MusicMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -208,12 +228,75 @@
     <None Include="QQ_piracy.ruleset" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\album.png" />
+    <Content Include="Resources\DefaultAlbum.png" />
+    <Content Include="Resources\defaultSmallAblum.png" />
+    <Content Include="Resources\favorite.png" />
+    <Content Include="Resources\list.png" />
+    <Content Include="Resources\message.png" />
+    <Content Include="Resources\musicLibrary.png" />
+    <Content Include="Resources\notifyIcon128x128.ico" />
+    <Content Include="Resources\ranking.png" />
+    <Content Include="Resources\star.png" />
+    <Content Include="Resources\user.png" />
+    <Content Include="Resources\wallhaven-12422.jpg" />
+    <Content Include="Resources\上一首.ico" />
+    <Content Include="Resources\上一首.png" />
+    <Content Include="Resources\上一首hover.png" />
+    <Content Include="Resources\下一首.ico" />
+    <Content Include="Resources\下一首.png" />
+    <Content Include="Resources\下一首hover.png" />
+    <Content Include="Resources\关闭.png" />
+    <Content Include="Resources\关闭hoover.png" />
+    <Content Include="Resources\列表循环.png" />
+    <Content Include="Resources\删除.png" />
+    <Content Include="Resources\删除hoover.png" />
+    <Content Include="Resources\单曲循环.png" />
+    <Content Include="Resources\喜欢.png" />
+    <Content Include="Resources\声音.png" />
+    <Content Include="Resources\展开.png" />
+    <Content Include="Resources\搜索.png" />
+    <Content Include="Resources\播放.ico" />
+    <Content Include="Resources\播放.png" />
+    <Content Include="Resources\播放hover.png" />
+    <Content Include="Resources\文件.png" />
+    <Content Include="Resources\文件hoover.png" />
+    <Content Include="Resources\暂停.ico" />
+    <Content Include="Resources\暂停.png" />
+    <Content Include="Resources\暂停hover.png" />
+    <Content Include="Resources\最大化.png" />
+    <Content Include="Resources\最大化hoover.png" />
+    <Content Include="Resources\最小化.png" />
+    <Content Include="Resources\最小化hoover.png" />
+    <Content Include="Resources\添加hoover.png" />
+    <Content Include="Resources\添加音乐.png" />
+    <Content Include="Resources\详情.png" />
+    <Content Include="Resources\详情hoover.png" />
+    <Content Include="Resources\随机播放.png" />
     <Content Include="图标.ico" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\ChatSystemServer\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

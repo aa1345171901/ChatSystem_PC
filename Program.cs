@@ -22,7 +22,7 @@ namespace QQ_piracy
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ManagerController manager = new ManagerController();
-            Application.Run(new LoginForm());
+            Application.Run(new MusicForms.MusicMainForm());
         }
     }
 }
