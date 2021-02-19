@@ -2,6 +2,7 @@
 {
     using System;
     using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Windows.Forms;
     using QQ_piracy.Properties;
 
@@ -201,6 +202,10 @@
             {
                 currPicBox.Image = Resources.最小化hoover;
             }
+            else if (currPicBox.Name == "pbAddSong")
+            {
+                currPicBox.Image = Resources.添加hoover;
+            }
         }
 
         /// <summary>
@@ -220,6 +225,10 @@
             else if (currPicBox.Name == "pbMinForm")
             {
                 currPicBox.Image = Resources.最小化;
+            }
+            else if (currPicBox.Name == "pbAddSong")
+            {
+                currPicBox.Image = Resources.添加音乐;
             }
         }
 
@@ -256,6 +265,28 @@
         private void pbSearch_MouseLeave(object sender, EventArgs e)
         {
             pbSearch.Image = Resources.搜索;
+        }
+
+        private void lvSongList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);    // 采用特定颜色绘制标题列
+            using (StringFormat sf = new StringFormat())
+            {
+                switch (e.Header.TextAlign)
+                {
+                    case HorizontalAlignment.Center:
+                        sf.Alignment = StringAlignment.Center;
+                        break;
+                    case HorizontalAlignment.Right:
+                        sf.Alignment = StringAlignment.Far;
+                        break;
+                }
+
+                using (Font headerFont = new Font("Helvetica", 10, FontStyle.Regular))
+                {
+                    e.Graphics.DrawString(e.Header.Text, headerFont, Brushes.Gray, e.Bounds, sf);
+                }
+            }
         }
     }
 }
