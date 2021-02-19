@@ -363,6 +363,16 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 搜索hover {
+            get {
+                object obj = ResourceManager.GetObject("搜索hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 播放 {
             get {
                 object obj = ResourceManager.GetObject("播放", resourceCulture);

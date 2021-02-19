@@ -1,18 +1,14 @@
-﻿using QQ_piracy.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace QQ_piracy.MusicForms
+﻿namespace QQ_piracy.MusicForms
 {
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using QQ_piracy.Properties;
+
     public partial class MusicMainForm : Form
     {
+        Point downPoint; // 用于设置拖动设置的位置
+
         public MusicMainForm()
         {
             InitializeComponent();
@@ -185,6 +181,81 @@ namespace QQ_piracy.MusicForms
         {
             pbListCount.Image = Resources.列表;
             labelListCount.ForeColor = Color.Silver;
+        }
+
+        /// <summary>
+        /// 设置的panel顶部，的鼠标移入事件
+        /// </summary>
+        private void MoveEnter_PanelSeting(object sender, EventArgs e)
+        {
+            PictureBox currPicBox = (PictureBox)sender;
+            if (currPicBox.Name == "pbCloseForm")
+            {
+                currPicBox.Image = Resources.关闭hoover;
+            }
+            else if (currPicBox.Name == "pbMaxForm")
+            {
+                currPicBox.Image = Resources.最大化hoover;
+            }
+            else if (currPicBox.Name == "pbMinForm")
+            {
+                currPicBox.Image = Resources.最小化hoover;
+            }
+        }
+
+        /// <summary>
+        /// 设置的panel顶部，的鼠标停留事件
+        /// </summary>
+        private void MoveLeave_PanelSeting(object sender, EventArgs e)
+        {
+            PictureBox currPicBox = (PictureBox)sender;
+            if (currPicBox.Name == "pbCloseForm")
+            {
+                currPicBox.Image = Resources.关闭;
+            }
+            else if (currPicBox.Name == "pbMaxForm")
+            {
+                currPicBox.Image = Resources.最大化;
+            }
+            else if (currPicBox.Name == "pbMinForm")
+            {
+                currPicBox.Image = Resources.最小化;
+            }
+        }
+
+        /// <summary>
+        /// 拖动窗口点击
+        /// </summary>
+        private void Panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            downPoint = new Point(e.X, e.Y);
+        }
+
+        /// <summary>
+        /// 拖动窗口移动
+        /// </summary>
+        private void Panel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Location = new Point(this.Location.X + e.X - downPoint.X, this.Location.Y + e.Y - downPoint.Y);
+            }
+        }
+
+        /// <summary>
+        /// 搜索按钮鼠标进入
+        /// </summary>
+        private void pbSearch_MouseHover(object sender, EventArgs e)
+        {
+            pbSearch.Image = Resources.搜索hover;
+        }
+
+        /// <summary>
+        /// 搜索按钮鼠标离开
+        /// </summary>
+        private void pbSearch_MouseLeave(object sender, EventArgs e)
+        {
+            pbSearch.Image = Resources.搜索;
         }
     }
 }

@@ -36,6 +36,7 @@
             this.pbBack = new System.Windows.Forms.PictureBox();
             this.pbPlay = new System.Windows.Forms.PictureBox();
             this.panelPlayControl = new System.Windows.Forms.Panel();
+            this.labelListCount = new System.Windows.Forms.Label();
             this.pbHiFi = new System.Windows.Forms.PictureBox();
             this.pbMusicStyle = new System.Windows.Forms.PictureBox();
             this.pbListCount = new System.Windows.Forms.PictureBox();
@@ -47,9 +48,16 @@
             this.labelMusicDetail = new System.Windows.Forms.Label();
             this.pbSmallAlbum = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pbMinForm = new System.Windows.Forms.PictureBox();
+            this.pbMaxForm = new System.Windows.Forms.PictureBox();
+            this.pbCloseForm = new System.Windows.Forms.PictureBox();
             this.tbMusicVolume = new System.Windows.Forms.TrackBar();
             this.panelMusicVlume = new System.Windows.Forms.Panel();
-            this.labelListCount = new System.Windows.Forms.Label();
+            this.panelSetting = new System.Windows.Forms.Panel();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
+            this.txtSreachSongName = new System.Windows.Forms.TextBox();
+            this.panelMainWindow = new System.Windows.Forms.Panel();
+            this.panelMenu = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -63,8 +71,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLyric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSmallAlbum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).BeginInit();
             this.panelMusicVlume.SuspendLayout();
+            this.panelSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // axWindowsMediaPlayer1
@@ -155,6 +168,21 @@
             this.panelPlayControl.Name = "panelPlayControl";
             this.panelPlayControl.Size = new System.Drawing.Size(990, 70);
             this.panelPlayControl.TabIndex = 18;
+            this.panelPlayControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
+            this.panelPlayControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // labelListCount
+            // 
+            this.labelListCount.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelListCount.ForeColor = System.Drawing.Color.Silver;
+            this.labelListCount.Location = new System.Drawing.Point(946, 30);
+            this.labelListCount.Name = "labelListCount";
+            this.labelListCount.Size = new System.Drawing.Size(41, 25);
+            this.labelListCount.TabIndex = 22;
+            this.labelListCount.Text = "111";
+            this.toolTip1.SetToolTip(this.labelListCount, "播放列表");
+            this.labelListCount.MouseLeave += new System.EventHandler(this.pbListCount_MouseLeave);
+            this.labelListCount.MouseHover += new System.EventHandler(this.pbListCount_MouseHover);
             // 
             // pbHiFi
             // 
@@ -285,6 +313,48 @@
             this.pbSmallAlbum.TabStop = false;
             this.toolTip1.SetToolTip(this.pbSmallAlbum, "打开音乐详情页");
             // 
+            // pbMinForm
+            // 
+            this.pbMinForm.Image = ((System.Drawing.Image)(resources.GetObject("pbMinForm.Image")));
+            this.pbMinForm.Location = new System.Drawing.Point(878, 15);
+            this.pbMinForm.Name = "pbMinForm";
+            this.pbMinForm.Padding = new System.Windows.Forms.Padding(6);
+            this.pbMinForm.Size = new System.Drawing.Size(30, 30);
+            this.pbMinForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMinForm.TabIndex = 22;
+            this.pbMinForm.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbMinForm, "最小化");
+            this.pbMinForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
+            this.pbMinForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
+            // 
+            // pbMaxForm
+            // 
+            this.pbMaxForm.Image = ((System.Drawing.Image)(resources.GetObject("pbMaxForm.Image")));
+            this.pbMaxForm.Location = new System.Drawing.Point(909, 16);
+            this.pbMaxForm.Name = "pbMaxForm";
+            this.pbMaxForm.Padding = new System.Windows.Forms.Padding(6);
+            this.pbMaxForm.Size = new System.Drawing.Size(28, 28);
+            this.pbMaxForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMaxForm.TabIndex = 23;
+            this.pbMaxForm.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbMaxForm, "最大化");
+            this.pbMaxForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
+            this.pbMaxForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
+            // 
+            // pbCloseForm
+            // 
+            this.pbCloseForm.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseForm.Image")));
+            this.pbCloseForm.Location = new System.Drawing.Point(938, 15);
+            this.pbCloseForm.Name = "pbCloseForm";
+            this.pbCloseForm.Padding = new System.Windows.Forms.Padding(8);
+            this.pbCloseForm.Size = new System.Drawing.Size(30, 30);
+            this.pbCloseForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCloseForm.TabIndex = 24;
+            this.pbCloseForm.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbCloseForm, "关闭");
+            this.pbCloseForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
+            this.pbCloseForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
+            // 
             // tbMusicVolume
             // 
             this.tbMusicVolume.AutoSize = false;
@@ -306,27 +376,72 @@
             this.panelMusicVlume.Visible = false;
             this.panelMusicVlume.MouseLeave += new System.EventHandler(this.panelMusicVlume_MouseLeave);
             // 
-            // labelListCount
+            // panelSetting
             // 
-            this.labelListCount.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelListCount.ForeColor = System.Drawing.Color.Silver;
-            this.labelListCount.Location = new System.Drawing.Point(946, 30);
-            this.labelListCount.Name = "labelListCount";
-            this.labelListCount.Size = new System.Drawing.Size(41, 25);
-            this.labelListCount.TabIndex = 22;
-            this.labelListCount.Text = "111";
-            this.toolTip1.SetToolTip(this.labelListCount, "播放列表");
-            this.labelListCount.MouseLeave += new System.EventHandler(this.pbListCount_MouseLeave);
-            this.labelListCount.MouseHover += new System.EventHandler(this.pbListCount_MouseHover);
+            this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.panelSetting.Controls.Add(this.pbSearch);
+            this.panelSetting.Controls.Add(this.txtSreachSongName);
+            this.panelSetting.Controls.Add(this.pbMinForm);
+            this.panelSetting.Controls.Add(this.pbMaxForm);
+            this.panelSetting.Controls.Add(this.pbCloseForm);
+            this.panelSetting.Location = new System.Drawing.Point(0, 0);
+            this.panelSetting.Name = "panelSetting";
+            this.panelSetting.Size = new System.Drawing.Size(990, 57);
+            this.panelSetting.TabIndex = 21;
+            this.panelSetting.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
+            this.panelSetting.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // pbSearch
+            // 
+            this.pbSearch.BackColor = System.Drawing.Color.White;
+            this.pbSearch.Image = ((System.Drawing.Image)(resources.GetObject("pbSearch.Image")));
+            this.pbSearch.Location = new System.Drawing.Point(443, 15);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(33, 25);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearch.TabIndex = 19;
+            this.pbSearch.TabStop = false;
+            this.pbSearch.MouseLeave += new System.EventHandler(this.pbSearch_MouseLeave);
+            this.pbSearch.MouseHover += new System.EventHandler(this.pbSearch_MouseHover);
+            // 
+            // txtSreachSongName
+            // 
+            this.txtSreachSongName.BackColor = System.Drawing.Color.White;
+            this.txtSreachSongName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSreachSongName.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtSreachSongName.ForeColor = System.Drawing.Color.Gray;
+            this.txtSreachSongName.Location = new System.Drawing.Point(235, 15);
+            this.txtSreachSongName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSreachSongName.Name = "txtSreachSongName";
+            this.txtSreachSongName.Size = new System.Drawing.Size(209, 25);
+            this.txtSreachSongName.TabIndex = 25;
+            this.txtSreachSongName.Text = "输入要搜索的歌曲名";
+            // 
+            // panelMainWindow
+            // 
+            this.panelMainWindow.Location = new System.Drawing.Point(174, 58);
+            this.panelMainWindow.Name = "panelMainWindow";
+            this.panelMainWindow.Size = new System.Drawing.Size(814, 465);
+            this.panelMainWindow.TabIndex = 22;
+            // 
+            // panelMenu
+            // 
+            this.panelMenu.Location = new System.Drawing.Point(1, 58);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(172, 465);
+            this.panelMenu.TabIndex = 23;
             // 
             // MusicMainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(989, 597);
+            this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelMainWindow);
+            this.Controls.Add(this.panelSetting);
             this.Controls.Add(this.panelMusicVlume);
-            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.panelPlayControl);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MusicMainForm";
@@ -346,8 +461,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLyric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSmallAlbum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).EndInit();
             this.panelMusicVlume.ResumeLayout(false);
+            this.panelSetting.ResumeLayout(false);
+            this.panelSetting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -374,5 +495,13 @@
         private System.Windows.Forms.PictureBox pbLike;
         private System.Windows.Forms.PictureBox pbLyric;
         private System.Windows.Forms.Label labelListCount;
+        private System.Windows.Forms.Panel panelSetting;
+        private System.Windows.Forms.PictureBox pbMinForm;
+        private System.Windows.Forms.PictureBox pbMaxForm;
+        private System.Windows.Forms.PictureBox pbCloseForm;
+        private System.Windows.Forms.Panel panelMainWindow;
+        private System.Windows.Forms.TextBox txtSreachSongName;
+        private System.Windows.Forms.Panel panelMenu;
+        private System.Windows.Forms.PictureBox pbSearch;
     }
 }
