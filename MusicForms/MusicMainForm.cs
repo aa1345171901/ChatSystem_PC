@@ -1,13 +1,24 @@
 ﻿namespace QQ_piracy.MusicForms
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.IO;
     using System.Windows.Forms;
+    using QQ_piracy.Model;
     using QQ_piracy.Properties;
 
     public partial class MusicMainForm : Form
     {
+        // 打开文件的默认文件位置
+        private const string DefaultSongsFilePath = @"C:\Users\Rhine\Music";
+        private string localSongsFilePath = Application.StartupPath + "\\songListHistory.txt"; // 本地音乐的记录文件
+
+        // 用于保存本地歌曲的链表
+        private List<SongsInfo> localSongsList = new List<SongsInfo>();
+        private List<SongsInfo> oringinListSong;                // 用于搜索功能
+
         Point downPoint; // 用于设置拖动设置的位置
 
         public MusicMainForm()
@@ -267,6 +278,9 @@
             pbSearch.Image = Resources.搜索;
         }
 
+        /// <summary>
+        /// listViewcolumn头部列表重绘
+        /// </summary>
         private void lvSongList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);    // 采用特定颜色绘制标题列
@@ -286,6 +300,193 @@
                 {
                     e.Graphics.DrawString(e.Header.Text, headerFont, Brushes.Gray, e.Bounds, sf);
                 }
+            }
+        }
+
+        /// <summary>
+        /// ListView子物体重绘
+        /// </summary>
+        private void lvSongList_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            if (e.ItemIndex == -1)
+            {
+                return;
+            }
+
+            e.SubItem.ForeColor = Color.DimGray;
+
+            if ((e.ItemState & ListViewItemStates.Selected) == ListViewItemStates.Selected)
+            {
+                using (SolidBrush brush = new SolidBrush(Color.Blue))
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.White), e.Bounds);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(e.SubItem.Text))
+            {
+                this.DrawText(e, e.Graphics, e.Bounds, 2);
+            }
+        }
+
+        private void DrawText(DrawListViewSubItemEventArgs e, Graphics g, Rectangle r, int paddingLeft)
+        {
+            TextFormatFlags flags = GetFormatFlags(e.Header.TextAlign);
+
+            r.X += 1 + paddingLeft; // 重绘图标时，文本右移
+            TextRenderer.DrawText(
+                g,
+                e.SubItem.Text,
+                e.SubItem.Font,
+                r,
+                e.SubItem.ForeColor,
+                flags);
+        }
+
+        private TextFormatFlags GetFormatFlags(HorizontalAlignment align)
+        {
+            TextFormatFlags flags =
+                    TextFormatFlags.EndEllipsis |
+                    TextFormatFlags.VerticalCenter;
+
+            switch (align)
+            {
+                case HorizontalAlignment.Center:
+                    flags |= TextFormatFlags.HorizontalCenter;
+                    break;
+                case HorizontalAlignment.Right:
+                    flags |= TextFormatFlags.Right;
+                    break;
+                case HorizontalAlignment.Left:
+                    flags |= TextFormatFlags.Left;
+                    break;
+            }
+
+            return flags;
+        }
+
+        /// <summary>
+        /// 最大化，最小化，关闭按钮点击事件
+        /// </summary>
+        private void FormControlButton_Click(object sender, EventArgs e)
+        {
+            PictureBox currPicBox = (PictureBox)sender;
+            if (currPicBox.Name == "pbCloseForm")
+            {
+                this.Close();
+            }
+            else if (currPicBox.Name == "pbMaxForm")
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else if (currPicBox.Name == "pbMinForm")
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+        }
+
+        /// <summary>
+        /// 添加音乐的按钮点击事件
+        /// </summary>
+        private void pbAddSong_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog1.InitialDirectory = DefaultSongsFilePath;
+            this.openFileDialog1.Filter = "媒体文件|*.mp3;*.wav;*.wma;*.avi;*.mpg;*.asf;*.wmv";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                for (int i = 0; i < openFileDialog1.FileNames.Length; i++)
+                {
+                    string path = openFileDialog1.FileNames[i];
+                    if (!IsExistInList(path))
+                    {
+                        this.localSongsList.Add(new SongsInfo(path));
+                    }
+                }
+            }
+
+            AddSongsToListView(localSongsList);
+            SaveSongsListHistory(localSongsFilePath, localSongsList);
+
+            UpdataOringinSongList();
+        }
+
+        /// <summary>
+        /// 用于判断该歌曲是否在链表中
+        /// </summary>
+        private bool IsExistInList(string path)
+        {
+            for (int i = 0; i < localSongsList.Count; i++)
+            {
+                if (path == localSongsList[i].FilePath)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 添加歌曲到ListView（lvSongList）中
+        /// </summary>
+        private void AddSongsToListView(List<SongsInfo> songList)
+        {
+            lvSongList.BeginUpdate();
+            lvSongList.Items.Clear();
+            foreach (SongsInfo song in songList)
+            {
+                string[] songAry = new string[6];
+                int currCount = lvSongList.Items.Count + 1;
+                if (currCount < 10)
+                {
+                    songAry[0] = "0" + currCount;
+                }
+                else
+                {
+                    songAry[0] = "" + currCount;
+                }
+
+                songAry[1] = song.FileName;
+                songAry[2] = song.Artist;
+                songAry[3] = song.Album;
+                songAry[4] = song.Duration;
+                songAry[5] = song.Filesize;
+                // songAry[6] = song.Year;
+
+                ListViewItem lvItem = new ListViewItem(songAry);
+                lvItem.SubItems.Add(song.FilePath);
+                lvSongList.Items.Add(lvItem);
+
+                WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(song.FilePath);
+                axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
+            }
+
+            lvSongList.EndUpdate();
+        }
+
+        /// <summary>
+        /// 保存歌曲列表到本地的历史记录文件
+        /// </summary>
+        private void SaveSongsListHistory(string savePath, List<SongsInfo> songsList)
+        {
+            string saveString = "";
+            for (int i = 0; i < songsList.Count; i++)
+            {
+                saveString += songsList[i].FilePath + "};{";
+            }
+
+            File.WriteAllText(savePath, saveString);
+        }
+
+        /// <summary>
+        /// 更新初始的本地音乐lvSongList列表
+        /// </summary>
+        private void UpdataOringinSongList()
+        {
+            oringinListSong = new List<SongsInfo>();
+            for (int i = 0; i < lvSongList.Items.Count; i++)
+            {
+                oringinListSong.Add(new SongsInfo(lvSongList.Items[i].SubItems[6].Text));
             }
         }
     }
