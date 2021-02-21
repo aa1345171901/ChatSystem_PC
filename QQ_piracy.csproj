@@ -151,7 +151,15 @@
     <Compile Include="Manager\Request\SendByChatRequest.cs" />
     <Compile Include="Manager\Request\SetSystemFaceRequest.cs" />
     <Compile Include="Manager\Request\UpdateStrangerRequest.cs" />
+    <Compile Include="Model\MenuItem.cs" />
+    <Compile Include="Model\MyColorTable.cs" />
     <Compile Include="Model\SongsInfo.cs" />
+    <Compile Include="MusicForms\DeleteSongFormList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusicForms\DeleteSongFormList.Designer.cs">
+      <DependentUpon>DeleteSongFormList.cs</DependentUpon>
+    </Compile>
     <Compile Include="MusicForms\MusicMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\XGMessageForm.resx">
       <DependentUpon>XGMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MusicForms\DeleteSongFormList.resx">
+      <DependentUpon>DeleteSongFormList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MusicForms\MusicMainForm.resx">
       <DependentUpon>MusicMainForm.cs</DependentUpon>
