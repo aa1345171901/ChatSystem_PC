@@ -180,6 +180,7 @@
                         labelMusicDetail.Text = currPlaySong.FileName;
                     }
 
+                    toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
                     tackBarMove.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
 
                     int currIndex = lvSongList.SelectedItems[0].Index;
@@ -189,7 +190,7 @@
                     lvSongList.Items[currIndex].Focused = true;
                     lvSongList.Select();
 
-                    pbPlay.Image = Resources.暂停hover;
+                    pbPlay.Image = Resources.暂停;
                     ttbbtnPlayPause.Icon = Resources.暂停1;
                     break;
 
@@ -302,7 +303,7 @@
             lvSongList.Items[currIndex].Selected = true; // 设定选中
             lvSongList.Items[currIndex].EnsureVisible(); // 保证可见
             lvSongList.Items[currIndex].Focused = true;
-            currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[6].Text);
+            currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
 
             return currPlaySong.FilePath;
         }
@@ -874,6 +875,21 @@
                     {
                         tbMusicVolume.Value = int.Parse(arr[0]); // 声音大小
                         currPlayMode = (PlayMode)int.Parse(arr[1]); // 循环模式
+                        switch (currPlayMode)
+                        {
+                            case PlayMode.Shuffle:
+                                btnPlayMode.BackgroundImage = Resources.随机播放;
+                                break;
+                            case PlayMode.ListLoop:
+                                btnPlayMode.BackgroundImage = Resources.列表循环;
+                                break;
+                            case PlayMode.SingleLoop:
+                                btnPlayMode.BackgroundImage = Resources.单曲循环;
+                                break;
+                            default:
+                                break;
+                        }
+
                         string songPath = arr[2]; // 歌曲文件
                         currPlaySong = new SongsInfo(songPath);
                     }
@@ -1337,6 +1353,59 @@
         private void tsmiOpenFilePath_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@"Explorer.exe", "/select,\"" + currSelectedSong.FilePath + "\"");
+        }
+
+        /// <summary>
+        /// 播放模式菜单弹出
+        /// </summary>
+        private void btnPlayMode_Click(object sender, EventArgs e)
+        {
+            cmsPlayModeMenu.Visible = true;
+            cmsPlayModeMenu.Show(new Point(Cursor.Position.X - 50, Cursor.Position.Y - 100));
+        }
+
+        /// <summary>
+        /// 播放模式按钮图片更改，toolTip也跟着更改
+        /// </summary>
+        private void btnPlayMode_BackgroundImageChanged(object sender, EventArgs e)
+        {
+            switch (currPlayMode)
+            {
+                case PlayMode.Shuffle:
+                    toolTip1.SetToolTip(btnPlayMode, "随机播放");
+                    break;
+                case PlayMode.ListLoop:
+                    toolTip1.SetToolTip(btnPlayMode, "顺序播放");
+                    break;
+                case PlayMode.SingleLoop:
+                    toolTip1.SetToolTip(btnPlayMode, "单曲循环");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 播放模式的子菜单按钮点击
+        /// </summary>
+        private void tsmiPlayModeBtn_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem currTsmi = (ToolStripMenuItem)sender;
+            if (currTsmi.Name == "tsmiSingleLoop")
+            {
+                btnPlayMode.BackgroundImage = Resources.单曲循环1;
+                currPlayMode = PlayMode.SingleLoop;
+            }
+            else if (currTsmi.Name == "tsmiShuffle")
+            {
+                btnPlayMode.BackgroundImage = Resources.随机播放;
+                currPlayMode = PlayMode.Shuffle;
+            }
+            else if (currTsmi.Name == "tsmiListLoop")
+            {
+                btnPlayMode.BackgroundImage = Resources.列表循环;
+                currPlayMode = PlayMode.ListLoop;
+            }
         }
 
         /// <summary>

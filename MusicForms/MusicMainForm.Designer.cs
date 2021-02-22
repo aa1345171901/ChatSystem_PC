@@ -81,6 +81,10 @@
             this.tsmiFavorite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveSongFromList = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpenFilePath = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPlayModeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSingleLoop = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShuffle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiListLoop = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -107,6 +111,7 @@
             this.panelMenu.SuspendLayout();
             this.contextMenuStripnotify.SuspendLayout();
             this.cmsSongListMenu.SuspendLayout();
+            this.cmsPlayModeMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // axWindowsMediaPlayer1
@@ -309,7 +314,10 @@
             this.btnPlayMode.Name = "btnPlayMode";
             this.btnPlayMode.Size = new System.Drawing.Size(25, 25);
             this.btnPlayMode.TabIndex = 19;
+            this.toolTip1.SetToolTip(this.btnPlayMode, "随机播放");
             this.btnPlayMode.UseVisualStyleBackColor = true;
+            this.btnPlayMode.BackgroundImageChanged += new System.EventHandler(this.btnPlayMode_BackgroundImageChanged);
+            this.btnPlayMode.Click += new System.EventHandler(this.btnPlayMode_Click);
             // 
             // labelMusicTimer
             // 
@@ -652,6 +660,7 @@
             // 
             this.tsmiFavorite.BackColor = System.Drawing.Color.White;
             this.tsmiFavorite.ForeColor = System.Drawing.Color.Black;
+            this.tsmiFavorite.Image = global::QQ_piracy.Properties.Resources.喜欢;
             this.tsmiFavorite.Name = "tsmiFavorite";
             this.tsmiFavorite.Size = new System.Drawing.Size(187, 26);
             this.tsmiFavorite.Text = "收藏到歌单(&I)";
@@ -676,6 +685,48 @@
             this.tsmiOpenFilePath.Size = new System.Drawing.Size(187, 26);
             this.tsmiOpenFilePath.Text = "打开文件位置(&F)";
             this.tsmiOpenFilePath.Click += new System.EventHandler(this.tsmiOpenFilePath_Click);
+            // 
+            // cmsPlayModeMenu
+            // 
+            this.cmsPlayModeMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.cmsPlayModeMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsPlayModeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSingleLoop,
+            this.tsmiShuffle,
+            this.tsmiListLoop});
+            this.cmsPlayModeMenu.Name = "cmsPlayModeMenu";
+            this.cmsPlayModeMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.cmsPlayModeMenu.Size = new System.Drawing.Size(185, 104);
+            // 
+            // tsmiSingleLoop
+            // 
+            this.tsmiSingleLoop.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tsmiSingleLoop.ForeColor = System.Drawing.Color.LightGray;
+            this.tsmiSingleLoop.Image = global::QQ_piracy.Properties.Resources.单曲循环1;
+            this.tsmiSingleLoop.Name = "tsmiSingleLoop";
+            this.tsmiSingleLoop.Size = new System.Drawing.Size(184, 26);
+            this.tsmiSingleLoop.Text = "单曲循环";
+            this.tsmiSingleLoop.Click += new System.EventHandler(this.tsmiPlayModeBtn_Click);
+            // 
+            // tsmiShuffle
+            // 
+            this.tsmiShuffle.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tsmiShuffle.ForeColor = System.Drawing.Color.LightGray;
+            this.tsmiShuffle.Image = global::QQ_piracy.Properties.Resources.随机播放;
+            this.tsmiShuffle.Name = "tsmiShuffle";
+            this.tsmiShuffle.Size = new System.Drawing.Size(184, 26);
+            this.tsmiShuffle.Text = "随机播放";
+            this.tsmiShuffle.Click += new System.EventHandler(this.tsmiPlayModeBtn_Click);
+            // 
+            // tsmiListLoop
+            // 
+            this.tsmiListLoop.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tsmiListLoop.ForeColor = System.Drawing.Color.LightGray;
+            this.tsmiListLoop.Image = global::QQ_piracy.Properties.Resources.列表循环;
+            this.tsmiListLoop.Name = "tsmiListLoop";
+            this.tsmiListLoop.Size = new System.Drawing.Size(184, 26);
+            this.tsmiListLoop.Text = "顺序播放";
+            this.tsmiListLoop.Click += new System.EventHandler(this.tsmiPlayModeBtn_Click);
             // 
             // MusicMainForm
             // 
@@ -725,6 +776,7 @@
             this.panelMenu.ResumeLayout(false);
             this.contextMenuStripnotify.ResumeLayout(false);
             this.cmsSongListMenu.ResumeLayout(false);
+            this.cmsPlayModeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -782,5 +834,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveSongFromList;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenFilePath;
         private System.Windows.Forms.Label lbNoResult;
+        private System.Windows.Forms.ContextMenuStrip cmsPlayModeMenu;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSingleLoop;
+        private System.Windows.Forms.ToolStripMenuItem tsmiListLoop;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShuffle;
     }
 }
