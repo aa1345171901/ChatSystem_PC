@@ -18,6 +18,7 @@
         private const string DefaultSongsFilePath = @"C:\Users\Rhine\Music";
         private string localSongsFilePath = Application.StartupPath + "\\songListHistory.txt"; // 本地音乐的记录文件
         private string favoriteSongsFilePath = Application.StartupPath + "\\favoriteSongs.txt"; // 本地音乐的记录文件
+        private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
 
         SongsInfo currSelectedSong = new SongsInfo(null);       // 用于查看详情，打开本地歌曲右键菜单
         SongsInfo currPlaySong = new SongsInfo(null);       // 记录当前选中播放的歌曲
@@ -54,32 +55,20 @@
             InitializeComponent();
             // testAWM.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(AxWmp_PlayStateChange);
 
-            MenuItem item1 = new MenuItem(Resources.list, "List");
-            MenuItem item2 = new MenuItem(Resources.favorite, "Favorite");
+            MenuItem item1 = new MenuItem(Resources.list, "本地音乐");
+            MenuItem item2 = new MenuItem(Resources.favorite, "收藏音乐");
             MenuItem item3 = new MenuItem(Resources.user, "User");
             MenuItem item4 = new MenuItem(Resources.album, "Album");
-            MenuItem item5 = new MenuItem(Resources.ranking, "Rank");
-            MenuItem item6 = new MenuItem(Resources.star, "Function");
-            MenuItem item7 = new MenuItem(Resources.musicLibrary, "Music library");
-            MenuItem item8 = new MenuItem(Resources.message, "Message");
             this.menuItemList = new List<MenuItem>();
             menuItemList.Add(item1);
             menuItemList.Add(item2);
             menuItemList.Add(item3);
             menuItemList.Add(item4);
-            menuItemList.Add(item5);
-            menuItemList.Add(item6);
-            menuItemList.Add(item7);
-            menuItemList.Add(item8);
 
             lbMenu.Items.Add("本地音乐");
             lbMenu.Items.Add("收藏音乐");
             lbMenu.Items.Add("Music library");
             lbMenu.Items.Add("User");
-            lbMenu.Items.Add("Album");
-            lbMenu.Items.Add("Rank");
-            lbMenu.Items.Add("Function");
-            lbMenu.Items.Add("Message");
 
             ImageList imgList = new ImageList();
             imgList.ImageSize = new Size(1, 30);    // 分别是宽和高
@@ -101,15 +90,28 @@
             // 重置播放器状态信息
             ReloadStatus();
 
+            // 读取用户设置
+            ReadSettings(currentSongFilePath);
+
             // 读取播放器列表历史记录
             localSongsList = ReadHistorySongsList(localSongsFilePath);
             favoriteSongsList = ReadHistorySongsList(favoriteSongsFilePath);
+
+            // 默认进入本地音乐列表
+            AddSongsToListView(localSongsList);
+            lvSongList.BringToFront();
+            tsmiFavorite.Visible = true;
+            pbAddSong.Visible = true;
+            axWindowsMediaPlayer1.settings.volume = tbMusicVolume.Value;
+            pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
+
+            axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
 
             // 设置专辑图片控件到顶部页面（z-index)
             // pbAlbumImage.BringToFront();
 
             // 设置开机自启
-            // StarUp("0");
+            StarUp("0");
         }
 
         /// <summary>
@@ -117,6 +119,7 @@
         /// </summary>
         private void MusicMainForm_Closed(object sender, FormClosedEventArgs e)
         {
+            SaveSettings();
             Application.Exit();
             this.Dispose();
         }
@@ -185,6 +188,9 @@
                     lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
                     lvSongList.Items[currIndex].Focused = true;
                     lvSongList.Select();
+
+                    pbPlay.Image = Resources.暂停hover;
+                    ttbbtnPlayPause.Icon = Resources.暂停1;
                     break;
 
                 case 4:    // ScanForward
@@ -245,12 +251,6 @@
             labelMusicTimer.Text = "00:00 / 00:00";
             tackBarMove.Value = tackBarMove.Maximum / 2;
             tackBarMove.Value = 0;
-            if (lvSongList.Items.Count > 0 && lvSongList.SelectedItems.Count == 0)
-            {
-                lvSongList.Items[0].Selected = true; // 设定选中
-                lvSongList.Items[0].EnsureVisible(); // 保证可见
-                lvSongList.Items[0].Focused = true;
-            }
         }
 
         /// <summary>
@@ -690,14 +690,6 @@
 
             e.SubItem.ForeColor = Color.DimGray;
 
-            if ((e.ItemState & ListViewItemStates.Selected) == ListViewItemStates.Selected)
-            {
-                using (SolidBrush brush = new SolidBrush(Color.Blue))
-                {
-                    e.Graphics.FillRectangle(new SolidBrush(Color.White), e.Bounds);
-                }
-            }
-
             if (!string.IsNullOrEmpty(e.SubItem.Text))
             {
                 this.DrawText(e, e.Graphics, e.Bounds, 2);
@@ -738,6 +730,14 @@
             }
 
             return flags;
+        }
+
+        /// <summary>
+        /// 子物体选中操作
+        /// </summary>
+        private void lvSongList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -788,6 +788,7 @@
         {
             lvSongList.BeginUpdate();
             lvSongList.Items.Clear();
+            int currIndex = 0;
             foreach (SongsInfo song in songList)
             {
                 string[] songAry = new string[7];
@@ -814,8 +815,18 @@
 
                 WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(song.FilePath);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
+
+                if (currSelectedSong == song)
+                {
+                    currIndex = lvSongList.Items.Count - 1;
+                }
             }
 
+            lvSongList.Columns[0].Text = songList.Count.ToString();
+            lvSongList.SelectedItems.Clear();
+            lvSongList.Items[currIndex].Selected = true;    // 设定选中
+            lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
+            lvSongList.Items[currIndex].Focused = true;
             lvSongList.EndUpdate();
         }
 
@@ -831,6 +842,51 @@
             }
 
             File.WriteAllText(savePath, saveString);
+        }
+
+        /// <summary>
+        ///  保存用户设置
+        /// </summary>
+        private void SaveSettings()
+        {
+            int volume = tbMusicVolume.Value; // 声音大小
+            int palyMode = (int)currPlayMode; // 循环模式
+            string songPath = currPlaySong.FilePath; // 歌曲文件
+
+            string saveString = volume + "};{" + palyMode + "};{" + songPath;
+
+            File.WriteAllText(currentSongFilePath, saveString);
+        }
+
+        /// <summary>
+        /// 读取用户设置
+        /// </summary>
+        private void ReadSettings(string filePath)
+        {
+            string readString = "";
+            if (File.Exists(filePath))
+            {
+                readString = File.ReadAllText(filePath);
+                if (readString != "")
+                {
+                    string[] arr = readString.Split(new string[] { "};{" }, StringSplitOptions.None);
+                    try
+                    {
+                        tbMusicVolume.Value = int.Parse(arr[0]); // 声音大小
+                        currPlayMode = (PlayMode)int.Parse(arr[1]); // 循环模式
+                        string songPath = arr[2]; // 歌曲文件
+                        currPlaySong = new SongsInfo(songPath);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
+            else
+            {
+                File.Create(filePath);
+            }
         }
 
         /// <summary>
@@ -892,6 +948,39 @@
                 else
                 {
                     cmsSongListMenu.Close();
+                }
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                ListViewItem lvi = lvSongList.GetItemAt(e.X, e.Y);
+                if (lvi != null)
+                {
+                    lvi.BackColor = Color.LightGray;
+
+                    currPlaySong = new SongsInfo(lvi.SubItems[7].Text);
+
+                    pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
+
+                    // 显示歌曲标题名字
+                    labelMusicDetail.Text = currPlaySong.FileName + "-" + currPlaySong.Artist;
+                    if (currPlaySong.FileName.Length > 30)
+                    {
+                        labelMusicDetail.Text = currPlaySong.FileName.Substring(0, 30) + "...";
+                    }
+                    else
+                    {
+                        labelMusicDetail.Text = currPlaySong.FileName;
+                        toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
+                    }
+
+                    if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady || axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPaused)
+                    {
+
+                    }
+                    else
+                    {
+                        axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
+                    }
                 }
             }
         }
@@ -1166,6 +1255,7 @@
         private void tbMusicVolume_ValueChanged(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.settings.volume = tbMusicVolume.Value;
+            SaveSettings();
         }
 
         /// <summary>

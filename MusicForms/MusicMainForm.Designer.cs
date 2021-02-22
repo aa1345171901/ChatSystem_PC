@@ -397,11 +397,13 @@
             // 
             this.tbMusicVolume.AutoSize = false;
             this.tbMusicVolume.Location = new System.Drawing.Point(6, 11);
+            this.tbMusicVolume.Maximum = 100;
             this.tbMusicVolume.Name = "tbMusicVolume";
             this.tbMusicVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbMusicVolume.Size = new System.Drawing.Size(15, 111);
             this.tbMusicVolume.TabIndex = 19;
             this.tbMusicVolume.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tbMusicVolume.Value = 50;
             this.tbMusicVolume.ValueChanged += new System.EventHandler(this.tbMusicVolume_ValueChanged);
             // 
             // panelMusicVlume
@@ -648,7 +650,7 @@
             // 
             // tsmiFavorite
             // 
-            this.tsmiFavorite.BackColor = System.Drawing.Color.Transparent;
+            this.tsmiFavorite.BackColor = System.Drawing.Color.White;
             this.tsmiFavorite.ForeColor = System.Drawing.Color.Black;
             this.tsmiFavorite.Name = "tsmiFavorite";
             this.tsmiFavorite.Size = new System.Drawing.Size(187, 26);
@@ -657,7 +659,7 @@
             // 
             // tsmiRemoveSongFromList
             // 
-            this.tsmiRemoveSongFromList.BackColor = System.Drawing.Color.Transparent;
+            this.tsmiRemoveSongFromList.BackColor = System.Drawing.Color.White;
             this.tsmiRemoveSongFromList.ForeColor = System.Drawing.Color.Black;
             this.tsmiRemoveSongFromList.Image = ((System.Drawing.Image)(resources.GetObject("tsmiRemoveSongFromList.Image")));
             this.tsmiRemoveSongFromList.Name = "tsmiRemoveSongFromList";
