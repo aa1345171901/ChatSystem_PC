@@ -65,6 +65,7 @@
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnYes
             // 
@@ -75,6 +76,7 @@
             this.btnYes.TabIndex = 4;
             this.btnYes.Text = "删除";
             this.btnYes.UseVisualStyleBackColor = true;
+            this.btnYes.Click += new System.EventHandler(this.btnYes_Click);
             // 
             // DeleteSongFormList
             // 

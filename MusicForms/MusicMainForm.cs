@@ -27,6 +27,8 @@
         private List<SongsInfo> localSongsList = new List<SongsInfo>();
         private List<SongsInfo> favoriteSongsList = new List<SongsInfo>(); // 用于保存收藏歌曲
         private List<SongsInfo> oringinListSong;                // 用于搜索功能
+        private List<SongsInfo> ListSong = new List<SongsInfo>();                // 播放列表
+        private int currIndex = 0; // 用于记录在播放播放列表第几首歌曲
 
         private ThumbnailToolbarButton ttbbtnPlayPause;  // 用于底部的缩略图的播放按钮 ico
         private ThumbnailToolbarButton ttbbtnPre;
@@ -98,6 +100,7 @@
             favoriteSongsList = ReadHistorySongsList(favoriteSongsFilePath);
 
             // 默认进入本地音乐列表
+            ListSong = localSongsList;
             AddSongsToListView(localSongsList);
             lvSongList.BringToFront();
             tsmiFavorite.Visible = true;
@@ -182,13 +185,20 @@
 
                     toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
                     tackBarMove.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
-
-                    int currIndex = lvSongList.SelectedItems[0].Index;
-                    lvSongList.SelectedItems.Clear();
-                    lvSongList.Items[currIndex].Selected = true;    // 设定选中
-                    lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
-                    lvSongList.Items[currIndex].Focused = true;
-                    lvSongList.Select();
+                    FavoritePictureSetting();
+                    //try
+                    //{
+                    //    int currIndex = lvSongList.SelectedItems[0].Index;
+                    //    lvSongList.SelectedItems.Clear();
+                    //    lvSongList.Items[currIndex].Selected = true;    // 设定选中
+                    //    lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
+                    //    lvSongList.Items[currIndex].Focused = true;
+                    //    lvSongList.Select();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Console.WriteLine(ex.Message);
+                    //}
 
                     pbPlay.Image = Resources.暂停;
                     ttbbtnPlayPause.Icon = Resources.暂停1;
@@ -259,7 +269,8 @@
         /// </summary>
         private string GetPath()
         {
-            int currIndex = lvSongList.SelectedItems[0].Index;
+            // int currIndex = lvSongList.SelectedItems[0].Index;
+            int currIndex = this.currIndex;
             switch (currPlayMode)
             {
                 case PlayMode.ListLoop:
@@ -303,8 +314,8 @@
             lvSongList.Items[currIndex].Selected = true; // 设定选中
             lvSongList.Items[currIndex].EnsureVisible(); // 保证可见
             lvSongList.Items[currIndex].Focused = true;
-            currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
-
+            // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
+            currPlaySong = new SongsInfo(ListSong[currIndex].FilePath);
             return currPlaySong.FilePath;
         }
 
@@ -789,7 +800,7 @@
         {
             lvSongList.BeginUpdate();
             lvSongList.Items.Clear();
-            int currIndex = 0;
+            int currIndex = -1;
             foreach (SongsInfo song in songList)
             {
                 string[] songAry = new string[7];
@@ -817,17 +828,22 @@
                 WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(song.FilePath);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
 
-                if (currSelectedSong == song)
+                if (currPlaySong.FileName == song.FileName)
                 {
                     currIndex = lvSongList.Items.Count - 1;
                 }
             }
 
+            if (currIndex != -1)
+            {
+                //lvSongList.SelectedItems.Clear();
+                //lvSongList.Items[currIndex].Selected = true;    // 设定选中
+                //lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
+                //lvSongList.Items[currIndex].Focused = true;
+                this.currIndex = currIndex;
+            }
+
             lvSongList.Columns[0].Text = songList.Count.ToString();
-            lvSongList.SelectedItems.Clear();
-            lvSongList.Items[currIndex].Selected = true;    // 设定选中
-            lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
-            lvSongList.Items[currIndex].Focused = true;
             lvSongList.EndUpdate();
         }
 
@@ -974,6 +990,7 @@
                     lvi.BackColor = Color.LightGray;
 
                     currPlaySong = new SongsInfo(lvi.SubItems[7].Text);
+                    FavoritePictureSetting();
 
                     pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
 
@@ -988,6 +1005,8 @@
                         labelMusicDetail.Text = currPlaySong.FileName;
                         toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
                     }
+
+                    labelMusicTimer.Text = "00:00 / " + currPlaySong.Duration.Remove(0, 3);
 
                     if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady || axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPaused)
                     {
@@ -1007,6 +1026,7 @@
         private void lvSongList_DoubleClick(object sender, EventArgs e)
         {
             int currIndex = lvSongList.SelectedItems[0].Index;
+            this.currIndex = currIndex;
             string songFilePath = lvSongList.Items[currIndex].SubItems[7].Text;
 
             // 选中的歌曲为正在播放的歌曲
@@ -1051,7 +1071,7 @@
                 return;
             }
 
-            int currIndex = lvSongList.SelectedItems[0].Index;
+            // int currIndex = lvSongList.SelectedItems[0].Index;
             if (currIndex > 0)
             {
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
@@ -1061,6 +1081,7 @@
             {
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
                 currIndex = lvSongList.Items.Count - 1;
+                currIndex = ListSong.Count - 1;
             }
 
             lvSongList.Items[currIndex].Focused = true;
@@ -1095,7 +1116,8 @@
             if (lvSongList.SelectedItems.Count > 0)
             {
                 // 双击播放列表控制
-                Play(lvSongList.SelectedItems[0].Index);
+                //Play(lvSongList.SelectedItems[0].Index);
+                Play(currIndex);
             }
             else
             {
@@ -1108,12 +1130,7 @@
         /// </summary>
         private void pbNext_Click(object sender, EventArgs e)
         {
-            if (lvSongList.SelectedItems.Count == 0)
-            {
-                return;
-            }
-
-            int currIndex = lvSongList.SelectedItems[0].Index;
+            // int currIndex = lvSongList.SelectedItems[0].Index;
             if (currIndex < lvSongList.Items.Count - 1)
             {
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
@@ -1150,7 +1167,8 @@
                 // 生成随机序列
                 BuildRandomList(lvSongList.Items.Count);
                 jumpSongIndex = index;
-                currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
+                // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
+                currPlaySong = new SongsInfo(ListSong[index].FilePath);
                 axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 return;
@@ -1305,7 +1323,7 @@
         }
 
         /// <summary>
-        /// 收藏音乐
+        /// 收藏音乐,右键子菜单
         /// </summary>
         private void tsmiFavorite_Click(object sender, EventArgs e)
         {
@@ -1353,6 +1371,76 @@
         private void tsmiOpenFilePath_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@"Explorer.exe", "/select,\"" + currSelectedSong.FilePath + "\"");
+        }
+
+        /// <summary>
+        /// 下方收藏按钮点击
+        /// </summary>
+        private void pbLikeBtnClick(object sender, EventArgs e)
+        {
+            // 收藏
+            PictureBox pb = (PictureBox)sender;
+            if (pb.Name == "pbLike")
+            {
+                pb.Image = Resources.收藏ing;
+                toolTip1.SetToolTip(pb, "取消收藏");
+                pb.Name = "pbUnLike";
+
+                favoriteSongsList.Add(new SongsInfo(currPlaySong.FilePath));
+                SaveSongsListHistory(favoriteSongsFilePath, favoriteSongsList);
+                pb.MouseHover -= pbLike_MouseHover;
+                pb.MouseLeave -= pbLike_MouseLeave;
+            }
+            else
+            {
+                // 取消收藏
+                pb.Image = Resources.收藏hover;
+                toolTip1.SetToolTip(pb, "收藏");
+                pb.Name = "pbLike";
+
+                int index = 0; // 记录删除的索引
+                foreach (var item in favoriteSongsList)
+                {
+                    if (item.FileName == currPlaySong.FileName)
+                    {
+                        break;
+                    }
+
+                    index++;
+                }
+
+                favoriteSongsList.RemoveAt(index);
+
+                SaveSongsListHistory(favoriteSongsFilePath, favoriteSongsList);
+                UpdataOringinSongList();
+                pb.MouseHover += pbLike_MouseHover;
+                pb.MouseLeave += pbLike_MouseLeave;
+            }
+        }
+
+        /// <summary>
+        /// 设置下方收藏按钮是否收藏
+        /// </summary>
+        private void FavoritePictureSetting()
+        {
+            foreach (SongsInfo song in favoriteSongsList)
+            {
+                if (currPlaySong.FilePath == song.FilePath)
+                {
+                    pbLike.Image = Resources.收藏ing;
+                    toolTip1.SetToolTip(pbLike, "取消收藏");
+                    pbLike.Name = "pbUnLike";
+                    return;
+                }
+            }
+
+            // 手动添加事件，后期需要移除
+            pbLike.MouseHover += pbLike_MouseHover;
+            pbLike.MouseLeave += pbLike_MouseLeave;
+
+            pbLike.Image = Resources.收藏;
+            toolTip1.SetToolTip(pbLike, "收藏");
+            pbLike.Name = "pbLike";
         }
 
         /// <summary>
@@ -1492,6 +1580,8 @@
                     lvSongList.BringToFront();
                     tsmiFavorite.Visible = true;
                     pbAddSong.Visible = true;
+
+                    ListSong = localSongsList;
                     break;
                 case 1:
                     lvSongList.Items.Clear();
@@ -1500,6 +1590,8 @@
                     lvSongList.BringToFront();
                     tsmiFavorite.Visible = false;
                     pbAddSong.Visible = false;
+
+                    ListSong = favoriteSongsList;
                     break;
             }
 

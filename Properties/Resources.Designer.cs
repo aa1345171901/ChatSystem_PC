@@ -453,6 +453,16 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 收藏ing {
+            get {
+                object obj = ResourceManager.GetObject("收藏ing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 文件 {
             get {
                 object obj = ResourceManager.GetObject("文件", resourceCulture);

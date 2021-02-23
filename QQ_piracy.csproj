@@ -278,6 +278,7 @@
     <Content Include="Resources\播放hover.png" />
     <None Include="Resources\收藏.png" />
     <None Include="Resources\收藏hover.png" />
+    <None Include="Resources\收藏ing.png" />
     <Content Include="Resources\文件.png" />
     <Content Include="Resources\文件hoover.png" />
     <Content Include="Resources\暂停.ico" />

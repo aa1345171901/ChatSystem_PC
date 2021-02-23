@@ -274,9 +274,7 @@
             this.pbLike.TabIndex = 19;
             this.pbLike.TabStop = false;
             this.toolTip1.SetToolTip(this.pbLike, "收藏");
-            this.pbLike.Click += new System.EventHandler(this.tsmiFavorite_Click);
-            this.pbLike.MouseLeave += new System.EventHandler(this.pbLike_MouseLeave);
-            this.pbLike.MouseHover += new System.EventHandler(this.pbLike_MouseHover);
+            this.pbLike.Click += new System.EventHandler(this.pbLikeBtnClick);
             // 
             // pbLyric
             // 
@@ -696,7 +694,7 @@
             this.tsmiListLoop});
             this.cmsPlayModeMenu.Name = "cmsPlayModeMenu";
             this.cmsPlayModeMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.cmsPlayModeMenu.Size = new System.Drawing.Size(185, 104);
+            this.cmsPlayModeMenu.Size = new System.Drawing.Size(136, 82);
             // 
             // tsmiSingleLoop
             // 
@@ -704,7 +702,7 @@
             this.tsmiSingleLoop.ForeColor = System.Drawing.Color.LightGray;
             this.tsmiSingleLoop.Image = global::QQ_piracy.Properties.Resources.单曲循环1;
             this.tsmiSingleLoop.Name = "tsmiSingleLoop";
-            this.tsmiSingleLoop.Size = new System.Drawing.Size(184, 26);
+            this.tsmiSingleLoop.Size = new System.Drawing.Size(135, 26);
             this.tsmiSingleLoop.Text = "单曲循环";
             this.tsmiSingleLoop.Click += new System.EventHandler(this.tsmiPlayModeBtn_Click);
             // 
@@ -714,7 +712,7 @@
             this.tsmiShuffle.ForeColor = System.Drawing.Color.LightGray;
             this.tsmiShuffle.Image = global::QQ_piracy.Properties.Resources.随机播放;
             this.tsmiShuffle.Name = "tsmiShuffle";
-            this.tsmiShuffle.Size = new System.Drawing.Size(184, 26);
+            this.tsmiShuffle.Size = new System.Drawing.Size(135, 26);
             this.tsmiShuffle.Text = "随机播放";
             this.tsmiShuffle.Click += new System.EventHandler(this.tsmiPlayModeBtn_Click);
             // 
@@ -724,7 +722,7 @@
             this.tsmiListLoop.ForeColor = System.Drawing.Color.LightGray;
             this.tsmiListLoop.Image = global::QQ_piracy.Properties.Resources.列表循环;
             this.tsmiListLoop.Name = "tsmiListLoop";
-            this.tsmiListLoop.Size = new System.Drawing.Size(184, 26);
+            this.tsmiListLoop.Size = new System.Drawing.Size(135, 26);
             this.tsmiListLoop.Text = "顺序播放";
             this.tsmiListLoop.Click += new System.EventHandler(this.tsmiPlayModeBtn_Click);
             // 
