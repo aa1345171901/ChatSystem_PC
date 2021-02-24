@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Text;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using Microsoft.WindowsAPICodePack.Taskbar;
@@ -46,11 +47,12 @@
             ListLoop,
         }
 
-        public PlayMode currPlayMode = PlayMode.Shuffle;
+        public PlayMode CurrPlayMode = PlayMode.Shuffle;
 
         Point downPoint; // 用于设置拖动设置的位置
 
         List<MenuItem> menuItemList;    // 界面左边的菜单列表
+        List<string> songItemList = new List<string>();    // 播放列表 显示的歌曲名
 
         public MusicMainForm()
         {
@@ -293,7 +295,7 @@
         {
             // int currIndex = lvSongList.SelectedItems[0].Index;
             int currIndex = this.currIndex;
-            switch (currPlayMode)
+            switch (CurrPlayMode)
             {
                 case PlayMode.ListLoop:
                     if (currIndex != listSong.Count - 1)
@@ -696,7 +698,7 @@
             }
             else if (currPicBox.Name == "pbMaxForm")
             {
-                this.WindowState = FormWindowState.Maximized;
+                // this.WindowState = FormWindowState.Maximized;
             }
             else if (currPicBox.Name == "pbMinForm")
             {
@@ -916,7 +918,7 @@
         private void SaveSettings()
         {
             int volume = tbMusicVolume.Value; // 声音大小
-            int palyMode = (int)currPlayMode; // 循环模式
+            int palyMode = (int)CurrPlayMode; // 循环模式
             string songPath = currPlaySong.FilePath; // 歌曲文件
 
             string saveString = volume + "};{" + palyMode + "};{" + songPath;
@@ -939,8 +941,8 @@
                     try
                     {
                         tbMusicVolume.Value = int.Parse(arr[0]); // 声音大小
-                        currPlayMode = (PlayMode)int.Parse(arr[1]); // 循环模式
-                        switch (currPlayMode)
+                        CurrPlayMode = (PlayMode)int.Parse(arr[1]); // 循环模式
+                        switch (CurrPlayMode)
                         {
                             case PlayMode.Shuffle:
                                 btnPlayMode.BackgroundImage = Resources.随机播放;
@@ -1036,8 +1038,6 @@
                 ListViewItem lvi = lvSongList.GetItemAt(e.X, e.Y);
                 if (lvi != null)
                 {
-                    lvi.BackColor = Color.LightGray;
-
                     currPlaySong = new SongsInfo(lvi.SubItems[7].Text);
 
                     int index = 0;
@@ -1185,6 +1185,10 @@
                 // Play(lvSongList.SelectedItems[0].Index);
 
                 Play(currIndex);
+            }
+            else if (currPlaySong != null && currPlaySong.FilePath != "未知")
+            {
+                axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
             }
             else
             {
@@ -1523,7 +1527,7 @@
         /// </summary>
         private void btnPlayMode_BackgroundImageChanged(object sender, EventArgs e)
         {
-            switch (currPlayMode)
+            switch (CurrPlayMode)
             {
                 case PlayMode.Shuffle:
                     toolTip1.SetToolTip(btnPlayMode, "随机播放");
@@ -1548,17 +1552,17 @@
             if (currTsmi.Name == "tsmiSingleLoop" || currTsmi.Name == "notiTsmiSingleLoop")
             {
                 btnPlayMode.BackgroundImage = Resources.单曲循环1;
-                currPlayMode = PlayMode.SingleLoop;
+                CurrPlayMode = PlayMode.SingleLoop;
             }
             else if (currTsmi.Name == "tsmiShuffle" || currTsmi.Name == "notiTsmiShuffle")
             {
                 btnPlayMode.BackgroundImage = Resources.随机播放;
-                currPlayMode = PlayMode.Shuffle;
+                CurrPlayMode = PlayMode.Shuffle;
             }
             else if (currTsmi.Name == "tsmiListLoop" || currTsmi.Name == "notiTsmiListLoop")
             {
                 btnPlayMode.BackgroundImage = Resources.列表循环;
-                currPlayMode = PlayMode.ListLoop;
+                CurrPlayMode = PlayMode.ListLoop;
             }
 
             // 保存用户设置
@@ -1669,36 +1673,39 @@
         /// </summary>
         private void lbListSongSetting()
         {
-            int num = 1;
-            string numStr = "";
             string fileName = "";
             string fileArtist = "";
+            string strAll = "";
+            songItemList.Clear();
             foreach (var item in listSong)
             {
-                if (num < 10)
+                fileName = item.FileName;
+                if (Encoding.GetEncoding("gb2312").GetBytes(fileName).Length > 32)
                 {
-                    numStr = "0" + num;
-                }
-                else
-                {
-                    numStr = num.ToString();
+                    fileName = SubString(fileName, 0, 32) + "...";
                 }
 
-                fileName = item.FileName;
-                if (fileName.Length > 20)
-                {
-                    fileName = fileName.Substring(0, 20) + "...";
-                }
+                strAll = fileName + new string(' ', 35 - Encoding.GetEncoding("gb2312").GetBytes(fileName).Length);
 
                 fileArtist = item.Artist;
-                if (fileArtist.Length > 14)
+                if (Encoding.GetEncoding("gb2312").GetBytes(fileArtist).Length > 16)
                 {
-                    fileArtist = fileArtist.Substring(0, 14) + "...";
+                    fileArtist = SubString(fileArtist, 0, 16) + "...";
                 }
 
-                lbListSong.Items.Add(numStr + " " + fileName + fileArtist);
-                num++;
+                strAll += "  " + fileArtist;
+                lbListSong.Items.Add(fileName + fileArtist);
+                songItemList.Add(strAll);
             }
+        }
+
+        private string SubString(string toSub, int startIndex, int length)
+        {
+            byte[] subbyte = System.Text.Encoding.Default.GetBytes(toSub);
+
+            string sub = System.Text.Encoding.Default.GetString(subbyte, startIndex, length);
+
+            return sub;
         }
 
         /// <summary>
@@ -1711,6 +1718,11 @@
             int index = e.Index;                                // 获取当前要进行绘制的行的序号，从0开始。
             Graphics g = e.Graphics;                            // 获取Graphics对象。
 
+            if (index >= listSong.Count)
+            {
+                return;
+            }
+
             Graphics tempG = Graphics.FromImage(bitmap);
 
             tempG.SmoothingMode = SmoothingMode.AntiAlias;          // 使绘图质量最高，即消除锯齿
@@ -1718,17 +1730,46 @@
             tempG.CompositingQuality = CompositingQuality.HighQuality;
 
             Rectangle bound = e.Bounds;                         // 获取当前要绘制的行的一个矩形范围。
-            string text = this.listSong[index].FileName + this.listSong[index].Artist;     // 获取当前要绘制的行的显示文本。
+            string text = songItemList[index];     // 获取当前要绘制的行的显示文本。
 
             // 绘制选中时的背景，要注意绘制的顺序，后面的会覆盖前面的
             // 绘制底色
             Color backgroundColor = Color.FromArgb(40, 40, 40);             // 背景色
-            Color guideTagColor = Color.FromArgb(183, 218, 114);            // 高亮指示色
+            Color guideTagColor = Color.WhiteSmoke;            // 高亮指示色
             Color selectedBackgroundColor = Color.FromArgb(64, 60, 66);     // 选中背景色
             Color fontColor = Color.White;                                   // 字体颜色
             Color selectedFontColor = Color.White;                          // 选中字体颜色
-            Font textFont = new Font("幼圆", 10, FontStyle.Regular);        // 文字
-            Image itmeImage = Resources.user;            // 图标
+            Font textFont = new Font("幼圆", 9, FontStyle.Regular);        // 文字
+                                                                          // Image itmeImage = Resources.user;            // 图标
+
+            #region 绘制字体转换成图片
+            string numStr = "";
+            if (index < 10)
+            {
+                numStr = "0" + (index + 1);
+            }
+            else
+            {
+                numStr = (index + 1).ToString();
+            }
+
+            string str = numStr;
+            Graphics grap = Graphics.FromImage(new Bitmap(1, 1));
+            Font font = new Font("幼圆", 10.5f);
+            SizeF sizeF = grap.MeasureString(str, font); // 测量出字体的高度和宽度
+            Brush brush; // 笔刷，颜色
+            brush = Brushes.White;
+            PointF pf = new PointF(0, 0);
+            Bitmap img = new Bitmap(Convert.ToInt32(sizeF.Width), Convert.ToInt32(sizeF.Height));
+            grap = Graphics.FromImage(img);
+            grap.DrawString(str, font, brush, pf);
+
+            // 输出图片
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+
+            Image itmeImage = img;
+            #endregion
 
             // 当前播放歌曲
             if (currIndex == index)
@@ -1739,8 +1780,8 @@
             // 矩形大小
             Rectangle backgroundRect = new Rectangle(0, 0, bound.Width, bound.Height);
             Rectangle guideRect = new Rectangle(0, 4, 5, bound.Height - 8);
-            Rectangle textRect = new Rectangle(55, 0, bound.Width, bound.Height);
-            Rectangle imgRect = new Rectangle(20, 4, 22, bound.Height - 8);
+            Rectangle textRect = new Rectangle(32, 0, bound.Width, bound.Height);
+            Rectangle imgRect = new Rectangle(10, 8, img.Width, img.Height);
 
             // 当前选中行
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
