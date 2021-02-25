@@ -270,6 +270,7 @@
     <Content Include="Resources\单曲循环.png" />
     <Content Include="Resources\喜欢.png" />
     <Content Include="Resources\声音.png" />
+    <None Include="Resources\声音ing.png" />
     <Content Include="Resources\展开.png" />
     <Content Include="Resources\搜索.png" />
     <Content Include="Resources\搜索hover.png" />

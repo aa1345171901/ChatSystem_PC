@@ -30,6 +30,7 @@
         private List<SongsInfo> oringinListSong;                // 用于搜索功能
         private List<SongsInfo> listSong = new List<SongsInfo>();                // 播放列表
         private int currIndex = 0; // 用于记录在播放播放列表第几首歌曲
+        private int currIndexSelected = 0; // 用于记录在播放播放列表选中的索引
 
         private ThumbnailToolbarButton ttbbtnPlayPause;  // 用于底部的缩略图的播放按钮 ico
         private ThumbnailToolbarButton ttbbtnPre;
@@ -159,6 +160,8 @@
 
                 case 1: // Stopped 停止
                     timerPlay.Stop();
+                    pbPlay.Image = Resources.播放;
+                    ttbbtnPlayPause.Icon = Resources.播放1;
                     ReloadStatus();
                     break;
 
@@ -173,19 +176,6 @@
                     // pbAlbumImage.Image = currPlaySong.AlbumImage;
                     pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
 
-                    // 设置播放列表
-                    switch (lbMenu.SelectedIndex)
-                    {
-                        case 0:
-                            listSong = localSongsList;
-                            lbListSongSetting();
-                            break;
-                        case 1:
-                            listSong = favoriteSongsList;
-                            lbListSongSetting();
-                            break;
-                    }
-
                     // 保存用户设置
                     SaveSettings();
 
@@ -195,13 +185,10 @@
                     {
                         labelMusicDetail.Text = currPlaySong.FileName.Substring(0, 30) + "...";
                     }
-                    else
-                    {
-                        labelMusicDetail.Text = currPlaySong.FileName;
-                    }
 
                     // 播放列表数字，设置各种text
                     labelListCount.Text = listSong.Count.ToString();
+                    lbListSongSetting();
                     labelListSong.Text = "   播放列表 - 共计 " + listSong.Count.ToString() + " 首歌曲";
                     toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
                     notifyIcon1.Text = labelMusicDetail.Text;
@@ -271,6 +258,7 @@
                 string path = GetPath();
                 WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(path);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
+                lbListSongSetting();
             }
         }
 
@@ -294,7 +282,6 @@
         private string GetPath()
         {
             // int currIndex = lvSongList.SelectedItems[0].Index;
-            int currIndex = this.currIndex;
             switch (CurrPlayMode)
             {
                 case PlayMode.ListLoop:
@@ -336,9 +323,9 @@
                     break;
             }
 
-            lvSongList.Items[currIndex].Selected = true; // 设定选中
-            lvSongList.Items[currIndex].EnsureVisible(); // 保证可见
-            lvSongList.Items[currIndex].Focused = true;
+            // lvSongList.Items[currIndex].Selected = true; // 设定选中
+            // lvSongList.Items[currIndex].EnsureVisible(); // 保证可见
+            // lvSongList.Items[currIndex].Focused = true;
 
             // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
             currPlaySong = new SongsInfo(listSong[currIndex].FilePath);
@@ -486,8 +473,8 @@
         /// </summary>
         private void pbVolume_MouseLeave(object sender, EventArgs e)
         {
-            Point p1 = new Point(this.pbVolume.Location.X, this.pbVolume.Location.Y + 523);
-            Point p2 = new Point(Cursor.Position.X - this.Location.X, Cursor.Position.Y - this.Location.Y);
+            Point p1 = new Point(this.pbVolume.Location.X, this.pbVolume.Location.Y + 523); // 相对mainform pbVolume位置
+            Point p2 = new Point(Cursor.Position.X - this.Location.X, Cursor.Position.Y - this.Location.Y); // 相对mainform 鼠标位置
 
             // 判断鼠标是否在panelMusicVlume上，是就不执行，否则就是该panel隐藏
             // bool b = this.RectangleToScreen(panelMusicVlume.ClientRectangle).Contains(MousePosition);
@@ -565,6 +552,11 @@
         /// </summary>
         private void pbLike_MouseHover(object sender, EventArgs e)
         {
+            if (pbLike.Name == "pbUnLike")
+            {
+                return;
+            }
+
             pbLike.Image = Resources.收藏hover;
         }
 
@@ -573,6 +565,11 @@
         /// </summary>
         private void pbLike_MouseLeave(object sender, EventArgs e)
         {
+            if (pbLike.Name == "pbUnLike")
+            {
+                return;
+            }
+
             pbLike.Image = Resources.收藏;
         }
 
@@ -879,7 +876,7 @@
                 WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(song.FilePath);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
 
-                if (currPlaySong.FileName == song.FileName)
+                if (currPlaySong != null && currPlaySong.FileName == song.FileName)
                 {
                     currIndex = lvSongList.Items.Count - 1;
                 }
@@ -887,10 +884,10 @@
 
             if (currIndex != -1)
             {
-                //lvSongList.SelectedItems.Clear();
-                //lvSongList.Items[currIndex].Selected = true;    // 设定选中
-                //lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
-                //lvSongList.Items[currIndex].Focused = true;
+                // lvSongList.SelectedItems.Clear();
+                // lvSongList.Items[currIndex].Selected = true;    // 设定选中
+                // lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
+                // lvSongList.Items[currIndex].Focused = true;
                 this.currIndex = currIndex;
             }
 
@@ -919,9 +916,13 @@
         {
             int volume = tbMusicVolume.Value; // 声音大小
             int palyMode = (int)CurrPlayMode; // 循环模式
-            string songPath = currPlaySong.FilePath; // 歌曲文件
+            string songPath = ""; // 歌曲文件
+            foreach (var item in listSong)
+            {
+                songPath += item.FilePath + "},{";
+            }
 
-            string saveString = volume + "};{" + palyMode + "};{" + songPath;
+            string saveString = volume + "};{" + palyMode + "};{" + currIndex + "};{" + songPath;
 
             File.WriteAllText(currentSongFilePath, saveString);
         }
@@ -957,8 +958,17 @@
                                 break;
                         }
 
-                        string songPath = arr[2]; // 歌曲文件
-                        currPlaySong = new SongsInfo(songPath);
+                        currIndex = int.Parse(arr[2]);
+                        string[] songsPath = arr[3].Split(new string[] { "},{" }, StringSplitOptions.None); // 歌曲文件
+                        for (int i = 0; i < songsPath.Length - 1; i++)
+                        {
+                            listSong.Add(new SongsInfo(songsPath[i]));
+                        }
+
+                        currPlaySong = listSong[currIndex];
+
+                        // 创建随机序列用于随机播放
+                        BuildRandomList(listSong.Count);
                     }
                     catch (Exception e)
                     {
@@ -1062,21 +1072,23 @@
                     {
                         labelMusicDetail.Text = currPlaySong.FileName.Substring(0, 30) + "...";
                     }
-                    else
-                    {
-                        labelMusicDetail.Text = currPlaySong.FileName;
-                    }
 
                     toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
                     notifyIcon1.Text = labelMusicDetail.Text;
                     labelMusicTimer.Text = "00:00 / " + currPlaySong.Duration.Remove(0, 3);
-
-                    if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady || axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPaused)
+                    if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPaused)
                     {
 
                     }
+                    else if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady)
+                    {
+                        SettingListSong();
+                    }
                     else
                     {
+                        BuildRandomList(listSong.Count);
+                        jumpSongIndex = currIndex;
+                        SettingListSong();
                         axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
                     }
                 }
@@ -1093,7 +1105,7 @@
             string songFilePath = lvSongList.Items[currIndex].SubItems[7].Text;
 
             // 选中的歌曲为正在播放的歌曲
-            if (currPlaySong.FilePath == songFilePath)
+            if (currPlaySong != null && currPlaySong.FilePath == songFilePath)
             {
                 if (axWindowsMediaPlayer1.playState.ToString() == "wmppsPlaying")
                 {
@@ -1120,7 +1132,7 @@
                 ttbbtnPlayPause.Icon = Resources.暂停1;
             }
 
-            lvSongList.Items[currIndex].Focused = true;
+            SettingListSong();
         }
 
         /// <summary>
@@ -1150,9 +1162,9 @@
                 currIndex = listSong.Count - 1;
             }
 
-            lvSongList.Items[currIndex].Focused = true;
-            lvSongList.Items[currIndex].EnsureVisible();
-            lvSongList.Items[currIndex].Selected = true;
+            // lvSongList.Items[currIndex].Focused = true;
+            // lvSongList.Items[currIndex].EnsureVisible();
+            // lvSongList.Items[currIndex].Selected = true;
 
             Play(currIndex);
         }
@@ -1201,6 +1213,11 @@
         /// </summary>
         private void pbNext_Click(object sender, EventArgs e)
         {
+            if (listSong.Count <= 0)
+            {
+                return;
+            }
+
             // int currIndex = lvSongList.SelectedItems[0].Index;
             if (currIndex < listSong.Count - 1)
             {
@@ -1222,11 +1239,6 @@
         /// </summary>
         private void Play(int index)
         {
-            // 设置被播放音乐项的状态
-            lvSongList.Items[index].Focused = true;
-            lvSongList.Items[index].EnsureVisible();
-            lvSongList.Items[index].Selected = true;
-
             if (axWindowsMediaPlayer1.playState.ToString() == "wmppsPlaying")
             {
                 axWindowsMediaPlayer1.Ctlcontrols.pause();
@@ -1495,8 +1507,10 @@
         {
             foreach (SongsInfo song in favoriteSongsList)
             {
-                if (currPlaySong.FilePath == song.FilePath)
+                if (currPlaySong != null && currPlaySong.FilePath == song.FilePath)
                 {
+                    pbLike.MouseHover -= pbLike_MouseHover;
+                    pbLike.MouseLeave -= pbLike_MouseLeave;
                     pbLike.Image = Resources.收藏ing;
                     toolTip1.SetToolTip(pbLike, "取消收藏");
                     pbLike.Name = "pbUnLike";
@@ -1677,6 +1691,7 @@
             string fileArtist = "";
             string strAll = "";
             songItemList.Clear();
+            lbListSong.Items.Clear();
             foreach (var item in listSong)
             {
                 fileName = item.FileName;
@@ -1713,6 +1728,11 @@
         /// </summary>
         private void lbListSong_DrawItem(object sender, DrawItemEventArgs e)
         {
+            if (e.Bounds.Height == 0)
+            {
+                return;
+            }
+
             Bitmap bitmap = new Bitmap(e.Bounds.Width, e.Bounds.Height);
 
             int index = e.Index;                                // 获取当前要进行绘制的行的序号，从0开始。
@@ -1769,19 +1789,25 @@
             img.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
 
             Image itmeImage = img;
+
+            // 调试出图片的位置和合适大小
+            int height = itmeImage.Height;
+            int y = 8;
             #endregion
 
             // 当前播放歌曲
             if (currIndex == index)
             {
-                itmeImage = Resources.star;            // 图标
+                itmeImage = Resources.声音ing;            // 图标
+                height += 2;
+                y -= 2;
             }
 
             // 矩形大小
             Rectangle backgroundRect = new Rectangle(0, 0, bound.Width, bound.Height);
             Rectangle guideRect = new Rectangle(0, 4, 5, bound.Height - 8);
             Rectangle textRect = new Rectangle(32, 0, bound.Width, bound.Height);
-            Rectangle imgRect = new Rectangle(10, 8, img.Width, img.Height);
+            Rectangle imgRect = new Rectangle(10, y, img.Width, height);
 
             // 当前选中行
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
@@ -1816,6 +1842,35 @@
         private void lbListSong_MeasureItem(object sender, MeasureItemEventArgs e)
         {
             e.ItemHeight = 30;
+        }
+
+        /// <summary>
+        /// 设置ListSong
+        /// </summary>
+        private void SettingListSong()
+        {
+            listSong.Clear();
+
+            // 设置播放列表
+            switch (lbMenu.SelectedIndex)
+            {
+                case 0:
+                    foreach (var item in localSongsList)
+                    {
+                        listSong.Add(item);
+                    }
+
+                    lbListSongSetting();
+                    break;
+                case 1:
+                    foreach (var item in favoriteSongsList)
+                    {
+                        listSong.Add(item);
+                    }
+
+                    lbListSongSetting();
+                    break;
+            }
         }
 
         /// <summary>
@@ -1855,7 +1910,94 @@
             listSong.Clear();
             labelListSong.Text = "   播放列表为空";
             labelListCount.Text = "";
+            currPlaySong = null;
             axWindowsMediaPlayer1.Ctlcontrols.stop();
+            lbListSong.ClearSelected();
+            lbListSongSetting();
+            FavoritePictureSetting();
+        }
+
+        /// <summary>
+        ///  播放列表listBox item子物体双击
+        /// </summary>
+        private void lbListSong_DoubleClick(object sender, EventArgs e)
+        {
+            currIndex = lbListSong.SelectedIndex;
+            string songFilePath = listSong[currIndex].FilePath;
+
+            // 选中的歌曲为正在播放的歌曲
+            if (currPlaySong != null && currPlaySong.FilePath == songFilePath)
+            {
+                if (axWindowsMediaPlayer1.playState.ToString() == "wmppsPlaying")
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.pause();
+                    pbPlay.Image = Resources.播放;
+                    ttbbtnPlayPause.Icon = Resources.播放1;
+                }
+                else
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                    pbPlay.Image = Resources.暂停;
+                    ttbbtnPlayPause.Icon = Resources.暂停1;
+                }
+            }
+            else
+            {
+                // 选中的为其他歌曲
+                BuildRandomList(listSong.Count);
+                jumpSongIndex = currIndex;
+                currPlaySong = new SongsInfo(songFilePath);
+                axWindowsMediaPlayer1.URL = songFilePath;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+                pbPlay.Image = Resources.暂停;
+                ttbbtnPlayPause.Icon = Resources.暂停1;
+            }
+
+            lbListSongSetting();
+        }
+
+        /// <summary>
+        /// 播放列表listBox item子物体鼠标按下
+        /// </summary>
+        private void lbListSong_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int index = -1;
+                index = this.lbListSong.SelectedIndex;
+                if (index != -1)
+                {
+                    cmsListSongMenu.Visible = true;
+                    currSelectedSong = new SongsInfo(listSong[index].FilePath);
+                    currIndexSelected = index;
+                    cmsListSongMenu.Show(Cursor.Position);
+                }
+                else
+                {
+                    cmsSongListMenu.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 播放列表子物体右键菜单播放
+        /// </summary>
+        private void tsmiPlay_Click(object sender, EventArgs e)
+        {
+            pbPlay.Image = Resources.暂停hover;
+            ttbbtnPlayPause.Icon = Resources.暂停1;
+            currPlaySong = currSelectedSong;
+            axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
+            currIndex = currIndexSelected;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        /// <summary>
+        /// 鼠标移动选中播放列表子物体lbListSong
+        /// </summary>
+        private void lbListSong_MouseMove(object sender, MouseEventArgs e)
+        {
+            lbListSong.SelectedIndex = this.lbListSong.IndexFromPoint(e.Location);
         }
     }
 }

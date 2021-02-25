@@ -131,28 +131,10 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pbVolume.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAu5JREFUaEPt
-        mIFx2zAMRT1CRsgI2aDZoNmg2aDdoNmg2SDdoNkg2SDZoN2g3UD9jwR4tEVSUnoylZ7eHc4WAFn4EkiT
-        Ouzs7KzDMAwXss9mF+Z+H1jxLzLnxULbR8Xmxf+yz8HC20Z15sW/yjgOZPEPsstwwpaw4o6KN3/Avl/H
-        o8Rv2Q/ZR+LdUAHF4iG6koBL2aPsWUZezk/ZV9l5BzwXlBWLh+gujwG5EXQrQ5CDkCtLWRddqFk8xND0
-        IFYK7eVCaK1bCy1DJ3JXmLt5nC27kzWLhxieFuAo9T6eEbgz93x0Eo9wCdXiIabMFwBKp62ca3NPo+Sr
-        eE6AOzzHmoNO8YB95+ny9JhKp85zEbRTMzehRJ/mns31z9jvuYDTaZSnXb3Din0PWcPwZK42SlxbAIP+
-        i4zC8mn0m6w2hvzffLqVSIq56wg4Re4b2Z+QoAnB3EfI7630aK46SjqrAFCIceFPozjryO/x9hJECWcX
-        AAojwp/E6E9MPiYLuDdXGSV0EQBKYWzAqFXk89mxvSxXQjcBYKm18RKwwzKK9xbgS4lSG3mL1ceBgr0F
-        +DLixlwJ+VxcfTolGHN2AQn7vaUtNGoT+VhSwKZbKGCHR1io/TuKdxOglDnT6Ku5yiihiwCF+SPzFinN
-        QD42tvdHphDF+8aotpTw+LaWEnKzmPM7X2wP+bezmNMHy2k2NA8yv6tQbQ3FfIfYfzmtD/99h7V+a0OD
-        UJhXjxLzLWW+gW/Z0i0lK0uEzN1SsoSYt6UEJaf3mTOhFaoXiCn1QVxC6W/b1INO4C4xJ+cb95r5RqMq
-        IobnC1Aq20tn+WuVJegCDMqmiBiaFqAU2soHNm3zthdbS9GFmiKiuyxAbp72J9kTOQYtfJ5Xi44uWBUR
-        XUeDmGIxv9sOhdOW1fG0KlxYNhIRD5OA02mUVuFt9Wj53AUVMhIRvyYBHCOivSToiRXpItJ7Vgu/D1Rv
-        LgLay+AtoqIRwf8J1mdg7uz89xwOfwEZtE77azNyKgAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pbMinForm.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -570,8 +552,11 @@
   <metadata name="cmsPlayModeMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 55</value>
   </metadata>
+  <metadata name="cmsListSongMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>185, 55</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>68</value>
+    <value>77</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
