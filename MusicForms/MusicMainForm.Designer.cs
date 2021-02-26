@@ -873,7 +873,7 @@
             this.tsmiNext,
             this.tsmiDelete});
             this.cmsListSongMenu.Name = "cmsListSongMenu";
-            this.cmsListSongMenu.Size = new System.Drawing.Size(145, 92);
+            this.cmsListSongMenu.Size = new System.Drawing.Size(181, 114);
             // 
             // tsmiBack
             // 
@@ -901,6 +901,7 @@
             this.tsmiDelete.Name = "tsmiDelete";
             this.tsmiDelete.Size = new System.Drawing.Size(180, 22);
             this.tsmiDelete.Text = "        删   除";
+            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
             // 
             // MusicMainForm
             // 

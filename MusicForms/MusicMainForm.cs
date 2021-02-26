@@ -285,7 +285,7 @@
             switch (CurrPlayMode)
             {
                 case PlayMode.ListLoop:
-                    if (currIndex != listSong.Count - 1)
+                    if (currIndex < listSong.Count - 1)
                     {
                         // if (currIndex != lvSongList.Items.Count - 1)
                         currIndex += 1;
@@ -848,7 +848,6 @@
         {
             lvSongList.BeginUpdate();
             lvSongList.Items.Clear();
-            int currIndex = -1;
             foreach (SongsInfo song in songList)
             {
                 string[] songAry = new string[7];
@@ -875,20 +874,6 @@
 
                 WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(song.FilePath);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
-
-                if (currPlaySong != null && currPlaySong.FileName == song.FileName)
-                {
-                    currIndex = lvSongList.Items.Count - 1;
-                }
-            }
-
-            if (currIndex != -1)
-            {
-                // lvSongList.SelectedItems.Clear();
-                // lvSongList.Items[currIndex].Selected = true;    // 设定选中
-                // lvSongList.Items[currIndex].EnsureVisible();    // 保证可见
-                // lvSongList.Items[currIndex].Focused = true;
-                this.currIndex = currIndex;
             }
 
             lvSongList.Columns[0].Text = songList.Count.ToString();
@@ -1151,12 +1136,12 @@
             // int currIndex = lvSongList.SelectedItems[0].Index;
             if (currIndex > 0)
             {
-                axWindowsMediaPlayer1.Ctlcontrols.stop();
+                timerPlay.Stop();
                 currIndex -= 1;
             }
             else
             {
-                axWindowsMediaPlayer1.Ctlcontrols.stop();
+                timerPlay.Stop();
 
                 // currIndex = lvSongList.Items.Count - 1;
                 currIndex = listSong.Count - 1;
@@ -1222,12 +1207,12 @@
             if (currIndex < listSong.Count - 1)
             {
                 // currIndex < lvSongList.Items.Count - 1
-                axWindowsMediaPlayer1.Ctlcontrols.stop();
+                timerPlay.Stop();
                 currIndex += 1;
             }
             else
             {
-                axWindowsMediaPlayer1.Ctlcontrols.stop();
+                timerPlay.Stop();
                 currIndex = 0;
             }
 
@@ -1239,14 +1224,7 @@
         /// </summary>
         private void Play(int index)
         {
-            if (axWindowsMediaPlayer1.playState.ToString() == "wmppsPlaying")
-            {
-                axWindowsMediaPlayer1.Ctlcontrols.pause();
-                pbPlay.Image = Resources.播放hover;
-                ttbbtnPlayPause.Icon = Resources.播放1;
-                return;
-            }
-            else if (axWindowsMediaPlayer1.playState.ToString() != "wmppsPaused")
+            if (axWindowsMediaPlayer1.playState.ToString() != "wmppsPaused")
             {
                 // 生成随机序列
                 BuildRandomList(listSong.Count);
@@ -1993,10 +1971,71 @@
         }
 
         /// <summary>
+        /// lbListSong(listBox)歌单单项删除
+        /// </summary>
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            if (listSong.Count == 1)
+            {
+                // 删除的是最后一首歌曲，执行与清空按钮相同的操作
+                listSong.Clear();
+                labelListSong.Text = "   播放列表为空";
+                labelListCount.Text = "";
+                currPlaySong = null;
+                axWindowsMediaPlayer1.Ctlcontrols.stop();
+                lbListSong.ClearSelected();
+            }
+            else if (currIndex == currIndexSelected)
+            {
+                // 如果删除的歌曲是当前播放的歌曲，就播放下一首，删除当前,需要删掉一首，所以-2
+                if (currIndex < listSong.Count - 2)
+                {
+                    timerPlay.Stop();
+                }
+                else
+                {
+                    timerPlay.Stop();
+                    currIndex = 0;
+                }
+
+                if (currIndexSelected < currIndex)
+                {
+                    currIndex--;
+                }
+
+                listSong.RemoveAt(currIndexSelected);
+                Play(currIndex);
+                labelListCount.Text = listSong.Count.ToString();
+                labelListSong.Text = "   播放列表 - 共计 " + listSong.Count.ToString() + " 首歌曲";
+            }
+            else
+            {
+                // 不是当前播放的歌曲，也不是下一首, 删除的在播放的前面就当前播放所以-1
+                if (currIndexSelected < currIndex)
+                {
+                    currIndex--;
+                }
+
+                listSong.RemoveAt(currIndexSelected);
+                labelListCount.Text = listSong.Count.ToString();
+                labelListSong.Text = "   播放列表 - 共计 " + listSong.Count.ToString() + " 首歌曲";
+            }
+
+            // 最后都更新播放列表以及收藏按钮
+            lbListSongSetting();
+            FavoritePictureSetting();
+        }
+
+        /// <summary>
         /// 鼠标移动选中播放列表子物体lbListSong
         /// </summary>
         private void lbListSong_MouseMove(object sender, MouseEventArgs e)
         {
+            if (lbListSong.Items.Count <= 0)
+            {
+                return;
+            }
+
             lbListSong.SelectedIndex = this.lbListSong.IndexFromPoint(e.Location);
         }
     }
