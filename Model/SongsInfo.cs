@@ -1,10 +1,10 @@
 ﻿namespace QQ_piracy.Model
 {
-    using Shell32;
     using System;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.IO;
+    using Shell32;
 
     class SongsInfo
     {
@@ -19,6 +19,8 @@
         private string duration;
         private string byteRate;
         private Image smallAblum;
+        private string saveTime;
+        private string filePathLrc = "";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SongsInfo"/> class.
@@ -51,6 +53,10 @@
         public string ByteRate { get => byteRate; set => byteRate = value; }
 
         public Image SmallAblum { get => smallAblum; set => smallAblum = value; }
+
+        public string SaveTime { get => saveTime; set => saveTime = value; }
+
+        public string FilePathLrc { get => filePathLrc; set => filePathLrc = value; }
 
         private void SetSongInfo(string strPath)
         {

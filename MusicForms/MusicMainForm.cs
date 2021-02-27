@@ -40,6 +40,8 @@
         private int randomListIndex = 0;    // 序列索引
         private int jumpSongIndex;          // 跳过当前播放的歌曲
 
+        private string[,] lrc = new string[2, 500]; // 保存歌词和当前进度
+
         // 随机0，单曲循环1，列表循环2
         public enum PlayMode
         {
@@ -191,7 +193,7 @@
                     lbListSongSetting();
                     labelListSong.Text = "   播放列表 - 共计 " + listSong.Count.ToString() + " 首歌曲";
                     toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
-                    notifyIcon1.Text = labelMusicDetail.Text;
+                    MyMusic.Text = labelMusicDetail.Text;
                     tackBarMove.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
                     FavoritePictureSetting();
 
@@ -814,7 +816,9 @@
                     string path = openFileDialog1.FileNames[i];
                     if (!IsExistInList(path))
                     {
-                        this.localSongsList.Add(new SongsInfo(path));
+                        SongsInfo song = new SongsInfo(path);
+                        song.SaveTime = DateTime.Now.ToString();
+                        this.localSongsList.Add(song);
                     }
                 }
             }
@@ -866,7 +870,7 @@
                 songAry[3] = song.Album;
                 songAry[4] = song.Duration;
                 songAry[5] = song.Filesize;
-                songAry[6] = song.Year;
+                songAry[6] = song.SaveTime;
 
                 ListViewItem lvItem = new ListViewItem(songAry);
                 lvItem.SubItems.Add(song.FilePath);
@@ -888,7 +892,7 @@
             string saveString = "";
             for (int i = 0; i < songsList.Count; i++)
             {
-                saveString += songsList[i].FilePath + "};{";
+                saveString += songsList[i].FilePath + "},{" + songsList[i].SaveTime + "};{";
             }
 
             File.WriteAllText(savePath, saveString);
@@ -974,24 +978,36 @@
         {
             List<SongsInfo> resSongList = new List<SongsInfo>();
             string readString = "";
-            if (File.Exists(filePath))
+            try
             {
-                readString = File.ReadAllText(filePath);
-                if (readString != "")
+                if (File.Exists(filePath))
                 {
-                    string[] arr = readString.Split(new string[] { "};{" }, StringSplitOptions.None);
-                    foreach (string path in arr)
+                    readString = File.ReadAllText(filePath);
+                    if (readString != "")
                     {
-                        if (path != null && path != "" && File.Exists(path))
+                        string[] arr = readString.Split(new string[] { "};{" }, StringSplitOptions.None);
+                        for (int i = 0; i < arr.Length - 1; i++)
                         {
-                            resSongList.Add(new SongsInfo(path));
+                            string[] filePaths = arr[i].Split(new string[] { "},{" }, StringSplitOptions.None);
+                            string songFilePath = filePaths[0];
+                            if (songFilePath != null && songFilePath != "" && File.Exists(songFilePath))
+                            {
+                                SongsInfo song = new SongsInfo(songFilePath);
+                                string saveTime = filePaths[1];
+                                song.SaveTime = saveTime;
+                                resSongList.Add(song);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    File.Create(filePath);
+                }
             }
-            else
+            catch (Exception e)
             {
-                File.Create(filePath);
+                Console.WriteLine(e.Message);
             }
 
             return resSongList;
@@ -1061,7 +1077,7 @@
                         }
 
                         toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
-                        notifyIcon1.Text = labelMusicDetail.Text;
+                        MyMusic.Text = labelMusicDetail.Text;
                         labelMusicTimer.Text = "00:00 / " + currPlaySong.Duration.Remove(0, 3);
                         SettingListSong();
                     }
@@ -1114,6 +1130,60 @@
             }
 
             SettingListSong();
+        }
+
+        string lviBackFile = "";  // 用于计算鼠标是否停留在同一物体上
+        int timeCount = 0;        // 计算停留时间
+        ListViewItem lvi = null;  // 保存当前物体
+        Point mousePoint;  // 记录鼠标位置
+
+        /// <summary>
+        /// 歌曲列表listview 鼠标停留添加tip
+        /// </summary>
+        private void lvSongList_MouseMove(object sender, MouseEventArgs e)
+        {
+            lvi = lvSongList.GetItemAt(e.X, e.Y);
+
+            if (lvi == null)
+            {
+                timer1.Stop();
+                timeCount = 0;
+                toolTipListView.RemoveAll();
+                return;
+            }
+
+            if (lvi.SubItems[1].Text == lviBackFile)
+            {
+                if (timeCount < 0)
+                {
+                    return;
+                }
+
+                timer1.Start();
+            }
+            else
+            {
+                toolTipListView.RemoveAll();
+                timeCount = 0;
+                timer1.Stop();
+            }
+
+            lviBackFile = lvi.SubItems[1].Text;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timeCount += 100;
+            if (timeCount >= 1000)
+            {
+                mousePoint = new Point(lvi.Position.X + (Cursor.Position.X - this.Location.X) - 174, lvi.Position.Y + 20); // +鼠标相对mainForm位置,-去父物体位置
+                toolTipListView.Show(
+                    "歌名:" + lvi.SubItems[1].Text + "\n歌手:"
+            + lvi.SubItems[2].Text + "\n专辑:" + lvi.SubItems[3].Text + "\n时长:"
+            + lvi.SubItems[4].Text + "\n大小:" + lvi.SubItems[5].Text + "\n添加时间"
+            + lvi.SubItems[6].Text + "\n位置:" + lvi.SubItems[7].Text, lvSongList, mousePoint);
+                timeCount = -4000;
+            }
         }
 
         /// <summary>
@@ -1364,8 +1434,8 @@
         /// </summary>
         private void tsmiQuit_Click(object sender, EventArgs e)
         {
-            notifyIcon1.Visible = false;
-            notifyIcon1.Dispose();
+            MyMusic.Visible = false;
+            MyMusic.Dispose();
             this.Close();
         }
 
@@ -1391,7 +1461,9 @@
                 }
             }
 
-            favoriteSongsList.Add(new SongsInfo(currSelectedSong.FilePath));
+            SongsInfo songInfo = new SongsInfo(currSelectedSong.FilePath);
+            songInfo.SaveTime = DateTime.Now.ToString();
+            favoriteSongsList.Add(songInfo);
             SaveSongsListHistory(favoriteSongsFilePath, favoriteSongsList);
         }
 
@@ -1442,7 +1514,9 @@
                 toolTip1.SetToolTip(pb, "取消收藏");
                 pb.Name = "pbUnLike";
 
-                favoriteSongsList.Add(new SongsInfo(currPlaySong.FilePath));
+                SongsInfo songInfo = new SongsInfo(currPlaySong.FilePath);
+                songInfo.SaveTime = DateTime.Now.ToString();
+                favoriteSongsList.Add(songInfo);
                 SaveSongsListHistory(favoriteSongsFilePath, favoriteSongsList);
                 pb.MouseHover -= pbLike_MouseHover;
                 pb.MouseLeave -= pbLike_MouseLeave;
@@ -2033,6 +2107,73 @@
             }
 
             lbListSong.SelectedIndex = this.lbListSong.IndexFromPoint(e.Location);
+        }
+
+        /// <summary>
+        /// 读取并显示歌词
+        /// </summary>
+        private void ShowLrc()
+        {
+            if (this.axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                try
+                {
+                    using (StreamReader sr = new StreamReader(currPlaySong.FilePathLrc, Encoding.Default))
+                    {
+                        string line;
+
+                        // 循环读取每一行歌词
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            // 将读取到的歌词存放到数组中
+                            for (int i = 0; i < 500; i++)
+                            {
+                                if (lrc[0, i] == null)
+                                {
+                                    lrc[0, i] = line.Substring(10, line.Length - 10);
+                                    break;
+                                }
+                            }
+
+                            // 将读取到的歌词时间存放到数组中
+                            for (int i = 0; i < 500; i++)
+                            {
+                                if (lrc[1, i] == null)
+                                {
+                                    lrc[1, i] = line.Substring(1, 5);
+                                    break;
+                                }
+                            }
+                        }
+
+                        // 获取播放器当前进度
+                        string numss = this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+                        for (int i = 0; i < 500; i++)
+                        {
+                            if (lrc[1, i].Equals(numss))
+                            {
+                                // this.lblLrc.Text = lrc[0, i];
+                            }
+                            else
+                            {
+                                // this.lblLrc.Text = "************";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("异常：" + ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 刷新歌词
+        /// </summary>
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            ShowLrc();
         }
     }
 }

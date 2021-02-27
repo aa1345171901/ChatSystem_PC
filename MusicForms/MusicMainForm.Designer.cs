@@ -76,7 +76,7 @@
             this.lbNoResult = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.lbMenu = new System.Windows.Forms.ListBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.MyMusic = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripnotify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiPlayMode = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,6 +101,8 @@
             this.tsmiPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNext = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTipListView = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -615,6 +617,7 @@
             this.lvSongList.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvSongList_DrawSubItem);
             this.lvSongList.DoubleClick += new System.EventHandler(this.lvSongList_DoubleClick);
             this.lvSongList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvSongList_MouseDown);
+            this.lvSongList.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvSongList_MouseMove);
             // 
             // columnNum
             // 
@@ -633,7 +636,7 @@
             // columnAlbum
             // 
             this.columnAlbum.Text = "专辑";
-            this.columnAlbum.Width = 150;
+            this.columnAlbum.Width = 100;
             // 
             // columnDuration
             // 
@@ -648,7 +651,7 @@
             // columnTime
             // 
             this.columnTime.Text = "添加时间";
-            this.columnTime.Width = 100;
+            this.columnTime.Width = 180;
             // 
             // pbAddSong
             // 
@@ -697,13 +700,13 @@
             this.lbMenu.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.lbMenu_MeasureItem);
             this.lbMenu.SelectedIndexChanged += new System.EventHandler(this.lbMenu_SelectedIndexChanged);
             // 
-            // notifyIcon1
+            // MyMusic
             // 
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStripnotify;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+            this.MyMusic.ContextMenuStrip = this.contextMenuStripnotify;
+            this.MyMusic.Icon = ((System.Drawing.Icon)(resources.GetObject("MyMusic.Icon")));
+            this.MyMusic.Text = "notifyIcon1";
+            this.MyMusic.Visible = true;
+            this.MyMusic.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
             // contextMenuStripnotify
             // 
@@ -873,35 +876,47 @@
             this.tsmiNext,
             this.tsmiDelete});
             this.cmsListSongMenu.Name = "cmsListSongMenu";
-            this.cmsListSongMenu.Size = new System.Drawing.Size(181, 114);
+            this.cmsListSongMenu.Size = new System.Drawing.Size(145, 92);
             // 
             // tsmiBack
             // 
             this.tsmiBack.Name = "tsmiBack";
-            this.tsmiBack.Size = new System.Drawing.Size(180, 22);
+            this.tsmiBack.Size = new System.Drawing.Size(144, 22);
             this.tsmiBack.Text = "        上一首";
             this.tsmiBack.Click += new System.EventHandler(this.pbBack_Click);
             // 
             // tsmiPlay
             // 
             this.tsmiPlay.Name = "tsmiPlay";
-            this.tsmiPlay.Size = new System.Drawing.Size(180, 22);
+            this.tsmiPlay.Size = new System.Drawing.Size(144, 22);
             this.tsmiPlay.Text = "        播   放";
             this.tsmiPlay.Click += new System.EventHandler(this.tsmiPlay_Click);
             // 
             // tsmiNext
             // 
             this.tsmiNext.Name = "tsmiNext";
-            this.tsmiNext.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNext.Size = new System.Drawing.Size(144, 22);
             this.tsmiNext.Text = "        下一首";
             this.tsmiNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // tsmiDelete
             // 
             this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(180, 22);
+            this.tsmiDelete.Size = new System.Drawing.Size(144, 22);
             this.tsmiDelete.Text = "        删   除";
             this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
+            // 
+            // toolTipListView
+            // 
+            this.toolTipListView.AutomaticDelay = 0;
+            this.toolTipListView.AutoPopDelay = 0;
+            this.toolTipListView.InitialDelay = 0;
+            this.toolTipListView.ReshowDelay = 0;
+            this.toolTipListView.ShowAlways = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MusicMainForm
             // 
@@ -998,7 +1013,7 @@
         private System.Windows.Forms.ColumnHeader columnDuration;
         private System.Windows.Forms.ColumnHeader columnSize;
         private System.Windows.Forms.ColumnHeader columnTime;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon MyMusic;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripnotify;
         private System.Windows.Forms.ToolStripMenuItem tsmiShowMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiQuit;
@@ -1032,5 +1047,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiPlay;
         private System.Windows.Forms.ToolStripMenuItem tsmiNext;
         private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
+        private System.Windows.Forms.ToolTip toolTipListView;
+        private System.Windows.Forms.Timer timer1;
     }
 }
