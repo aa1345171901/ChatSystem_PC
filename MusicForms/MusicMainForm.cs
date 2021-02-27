@@ -1047,26 +1047,22 @@
                     }
 
                     currIndex = index;
-                    FavoritePictureSetting();
-
-                    pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
-
-                    // 显示歌曲标题名字
-                    labelMusicDetail.Text = currPlaySong.FileName + "-" + currPlaySong.Artist;
-                    if (currPlaySong.FileName.Length > 30)
+                    if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady)
                     {
-                        labelMusicDetail.Text = currPlaySong.FileName.Substring(0, 30) + "...";
-                    }
+                        FavoritePictureSetting();
 
-                    toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
-                    notifyIcon1.Text = labelMusicDetail.Text;
-                    labelMusicTimer.Text = "00:00 / " + currPlaySong.Duration.Remove(0, 3);
-                    if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPaused)
-                    {
+                        pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
 
-                    }
-                    else if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady)
-                    {
+                        // 显示歌曲标题名字
+                        labelMusicDetail.Text = currPlaySong.FileName + "-" + currPlaySong.Artist;
+                        if (currPlaySong.FileName.Length > 30)
+                        {
+                            labelMusicDetail.Text = currPlaySong.FileName.Substring(0, 30) + "...";
+                        }
+
+                        toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
+                        notifyIcon1.Text = labelMusicDetail.Text;
+                        labelMusicTimer.Text = "00:00 / " + currPlaySong.Duration.Remove(0, 3);
                         SettingListSong();
                     }
                     else
