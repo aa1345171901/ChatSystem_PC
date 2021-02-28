@@ -20,7 +20,7 @@
         private string byteRate;
         private Image smallAblum;
         private string saveTime;
-        private string filePathLrc = "";
+        private string filePathLrc = " ";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SongsInfo"/> class.
@@ -138,7 +138,7 @@
                 {
                     var bin = (byte[])file.Tag.Pictures[0].Data.Data;
                     albumImage = Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(900, 900, null, IntPtr.Zero);
-                    albumImage = Cut((Bitmap)albumImage, 20, 215, 877, 530);
+                    albumImage = Cut((Bitmap)albumImage, 20, 215, 990, 530);
                     smallAblum = Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(64, 64, null, IntPtr.Zero);
                     return;
                 }
