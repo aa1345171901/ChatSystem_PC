@@ -16,7 +16,7 @@
     public partial class MusicMainForm : Form
     {
         // 打开文件的默认文件位置
-        private const string DefaultSongsFilePath = @"C:\Users\Rhine\Music";
+        private const string DefaultSongsFilePath = @"D:\KwDownload";
         private string localSongsFilePath = Application.StartupPath + "\\songListHistory.txt"; // 本地音乐的记录文件
         private string favoriteSongsFilePath = Application.StartupPath + "\\favoriteSongs.txt"; // 本地音乐的记录文件
         private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
@@ -110,7 +110,6 @@
             tsmiFavorite.Visible = true;
             pbAddSong.Visible = true;
             axWindowsMediaPlayer1.settings.volume = tbMusicVolume.Value;
-            pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
 
             axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
             lbMenu.SelectedIndex = 0;
@@ -270,7 +269,7 @@
         private void ReloadStatus()
         {
             // 设置专辑封面为默认
-            pbSmallAlbum.Image = Properties.Resources.defaultSmallAblum;
+            pbSmallAlbum.BackgroundImage = Properties.Resources.defaultSmallAblum;
             labelMusicTimer.Text = "00:00 / 00:00";
             labelMusicDetail.Text = "音乐名 - 歌手";
             toolTip1.SetToolTip(labelMusicDetail, "音乐名 - 歌手");
@@ -1171,6 +1170,19 @@
             lviBackFile = lvi.SubItems[1].Text;
         }
 
+        /// <summary>
+        /// 离开lvSongList时关闭计时器
+        /// </summary>
+        private void lvSongList_MouseLeave(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            timeCount = 0;
+            toolTipListView.RemoveAll();
+        }
+
+        /// <summary>
+        /// 用于开启tooltip以及计时
+        /// </summary>
         private void timer1_Tick(object sender, EventArgs e)
         {
             timeCount += 100;
@@ -2152,11 +2164,11 @@
                         {
                             if (lrc[1, i].Equals(numss))
                             {
-                                // this.lblLrc.Text = lrc[0, i];
+                                 //this.lableLrc.Text = lrc[0, i];
                             }
                             else
                             {
-                                // this.lblLrc.Text = "************";
+                                 //this.lableLrc.Text = "************";
                             }
                         }
                     }
@@ -2171,9 +2183,57 @@
         /// <summary>
         /// 刷新歌词
         /// </summary>
-        private void timer5_Tick(object sender, EventArgs e)
+        private void timerLyrc_Tick(object sender, EventArgs e)
         {
             ShowLrc();
+        }
+
+        private void lbLyrc_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //获取当前绘制的行的索引
+            int index = e.Index;
+            Graphics g = e.Graphics;
+            //得到每一项的绘制区域大小
+            Rectangle bound = e.Bounds;
+            //得到当前项的文本内容
+            string text = lbLyrc.Items[index].ToString();
+
+            //判断当前选择的项是正在唱的歌词，也就是中间一行歌词
+            if (index == lbLyrc.Items.Count / 2)
+            {//如果当前行为选中行。
+             //绘制选中时要显示的蓝色边框，实际不需要就注释掉了
+             // g.DrawRectangle(Pens.Blue, bound.Left, bound.Top, bound.Width - 1, bound.Height - 1);
+             //绘制边框后，里面的矩形框大小改变，故重新定义一个，如果没有绘制边框就不需要重新定义
+                Rectangle rect = new Rectangle(bound.Left - 1, bound.Top - 1,
+                                               bound.Width - 2, bound.Height - 2);
+                //绘制选中时要显示的蓝色背景。可以选中其它色，此处省略了背景绘制
+                // g.FillRectangle(Brushes.Blue, rect);
+                //定义一个字体，是用来绘制显示的当前歌词文本。
+                Font font = new System.Drawing.Font("微软雅黑", 18, FontStyle.Bold & FontStyle.Italic);
+                //绘制歌词，颜色为红色
+                TextRenderer.DrawText(g, text, font, rect, Color.Red,
+                                      TextFormatFlags.VerticalCenter);
+            }
+            else
+            {
+                //定义一个颜色为白色的画刷
+                using (Brush brush = new SolidBrush(Color.White))
+                {
+                    g.FillRectangle(brush, bound);//绘制背景色。
+                }
+                //填充字体，字体的颜色为黑色
+                TextRenderer.DrawText(g, text, this.Font, bound, Color.Black,
+                                      TextFormatFlags.VerticalCenter | TextFormatFlags.Left);
+            }
+        }
+
+        /// <summary>
+        /// 音乐详情按钮点击，弹出歌词和专辑图片
+        /// </summary>
+        private void pbSmallAlbum_Click(object sender, EventArgs e)
+        {
+            panelLyrc.Visible = true;
+            panelLyrc.BringToFront();
         }
     }
 }

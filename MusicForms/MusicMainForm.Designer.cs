@@ -54,6 +54,8 @@
             this.tbMusicVolume = new System.Windows.Forms.TrackBar();
             this.panelMusicVlume = new System.Windows.Forms.Panel();
             this.panelSetting = new System.Windows.Forms.Panel();
+            this.panelLyrc = new System.Windows.Forms.Panel();
+            this.lbLyrc = new System.Windows.Forms.ListBox();
             this.labelNickName = new System.Windows.Forms.Label();
             this.pbFace = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -103,6 +105,7 @@
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipListView = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerLyrc = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -122,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).BeginInit();
             this.panelMusicVlume.SuspendLayout();
             this.panelSetting.SuspendLayout();
+            this.panelLyrc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelMainWindow.SuspendLayout();
@@ -154,6 +158,7 @@
             this.tackBarMove.Maximum = 100;
             this.tackBarMove.Name = "tackBarMove";
             this.tackBarMove.Size = new System.Drawing.Size(356, 15);
+            this.tackBarMove.SmallChange = 10;
             this.tackBarMove.TabIndex = 2;
             this.tackBarMove.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tackBarMove.Scroll += new System.EventHandler(this.tackBarMove_Scroll);
@@ -375,6 +380,7 @@
             this.pbSmallAlbum.TabIndex = 19;
             this.pbSmallAlbum.TabStop = false;
             this.toolTip1.SetToolTip(this.pbSmallAlbum, "打开音乐详情页");
+            this.pbSmallAlbum.Click += new System.EventHandler(this.pbSmallAlbum_Click);
             // 
             // pbMinForm
             // 
@@ -448,6 +454,7 @@
             // panelSetting
             // 
             this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.panelSetting.Controls.Add(this.panelLyrc);
             this.panelSetting.Controls.Add(this.labelNickName);
             this.panelSetting.Controls.Add(this.pbFace);
             this.panelSetting.Controls.Add(this.panel1);
@@ -460,6 +467,28 @@
             this.panelSetting.TabIndex = 21;
             this.panelSetting.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.panelSetting.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // panelLyrc
+            // 
+            this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
+            this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.DefaultAlbum;
+            this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panelLyrc.Controls.Add(this.lbLyrc);
+            this.panelLyrc.Location = new System.Drawing.Point(0, 0);
+            this.panelLyrc.Name = "panelLyrc";
+            this.panelLyrc.Size = new System.Drawing.Size(990, 593);
+            this.panelLyrc.TabIndex = 29;
+            this.panelLyrc.Visible = false;
+            // 
+            // lbLyrc
+            // 
+            this.lbLyrc.FormattingEnabled = true;
+            this.lbLyrc.ItemHeight = 12;
+            this.lbLyrc.Location = new System.Drawing.Point(295, 1);
+            this.lbLyrc.Name = "lbLyrc";
+            this.lbLyrc.Size = new System.Drawing.Size(383, 520);
+            this.lbLyrc.TabIndex = 0;
+            this.lbLyrc.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbLyrc_DrawItem);
             // 
             // labelNickName
             // 
@@ -617,6 +646,7 @@
             this.lvSongList.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvSongList_DrawSubItem);
             this.lvSongList.DoubleClick += new System.EventHandler(this.lvSongList_DoubleClick);
             this.lvSongList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvSongList_MouseDown);
+            this.lvSongList.MouseLeave += new System.EventHandler(this.lvSongList_MouseLeave);
             this.lvSongList.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvSongList_MouseMove);
             // 
             // columnNum
@@ -918,6 +948,10 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timerLyrc
+            // 
+            this.timerLyrc.Tick += new System.EventHandler(this.timerLyrc_Tick);
+            // 
             // MusicMainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -957,6 +991,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).EndInit();
             this.panelMusicVlume.ResumeLayout(false);
             this.panelSetting.ResumeLayout(false);
+            this.panelLyrc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1049,5 +1084,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
         private System.Windows.Forms.ToolTip toolTipListView;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panelLyrc;
+        private System.Windows.Forms.ListBox lbLyrc;
+        private System.Windows.Forms.Timer timerLyrc;
     }
 }
