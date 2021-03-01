@@ -114,6 +114,11 @@
             // 设置专辑图片控件到顶部页面（z-index)
             // pbAlbumImage.BringToFront();
 
+            // 给几个panel添加鼠标点击事件使panelListSong隐藏
+            lvSongList.MouseDown += LeaveListSong_MouseDown;
+            panelLyrc.MouseDown += LeaveListSong_MouseDown;
+            lbMenu.MouseDown += LeaveListSong_MouseDown;
+
             // 设置开机自启
             StarUp("0");
         }
@@ -124,6 +129,7 @@
         private void MusicMainForm_Closed(object sender, FormClosedEventArgs e)
         {
             SaveSettings();
+            MyMusic.Visible = false;
             Application.Exit();
             this.Dispose();
         }
@@ -191,6 +197,7 @@
                     labelListSong.Text = "   播放列表 - 共计 " + listSong.Count.ToString() + " 首歌曲";
                     toolTip1.SetToolTip(labelMusicDetail, labelMusicDetail.Text);
                     MyMusic.Text = labelMusicDetail.Text;
+                    this.Text = currPlaySong.FileName;
                     tackBarMove.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
                     FavoritePictureSetting();
 
@@ -468,6 +475,7 @@
         private void pbVolume_MouseHover(object sender, EventArgs e)
         {
             panelMusicVlume.Visible = true;
+            panelMusicVlume.BringToFront();
         }
 
         /// <summary>
@@ -1156,7 +1164,7 @@
 
             if (lvi == null)
             {
-                timer1.Stop();
+                timerToolTIp.Stop();
                 timeCount = 0;
                 toolTipListView.RemoveAll();
                 return;
@@ -1169,13 +1177,13 @@
                     return;
                 }
 
-                timer1.Start();
+                timerToolTIp.Start();
             }
             else
             {
                 toolTipListView.RemoveAll();
                 timeCount = 0;
-                timer1.Stop();
+                timerToolTIp.Stop();
             }
 
             lviBackFile = lvi.SubItems[1].Text;
@@ -1186,7 +1194,7 @@
         /// </summary>
         private void lvSongList_MouseLeave(object sender, EventArgs e)
         {
-            timer1.Stop();
+            timerToolTIp.Stop();
             timeCount = 0;
             toolTipListView.RemoveAll();
         }
@@ -1194,7 +1202,7 @@
         /// <summary>
         /// 用于开启tooltip以及计时
         /// </summary>
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timerToolTip_Tick(object sender, EventArgs e)
         {
             timeCount += 100;
             if (timeCount >= 1000)
@@ -1918,6 +1926,19 @@
         }
 
         /// <summary>
+        /// 在panelListSong外点击，时panelListSong隐藏
+        /// </summary>
+        private void LeaveListSong_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 判断点击时鼠标是否在Panel内
+            bool b = this.RectangleToScreen(this.panelListSong.ClientRectangle).Contains(MousePosition);
+            if (!b)
+            {
+                panelListSong.Visible = false;
+            }
+        }
+
+        /// <summary>
         /// 设置ListSong
         /// </summary>
         private void SettingListSong()
@@ -2141,6 +2162,12 @@
         {
             try
             {
+                if (listSong[currIndex].FilePathLrc == " ")
+                {
+                    lrc = null;
+                    return;
+                }
+
                 using (StreamReader sr = new StreamReader(listSong[currIndex].FilePathLrc, Encoding.Default))
                 {
                     string line;
@@ -2184,6 +2211,7 @@
             }
             catch (Exception ex)
             {
+                lrc = null;
                 Console.WriteLine("异常：" + ex.Message);
             }
         }
@@ -2245,6 +2273,9 @@
             //}
         }
 
+        /// <summary>
+        /// 用于比较时间
+        /// </summary>
         private bool CheckTime(string str1, string str2)
         {
             return string.CompareOrdinal(str1, 0, str2, 0, str2.Length) > 0;
@@ -2255,24 +2286,27 @@
         /// </summary>
         private void pbSmallAlbum_Click(object sender, EventArgs e)
         {
+            // 如果已经显示了就设置false
+            if (panelLyrc.Visible == true)
+            {
+                panelLyrc.Visible = false;
+                return;
+            }
+
             panelLyrc.Visible = true;
             panelLyrc.BringToFront();
-            panelMenu.Visible = false;
             panelLyrc.BackgroundImage = currPlaySong.AlbumImage;
-            //if (lrc != null)
-            //{
-            //    linkLabelAddLyrc.Visible = false;
-            //    timerLyrc.Start();
-            //}
-            //else
-            //{
-            //    linkLabelAddLyrc.Visible = true;
-            //    lbLyrc.Items.Clear();
-            //    for (int x = 0; x < 10; x++)
-            //    {
-            //        lbLyrc.Items.Add(x != 10 / 2 ? "" : "---未  找  到  歌  词---");
-            //    }
-            //}
+            if (lrc != null)
+            {
+                labelNoLyric.Visible = false;
+                linkLabelAddLyrc.Visible = false;
+                timerLyrc.Start();
+            }
+            else
+            {
+                labelNoLyric.Visible = true;
+                linkLabelAddLyrc.Visible = true;
+            }
         }
 
         /// <summary>
@@ -2317,6 +2351,54 @@
             }
 
             SaveSongsListHistory(localSongsFilePath, localSongsList);
+        }
+
+        /// <summary>
+        /// 歌词界面按钮点击
+        /// </summary>
+        private void LyricButtonClick(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            if (pb.Name == "pbLyricMin")
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else if (pb.Name == "pbLyricClose")
+            {
+                panelLyrc.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// 歌词界面按钮鼠标进入
+        /// </summary>
+        private void LyricButtonEnter(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            if (pb.Name == "pbLyricMin")
+            {
+                pbLyricMin.Image = Resources.lyricMinhover;
+            }
+            else if (pb.Name == "pbLyricClose")
+            {
+                pbLyricClose.Image = Resources.lyricClosehover;
+            }
+        }
+
+        /// <summary>
+        /// 歌词界面按钮鼠标离开
+        /// </summary>
+        private void LyricButtonLeave(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            if (pb.Name == "pbLyricMin")
+            {
+                pbLyricMin.Image = Resources.lyricMin;
+            }
+            else if (pb.Name == "pbLyricClose")
+            {
+                pbLyricClose.Image = Resources.lyricClose;
+            }
         }
     }
 }

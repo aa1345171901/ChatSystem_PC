@@ -133,8 +133,8 @@
   <data name="添加hoover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\添加hoover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="详情" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\详情.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="声音ing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\声音ing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="列表循环" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\列表循环.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,6 +160,9 @@
   <data name="list" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="详情" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\详情.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="notifyIcon128x128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\notifyIcon128x128.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -175,6 +178,9 @@
   <data name="文件hoover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\文件hoover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lyricClosehover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lyricClosehover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,6 +189,9 @@
   </data>
   <data name="下一首1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\下一首.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lyricClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lyricClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="单曲循环1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\单曲循环.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,11 +217,8 @@
   <data name="wallhaven-12422" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wallhaven-12422.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="词hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\词hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="收藏ing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\收藏ing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defaultSmallAblum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defaultSmallAblum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="message" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\message.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,8 +244,8 @@
   <data name="随机播放" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\随机播放.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defaultSmallAblum" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defaultSmallAblum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="收藏ing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\收藏ing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="音效" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\音效.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -252,6 +258,9 @@
   </data>
   <data name="展开" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\展开.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="文件" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\文件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="关闭hoover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\关闭hoover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -274,8 +283,8 @@
   <data name="下一首hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\下一首hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="文件" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\文件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="词hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\词hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="搜索hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\搜索hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -292,7 +301,10 @@
   <data name="暂停" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\暂停.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="声音ing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\声音ing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lyricMin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lyricMin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lyricMinhover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lyricMinhover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

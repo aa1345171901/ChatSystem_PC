@@ -247,6 +247,10 @@
     <None Include="Resources\HiFi.png" />
     <None Include="Resources\HiFihover.png" />
     <Content Include="Resources\list.png" />
+    <None Include="Resources\lyricClose.png" />
+    <None Include="Resources\lyricClosehover.png" />
+    <None Include="Resources\lyricMin.png" />
+    <None Include="Resources\lyricMinhover.png" />
     <Content Include="Resources\message.png" />
     <Content Include="Resources\musicLibrary.png" />
     <Content Include="Resources\notifyIcon128x128.ico" />

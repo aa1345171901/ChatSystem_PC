@@ -51,15 +51,18 @@
             this.pbMinForm = new System.Windows.Forms.PictureBox();
             this.pbMaxForm = new System.Windows.Forms.PictureBox();
             this.pbCloseForm = new System.Windows.Forms.PictureBox();
+            this.pbLyricClose = new System.Windows.Forms.PictureBox();
+            this.pbLyricMin = new System.Windows.Forms.PictureBox();
             this.tbMusicVolume = new System.Windows.Forms.TrackBar();
             this.panelMusicVlume = new System.Windows.Forms.Panel();
             this.panelSetting = new System.Windows.Forms.Panel();
-            this.panelLyrc = new System.Windows.Forms.Panel();
-            this.linkLabelAddLyrc = new System.Windows.Forms.LinkLabel();
             this.labelNickName = new System.Windows.Forms.Label();
             this.pbFace = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtSreachSongName = new System.Windows.Forms.TextBox();
+            this.panelLyrc = new System.Windows.Forms.Panel();
+            this.labelNoLyric = new System.Windows.Forms.Label();
+            this.linkLabelAddLyrc = new System.Windows.Forms.LinkLabel();
             this.panelListSong = new System.Windows.Forms.Panel();
             this.labelClearSongList = new System.Windows.Forms.Label();
             this.pbListSongClose = new System.Windows.Forms.PictureBox();
@@ -103,7 +106,7 @@
             this.tsmiNext = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipListView = new System.Windows.Forms.ToolTip(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerToolTIp = new System.Windows.Forms.Timer(this.components);
             this.timerLyrc = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
@@ -121,12 +124,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).BeginInit();
             this.panelMusicVlume.SuspendLayout();
             this.panelSetting.SuspendLayout();
-            this.panelLyrc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panelLyrc.SuspendLayout();
             this.panelListSong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).BeginInit();
@@ -425,6 +430,36 @@
             this.pbCloseForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
             this.pbCloseForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
             // 
+            // pbLyricClose
+            // 
+            this.pbLyricClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbLyricClose.Image = global::QQ_piracy.Properties.Resources.lyricClose;
+            this.pbLyricClose.Location = new System.Drawing.Point(937, 12);
+            this.pbLyricClose.Name = "pbLyricClose";
+            this.pbLyricClose.Size = new System.Drawing.Size(40, 40);
+            this.pbLyricClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLyricClose.TabIndex = 3;
+            this.pbLyricClose.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbLyricClose, "收起");
+            this.pbLyricClose.Click += new System.EventHandler(this.LyricButtonClick);
+            this.pbLyricClose.MouseEnter += new System.EventHandler(this.LyricButtonEnter);
+            this.pbLyricClose.MouseLeave += new System.EventHandler(this.LyricButtonLeave);
+            // 
+            // pbLyricMin
+            // 
+            this.pbLyricMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbLyricMin.Image = global::QQ_piracy.Properties.Resources.lyricMin;
+            this.pbLyricMin.Location = new System.Drawing.Point(878, 12);
+            this.pbLyricMin.Name = "pbLyricMin";
+            this.pbLyricMin.Size = new System.Drawing.Size(40, 40);
+            this.pbLyricMin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLyricMin.TabIndex = 3;
+            this.pbLyricMin.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbLyricMin, "最小化");
+            this.pbLyricMin.Click += new System.EventHandler(this.LyricButtonClick);
+            this.pbLyricMin.MouseEnter += new System.EventHandler(this.LyricButtonEnter);
+            this.pbLyricMin.MouseLeave += new System.EventHandler(this.LyricButtonLeave);
+            // 
             // tbMusicVolume
             // 
             this.tbMusicVolume.AutoSize = false;
@@ -464,29 +499,6 @@
             this.panelSetting.TabIndex = 21;
             this.panelSetting.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.panelSetting.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
-            // 
-            // panelLyrc
-            // 
-            this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
-            this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.DefaultAlbum;
-            this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelLyrc.Controls.Add(this.linkLabelAddLyrc);
-            this.panelLyrc.Location = new System.Drawing.Point(0, 0);
-            this.panelLyrc.Name = "panelLyrc";
-            this.panelLyrc.Size = new System.Drawing.Size(990, 524);
-            this.panelLyrc.TabIndex = 29;
-            this.panelLyrc.Visible = false;
-            // 
-            // linkLabelAddLyrc
-            // 
-            this.linkLabelAddLyrc.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabelAddLyrc.Location = new System.Drawing.Point(546, 210);
-            this.linkLabelAddLyrc.Name = "linkLabelAddLyrc";
-            this.linkLabelAddLyrc.Size = new System.Drawing.Size(100, 23);
-            this.linkLabelAddLyrc.TabIndex = 1;
-            this.linkLabelAddLyrc.TabStop = true;
-            this.linkLabelAddLyrc.Text = "添加歌词";
-            this.linkLabelAddLyrc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelAddLyrc_LinkClicked);
             // 
             // labelNickName
             // 
@@ -529,6 +541,45 @@
             this.txtSreachSongName.TextChanged += new System.EventHandler(this.txtSreachSongName_TextChanged);
             this.txtSreachSongName.Enter += new System.EventHandler(this.txtSreachSongName_Enter);
             this.txtSreachSongName.Leave += new System.EventHandler(this.txtSreachSongName_Leave);
+            // 
+            // panelLyrc
+            // 
+            this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
+            this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.DefaultAlbum;
+            this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelLyrc.Controls.Add(this.pbLyricClose);
+            this.panelLyrc.Controls.Add(this.pbLyricMin);
+            this.panelLyrc.Controls.Add(this.labelNoLyric);
+            this.panelLyrc.Controls.Add(this.linkLabelAddLyrc);
+            this.panelLyrc.Location = new System.Drawing.Point(0, 0);
+            this.panelLyrc.Name = "panelLyrc";
+            this.panelLyrc.Size = new System.Drawing.Size(990, 524);
+            this.panelLyrc.TabIndex = 29;
+            this.panelLyrc.Visible = false;
+            this.panelLyrc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
+            this.panelLyrc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // labelNoLyric
+            // 
+            this.labelNoLyric.BackColor = System.Drawing.Color.Transparent;
+            this.labelNoLyric.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelNoLyric.ForeColor = System.Drawing.Color.Black;
+            this.labelNoLyric.Location = new System.Drawing.Point(440, 210);
+            this.labelNoLyric.Name = "labelNoLyric";
+            this.labelNoLyric.Size = new System.Drawing.Size(111, 23);
+            this.labelNoLyric.TabIndex = 2;
+            this.labelNoLyric.Text = "暂未找到歌词";
+            // 
+            // linkLabelAddLyrc
+            // 
+            this.linkLabelAddLyrc.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabelAddLyrc.Location = new System.Drawing.Point(546, 210);
+            this.linkLabelAddLyrc.Name = "linkLabelAddLyrc";
+            this.linkLabelAddLyrc.Size = new System.Drawing.Size(100, 23);
+            this.linkLabelAddLyrc.TabIndex = 1;
+            this.linkLabelAddLyrc.TabStop = true;
+            this.linkLabelAddLyrc.Text = "添加歌词";
+            this.linkLabelAddLyrc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelAddLyrc_LinkClicked);
             // 
             // panelListSong
             // 
@@ -931,9 +982,9 @@
             this.toolTipListView.ReshowDelay = 0;
             this.toolTipListView.ShowAlways = true;
             // 
-            // timer1
+            // timerToolTIp
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerToolTIp.Tick += new System.EventHandler(this.timerToolTip_Tick);
             // 
             // timerLyrc
             // 
@@ -944,8 +995,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(989, 597);
-            this.Controls.Add(this.panelLyrc);
             this.Controls.Add(this.panelMusicVlume);
+            this.Controls.Add(this.panelLyrc);
             this.Controls.Add(this.panelListSong);
             this.Controls.Add(this.lvSongList);
             this.Controls.Add(this.lbNoResult);
@@ -979,13 +1030,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).EndInit();
             this.panelMusicVlume.ResumeLayout(false);
             this.panelSetting.ResumeLayout(false);
-            this.panelLyrc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelLyrc.ResumeLayout(false);
             this.panelListSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).EndInit();
@@ -1072,9 +1125,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiNext;
         private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
         private System.Windows.Forms.ToolTip toolTipListView;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerToolTIp;
         private System.Windows.Forms.Timer timerLyrc;
         private System.Windows.Forms.Panel panelLyrc;
         private System.Windows.Forms.LinkLabel linkLabelAddLyrc;
+        private System.Windows.Forms.Label labelNoLyric;
+        private System.Windows.Forms.PictureBox pbLyricMin;
+        private System.Windows.Forms.PictureBox pbLyricClose;
     }
 }
