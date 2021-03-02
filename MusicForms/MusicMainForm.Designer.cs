@@ -61,6 +61,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtSreachSongName = new System.Windows.Forms.TextBox();
             this.panelLyrc = new System.Windows.Forms.Panel();
+            this.panelLyricIng = new System.Windows.Forms.Panel();
+            this.labelLyricIng = new System.Windows.Forms.Label();
+            this.labelLyric11 = new System.Windows.Forms.Label();
+            this.labelLyric10 = new System.Windows.Forms.Label();
+            this.labelLyric9 = new System.Windows.Forms.Label();
+            this.labelLyric8 = new System.Windows.Forms.Label();
+            this.labelLyric7 = new System.Windows.Forms.Label();
+            this.labelLyric6 = new System.Windows.Forms.Label();
+            this.labelLyric5 = new System.Windows.Forms.Label();
+            this.labelLyric4 = new System.Windows.Forms.Label();
+            this.labelLyric3 = new System.Windows.Forms.Label();
+            this.labelLyric2 = new System.Windows.Forms.Label();
+            this.labelLyric1 = new System.Windows.Forms.Label();
             this.labelNoLyric = new System.Windows.Forms.Label();
             this.linkLabelAddLyrc = new System.Windows.Forms.LinkLabel();
             this.panelListSong = new System.Windows.Forms.Panel();
@@ -108,6 +121,7 @@
             this.toolTipListView = new System.Windows.Forms.ToolTip(this.components);
             this.timerToolTIp = new System.Windows.Forms.Timer(this.components);
             this.timerLyrc = new System.Windows.Forms.Timer(this.components);
+            this.panelLyricLabels = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -132,6 +146,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelLyrc.SuspendLayout();
+            this.panelLyricIng.SuspendLayout();
             this.panelListSong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).BeginInit();
@@ -140,6 +155,7 @@
             this.cmsSongListMenu.SuspendLayout();
             this.cmsPlayModeMenu.SuspendLayout();
             this.cmsListSongMenu.SuspendLayout();
+            this.panelLyricLabels.SuspendLayout();
             this.SuspendLayout();
             // 
             // axWindowsMediaPlayer1
@@ -165,6 +181,7 @@
             this.tackBarMove.TabIndex = 2;
             this.tackBarMove.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tackBarMove.Scroll += new System.EventHandler(this.tackBarMove_Scroll);
+            this.tackBarMove.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tackBarMove_MouseDown);
             // 
             // pbNext
             // 
@@ -472,6 +489,7 @@
             this.tbMusicVolume.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tbMusicVolume.Value = 50;
             this.tbMusicVolume.ValueChanged += new System.EventHandler(this.tbMusicVolume_ValueChanged);
+            this.tbMusicVolume.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbMusicVolume_MouseDown);
             // 
             // panelMusicVlume
             // 
@@ -547,6 +565,7 @@
             this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
             this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.DefaultAlbum;
             this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelLyrc.Controls.Add(this.panelLyricLabels);
             this.panelLyrc.Controls.Add(this.pbLyricClose);
             this.panelLyrc.Controls.Add(this.pbLyricMin);
             this.panelLyrc.Controls.Add(this.labelNoLyric);
@@ -558,6 +577,134 @@
             this.panelLyrc.Visible = false;
             this.panelLyrc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.panelLyrc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // panelLyricIng
+            // 
+            this.panelLyricIng.Controls.Add(this.labelLyricIng);
+            this.panelLyricIng.Location = new System.Drawing.Point(27, 187);
+            this.panelLyricIng.Name = "panelLyricIng";
+            this.panelLyricIng.Size = new System.Drawing.Size(402, 42);
+            this.panelLyricIng.TabIndex = 5;
+            // 
+            // labelLyricIng
+            // 
+            this.labelLyricIng.Font = new System.Drawing.Font("幼圆", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyricIng.ForeColor = System.Drawing.Color.Yellow;
+            this.labelLyricIng.Location = new System.Drawing.Point(0, 0);
+            this.labelLyricIng.Name = "labelLyricIng";
+            this.labelLyricIng.Size = new System.Drawing.Size(402, 42);
+            this.labelLyricIng.TabIndex = 4;
+            this.labelLyricIng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric11
+            // 
+            this.labelLyric11.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric11.ForeColor = System.Drawing.Color.White;
+            this.labelLyric11.Location = new System.Drawing.Point(44, 448);
+            this.labelLyric11.Name = "labelLyric11";
+            this.labelLyric11.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric11.TabIndex = 4;
+            this.labelLyric11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric10
+            // 
+            this.labelLyric10.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric10.ForeColor = System.Drawing.Color.White;
+            this.labelLyric10.Location = new System.Drawing.Point(44, 408);
+            this.labelLyric10.Name = "labelLyric10";
+            this.labelLyric10.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric10.TabIndex = 4;
+            this.labelLyric10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric9
+            // 
+            this.labelLyric9.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric9.ForeColor = System.Drawing.Color.White;
+            this.labelLyric9.Location = new System.Drawing.Point(44, 368);
+            this.labelLyric9.Name = "labelLyric9";
+            this.labelLyric9.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric9.TabIndex = 4;
+            this.labelLyric9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric8
+            // 
+            this.labelLyric8.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric8.ForeColor = System.Drawing.Color.White;
+            this.labelLyric8.Location = new System.Drawing.Point(44, 328);
+            this.labelLyric8.Name = "labelLyric8";
+            this.labelLyric8.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric8.TabIndex = 4;
+            this.labelLyric8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric7
+            // 
+            this.labelLyric7.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric7.ForeColor = System.Drawing.Color.White;
+            this.labelLyric7.Location = new System.Drawing.Point(44, 288);
+            this.labelLyric7.Name = "labelLyric7";
+            this.labelLyric7.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric7.TabIndex = 4;
+            this.labelLyric7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric6
+            // 
+            this.labelLyric6.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric6.ForeColor = System.Drawing.Color.White;
+            this.labelLyric6.Location = new System.Drawing.Point(44, 248);
+            this.labelLyric6.Name = "labelLyric6";
+            this.labelLyric6.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric6.TabIndex = 4;
+            this.labelLyric6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric5
+            // 
+            this.labelLyric5.Font = new System.Drawing.Font("幼圆", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric5.ForeColor = System.Drawing.Color.White;
+            this.labelLyric5.Location = new System.Drawing.Point(27, 187);
+            this.labelLyric5.Name = "labelLyric5";
+            this.labelLyric5.Size = new System.Drawing.Size(402, 42);
+            this.labelLyric5.TabIndex = 4;
+            this.labelLyric5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric4
+            // 
+            this.labelLyric4.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric4.ForeColor = System.Drawing.Color.White;
+            this.labelLyric4.Location = new System.Drawing.Point(44, 146);
+            this.labelLyric4.Name = "labelLyric4";
+            this.labelLyric4.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric4.TabIndex = 4;
+            this.labelLyric4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric3
+            // 
+            this.labelLyric3.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric3.ForeColor = System.Drawing.Color.White;
+            this.labelLyric3.Location = new System.Drawing.Point(44, 106);
+            this.labelLyric3.Name = "labelLyric3";
+            this.labelLyric3.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric3.TabIndex = 4;
+            this.labelLyric3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric2
+            // 
+            this.labelLyric2.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric2.ForeColor = System.Drawing.Color.White;
+            this.labelLyric2.Location = new System.Drawing.Point(44, 66);
+            this.labelLyric2.Name = "labelLyric2";
+            this.labelLyric2.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric2.TabIndex = 4;
+            this.labelLyric2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric1
+            // 
+            this.labelLyric1.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric1.ForeColor = System.Drawing.Color.White;
+            this.labelLyric1.Location = new System.Drawing.Point(44, 26);
+            this.labelLyric1.Name = "labelLyric1";
+            this.labelLyric1.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric1.TabIndex = 4;
+            this.labelLyric1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelNoLyric
             // 
@@ -990,6 +1137,25 @@
             // 
             this.timerLyrc.Tick += new System.EventHandler(this.timerLyrc_Tick);
             // 
+            // panelLyricLabels
+            // 
+            this.panelLyricLabels.Controls.Add(this.panelLyricIng);
+            this.panelLyricLabels.Controls.Add(this.labelLyric1);
+            this.panelLyricLabels.Controls.Add(this.labelLyric2);
+            this.panelLyricLabels.Controls.Add(this.labelLyric3);
+            this.panelLyricLabels.Controls.Add(this.labelLyric4);
+            this.panelLyricLabels.Controls.Add(this.labelLyric6);
+            this.panelLyricLabels.Controls.Add(this.labelLyric5);
+            this.panelLyricLabels.Controls.Add(this.labelLyric7);
+            this.panelLyricLabels.Controls.Add(this.labelLyric8);
+            this.panelLyricLabels.Controls.Add(this.labelLyric9);
+            this.panelLyricLabels.Controls.Add(this.labelLyric10);
+            this.panelLyricLabels.Controls.Add(this.labelLyric11);
+            this.panelLyricLabels.Location = new System.Drawing.Point(281, 4);
+            this.panelLyricLabels.Name = "panelLyricLabels";
+            this.panelLyricLabels.Size = new System.Drawing.Size(461, 515);
+            this.panelLyricLabels.TabIndex = 6;
+            // 
             // MusicMainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1039,6 +1205,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelLyrc.ResumeLayout(false);
+            this.panelLyricIng.ResumeLayout(false);
             this.panelListSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).EndInit();
@@ -1047,6 +1214,7 @@
             this.cmsSongListMenu.ResumeLayout(false);
             this.cmsPlayModeMenu.ResumeLayout(false);
             this.cmsListSongMenu.ResumeLayout(false);
+            this.panelLyricLabels.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1132,5 +1300,19 @@
         private System.Windows.Forms.Label labelNoLyric;
         private System.Windows.Forms.PictureBox pbLyricMin;
         private System.Windows.Forms.PictureBox pbLyricClose;
+        private System.Windows.Forms.Label labelLyric11;
+        private System.Windows.Forms.Label labelLyric10;
+        private System.Windows.Forms.Label labelLyric9;
+        private System.Windows.Forms.Label labelLyric8;
+        private System.Windows.Forms.Label labelLyric7;
+        private System.Windows.Forms.Label labelLyric6;
+        private System.Windows.Forms.Label labelLyric5;
+        private System.Windows.Forms.Label labelLyric4;
+        private System.Windows.Forms.Label labelLyric3;
+        private System.Windows.Forms.Label labelLyric2;
+        private System.Windows.Forms.Label labelLyric1;
+        private System.Windows.Forms.Panel panelLyricIng;
+        private System.Windows.Forms.Label labelLyricIng;
+        private System.Windows.Forms.Panel panelLyricLabels;
     }
 }
