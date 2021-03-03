@@ -21,6 +21,8 @@
         private string favoriteSongsFilePath = Application.StartupPath + "\\favoriteSongs.txt"; // 本地音乐的记录文件
         private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
 
+        private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
+
         SongsInfo currSelectedSong = new SongsInfo(null);       // 用于查看详情，打开本地歌曲右键菜单
         SongsInfo currPlaySong = new SongsInfo(null);       // 记录当前选中播放的歌曲
 
@@ -117,9 +119,10 @@
             // pbAlbumImage.BringToFront();
 
             // 给几个panel添加鼠标点击事件使panelListSong隐藏
-            lvSongList.MouseDown += LeaveListSong_MouseDown;
-            panelLyrc.MouseDown += LeaveListSong_MouseDown;
-            lbMenu.MouseDown += LeaveListSong_MouseDown;
+            panelMenu.MouseDown += LeaveListSong_MouseDown;
+            panelPlayControl.MouseDown += LeaveListSong_MouseDown;
+            panelUser.MouseDown += LeaveListSong_MouseDown;
+            panelSetting.MouseDown += LeaveListSong_MouseDown;
 
             // 获取歌词label
             lyricLabels[0] = labelLyric1;
@@ -133,6 +136,24 @@
             lyricLabels[8] = labelLyric9;
             lyricLabels[9] = labelLyric10;
             lyricLabels[10] = labelLyric11;
+
+            // 设置头像
+            string appPath = faceFilePath + UserHelper.FaceId + ".jpg";
+
+            // 图片需跟exe同一路径下
+            if (File.Exists(appPath))
+            {
+                Image img = Image.FromFile(appPath);
+                this.pbFace.BackgroundImage = img.GetThumbnailImage(64, 64, null, IntPtr.Zero);
+                this.pbUserFace.BackgroundImage = img.GetThumbnailImage(64, 64, null, IntPtr.Zero);
+            }
+
+            // 设置昵称
+            this.labelNickName.Text = UserHelper.NickName;
+            this.labelUserNickName.Text = UserHelper.NickName;
+
+            // 设置用户Id
+            this.labelUserId.Text = "用户ID : " + UserHelper.LoginId.ToString();
 
             // 设置开机自启
             StarUp("0");
@@ -1512,8 +1533,8 @@
 
         private void LyricMoveByTackBar()
         {
-            // lyric panel是可见，并且lrc数组不为空时，拖动滑动条改变歌词
-            if (panelLyrc.Visible && lrc != null)
+            // lrc数组不为空时，拖动滑动条改变歌词
+            if (lrc != null)
             {
                 int i = 0;
                 for (i = 0; i < lrcCount; i++)
@@ -1540,7 +1561,14 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
-                offset = (14 - labelLyric5.Text.Length) * 20;   // 总共最多可以显示有14个歌词
+                if (14 - labelLyric5.Text.Length > 1)
+                {
+                    offset = (14 - labelLyric5.Text.Length) * 20 + 10;   // 总共最多可以显示有14个歌词
+                }
+                else
+                {
+                    offset = 30;   // panel左边有一点缝隙
+                }
                 panelLyricIng.Width = offset;
             }
         }
@@ -1866,6 +1894,8 @@
             switch (lbMenu.SelectedIndex)
             {
                 case 0:
+                    panelUser.Visible = false;
+
                     lvSongList.Items.Clear();
                     AddSongsToListView(localSongsList);
 
@@ -1874,6 +1904,8 @@
                     pbAddSong.Visible = true;
                     break;
                 case 1:
+                    panelUser.Visible = false;
+
                     lvSongList.Items.Clear();
                     AddSongsToListView(favoriteSongsList);
 
@@ -1881,10 +1913,32 @@
                     tsmiFavorite.Visible = false;
                     pbAddSong.Visible = false;
                     break;
+                case 3:
+                    panelUser.Visible = true;
+                    labelLoclaListCountUser.Text = localSongsList.Count + "首歌曲";
+                    labelFavoriteListCountUser.Text = favoriteSongsList.Count + "首歌曲";
+                    panelUser.BringToFront();
+                    break;
             }
 
             int songsCount = lvSongList.Items.Count;
             lvSongList.Columns[0].Text = songsCount.ToString();
+        }
+
+        /// <summary>
+        /// panelUserClick
+        /// </summary>
+        private void pbUserLocal_Click(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            if (pb.Name == "pbUserLocal")
+            {
+                lbMenu.SelectedIndex = 0;
+            }
+            else if (pb.Name == "pbFavoriteUser")
+            {
+                lbMenu.SelectedIndex = 1;
+            }
         }
 
         /// <summary>
@@ -2060,7 +2114,9 @@
         private void LeaveListSong_MouseDown(object sender, MouseEventArgs e)
         {
             // 判断点击时鼠标是否在Panel内
-            bool b = this.RectangleToScreen(this.panelListSong.ClientRectangle).Contains(MousePosition);
+            bool b = this.RectangleToScreen(this.panelListSong.ClientRectangle).Contains(MousePosition)
+                || this.RectangleToScreen(this.lbListSong.ClientRectangle).Contains(MousePosition)
+                || this.RectangleToScreen(this.labelListSong.ClientRectangle).Contains(MousePosition);
             if (!b)
             {
                 panelListSong.Visible = false;
@@ -2115,6 +2171,21 @@
         {
             panelListSong.Visible = true;
             panelListSong.BringToFront();
+        }
+
+        /// <summary>
+        /// 鼠标离开播放列表就隐藏
+        /// </summary>
+        private void panelListSong_MouseLeave(object sender, EventArgs e)
+        {
+            Point p1 = new Point(this.panelListSong.Location.X, this.panelListSong.Location.Y);
+            Point p2 = new Point(Cursor.Position.X - this.Location.X, Cursor.Position.Y - this.Location.Y);
+
+            // 判断鼠标是否还在该控件上，不在再隐藏
+            if ((p1.X - p2.X > 0) || (p1.X - p2.X < -388) || p2.Y < 82 || p2.Y > 526)
+            {
+                panelListSong.Visible = false;
+            }
         }
 
         /// <summary>
@@ -2381,8 +2452,17 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
-                offset = (14 - labelLyric5.Text.Length) * 20; // panelLyricIng 黄字，先设0，走满就继续滚动歌词，长度402
-                                                              // 如果歌词长度不长就设之一些宽度 ，最多显示14字
+                if (14 - labelLyric5.Text.Length >= 1)
+                {
+                    offset = (14 - labelLyric5.Text.Length) * 20 + 10;   // 总共最多可以显示有14个歌词
+                }
+                else
+                {
+                    offset = 30;
+                }
+
+                // panelLyricIng 黄字，先设0，走满就继续滚动歌词，长度402
+                // 如果歌词长度不长就设之一些宽度 ，最多显示16字
                 panelLyricIng.Width = offset;
             }
 
@@ -2426,7 +2506,14 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
-                offset = (14 - labelLyric5.Text.Length) * 20;
+                if (14 - labelLyric5.Text.Length >= 1)
+                {
+                    offset = (14 - labelLyric5.Text.Length) * 20 + 10;   // 总共最多可以显示有14个歌词
+                }
+                else
+                {
+                    offset = 30;
+                }
                 panelLyricIng.Width = offset;
             }
         }
@@ -2449,7 +2536,6 @@
             if (panelLyrc.Visible == true)
             {
                 panelLyrc.Visible = false;
-                timerLyrc.Stop();
                 return;
             }
 
@@ -2468,7 +2554,7 @@
                 labelNoLyric.Visible = true;
                 linkLabelAddLyrc.Visible = true;
                 panelLyricLabels.Visible = false;
-                if (currPlaySong == null)
+                if (currPlaySong == null || axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady)
                 {
                     labelNoLyric.Text = "播放音乐";
                     linkLabelAddLyrc.Visible = false;

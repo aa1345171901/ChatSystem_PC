@@ -254,10 +254,15 @@
     <None Include="Resources\lyricClosehover.png" />
     <None Include="Resources\lyricMin.png" />
     <None Include="Resources\lyricMinhover.png" />
+    <None Include="Resources\mask.png" />
+    <None Include="Resources\Mask2.png" />
+    <None Include="Resources\listUser.png" />
     <Content Include="Resources\message.png" />
     <Content Include="Resources\musicLibrary.png" />
+    <None Include="Resources\Ps123.Net_0663.jpg" />
     <Content Include="Resources\ranking.png" />
     <Content Include="Resources\star.png" />
+    <None Include="Resources\starUser.png" />
     <Content Include="Resources\user.png" />
     <Content Include="Resources\wallhaven-12422.jpg" />
     <None Include="Resources\zzz.jpg" />
