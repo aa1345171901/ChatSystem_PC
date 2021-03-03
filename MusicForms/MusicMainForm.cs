@@ -67,8 +67,8 @@
 
             MenuItem item1 = new MenuItem(Resources.list, "本地音乐");
             MenuItem item2 = new MenuItem(Resources.favorite, "收藏音乐");
-            MenuItem item3 = new MenuItem(Resources.user, "User");
-            MenuItem item4 = new MenuItem(Resources.album, "Album");
+            MenuItem item3 = new MenuItem(Resources.album, "音乐库");
+            MenuItem item4 = new MenuItem(Resources.user, "用户");
             this.menuItemList = new List<MenuItem>();
             menuItemList.Add(item1);
             menuItemList.Add(item2);
@@ -77,8 +77,8 @@
 
             lbMenu.Items.Add("本地音乐");
             lbMenu.Items.Add("收藏音乐");
-            lbMenu.Items.Add("Music library");
-            lbMenu.Items.Add("User");
+            lbMenu.Items.Add("音乐库");
+            lbMenu.Items.Add("用户");
 
             ImageList imgList = new ImageList();
             imgList.ImageSize = new Size(1, 30);    // 分别是宽和高
@@ -180,6 +180,7 @@
 
                 case 1: // Stopped 停止
                     timerPlay.Stop();
+                    timerLyrc.Stop();
                     pbPlay.Image = Resources.播放;
                     ttbbtnPlayPause.Icon = Resources.播放1;
                     ReloadStatus();
@@ -187,6 +188,7 @@
 
                 case 2: // Paused 暂停
                     timerPlay.Stop();
+                    timerLyrc.Stop();
                     break;
 
                 case 3: // Playing 正在播放
@@ -195,9 +197,6 @@
                     // 显示专辑图片
                     panelLyrc.BackgroundImage = currPlaySong.AlbumImage;
                     pbSmallAlbum.BackgroundImage = currPlaySong.SmallAblum;
-
-                    // 保存用户设置
-                    SaveSettings();
 
                     // 显示歌曲标题名字
                     labelMusicDetail.Text = currPlaySong.FileName + "-" + currPlaySong.Artist;
@@ -215,6 +214,9 @@
                     this.Text = currPlaySong.FileName;
                     tackBarMove.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
                     FavoritePictureSetting();
+
+                    // 保存一波当前播放
+                    SaveSettings();
 
                     // 获取歌词
                     GetLrc();
@@ -311,8 +313,9 @@
         /// </summary>
         private void ReloadStatus()
         {
-            // 设置专辑封面为默认
-            pbSmallAlbum.BackgroundImage = Properties.Resources.defaultSmallAblum;
+            // 使专辑图片默认
+            panelLyrc.BackgroundImage = Resources.wallhaven_12422;
+            pbSmallAlbum.BackgroundImage = Resources.zzz;
             labelMusicTimer.Text = "00:00 / 00:00";
             labelMusicDetail.Text = "音乐名 - 歌手";
             toolTip1.SetToolTip(labelMusicDetail, "音乐名 - 歌手");
@@ -372,7 +375,7 @@
             // lvSongList.Items[currIndex].Focused = true;
 
             // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
-            currPlaySong = new SongsInfo(listSong[currIndex].FilePath);
+            currPlaySong = listSong[currIndex];
             return currPlaySong.FilePath;
         }
 
@@ -1362,7 +1365,7 @@
                 BuildRandomList(listSong.Count);
                 jumpSongIndex = index;
                 // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
-                currPlaySong = new SongsInfo(listSong[index].FilePath);
+                currPlaySong = listSong[index];
                 axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 return;
@@ -1537,7 +1540,8 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
-                panelLyricIng.Width = 0;
+                offset = (14 - labelLyric5.Text.Length) * 20;   // 总共最多可以显示有14个歌词
+                panelLyricIng.Width = offset;
             }
         }
 
@@ -1919,6 +1923,11 @@
         {
             byte[] subbyte = System.Text.Encoding.Default.GetBytes(toSub);
 
+            if (length > subbyte.Length)
+            {
+                length = subbyte.Length;
+            }
+
             string sub = System.Text.Encoding.Default.GetString(subbyte, startIndex, length);
 
             return sub;
@@ -2121,6 +2130,9 @@
         /// </summary>
         private void labelClearSongList_Click(object sender, EventArgs e)
         {
+            // 在歌词界面就退出
+            panelLyrc.Visible = false;
+            lrc = null;
             listSong.Clear();
             labelListSong.Text = "   播放列表为空";
             labelListCount.Text = "";
@@ -2129,6 +2141,9 @@
             lbListSong.ClearSelected();
             lbListSongSetting();
             FavoritePictureSetting();
+
+            this.Text = "音乐播放器";
+            MyMusic.Text = "音乐播放器";
         }
 
         /// <summary>
@@ -2305,36 +2320,29 @@
                     // 循环读取每一行歌词
                     while ((line = sr.ReadLine()) != null)
                     {
-                        // 歌词文件里前面几行可能不是歌词，去掉
-                        try
+                        if (string.IsNullOrWhiteSpace(line))
                         {
-                            TimeStringToDouble(line.Substring(1, 8));
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
                             continue;
+                        }
+                        // 歌词文件里前面几行可能不是歌词，去掉 ,后面就去掉try,耗时
+                        if (lrcCount == 0)
+                        {
+                            try
+                            {
+                                TimeStringToDouble(line.Substring(1, 8));
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                continue;
+                            }
                         }
 
                         // 将读取到的歌词存放到数组中
-                        for (int i = 0; i < 500; i++)
-                        {
-                            if (lrc[0, i] == null)
-                            {
-                                lrc[0, i] = line.Substring(10, line.Length - 10);
-                                break;
-                            }
-                        }
+                        lrc[0, lrcCount] = line.Substring(10, line.Length - 10);
 
                         // 将读取到的歌词时间存放到数组中
-                        for (int i = 0; i < 500; i++)
-                        {
-                            if (lrc[1, i] == null)
-                            {
-                                lrc[1, i] = line.Substring(1, 8);
-                                break;
-                            }
-                        }
+                        lrc[1, lrcCount] = line.Substring(1, 8);
 
                         lrcCount++;
                     }
@@ -2342,13 +2350,13 @@
             }
             catch (Exception ex)
             {
-                lrc = null;
                 Console.WriteLine("异常：" + ex.Message);
             }
         }
 
         int currLyricIndex = 0; // 记录歌词的当前时间索引
         double lyricTime = 0; // 获取当前歌词的剩余时间长度
+        int offset = 0;     // 设置panel 歌词前的大概长度，使黄字滚动稍微准确一些
 
         /// <summary>
         /// 刷新歌词
@@ -2373,7 +2381,9 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
-                panelLyricIng.Width = 0; // panelLyricIng 黄字，先设0，走满就继续滚动歌词，长度402
+                offset = (14 - labelLyric5.Text.Length) * 20; // panelLyricIng 黄字，先设0，走满就继续滚动歌词，长度402
+                                                              // 如果歌词长度不长就设之一些宽度 ，最多显示14字
+                panelLyricIng.Width = offset;
             }
 
             // 歌曲唱完以后，后面显示为空
@@ -2383,7 +2393,7 @@
                     - axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
                 double allTimeLyricIng = TimeStringToDouble(currPlaySong.Duration.Remove(0, 3))
                     - TimeStringToDouble(lrc[1, currLyricIndex - 1]);
-                panelLyricIng.Width = Convert.ToInt32(402 * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
+                panelLyricIng.Width = offset + Convert.ToInt32((402 - offset) * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
                 return;
             }
             else
@@ -2393,13 +2403,13 @@
         - axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
             }
 
-            // 黄字没有滚动完，就不继续加载歌词
-            if (lyricTime > 0)
+            // 黄字没有滚动完，就不继续加载歌词 提前0.3秒跳到下一句歌词
+            if (lyricTime > 0.3)
             {
                 double allTimeLyricIng = currLyricIndex == 0 ?
                     TimeStringToDouble(lrc[1, currLyricIndex]) :
                     TimeStringToDouble(lrc[1, currLyricIndex]) - TimeStringToDouble(lrc[1, currLyricIndex - 1]);
-                panelLyricIng.Width = Convert.ToInt32(402 * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
+                panelLyricIng.Width = offset + Convert.ToInt32((402 - offset) * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
                 return;
             }
             else
@@ -2416,7 +2426,8 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
-                panelLyricIng.Width = 0;
+                offset = (14 - labelLyric5.Text.Length) * 20;
+                panelLyricIng.Width = offset;
             }
         }
 
@@ -2444,7 +2455,6 @@
 
             panelLyrc.Visible = true;
             panelLyrc.BringToFront();
-            panelLyrc.BackgroundImage = currPlaySong.AlbumImage;
             if (lrc != null)
             {
                 labelNoLyric.Visible = false;
@@ -2458,6 +2468,11 @@
                 labelNoLyric.Visible = true;
                 linkLabelAddLyrc.Visible = true;
                 panelLyricLabels.Visible = false;
+                if (currPlaySong == null)
+                {
+                    labelNoLyric.Text = "播放音乐";
+                    linkLabelAddLyrc.Visible = false;
+                }
             }
         }
 
@@ -2473,32 +2488,33 @@
             openFileDialog1.Multiselect = false;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < openFileDialog1.FileNames.Length; i++)
-                {
-                    string path = openFileDialog1.FileNames[i];
-                    listSong[currIndex].FilePathLrc = path;
-                }
+                string path = openFileDialog1.FileName;
+                listSong[currIndex].FilePathLrc = path;
+            }
 
-                GetLrc();
-                if (lrc != null)
-                {
-                    timerLyrc.Start();
-                }
+            GetLrc();
+            if (lrc != null)
+            {
+                currLyricIndex = 0;
+                labelNoLyric.Visible = false;
+                linkLabelAddLyrc.Visible = false;
+                panelLyricLabels.Visible = true;
+                timerLyrc.Start();
             }
 
             for (int i = 0; i < localSongsList.Count; i++)
             {
-                if (localSongsList[i].FileName == currPlaySong.FileName)
+                if (localSongsList[i].FileName == listSong[currIndex].FileName)
                 {
-                    localSongsList[i].FilePathLrc = currPlaySong.FilePathLrc;
+                    localSongsList[i].FilePathLrc = listSong[currIndex].FilePathLrc;
                 }
             }
 
             for (int i = 0; i < favoriteSongsList.Count; i++)
             {
-                if (favoriteSongsList[i].FileName == currPlaySong.FileName)
+                if (favoriteSongsList[i].FileName == listSong[currIndex].FileName)
                 {
-                    favoriteSongsList[i].FilePathLrc = currPlaySong.FilePathLrc;
+                    favoriteSongsList[i].FilePathLrc = listSong[currIndex].FilePathLrc;
                 }
             }
 

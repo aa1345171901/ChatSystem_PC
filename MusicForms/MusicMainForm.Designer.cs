@@ -1,4 +1,6 @@
-﻿namespace QQ_piracy.MusicForms
+﻿using QQ_piracy.Model;
+
+namespace QQ_piracy.MusicForms
 {
     partial class MusicMainForm
     {
@@ -35,7 +37,6 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbBack = new System.Windows.Forms.PictureBox();
             this.pbPlay = new System.Windows.Forms.PictureBox();
-            this.panelPlayControl = new System.Windows.Forms.Panel();
             this.labelListCount = new System.Windows.Forms.Label();
             this.pbHiFi = new System.Windows.Forms.PictureBox();
             this.pbMusicStyle = new System.Windows.Forms.PictureBox();
@@ -55,28 +56,25 @@
             this.pbLyricMin = new System.Windows.Forms.PictureBox();
             this.tbMusicVolume = new System.Windows.Forms.TrackBar();
             this.panelMusicVlume = new System.Windows.Forms.Panel();
-            this.panelSetting = new System.Windows.Forms.Panel();
             this.labelNickName = new System.Windows.Forms.Label();
             this.pbFace = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtSreachSongName = new System.Windows.Forms.TextBox();
-            this.panelLyrc = new System.Windows.Forms.Panel();
             this.panelLyricIng = new System.Windows.Forms.Panel();
             this.labelLyricIng = new System.Windows.Forms.Label();
-            this.labelLyric11 = new System.Windows.Forms.Label();
-            this.labelLyric10 = new System.Windows.Forms.Label();
-            this.labelLyric9 = new System.Windows.Forms.Label();
-            this.labelLyric8 = new System.Windows.Forms.Label();
-            this.labelLyric7 = new System.Windows.Forms.Label();
+            this.labelLyric1 = new System.Windows.Forms.Label();
+            this.labelLyric2 = new System.Windows.Forms.Label();
+            this.labelLyric3 = new System.Windows.Forms.Label();
+            this.labelLyric4 = new System.Windows.Forms.Label();
             this.labelLyric6 = new System.Windows.Forms.Label();
             this.labelLyric5 = new System.Windows.Forms.Label();
-            this.labelLyric4 = new System.Windows.Forms.Label();
-            this.labelLyric3 = new System.Windows.Forms.Label();
-            this.labelLyric2 = new System.Windows.Forms.Label();
-            this.labelLyric1 = new System.Windows.Forms.Label();
+            this.labelLyric7 = new System.Windows.Forms.Label();
+            this.labelLyric8 = new System.Windows.Forms.Label();
+            this.labelLyric9 = new System.Windows.Forms.Label();
+            this.labelLyric10 = new System.Windows.Forms.Label();
+            this.labelLyric11 = new System.Windows.Forms.Label();
             this.labelNoLyric = new System.Windows.Forms.Label();
             this.linkLabelAddLyrc = new System.Windows.Forms.LinkLabel();
-            this.panelListSong = new System.Windows.Forms.Panel();
             this.labelClearSongList = new System.Windows.Forms.Label();
             this.pbListSongClose = new System.Windows.Forms.PictureBox();
             this.lbListSong = new System.Windows.Forms.ListBox();
@@ -91,7 +89,6 @@
             this.columnTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pbAddSong = new System.Windows.Forms.PictureBox();
             this.lbNoResult = new System.Windows.Forms.Label();
-            this.panelMenu = new System.Windows.Forms.Panel();
             this.lbMenu = new System.Windows.Forms.ListBox();
             this.MyMusic = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripnotify = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -121,13 +118,17 @@
             this.toolTipListView = new System.Windows.Forms.ToolTip(this.components);
             this.timerToolTIp = new System.Windows.Forms.Timer(this.components);
             this.timerLyrc = new System.Windows.Forms.Timer(this.components);
-            this.panelLyricLabels = new System.Windows.Forms.Panel();
+            this.panelPlayControl = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelListSong = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelLyrc = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelLyricLabels = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelMenu = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelSetting = new QQ_piracy.Model.NewPanel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).BeginInit();
-            this.panelPlayControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHiFi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMusicStyle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbListCount)).BeginInit();
@@ -142,20 +143,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).BeginInit();
             this.panelMusicVlume.SuspendLayout();
-            this.panelSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panelLyrc.SuspendLayout();
             this.panelLyricIng.SuspendLayout();
-            this.panelListSong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).BeginInit();
-            this.panelMenu.SuspendLayout();
             this.contextMenuStripnotify.SuspendLayout();
             this.cmsSongListMenu.SuspendLayout();
             this.cmsPlayModeMenu.SuspendLayout();
             this.cmsListSongMenu.SuspendLayout();
+            this.panelPlayControl.SuspendLayout();
+            this.panelListSong.SuspendLayout();
+            this.panelLyrc.SuspendLayout();
             this.panelLyricLabels.SuspendLayout();
+            this.panelMenu.SuspendLayout();
+            this.panelSetting.SuspendLayout();
             this.SuspendLayout();
             // 
             // axWindowsMediaPlayer1
@@ -230,31 +232,6 @@
             this.pbPlay.Click += new System.EventHandler(this.pbPlay_Click);
             this.pbPlay.MouseLeave += new System.EventHandler(this.pbPlay_MouseLeave);
             this.pbPlay.MouseHover += new System.EventHandler(this.pbPlay_MouseHover);
-            // 
-            // panelPlayControl
-            // 
-            this.panelPlayControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.panelPlayControl.Controls.Add(this.labelListCount);
-            this.panelPlayControl.Controls.Add(this.pbHiFi);
-            this.panelPlayControl.Controls.Add(this.pbMusicStyle);
-            this.panelPlayControl.Controls.Add(this.pbListCount);
-            this.panelPlayControl.Controls.Add(this.pbLike);
-            this.panelPlayControl.Controls.Add(this.pbLyric);
-            this.panelPlayControl.Controls.Add(this.pbVolume);
-            this.panelPlayControl.Controls.Add(this.tackBarMove);
-            this.panelPlayControl.Controls.Add(this.btnPlayMode);
-            this.panelPlayControl.Controls.Add(this.labelMusicTimer);
-            this.panelPlayControl.Controls.Add(this.labelMusicDetail);
-            this.panelPlayControl.Controls.Add(this.pbSmallAlbum);
-            this.panelPlayControl.Controls.Add(this.pbNext);
-            this.panelPlayControl.Controls.Add(this.pbBack);
-            this.panelPlayControl.Controls.Add(this.pbPlay);
-            this.panelPlayControl.Location = new System.Drawing.Point(0, 523);
-            this.panelPlayControl.Name = "panelPlayControl";
-            this.panelPlayControl.Size = new System.Drawing.Size(990, 70);
-            this.panelPlayControl.TabIndex = 18;
-            this.panelPlayControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
-            this.panelPlayControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
             // 
             // labelListCount
             // 
@@ -391,7 +368,7 @@
             // 
             // pbSmallAlbum
             // 
-            this.pbSmallAlbum.BackgroundImage = global::QQ_piracy.Properties.Resources.defaultSmallAblum;
+            this.pbSmallAlbum.BackgroundImage = global::QQ_piracy.Properties.Resources.zzz;
             this.pbSmallAlbum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pbSmallAlbum.Cursor = System.Windows.Forms.Cursors.Default;
             this.pbSmallAlbum.Location = new System.Drawing.Point(185, 3);
@@ -502,22 +479,6 @@
             this.panelMusicVlume.Visible = false;
             this.panelMusicVlume.MouseLeave += new System.EventHandler(this.panelMusicVlume_MouseLeave);
             // 
-            // panelSetting
-            // 
-            this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.panelSetting.Controls.Add(this.labelNickName);
-            this.panelSetting.Controls.Add(this.pbFace);
-            this.panelSetting.Controls.Add(this.panel1);
-            this.panelSetting.Controls.Add(this.pbMinForm);
-            this.panelSetting.Controls.Add(this.pbMaxForm);
-            this.panelSetting.Controls.Add(this.pbCloseForm);
-            this.panelSetting.Location = new System.Drawing.Point(0, 0);
-            this.panelSetting.Name = "panelSetting";
-            this.panelSetting.Size = new System.Drawing.Size(990, 57);
-            this.panelSetting.TabIndex = 21;
-            this.panelSetting.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
-            this.panelSetting.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
-            // 
             // labelNickName
             // 
             this.labelNickName.ForeColor = System.Drawing.Color.Gainsboro;
@@ -560,24 +521,6 @@
             this.txtSreachSongName.Enter += new System.EventHandler(this.txtSreachSongName_Enter);
             this.txtSreachSongName.Leave += new System.EventHandler(this.txtSreachSongName_Leave);
             // 
-            // panelLyrc
-            // 
-            this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
-            this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.DefaultAlbum;
-            this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelLyrc.Controls.Add(this.panelLyricLabels);
-            this.panelLyrc.Controls.Add(this.pbLyricClose);
-            this.panelLyrc.Controls.Add(this.pbLyricMin);
-            this.panelLyrc.Controls.Add(this.labelNoLyric);
-            this.panelLyrc.Controls.Add(this.linkLabelAddLyrc);
-            this.panelLyrc.Location = new System.Drawing.Point(0, 0);
-            this.panelLyrc.Name = "panelLyrc";
-            this.panelLyrc.Size = new System.Drawing.Size(990, 524);
-            this.panelLyrc.TabIndex = 29;
-            this.panelLyrc.Visible = false;
-            this.panelLyrc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
-            this.panelLyrc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
-            // 
             // panelLyricIng
             // 
             this.panelLyricIng.Controls.Add(this.labelLyricIng);
@@ -596,55 +539,45 @@
             this.labelLyricIng.TabIndex = 4;
             this.labelLyricIng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric11
+            // labelLyric1
             // 
-            this.labelLyric11.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric11.ForeColor = System.Drawing.Color.White;
-            this.labelLyric11.Location = new System.Drawing.Point(44, 448);
-            this.labelLyric11.Name = "labelLyric11";
-            this.labelLyric11.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric11.TabIndex = 4;
-            this.labelLyric11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric1.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric1.ForeColor = System.Drawing.Color.White;
+            this.labelLyric1.Location = new System.Drawing.Point(44, 26);
+            this.labelLyric1.Name = "labelLyric1";
+            this.labelLyric1.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric1.TabIndex = 4;
+            this.labelLyric1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric10
+            // labelLyric2
             // 
-            this.labelLyric10.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric10.ForeColor = System.Drawing.Color.White;
-            this.labelLyric10.Location = new System.Drawing.Point(44, 408);
-            this.labelLyric10.Name = "labelLyric10";
-            this.labelLyric10.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric10.TabIndex = 4;
-            this.labelLyric10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric2.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric2.ForeColor = System.Drawing.Color.White;
+            this.labelLyric2.Location = new System.Drawing.Point(44, 66);
+            this.labelLyric2.Name = "labelLyric2";
+            this.labelLyric2.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric2.TabIndex = 4;
+            this.labelLyric2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric9
+            // labelLyric3
             // 
-            this.labelLyric9.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric9.ForeColor = System.Drawing.Color.White;
-            this.labelLyric9.Location = new System.Drawing.Point(44, 368);
-            this.labelLyric9.Name = "labelLyric9";
-            this.labelLyric9.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric9.TabIndex = 4;
-            this.labelLyric9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric3.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric3.ForeColor = System.Drawing.Color.White;
+            this.labelLyric3.Location = new System.Drawing.Point(44, 106);
+            this.labelLyric3.Name = "labelLyric3";
+            this.labelLyric3.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric3.TabIndex = 4;
+            this.labelLyric3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric8
+            // labelLyric4
             // 
-            this.labelLyric8.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric8.ForeColor = System.Drawing.Color.White;
-            this.labelLyric8.Location = new System.Drawing.Point(44, 328);
-            this.labelLyric8.Name = "labelLyric8";
-            this.labelLyric8.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric8.TabIndex = 4;
-            this.labelLyric8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelLyric7
-            // 
-            this.labelLyric7.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric7.ForeColor = System.Drawing.Color.White;
-            this.labelLyric7.Location = new System.Drawing.Point(44, 288);
-            this.labelLyric7.Name = "labelLyric7";
-            this.labelLyric7.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric7.TabIndex = 4;
-            this.labelLyric7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric4.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric4.ForeColor = System.Drawing.Color.White;
+            this.labelLyric4.Location = new System.Drawing.Point(44, 146);
+            this.labelLyric4.Name = "labelLyric4";
+            this.labelLyric4.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric4.TabIndex = 4;
+            this.labelLyric4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelLyric6
             // 
@@ -666,45 +599,55 @@
             this.labelLyric5.TabIndex = 4;
             this.labelLyric5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric4
+            // labelLyric7
             // 
-            this.labelLyric4.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric4.ForeColor = System.Drawing.Color.White;
-            this.labelLyric4.Location = new System.Drawing.Point(44, 146);
-            this.labelLyric4.Name = "labelLyric4";
-            this.labelLyric4.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric4.TabIndex = 4;
-            this.labelLyric4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric7.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric7.ForeColor = System.Drawing.Color.White;
+            this.labelLyric7.Location = new System.Drawing.Point(44, 288);
+            this.labelLyric7.Name = "labelLyric7";
+            this.labelLyric7.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric7.TabIndex = 4;
+            this.labelLyric7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric3
+            // labelLyric8
             // 
-            this.labelLyric3.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric3.ForeColor = System.Drawing.Color.White;
-            this.labelLyric3.Location = new System.Drawing.Point(44, 106);
-            this.labelLyric3.Name = "labelLyric3";
-            this.labelLyric3.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric3.TabIndex = 4;
-            this.labelLyric3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric8.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric8.ForeColor = System.Drawing.Color.White;
+            this.labelLyric8.Location = new System.Drawing.Point(44, 328);
+            this.labelLyric8.Name = "labelLyric8";
+            this.labelLyric8.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric8.TabIndex = 4;
+            this.labelLyric8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric2
+            // labelLyric9
             // 
-            this.labelLyric2.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric2.ForeColor = System.Drawing.Color.White;
-            this.labelLyric2.Location = new System.Drawing.Point(44, 66);
-            this.labelLyric2.Name = "labelLyric2";
-            this.labelLyric2.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric2.TabIndex = 4;
-            this.labelLyric2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric9.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric9.ForeColor = System.Drawing.Color.White;
+            this.labelLyric9.Location = new System.Drawing.Point(44, 368);
+            this.labelLyric9.Name = "labelLyric9";
+            this.labelLyric9.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric9.TabIndex = 4;
+            this.labelLyric9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLyric1
+            // labelLyric10
             // 
-            this.labelLyric1.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric1.ForeColor = System.Drawing.Color.White;
-            this.labelLyric1.Location = new System.Drawing.Point(44, 26);
-            this.labelLyric1.Name = "labelLyric1";
-            this.labelLyric1.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric1.TabIndex = 4;
-            this.labelLyric1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelLyric10.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric10.ForeColor = System.Drawing.Color.White;
+            this.labelLyric10.Location = new System.Drawing.Point(44, 408);
+            this.labelLyric10.Name = "labelLyric10";
+            this.labelLyric10.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric10.TabIndex = 4;
+            this.labelLyric10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric11
+            // 
+            this.labelLyric11.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric11.ForeColor = System.Drawing.Color.White;
+            this.labelLyric11.Location = new System.Drawing.Point(44, 448);
+            this.labelLyric11.Name = "labelLyric11";
+            this.labelLyric11.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric11.TabIndex = 4;
+            this.labelLyric11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelNoLyric
             // 
@@ -727,19 +670,6 @@
             this.linkLabelAddLyrc.TabStop = true;
             this.linkLabelAddLyrc.Text = "添加歌词";
             this.linkLabelAddLyrc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelAddLyrc_LinkClicked);
-            // 
-            // panelListSong
-            // 
-            this.panelListSong.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.panelListSong.Controls.Add(this.labelClearSongList);
-            this.panelListSong.Controls.Add(this.pbListSongClose);
-            this.panelListSong.Controls.Add(this.lbListSong);
-            this.panelListSong.Controls.Add(this.labelListSong);
-            this.panelListSong.Location = new System.Drawing.Point(600, 82);
-            this.panelListSong.Name = "panelListSong";
-            this.panelListSong.Size = new System.Drawing.Size(390, 445);
-            this.panelListSong.TabIndex = 22;
-            this.panelListSong.Visible = false;
             // 
             // labelClearSongList
             // 
@@ -891,15 +821,6 @@
             this.lbNoResult.TabIndex = 21;
             this.lbNoResult.Text = "没有相关搜索结果";
             // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(35)))), ((int)(((byte)(39)))));
-            this.panelMenu.Controls.Add(this.lbMenu);
-            this.panelMenu.Location = new System.Drawing.Point(-1, 54);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(189, 470);
-            this.panelMenu.TabIndex = 23;
-            // 
             // lbMenu
             // 
             this.lbMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(35)))), ((int)(((byte)(39)))));
@@ -919,7 +840,7 @@
             // 
             this.MyMusic.ContextMenuStrip = this.contextMenuStripnotify;
             this.MyMusic.Icon = ((System.Drawing.Icon)(resources.GetObject("MyMusic.Icon")));
-            this.MyMusic.Text = "notifyIcon1";
+            this.MyMusic.Text = "音乐播放器";
             this.MyMusic.Visible = true;
             this.MyMusic.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
@@ -1137,6 +1058,62 @@
             // 
             this.timerLyrc.Tick += new System.EventHandler(this.timerLyrc_Tick);
             // 
+            // panelPlayControl
+            // 
+            this.panelPlayControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelPlayControl.Controls.Add(this.labelListCount);
+            this.panelPlayControl.Controls.Add(this.pbHiFi);
+            this.panelPlayControl.Controls.Add(this.pbMusicStyle);
+            this.panelPlayControl.Controls.Add(this.pbListCount);
+            this.panelPlayControl.Controls.Add(this.pbLike);
+            this.panelPlayControl.Controls.Add(this.pbLyric);
+            this.panelPlayControl.Controls.Add(this.pbVolume);
+            this.panelPlayControl.Controls.Add(this.tackBarMove);
+            this.panelPlayControl.Controls.Add(this.btnPlayMode);
+            this.panelPlayControl.Controls.Add(this.labelMusicTimer);
+            this.panelPlayControl.Controls.Add(this.labelMusicDetail);
+            this.panelPlayControl.Controls.Add(this.pbSmallAlbum);
+            this.panelPlayControl.Controls.Add(this.pbNext);
+            this.panelPlayControl.Controls.Add(this.pbBack);
+            this.panelPlayControl.Controls.Add(this.pbPlay);
+            this.panelPlayControl.Location = new System.Drawing.Point(0, 523);
+            this.panelPlayControl.Name = "panelPlayControl";
+            this.panelPlayControl.Size = new System.Drawing.Size(990, 70);
+            this.panelPlayControl.TabIndex = 18;
+            this.panelPlayControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
+            this.panelPlayControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // panelListSong
+            // 
+            this.panelListSong.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelListSong.Controls.Add(this.labelClearSongList);
+            this.panelListSong.Controls.Add(this.pbListSongClose);
+            this.panelListSong.Controls.Add(this.lbListSong);
+            this.panelListSong.Controls.Add(this.labelListSong);
+            this.panelListSong.Location = new System.Drawing.Point(600, 82);
+            this.panelListSong.Name = "panelListSong";
+            this.panelListSong.Size = new System.Drawing.Size(390, 445);
+            this.panelListSong.TabIndex = 22;
+            this.panelListSong.Visible = false;
+            // 
+            // panelLyrc
+            // 
+            this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
+            this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.wallhaven_12422;
+            this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelLyrc.Controls.Add(this.panelLyricLabels);
+            this.panelLyrc.Controls.Add(this.pbLyricClose);
+            this.panelLyrc.Controls.Add(this.pbLyricMin);
+            this.panelLyrc.Controls.Add(this.labelNoLyric);
+            this.panelLyrc.Controls.Add(this.linkLabelAddLyrc);
+            this.panelLyrc.Location = new System.Drawing.Point(0, 0);
+            this.panelLyrc.Name = "panelLyrc";
+            this.panelLyrc.Size = new System.Drawing.Size(990, 524);
+            this.panelLyrc.TabIndex = 29;
+            this.panelLyrc.Visible = false;
+            this.panelLyrc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
+            this.panelLyrc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
             // panelLyricLabels
             // 
             this.panelLyricLabels.Controls.Add(this.panelLyricIng);
@@ -1155,14 +1132,40 @@
             this.panelLyricLabels.Name = "panelLyricLabels";
             this.panelLyricLabels.Size = new System.Drawing.Size(461, 515);
             this.panelLyricLabels.TabIndex = 6;
+            this.panelLyricLabels.Visible = false;
+            // 
+            // panelMenu
+            // 
+            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(35)))), ((int)(((byte)(39)))));
+            this.panelMenu.Controls.Add(this.lbMenu);
+            this.panelMenu.Location = new System.Drawing.Point(-1, 54);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(189, 470);
+            this.panelMenu.TabIndex = 23;
+            // 
+            // panelSetting
+            // 
+            this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.panelSetting.Controls.Add(this.labelNickName);
+            this.panelSetting.Controls.Add(this.pbFace);
+            this.panelSetting.Controls.Add(this.panel1);
+            this.panelSetting.Controls.Add(this.pbMinForm);
+            this.panelSetting.Controls.Add(this.pbMaxForm);
+            this.panelSetting.Controls.Add(this.pbCloseForm);
+            this.panelSetting.Location = new System.Drawing.Point(0, 0);
+            this.panelSetting.Name = "panelSetting";
+            this.panelSetting.Size = new System.Drawing.Size(990, 57);
+            this.panelSetting.TabIndex = 21;
+            this.panelSetting.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
+            this.panelSetting.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
             // 
             // MusicMainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(989, 597);
-            this.Controls.Add(this.panelMusicVlume);
             this.Controls.Add(this.panelLyrc);
+            this.Controls.Add(this.panelMusicVlume);
             this.Controls.Add(this.panelListSong);
             this.Controls.Add(this.lvSongList);
             this.Controls.Add(this.lbNoResult);
@@ -1184,8 +1187,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).EndInit();
-            this.panelPlayControl.ResumeLayout(false);
-            this.panelPlayControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHiFi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMusicStyle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbListCount)).EndInit();
@@ -1200,35 +1201,42 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).EndInit();
             this.panelMusicVlume.ResumeLayout(false);
-            this.panelSetting.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panelLyrc.ResumeLayout(false);
             this.panelLyricIng.ResumeLayout(false);
-            this.panelListSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).EndInit();
-            this.panelMenu.ResumeLayout(false);
             this.contextMenuStripnotify.ResumeLayout(false);
             this.cmsSongListMenu.ResumeLayout(false);
             this.cmsPlayModeMenu.ResumeLayout(false);
             this.cmsListSongMenu.ResumeLayout(false);
+            this.panelPlayControl.ResumeLayout(false);
+            this.panelPlayControl.PerformLayout();
+            this.panelListSong.ResumeLayout(false);
+            this.panelLyrc.ResumeLayout(false);
             this.panelLyricLabels.ResumeLayout(false);
+            this.panelMenu.ResumeLayout(false);
+            this.panelSetting.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
         #endregion
-
+        /*
+        this.panelPlayControl = new NewPanel(this.components); // 用于防止panel闪烁
+        this.panelListSong = new NewPanel(this.components);
+        this.panelLyrc = new NewPanel(this.components);
+        this.panelMenu = new NewPanel(this.components);
+        this.panelSetting = new NewPanel(this.components);
+        this.panelLyricLabels = new NewPanel(this.components);
+        */
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.TrackBar tackBarMove;
         private System.Windows.Forms.PictureBox pbNext;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.PictureBox pbBack;
         private System.Windows.Forms.PictureBox pbPlay;
-        private System.Windows.Forms.Panel panelPlayControl;
         private System.Windows.Forms.Label labelMusicTimer;
         private System.Windows.Forms.Label labelMusicDetail;
         private System.Windows.Forms.PictureBox pbSmallAlbum;
@@ -1242,11 +1250,9 @@
         private System.Windows.Forms.PictureBox pbLike;
         private System.Windows.Forms.PictureBox pbLyric;
         private System.Windows.Forms.Label labelListCount;
-        private System.Windows.Forms.Panel panelSetting;
         private System.Windows.Forms.PictureBox pbMinForm;
         private System.Windows.Forms.PictureBox pbMaxForm;
         private System.Windows.Forms.PictureBox pbCloseForm;
-        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.PictureBox pbFace;
         private System.Windows.Forms.Label labelNickName;
         private System.Windows.Forms.ListView lvSongList;
@@ -1279,7 +1285,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtSreachSongName;
-        private System.Windows.Forms.Panel panelListSong;
         private System.Windows.Forms.PictureBox pbListSongClose;
         private System.Windows.Forms.Label labelListSong;
         private System.Windows.Forms.ListBox lbListSong;
@@ -1295,7 +1300,6 @@
         private System.Windows.Forms.ToolTip toolTipListView;
         private System.Windows.Forms.Timer timerToolTIp;
         private System.Windows.Forms.Timer timerLyrc;
-        private System.Windows.Forms.Panel panelLyrc;
         private System.Windows.Forms.LinkLabel linkLabelAddLyrc;
         private System.Windows.Forms.Label labelNoLyric;
         private System.Windows.Forms.PictureBox pbLyricMin;
@@ -1313,6 +1317,11 @@
         private System.Windows.Forms.Label labelLyric1;
         private System.Windows.Forms.Panel panelLyricIng;
         private System.Windows.Forms.Label labelLyricIng;
-        private System.Windows.Forms.Panel panelLyricLabels;
+        private NewPanel panelPlayControl;
+        private NewPanel panelSetting;
+        private NewPanel panelMenu;
+        private NewPanel panelListSong;
+        private NewPanel panelLyrc;
+        private NewPanel panelLyricLabels;
     }
 }

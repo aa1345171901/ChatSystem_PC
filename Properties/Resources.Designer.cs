@@ -191,16 +191,6 @@ namespace QQ_piracy.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Icon notifyIcon128x128 {
-            get {
-                object obj = ResourceManager.GetObject("notifyIcon128x128", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap ranking {
@@ -236,6 +226,16 @@ namespace QQ_piracy.Properties {
         internal static System.Drawing.Bitmap wallhaven_12422 {
             get {
                 object obj = ResourceManager.GetObject("wallhaven-12422", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap zzz {
+            get {
+                object obj = ResourceManager.GetObject("zzz", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

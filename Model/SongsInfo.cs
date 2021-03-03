@@ -28,6 +28,11 @@
         /// </summary>
         public SongsInfo(string fPath)
         {
+            if (fPath == null)
+            {
+                return;
+            }
+
             SetSongInfo(fPath);
             SetAlbumArt(fPath);
         }
@@ -144,8 +149,8 @@
                 }
             }
 
-            albumImage = Properties.Resources.DefaultAlbum;
-            smallAblum = Properties.Resources.defaultSmallAblum;
+            albumImage = Properties.Resources.wallhaven_12422;
+            smallAblum = Properties.Resources.zzz;
         }
 
         public static Bitmap Cut(Bitmap b, int startX, int startY, int iWidth, int iHeight)

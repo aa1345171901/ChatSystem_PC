@@ -153,6 +153,9 @@
     <Compile Include="Manager\Request\UpdateStrangerRequest.cs" />
     <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\MyColorTable.cs" />
+    <Compile Include="Model\NewPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\SongsInfo.cs" />
     <Compile Include="MusicForms\DeleteSongFormList.cs">
       <SubType>Form</SubType>
@@ -253,11 +256,11 @@
     <None Include="Resources\lyricMinhover.png" />
     <Content Include="Resources\message.png" />
     <Content Include="Resources\musicLibrary.png" />
-    <Content Include="Resources\notifyIcon128x128.ico" />
     <Content Include="Resources\ranking.png" />
     <Content Include="Resources\star.png" />
     <Content Include="Resources\user.png" />
     <Content Include="Resources\wallhaven-12422.jpg" />
+    <None Include="Resources\zzz.jpg" />
     <Content Include="Resources\上一首.ico" />
     <Content Include="Resources\上一首.png" />
     <Content Include="Resources\上一首hover.png" />
