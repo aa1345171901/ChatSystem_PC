@@ -151,6 +151,9 @@
     <Compile Include="Manager\Request\SendByChatRequest.cs" />
     <Compile Include="Manager\Request\SetSystemFaceRequest.cs" />
     <Compile Include="Manager\Request\UpdateStrangerRequest.cs" />
+    <Compile Include="Model\ImagePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\MyColorTable.cs" />
     <Compile Include="Model\NewPanel.cs">
@@ -244,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\album.png" />
+    <None Include="Resources\backgroundMask.png" />
     <Content Include="Resources\DefaultAlbum.png" />
     <Content Include="Resources\defaultSmallAblum.png" />
     <Content Include="Resources\favorite.png" />
@@ -261,6 +265,10 @@
     <Content Include="Resources\musicLibrary.png" />
     <None Include="Resources\Ps123.Net_0663.jpg" />
     <Content Include="Resources\ranking.png" />
+    <None Include="Resources\recommendBox1.png" />
+    <None Include="Resources\recommendBox2.png" />
+    <None Include="Resources\recommendBox3.png" />
+    <None Include="Resources\recommendBox4.png" />
     <Content Include="Resources\star.png" />
     <None Include="Resources\starUser.png" />
     <Content Include="Resources\user.png" />

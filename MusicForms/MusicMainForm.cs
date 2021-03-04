@@ -22,6 +22,7 @@
         private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
 
         private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
+        private string backGroundPath = Application.StartupPath + "\\BackGround\\"; // 获取保存头像的文件
 
         SongsInfo currSelectedSong = new SongsInfo(null);       // 用于查看详情，打开本地歌曲右键菜单
         SongsInfo currPlaySong = new SongsInfo(null);       // 记录当前选中播放的歌曲
@@ -46,6 +47,8 @@
         private int lrcCount = 0;  // 保存歌词的行数
 
         private Label[] lyricLabels = new Label[11]; // 用于处理歌词的label
+
+        private List<Image> images = new List<Image>(); // 用于存储音乐库顶部的图片
 
         // 随机0，单曲循环1，列表循环2
         public enum PlayMode
@@ -154,6 +157,26 @@
 
             // 设置用户Id
             this.labelUserId.Text = "用户ID : " + UserHelper.LoginId.ToString();
+
+            string imagePath;
+            // 设置音乐库的图片,后续可以从服务器中获取，现在从本地模拟一下
+            for (int i = 1; i <= 8; i++)
+            {
+                imagePath = backGroundPath + "recommendImage" + i + ".png";
+                if (File.Exists(imagePath))
+                {
+                    Image img = Image.FromFile(imagePath).GetThumbnailImage(440, 200, null, IntPtr.Zero); ;
+                    images.Add(img);
+                }
+            }
+            imagePanel.AddLabel(imagePanel, images.Count);
+
+            // 给label添加事件
+            imagePanel.AddEvent(labelClickImage_MouseEnter);
+
+            pbRecommend1.BackgroundImage = images[0];
+            pbRecommend2.BackgroundImage = images[images.Count - 1];
+            pbRecommend3.BackgroundImage = images[1];
 
             // 设置开机自启
             StarUp("0");
@@ -1270,7 +1293,7 @@
                 toolTipListView.Show(
                     "歌名:" + lvi.SubItems[1].Text + "\n歌手:"
             + lvi.SubItems[2].Text + "\n专辑:" + lvi.SubItems[3].Text + "\n时长:"
-            + lvi.SubItems[4].Text + "\n大小:" + lvi.SubItems[5].Text + "\n添加时间"
+            + lvi.SubItems[4].Text + "\n大小:" + lvi.SubItems[5].Text + "\n添加时间:"
             + lvi.SubItems[6].Text + "\n位置:" + lvi.SubItems[7].Text, lvSongList, mousePoint);
                 timeCount = -4000;
             }
@@ -1895,6 +1918,8 @@
             {
                 case 0:
                     panelUser.Visible = false;
+                    panelMusicRecommend.Visible = false;
+                    timerImageShow.Stop();
 
                     lvSongList.Items.Clear();
                     AddSongsToListView(localSongsList);
@@ -1905,6 +1930,8 @@
                     break;
                 case 1:
                     panelUser.Visible = false;
+                    panelMusicRecommend.Visible = false;
+                    timerImageShow.Stop();
 
                     lvSongList.Items.Clear();
                     AddSongsToListView(favoriteSongsList);
@@ -1913,7 +1940,17 @@
                     tsmiFavorite.Visible = false;
                     pbAddSong.Visible = false;
                     break;
+                case 2:
+                    panelUser.Visible = false;
+
+                    panelMusicRecommend.Visible = true;
+                    timerImageShow.Start();
+                    panelMusicRecommend.BringToFront();
+                    break;
                 case 3:
+                    panelMusicRecommend.Visible = false;
+                    timerImageShow.Stop();
+
                     panelUser.Visible = true;
                     labelLoclaListCountUser.Text = localSongsList.Count + "首歌曲";
                     labelFavoriteListCountUser.Text = favoriteSongsList.Count + "首歌曲";
@@ -2652,6 +2689,72 @@
             else if (pb.Name == "pbLyricClose")
             {
                 pbLyricClose.Image = Resources.lyricClose;
+            }
+        }
+
+
+        /// <summary>
+        /// 控制图片更换
+        /// </summary>
+        private void timerImageShow_Tick(object sender, EventArgs e)
+        {
+            timerImageChange += 100;
+            imagePanel.SetBackColor(imageIndex);
+            if (timerImageChange >= 5000)
+            {
+                if (imageIndex == images.Count - 1)
+                {
+                    imageIndex = 0;
+                }
+                else
+                {
+                    imageIndex++;
+                }
+                timerImageChange = 0;
+                ShowImage();
+                imagePanel.SetBackColor(imageIndex);
+            }
+        }
+
+        int imageIndex = 0; // 设置显示的图片索引
+        double timerImageChange = 0; // 图片显示时间，5s更换
+
+        /// <summary>
+        /// 鼠标进入图片时，切换图片
+        /// </summary>
+        private void labelClickImage_MouseEnter(object sender, EventArgs e)
+        {
+            timerImageChange = 0;
+            Label label = (Label)sender;
+            imageIndex = imagePanel.GetIndexOfLabel(label);
+            ShowImage();
+        }
+
+        /// <summary>
+        /// 用于显示图片
+        /// </summary>
+        private void ShowImage()
+        {
+            // 点击的是第一个label,显示最后一个第一个和第二个图片
+            if (imageIndex == 0)
+            {
+                pbRecommend1.BackgroundImage = images[imageIndex];
+                pbRecommend2.BackgroundImage = images[images.Count - 1];
+                pbRecommend3.BackgroundImage = images[imageIndex + 1];
+            }
+            else if (imageIndex == images.Count - 1)
+            {
+                // 点击的是最后label,显示最后一个第一个和倒数二个图片
+                pbRecommend1.BackgroundImage = images[imageIndex];
+                pbRecommend2.BackgroundImage = images[imageIndex - 1];
+                pbRecommend3.BackgroundImage = images[0];
+            }
+            else
+            {
+                // 显示前后两个
+                pbRecommend1.BackgroundImage = images[imageIndex];
+                pbRecommend2.BackgroundImage = images[imageIndex - 1];
+                pbRecommend3.BackgroundImage = images[imageIndex + 1];
             }
         }
     }

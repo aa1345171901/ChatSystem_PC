@@ -73,6 +73,16 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap backgroundMask {
+            get {
+                object obj = ResourceManager.GetObject("backgroundMask", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap DefaultAlbum {
             get {
                 object obj = ResourceManager.GetObject("DefaultAlbum", resourceCulture);
@@ -236,6 +246,46 @@ namespace QQ_piracy.Properties {
         internal static System.Drawing.Bitmap ranking {
             get {
                 object obj = ResourceManager.GetObject("ranking", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recommendBox1 {
+            get {
+                object obj = ResourceManager.GetObject("recommendBox1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recommendBox2 {
+            get {
+                object obj = ResourceManager.GetObject("recommendBox2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recommendBox3 {
+            get {
+                object obj = ResourceManager.GetObject("recommendBox3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recommendBox4 {
+            get {
+                object obj = ResourceManager.GetObject("recommendBox4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
