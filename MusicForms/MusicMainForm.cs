@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
@@ -50,6 +51,8 @@
 
         private List<Image> images = new List<Image>(); // 用于存储音乐库顶部的图片
 
+        private LyricDesktop lyricDesktop = null;
+
         // 随机0，单曲循环1，列表循环2
         public enum PlayMode
         {
@@ -60,10 +63,13 @@
 
         public PlayMode CurrPlayMode = PlayMode.Shuffle;
 
-        Point downPoint; // 用于设置拖动设置的位置
+        // Point downPoint; // 用于设置拖动设置的位置
 
         List<MenuItem> menuItemList;    // 界面左边的菜单列表
         List<string> songItemList = new List<string>();    // 播放列表 显示的歌曲名
+
+        Point lyricDesktopPoint = new Point(0, 0); // 保存桌面歌词位置
+        int lyricTip = 0;  // 用户是否打开桌面歌词，0为关闭
 
         public MusicMainForm()
         {
@@ -95,6 +101,11 @@
             cmsSongListMenu.BackColor = Color.FromArgb(48, 47, 51);
 
             pbAddSong.Visible = false;
+
+            // 获取桌面歌词第一次出现的位置
+            int w = Screen.PrimaryScreen.Bounds.Width;  // 获取屏幕的宽
+            int h = Screen.PrimaryScreen.Bounds.Height; // 获取屏幕的高
+            lyricDesktopPoint = new Point(w / 4 - 100, h - 200); // 默认位置我屏幕分辨率时1366*768; 
         }
 
         private void MusicMainForm_Load(object sender, EventArgs e)
@@ -139,6 +150,12 @@
             lyricLabels[8] = labelLyric9;
             lyricLabels[9] = labelLyric10;
             lyricLabels[10] = labelLyric11;
+
+            // 为1就打开桌面歌词
+            if (lyricTip == 1)
+            {
+                ShowLyricDesk();
+            }
 
             // 设置头像
             string appPath = faceFilePath + UserHelper.FaceId + ".jpg";
@@ -263,6 +280,8 @@
                     SaveSettings();
 
                     // 获取歌词
+
+                    timerLyrc.Start();
                     GetLrc();
                     if (panelLyrc.Visible)
                     {
@@ -271,15 +290,17 @@
                             labelNoLyric.Visible = false;
                             linkLabelAddLyrc.Visible = false;
                             panelLyricLabels.Visible = true;
-                            timerLyrc.Start();
                         }
                         else
                         {
-                            timerLyrc.Stop();
                             labelNoLyric.Visible = true;
                             linkLabelAddLyrc.Visible = true;
                             panelLyricLabels.Visible = false;
                         }
+                    }
+                    if (lrc == null && lyricDesktop != null)
+                    {
+                        lyricDesktop.SetLyric("暂无歌词", "");
                     }
 
                     // 重新播放，当前歌词索引设0
@@ -756,22 +777,38 @@
         }
 
         /// <summary>
-        /// 拖动窗口点击
+        /// 拖动窗口点击,  
         /// </summary>
         private void Panel_MouseDown(object sender, MouseEventArgs e)
         {
-            downPoint = new Point(e.X, e.Y);
+            // downPoint = new Point(e.X, e.Y);
         }
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
 
         /// <summary>
         /// 拖动窗口移动
         /// </summary>
         private void Panel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Location = new Point(this.Location.X + e.X - downPoint.X, this.Location.Y + e.Y - downPoint.Y);
-            }
+            // 此方法不行，换一种，此方法是down,Move连用
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    this.Location = new Point(this.Location.X + e.X - downPoint.X, this.Location.Y + e.Y - downPoint.Y);
+            //}
+
+            //常量
+            int WM_SYSCOMMAND = 0x0112;
+
+            //窗体移动
+            int SC_MOVE = 0xF010;
+            int HTCAPTION = 0x0002;
+
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
 
         /// <summary>
@@ -784,6 +821,10 @@
             {
                 this.WindowState = FormWindowState.Minimized;
                 this.Visible = false;
+                if (lyricDesktop != null)
+                {
+                    lyricDesktop.Show();
+                }
             }
             else if (currPicBox.Name == "pbMaxForm")
             {
@@ -792,6 +833,10 @@
             else if (currPicBox.Name == "pbMinForm")
             {
                 this.WindowState = FormWindowState.Minimized;
+                if (lyricDesktop != null)
+                {
+                    lyricDesktop.Show();
+                }
             }
         }
 
@@ -1004,7 +1049,12 @@
                 songPath += item.FilePath + "}.{" + item.FilePathLrc + "},{";
             }
 
-            string saveString = volume + "};{" + palyMode + "};{" + currIndex + "};{" + songPath;
+            int x = 0,y = 0;
+            x = lyricDesktopPoint.X;
+            y = lyricDesktopPoint.Y;
+            string point = x + "},{" + y;
+
+            string saveString = volume + "};{" + palyMode + "};{" + currIndex + "};{" + songPath + "};{" + lyricTip + "};{" + point;
 
             File.WriteAllText(currentSongFilePath, saveString);
         }
@@ -1056,6 +1106,13 @@
 
                         // 创建随机序列用于随机播放
                         BuildRandomList(listSong.Count);
+
+                        lyricTip = int.Parse(arr[4]);  // 查看用户是否打开桌面歌词
+
+                        string[] points = arr[5].Split(new string[] { "},{" }, StringSplitOptions.None);
+                        int x = int.Parse(points[0]);
+                        int y = int.Parse(points[1]);
+                        lyricDesktopPoint = new Point(x, y);
                     }
                     catch (Exception e)
                     {
@@ -1596,6 +1653,21 @@
                     offset = 20;   // panel左边有一点缝隙
                 }
                 panelLyricIng.Width = offset;
+
+                // 设置桌面歌词
+                if (lyricDesktop != null)
+                {
+                    if (currLyricIndex % 2 == 0)
+                    {
+                        lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                        lyricDesktop.SetLyricIng(10, 0);
+                    }
+                    else
+                    {
+                        lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20));
+                    }
+                }
             }
         }
 
@@ -2422,6 +2494,7 @@
                     if ((line = sr.ReadLine()) == null)
                     {
                         lrc = null;
+                        lrcCount = 0;
                         return;
                     }
 
@@ -2477,7 +2550,13 @@
             int num = 11;
             int index;
 
-            if (currLyricIndex > lrcCount)
+            // 实时保存桌面歌词位置
+            if (lyricDesktop != null)
+            {
+                lyricDesktopPoint = lyricDesktop.Location;
+            }
+
+            if (currLyricIndex > lrcCount || lrc == null)
             {
                 return;
             }
@@ -2504,6 +2583,13 @@
                 // panelLyricIng 黄字，先设0，走满就继续滚动歌词，长度402
                 // 如果歌词长度不长就设之一些宽度 ，最多显示16字
                 panelLyricIng.Width = offset;
+
+                // 设置桌面歌词
+                if (lyricDesktop != null)
+                {
+                    lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                    lyricDesktop.SetLyricIng(20, 0);  // 前面那条歌词居左显示，不需要设置，右边的播放他时设置
+                }
             }
 
             // 歌曲唱完以后，后面显示为空
@@ -2514,6 +2600,19 @@
                 double allTimeLyricIng = TimeStringToDouble(currPlaySong.Duration.Remove(0, 3))
                     - TimeStringToDouble(lrc[1, currLyricIndex - 1]);
                 panelLyricIng.Width = offset + Convert.ToInt32((402 - offset) * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
+
+                // 设置桌面歌词
+                if (lyricDesktop != null)
+                {
+                    if (currLyricIndex % 2 == 0)
+                    {
+                        lyricDesktop.SetLyricIng(10 + Convert.ToInt32((500 - (offset * 1.3)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng), 0);
+                    }
+                    else
+                    {
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20) + Convert.ToInt32((500 - (offset * 2.5)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
+                    }
+                }
                 return;
             }
             else
@@ -2530,6 +2629,19 @@
                     TimeStringToDouble(lrc[1, currLyricIndex]) :
                     TimeStringToDouble(lrc[1, currLyricIndex]) - TimeStringToDouble(lrc[1, currLyricIndex - 1]);
                 panelLyricIng.Width = offset + Convert.ToInt32((402 - offset) * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
+
+                // 设置桌面歌词
+                if (lyricDesktop != null)
+                {
+                    if (currLyricIndex % 2 == 0)
+                    {
+                        lyricDesktop.SetLyricIng(10 + Convert.ToInt32((500 - (offset * 1.3)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng), 0);
+                    }
+                    else
+                    {
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20) + Convert.ToInt32((500 - (offset * 2.5)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
+                    }
+                }
                 return;
             }
             else
@@ -2546,6 +2658,7 @@
                 }
 
                 labelLyricIng.Text = labelLyric5.Text;
+
                 if (14 - labelLyric5.Text.Length >= 1)
                 {
                     offset = (14 - labelLyric5.Text.Length) * 20 - 10;   // 总共最多可以显示有14个歌词
@@ -2555,6 +2668,21 @@
                     offset = 20;
                 }
                 panelLyricIng.Width = offset;
+            }
+
+            // 设置桌面歌词
+            if (lyricDesktop != null)
+            {
+                if (currLyricIndex % 2 == 0)
+                {
+                    lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                    lyricDesktop.SetLyricIng(10, 0);
+                }
+                else
+                {
+                    lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
+                    lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20));
+                }
             }
         }
 
@@ -2586,11 +2714,9 @@
                 labelNoLyric.Visible = false;
                 linkLabelAddLyrc.Visible = false;
                 panelLyricLabels.Visible = true;
-                timerLyrc.Start();
             }
             else
             {
-                timerLyrc.Stop();
                 labelNoLyric.Visible = true;
                 linkLabelAddLyrc.Visible = true;
                 panelLyricLabels.Visible = false;
@@ -2706,6 +2832,54 @@
             }
         }
 
+        /// <summary>
+        /// 桌面歌词点击,创建一个form,用timerLyrc显示桌面歌词
+        /// </summary>
+        private void pbLyric_Click(object sender, EventArgs e)
+        {
+            if (lyricDesktop == null)
+            {
+                lyricTip = 1;
+                ShowLyricDesk();
+            }
+            else
+            {
+                lyricTip = 0;
+                lyricDesktop.Dispose();
+                lyricDesktop = null;
+                toolTip1.SetToolTip(pbLyric, "显示桌面歌词");
+                tsmiSong.Text = "显示桌面歌词";
+            }
+        }
+
+        // 显示桌面歌词
+        private void ShowLyricDesk()
+        {
+            lyricDesktop = new LyricDesktop();
+            lyricDesktop.Show(this);
+            lyricDesktop.Focus();
+            lyricDesktop.TopMost = true;
+            lyricDesktop.Location = lyricDesktopPoint;
+            if (lrc == null)
+            {
+                lyricDesktop.SetLyric("暂无歌词", "");
+            }
+            else
+            {
+                if (currLyricIndex % 2 == 0)
+                {
+                    lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                    lyricDesktop.SetLyricIng(10, 0);
+                }
+                else
+                {
+                    lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
+                    lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20));
+                }
+            }
+            toolTip1.SetToolTip(pbLyric, "隐藏桌面歌词");
+            tsmiSong.Text = "隐藏桌面歌词";
+        }
 
         /// <summary>
         /// 控制图片更换
@@ -2788,19 +2962,14 @@
                 labelNoLyric.Visible = true;
                 linkLabelAddLyrc.Visible = true;
                 panelLyricLabels.Visible = false;
-                timerLyrc.Stop();
                 setLyric();
+                timerLyrc.Stop();
+                if (lyricDesktop != null)
+                {
+                    lyricDesktop.SetLyric("暂无歌词", "");
+                }
             }
 
-        }
-
-        /// <summary>
-        /// 桌面歌词点击
-        /// </summary>
-        private void pbLyric_Click(object sender, EventArgs e)
-        {
-            LyricDesktop lyricDesktop = new LyricDesktop();
-            lyricDesktop.Show();
         }
     }
 }

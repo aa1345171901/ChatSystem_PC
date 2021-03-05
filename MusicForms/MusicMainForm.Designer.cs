@@ -34,49 +34,8 @@ namespace QQ_piracy.MusicForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicMainForm));
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.recommendBox4 = new System.Windows.Forms.PictureBox();
-            this.recommendBox3 = new System.Windows.Forms.PictureBox();
-            this.recommendBox2 = new System.Windows.Forms.PictureBox();
-            this.recommendBox1 = new System.Windows.Forms.PictureBox();
-            this.pbRecommend1 = new System.Windows.Forms.PictureBox();
-            this.pbRecommend3 = new System.Windows.Forms.PictureBox();
-            this.pbRecommend2 = new System.Windows.Forms.PictureBox();
-            this.pbFavoriteUser = new System.Windows.Forms.PictureBox();
-            this.pbUserLocal = new System.Windows.Forms.PictureBox();
-            this.pbBackGroundUser = new System.Windows.Forms.PictureBox();
-            this.pbMinForm = new System.Windows.Forms.PictureBox();
-            this.pbMaxForm = new System.Windows.Forms.PictureBox();
-            this.pbCloseForm = new System.Windows.Forms.PictureBox();
-            this.labelListCount = new System.Windows.Forms.Label();
-            this.pbHiFi = new System.Windows.Forms.PictureBox();
-            this.pbMusicStyle = new System.Windows.Forms.PictureBox();
-            this.pbListCount = new System.Windows.Forms.PictureBox();
-            this.pbLike = new System.Windows.Forms.PictureBox();
-            this.pbLyric = new System.Windows.Forms.PictureBox();
-            this.btnPlayMode = new System.Windows.Forms.Button();
-            this.labelMusicDetail = new System.Windows.Forms.Label();
-            this.pbSmallAlbum = new System.Windows.Forms.PictureBox();
-            this.pbNext = new System.Windows.Forms.PictureBox();
-            this.pbBack = new System.Windows.Forms.PictureBox();
-            this.pbPlay = new System.Windows.Forms.PictureBox();
-            this.panelLyricLabels = new QQ_piracy.Model.NewPanel(this.components);
             this.cmsLyricDelete = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiLyricDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelLyricIng = new System.Windows.Forms.Panel();
-            this.labelLyricIng = new System.Windows.Forms.Label();
-            this.labelLyric1 = new System.Windows.Forms.Label();
-            this.labelLyric2 = new System.Windows.Forms.Label();
-            this.labelLyric3 = new System.Windows.Forms.Label();
-            this.labelLyric4 = new System.Windows.Forms.Label();
-            this.labelLyric6 = new System.Windows.Forms.Label();
-            this.labelLyric5 = new System.Windows.Forms.Label();
-            this.labelLyric7 = new System.Windows.Forms.Label();
-            this.labelLyric8 = new System.Windows.Forms.Label();
-            this.labelLyric9 = new System.Windows.Forms.Label();
-            this.labelLyric10 = new System.Windows.Forms.Label();
-            this.labelLyric11 = new System.Windows.Forms.Label();
-            this.pbLyricClose = new System.Windows.Forms.PictureBox();
-            this.pbLyricMin = new System.Windows.Forms.PictureBox();
             this.tbMusicVolume = new System.Windows.Forms.TrackBar();
             this.panelMusicVlume = new System.Windows.Forms.Panel();
             this.lvSongList = new System.Windows.Forms.ListView();
@@ -123,18 +82,28 @@ namespace QQ_piracy.MusicForms
             this.LabelRecommendBox3 = new System.Windows.Forms.Label();
             this.LabelRecommendBox2 = new System.Windows.Forms.Label();
             this.LabelRecommendBox4 = new System.Windows.Forms.Label();
+            this.recommendBox4 = new System.Windows.Forms.PictureBox();
+            this.recommendBox3 = new System.Windows.Forms.PictureBox();
+            this.recommendBox2 = new System.Windows.Forms.PictureBox();
+            this.recommendBox1 = new System.Windows.Forms.PictureBox();
             this.imagePanel = new QQ_piracy.Model.ImagePanel(this.components);
+            this.pbRecommend1 = new System.Windows.Forms.PictureBox();
+            this.pbRecommend3 = new System.Windows.Forms.PictureBox();
+            this.pbRecommend2 = new System.Windows.Forms.PictureBox();
             this.panelUser = new QQ_piracy.Model.NewPanel(this.components);
             this.labelFavoriteListUser = new System.Windows.Forms.Label();
             this.labelFavoriteListCountUser = new System.Windows.Forms.Label();
             this.labelLoclaListCountUser = new System.Windows.Forms.Label();
             this.labelLocalListUser = new System.Windows.Forms.Label();
+            this.pbFavoriteUser = new System.Windows.Forms.PictureBox();
+            this.pbUserLocal = new System.Windows.Forms.PictureBox();
             this.separator2 = new System.Windows.Forms.Label();
             this.labelSelfMusicList = new System.Windows.Forms.Label();
             this.separator = new System.Windows.Forms.Label();
             this.pbUserFace = new System.Windows.Forms.PictureBox();
             this.labelUserNickName = new System.Windows.Forms.Label();
             this.labelUserId = new System.Windows.Forms.Label();
+            this.pbBackGroundUser = new System.Windows.Forms.PictureBox();
             this.panelListSong = new QQ_piracy.Model.NewPanel(this.components);
             this.labelClearSongList = new System.Windows.Forms.Label();
             this.pbListSongClose = new System.Windows.Forms.PictureBox();
@@ -146,41 +115,46 @@ namespace QQ_piracy.MusicForms
             this.labelNickName = new System.Windows.Forms.Label();
             this.txtSreachSongName = new System.Windows.Forms.TextBox();
             this.pbFace = new System.Windows.Forms.PictureBox();
+            this.pbMinForm = new System.Windows.Forms.PictureBox();
+            this.pbMaxForm = new System.Windows.Forms.PictureBox();
+            this.pbCloseForm = new System.Windows.Forms.PictureBox();
             this.panelPlayControl = new QQ_piracy.Model.NewPanel(this.components);
+            this.labelListCount = new System.Windows.Forms.Label();
+            this.pbHiFi = new System.Windows.Forms.PictureBox();
+            this.pbMusicStyle = new System.Windows.Forms.PictureBox();
+            this.pbListCount = new System.Windows.Forms.PictureBox();
+            this.pbLike = new System.Windows.Forms.PictureBox();
+            this.pbLyric = new System.Windows.Forms.PictureBox();
             this.pbVolume = new System.Windows.Forms.PictureBox();
             this.tackBarMove = new System.Windows.Forms.TrackBar();
+            this.btnPlayMode = new System.Windows.Forms.Button();
             this.labelMusicTimer = new System.Windows.Forms.Label();
+            this.labelMusicDetail = new System.Windows.Forms.Label();
+            this.pbSmallAlbum = new System.Windows.Forms.PictureBox();
+            this.pbNext = new System.Windows.Forms.PictureBox();
+            this.pbBack = new System.Windows.Forms.PictureBox();
+            this.pbPlay = new System.Windows.Forms.PictureBox();
             this.panelLyrc = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelLyricLabels = new QQ_piracy.Model.NewPanel(this.components);
+            this.panelLyricIng = new System.Windows.Forms.Panel();
+            this.labelLyricIng = new System.Windows.Forms.Label();
+            this.labelLyric1 = new System.Windows.Forms.Label();
+            this.labelLyric2 = new System.Windows.Forms.Label();
+            this.labelLyric3 = new System.Windows.Forms.Label();
+            this.labelLyric4 = new System.Windows.Forms.Label();
+            this.labelLyric6 = new System.Windows.Forms.Label();
+            this.labelLyric5 = new System.Windows.Forms.Label();
+            this.labelLyric7 = new System.Windows.Forms.Label();
+            this.labelLyric8 = new System.Windows.Forms.Label();
+            this.labelLyric9 = new System.Windows.Forms.Label();
+            this.labelLyric10 = new System.Windows.Forms.Label();
+            this.labelLyric11 = new System.Windows.Forms.Label();
+            this.pbLyricClose = new System.Windows.Forms.PictureBox();
+            this.pbLyricMin = new System.Windows.Forms.PictureBox();
             this.labelNoLyric = new System.Windows.Forms.Label();
             this.linkLabelAddLyrc = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFavoriteUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUserLocal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBackGroundUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHiFi)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMusicStyle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbListCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLike)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLyric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSmallAlbum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).BeginInit();
-            this.panelLyricLabels.SuspendLayout();
             this.cmsLyricDelete.SuspendLayout();
-            this.panelLyricIng.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLyricClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).BeginInit();
             this.panelMusicVlume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).BeginInit();
@@ -189,18 +163,44 @@ namespace QQ_piracy.MusicForms
             this.cmsPlayModeMenu.SuspendLayout();
             this.cmsListSongMenu.SuspendLayout();
             this.panelMusicRecommend.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox1)).BeginInit();
             this.imagePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend2)).BeginInit();
             this.panelUser.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFavoriteUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUserLocal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserFace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBackGroundUser)).BeginInit();
             this.panelListSong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).BeginInit();
             this.panelMenu.SuspendLayout();
             this.panelSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).BeginInit();
             this.panelPlayControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHiFi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMusicStyle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbListCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLike)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSmallAlbum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).BeginInit();
             this.panelLyrc.SuspendLayout();
+            this.panelLyricLabels.SuspendLayout();
+            this.panelLyricIng.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).BeginInit();
             this.SuspendLayout();
             // 
             // axWindowsMediaPlayer1
@@ -213,354 +213,6 @@ namespace QQ_piracy.MusicForms
             this.axWindowsMediaPlayer1.TabIndex = 0;
             this.axWindowsMediaPlayer1.Visible = false;
             this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.AxWmp_PlayStateChange);
-            // 
-            // recommendBox4
-            // 
-            this.recommendBox4.Image = global::QQ_piracy.Properties.Resources.recommendBox4;
-            this.recommendBox4.Location = new System.Drawing.Point(608, 293);
-            this.recommendBox4.Name = "recommendBox4";
-            this.recommendBox4.Size = new System.Drawing.Size(188, 100);
-            this.recommendBox4.TabIndex = 3;
-            this.recommendBox4.TabStop = false;
-            this.toolTip1.SetToolTip(this.recommendBox4, "暂未开发w(ﾟДﾟ)w");
-            // 
-            // recommendBox3
-            // 
-            this.recommendBox3.Image = global::QQ_piracy.Properties.Resources.recommendBox3;
-            this.recommendBox3.Location = new System.Drawing.Point(407, 293);
-            this.recommendBox3.Name = "recommendBox3";
-            this.recommendBox3.Size = new System.Drawing.Size(188, 100);
-            this.recommendBox3.TabIndex = 3;
-            this.recommendBox3.TabStop = false;
-            this.toolTip1.SetToolTip(this.recommendBox3, "暂未开发w(ﾟДﾟ)w");
-            // 
-            // recommendBox2
-            // 
-            this.recommendBox2.Image = global::QQ_piracy.Properties.Resources.recommendBox2;
-            this.recommendBox2.Location = new System.Drawing.Point(206, 293);
-            this.recommendBox2.Name = "recommendBox2";
-            this.recommendBox2.Size = new System.Drawing.Size(188, 100);
-            this.recommendBox2.TabIndex = 3;
-            this.recommendBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.recommendBox2, "暂未开发w(ﾟДﾟ)w");
-            // 
-            // recommendBox1
-            // 
-            this.recommendBox1.Image = global::QQ_piracy.Properties.Resources.recommendBox1;
-            this.recommendBox1.Location = new System.Drawing.Point(6, 293);
-            this.recommendBox1.Name = "recommendBox1";
-            this.recommendBox1.Size = new System.Drawing.Size(188, 100);
-            this.recommendBox1.TabIndex = 3;
-            this.recommendBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.recommendBox1, "暂未开发w(ﾟДﾟ)w");
-            // 
-            // pbRecommend1
-            // 
-            this.pbRecommend1.BackColor = System.Drawing.Color.White;
-            this.pbRecommend1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbRecommend1.Location = new System.Drawing.Point(125, 0);
-            this.pbRecommend1.Name = "pbRecommend1";
-            this.pbRecommend1.Size = new System.Drawing.Size(440, 200);
-            this.pbRecommend1.TabIndex = 0;
-            this.pbRecommend1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbRecommend1, "暂未开发╰(￣ω￣ｏ)");
-            // 
-            // pbRecommend3
-            // 
-            this.pbRecommend3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbRecommend3.Image = global::QQ_piracy.Properties.Resources.backgroundMask;
-            this.pbRecommend3.Location = new System.Drawing.Point(252, 26);
-            this.pbRecommend3.Name = "pbRecommend3";
-            this.pbRecommend3.Size = new System.Drawing.Size(440, 174);
-            this.pbRecommend3.TabIndex = 0;
-            this.pbRecommend3.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbRecommend3, "w(ﾟДﾟ)w");
-            // 
-            // pbRecommend2
-            // 
-            this.pbRecommend2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbRecommend2.Image = global::QQ_piracy.Properties.Resources.backgroundMask;
-            this.pbRecommend2.Location = new System.Drawing.Point(0, 26);
-            this.pbRecommend2.Name = "pbRecommend2";
-            this.pbRecommend2.Size = new System.Drawing.Size(440, 174);
-            this.pbRecommend2.TabIndex = 0;
-            this.pbRecommend2.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbRecommend2, "(^^ゞ");
-            // 
-            // pbFavoriteUser
-            // 
-            this.pbFavoriteUser.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.pbFavoriteUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbFavoriteUser.Image = global::QQ_piracy.Properties.Resources.starUser;
-            this.pbFavoriteUser.Location = new System.Drawing.Point(198, 278);
-            this.pbFavoriteUser.Name = "pbFavoriteUser";
-            this.pbFavoriteUser.Size = new System.Drawing.Size(125, 125);
-            this.pbFavoriteUser.TabIndex = 6;
-            this.pbFavoriteUser.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbFavoriteUser, "打开收藏音乐列表");
-            this.pbFavoriteUser.Click += new System.EventHandler(this.pbUserLocal_Click);
-            // 
-            // pbUserLocal
-            // 
-            this.pbUserLocal.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.pbUserLocal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbUserLocal.Image = global::QQ_piracy.Properties.Resources.listUser;
-            this.pbUserLocal.Location = new System.Drawing.Point(36, 278);
-            this.pbUserLocal.Name = "pbUserLocal";
-            this.pbUserLocal.Size = new System.Drawing.Size(125, 125);
-            this.pbUserLocal.TabIndex = 6;
-            this.pbUserLocal.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbUserLocal, "打开本地音乐列表");
-            this.pbUserLocal.Click += new System.EventHandler(this.pbUserLocal_Click);
-            // 
-            // pbBackGroundUser
-            // 
-            this.pbBackGroundUser.BackColor = System.Drawing.Color.Transparent;
-            this.pbBackGroundUser.Image = global::QQ_piracy.Properties.Resources.Ps123_Net_0663;
-            this.pbBackGroundUser.Location = new System.Drawing.Point(35, 16);
-            this.pbBackGroundUser.Name = "pbBackGroundUser";
-            this.pbBackGroundUser.Size = new System.Drawing.Size(731, 203);
-            this.pbBackGroundUser.TabIndex = 0;
-            this.pbBackGroundUser.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbBackGroundUser, "部分功能尚未完善，Σ(っ °Д °;)っ");
-            // 
-            // pbMinForm
-            // 
-            this.pbMinForm.Image = ((System.Drawing.Image)(resources.GetObject("pbMinForm.Image")));
-            this.pbMinForm.Location = new System.Drawing.Point(878, 15);
-            this.pbMinForm.Name = "pbMinForm";
-            this.pbMinForm.Padding = new System.Windows.Forms.Padding(6);
-            this.pbMinForm.Size = new System.Drawing.Size(30, 30);
-            this.pbMinForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMinForm.TabIndex = 22;
-            this.pbMinForm.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbMinForm, "最小化");
-            this.pbMinForm.Click += new System.EventHandler(this.FormControlButton_Click);
-            this.pbMinForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
-            this.pbMinForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
-            // 
-            // pbMaxForm
-            // 
-            this.pbMaxForm.Image = ((System.Drawing.Image)(resources.GetObject("pbMaxForm.Image")));
-            this.pbMaxForm.Location = new System.Drawing.Point(909, 16);
-            this.pbMaxForm.Name = "pbMaxForm";
-            this.pbMaxForm.Padding = new System.Windows.Forms.Padding(6);
-            this.pbMaxForm.Size = new System.Drawing.Size(28, 28);
-            this.pbMaxForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMaxForm.TabIndex = 23;
-            this.pbMaxForm.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbMaxForm, "最大化");
-            this.pbMaxForm.Click += new System.EventHandler(this.FormControlButton_Click);
-            this.pbMaxForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
-            this.pbMaxForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
-            // 
-            // pbCloseForm
-            // 
-            this.pbCloseForm.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseForm.Image")));
-            this.pbCloseForm.Location = new System.Drawing.Point(938, 15);
-            this.pbCloseForm.Name = "pbCloseForm";
-            this.pbCloseForm.Padding = new System.Windows.Forms.Padding(8);
-            this.pbCloseForm.Size = new System.Drawing.Size(30, 30);
-            this.pbCloseForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCloseForm.TabIndex = 24;
-            this.pbCloseForm.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbCloseForm, "关闭");
-            this.pbCloseForm.Click += new System.EventHandler(this.FormControlButton_Click);
-            this.pbCloseForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
-            this.pbCloseForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
-            // 
-            // labelListCount
-            // 
-            this.labelListCount.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelListCount.ForeColor = System.Drawing.Color.Silver;
-            this.labelListCount.Location = new System.Drawing.Point(946, 30);
-            this.labelListCount.Name = "labelListCount";
-            this.labelListCount.Size = new System.Drawing.Size(41, 25);
-            this.labelListCount.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.labelListCount, "播放列表");
-            this.labelListCount.Click += new System.EventHandler(this.btnSongList_Click);
-            this.labelListCount.MouseLeave += new System.EventHandler(this.pbListCount_MouseLeave);
-            this.labelListCount.MouseHover += new System.EventHandler(this.pbListCount_MouseHover);
-            // 
-            // pbHiFi
-            // 
-            this.pbHiFi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbHiFi.Image = global::QQ_piracy.Properties.Resources.HiFi;
-            this.pbHiFi.Location = new System.Drawing.Point(777, 12);
-            this.pbHiFi.Name = "pbHiFi";
-            this.pbHiFi.Size = new System.Drawing.Size(48, 48);
-            this.pbHiFi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbHiFi.TabIndex = 19;
-            this.pbHiFi.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbHiFi, "开启HiFi独占模式（功能暂未开启）");
-            this.pbHiFi.MouseLeave += new System.EventHandler(this.pbHiFi_MouseLeave);
-            this.pbHiFi.MouseHover += new System.EventHandler(this.pbHiFi_MouseHover);
-            // 
-            // pbMusicStyle
-            // 
-            this.pbMusicStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbMusicStyle.Image = global::QQ_piracy.Properties.Resources.音效;
-            this.pbMusicStyle.Location = new System.Drawing.Point(713, 12);
-            this.pbMusicStyle.Name = "pbMusicStyle";
-            this.pbMusicStyle.Size = new System.Drawing.Size(48, 48);
-            this.pbMusicStyle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbMusicStyle.TabIndex = 19;
-            this.pbMusicStyle.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbMusicStyle, "点击开启音效（功能暂未开启）");
-            this.pbMusicStyle.MouseLeave += new System.EventHandler(this.pbMusicStyle_MouseLeave);
-            this.pbMusicStyle.MouseHover += new System.EventHandler(this.pbMusicStyle_MouseHover);
-            // 
-            // pbListCount
-            // 
-            this.pbListCount.Image = global::QQ_piracy.Properties.Resources.列表;
-            this.pbListCount.Location = new System.Drawing.Point(926, 24);
-            this.pbListCount.Name = "pbListCount";
-            this.pbListCount.Size = new System.Drawing.Size(25, 25);
-            this.pbListCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbListCount.TabIndex = 19;
-            this.pbListCount.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbListCount, "播放列表");
-            this.pbListCount.Click += new System.EventHandler(this.btnSongList_Click);
-            this.pbListCount.MouseLeave += new System.EventHandler(this.pbListCount_MouseLeave);
-            this.pbListCount.MouseHover += new System.EventHandler(this.pbListCount_MouseHover);
-            // 
-            // pbLike
-            // 
-            this.pbLike.Image = global::QQ_piracy.Properties.Resources.收藏;
-            this.pbLike.Location = new System.Drawing.Point(883, 24);
-            this.pbLike.Name = "pbLike";
-            this.pbLike.Size = new System.Drawing.Size(22, 22);
-            this.pbLike.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLike.TabIndex = 19;
-            this.pbLike.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbLike, "收藏");
-            this.pbLike.Click += new System.EventHandler(this.pbLikeBtnClick);
-            // 
-            // pbLyric
-            // 
-            this.pbLyric.Image = global::QQ_piracy.Properties.Resources.词;
-            this.pbLyric.Location = new System.Drawing.Point(841, 21);
-            this.pbLyric.Name = "pbLyric";
-            this.pbLyric.Size = new System.Drawing.Size(30, 30);
-            this.pbLyric.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLyric.TabIndex = 19;
-            this.pbLyric.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbLyric, "显示桌面歌词");
-            this.pbLyric.Click += new System.EventHandler(this.pbLyric_Click);
-            this.pbLyric.MouseLeave += new System.EventHandler(this.pbLyric_MouseLeave);
-            this.pbLyric.MouseHover += new System.EventHandler(this.pbLyric_MouseHover);
-            // 
-            // btnPlayMode
-            // 
-            this.btnPlayMode.BackgroundImage = global::QQ_piracy.Properties.Resources.随机播放;
-            this.btnPlayMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPlayMode.FlatAppearance.BorderSize = 0;
-            this.btnPlayMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlayMode.Location = new System.Drawing.Point(621, 25);
-            this.btnPlayMode.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPlayMode.Name = "btnPlayMode";
-            this.btnPlayMode.Size = new System.Drawing.Size(25, 25);
-            this.btnPlayMode.TabIndex = 19;
-            this.toolTip1.SetToolTip(this.btnPlayMode, "随机播放");
-            this.btnPlayMode.UseVisualStyleBackColor = true;
-            this.btnPlayMode.BackgroundImageChanged += new System.EventHandler(this.btnPlayMode_BackgroundImageChanged);
-            this.btnPlayMode.Click += new System.EventHandler(this.btnPlayMode_Click);
-            // 
-            // labelMusicDetail
-            // 
-            this.labelMusicDetail.AutoSize = true;
-            this.labelMusicDetail.BackColor = System.Drawing.Color.Transparent;
-            this.labelMusicDetail.Font = new System.Drawing.Font("幼圆", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelMusicDetail.ForeColor = System.Drawing.Color.White;
-            this.labelMusicDetail.Location = new System.Drawing.Point(255, 18);
-            this.labelMusicDetail.Name = "labelMusicDetail";
-            this.labelMusicDetail.Size = new System.Drawing.Size(98, 13);
-            this.labelMusicDetail.TabIndex = 20;
-            this.labelMusicDetail.Text = "音乐名 - 歌手";
-            this.toolTip1.SetToolTip(this.labelMusicDetail, "音乐名 - 歌手");
-            // 
-            // pbSmallAlbum
-            // 
-            this.pbSmallAlbum.BackgroundImage = global::QQ_piracy.Properties.Resources.zzz;
-            this.pbSmallAlbum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbSmallAlbum.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pbSmallAlbum.Location = new System.Drawing.Point(185, 3);
-            this.pbSmallAlbum.Name = "pbSmallAlbum";
-            this.pbSmallAlbum.Size = new System.Drawing.Size(64, 64);
-            this.pbSmallAlbum.TabIndex = 19;
-            this.pbSmallAlbum.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbSmallAlbum, "打开音乐详情页");
-            this.pbSmallAlbum.Click += new System.EventHandler(this.pbSmallAlbum_Click);
-            // 
-            // pbNext
-            // 
-            this.pbNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbNext.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pbNext.Image = global::QQ_piracy.Properties.Resources.下一首;
-            this.pbNext.Location = new System.Drawing.Point(133, 18);
-            this.pbNext.Name = "pbNext";
-            this.pbNext.Size = new System.Drawing.Size(35, 35);
-            this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbNext.TabIndex = 17;
-            this.pbNext.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbNext, "下一首");
-            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
-            this.pbNext.MouseLeave += new System.EventHandler(this.pbNext_MouseLeave);
-            this.pbNext.MouseHover += new System.EventHandler(this.pbNext_MouseHover);
-            // 
-            // pbBack
-            // 
-            this.pbBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbBack.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pbBack.Image = global::QQ_piracy.Properties.Resources.上一首;
-            this.pbBack.Location = new System.Drawing.Point(18, 18);
-            this.pbBack.Name = "pbBack";
-            this.pbBack.Size = new System.Drawing.Size(35, 35);
-            this.pbBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbBack.TabIndex = 16;
-            this.pbBack.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbBack, "上一首");
-            this.pbBack.Click += new System.EventHandler(this.pbBack_Click);
-            this.pbBack.MouseLeave += new System.EventHandler(this.pbBack_MouseLeave);
-            this.pbBack.MouseHover += new System.EventHandler(this.pbBack_MouseHover);
-            // 
-            // pbPlay
-            // 
-            this.pbPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbPlay.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pbPlay.Image = global::QQ_piracy.Properties.Resources.播放;
-            this.pbPlay.Location = new System.Drawing.Point(67, 9);
-            this.pbPlay.Name = "pbPlay";
-            this.pbPlay.Size = new System.Drawing.Size(50, 50);
-            this.pbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPlay.TabIndex = 15;
-            this.pbPlay.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbPlay, "播放/暂停");
-            this.pbPlay.Click += new System.EventHandler(this.pbPlay_Click);
-            this.pbPlay.MouseLeave += new System.EventHandler(this.pbPlay_MouseLeave);
-            this.pbPlay.MouseHover += new System.EventHandler(this.pbPlay_MouseHover);
-            // 
-            // panelLyricLabels
-            // 
-            this.panelLyricLabels.ContextMenuStrip = this.cmsLyricDelete;
-            this.panelLyricLabels.Controls.Add(this.panelLyricIng);
-            this.panelLyricLabels.Controls.Add(this.labelLyric1);
-            this.panelLyricLabels.Controls.Add(this.labelLyric2);
-            this.panelLyricLabels.Controls.Add(this.labelLyric3);
-            this.panelLyricLabels.Controls.Add(this.labelLyric4);
-            this.panelLyricLabels.Controls.Add(this.labelLyric6);
-            this.panelLyricLabels.Controls.Add(this.labelLyric5);
-            this.panelLyricLabels.Controls.Add(this.labelLyric7);
-            this.panelLyricLabels.Controls.Add(this.labelLyric8);
-            this.panelLyricLabels.Controls.Add(this.labelLyric9);
-            this.panelLyricLabels.Controls.Add(this.labelLyric10);
-            this.panelLyricLabels.Controls.Add(this.labelLyric11);
-            this.panelLyricLabels.Location = new System.Drawing.Point(281, 4);
-            this.panelLyricLabels.Name = "panelLyricLabels";
-            this.panelLyricLabels.Size = new System.Drawing.Size(461, 515);
-            this.panelLyricLabels.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.panelLyricLabels, "歌词有误？右键点击打开菜单删除吧");
-            this.panelLyricLabels.Visible = false;
             // 
             // cmsLyricDelete
             // 
@@ -575,170 +227,6 @@ namespace QQ_piracy.MusicForms
             this.tsmiLyricDelete.Size = new System.Drawing.Size(124, 22);
             this.tsmiLyricDelete.Text = "歌词删除";
             this.tsmiLyricDelete.Click += new System.EventHandler(this.tsmiLyricDelete_Click);
-            // 
-            // panelLyricIng
-            // 
-            this.panelLyricIng.Controls.Add(this.labelLyricIng);
-            this.panelLyricIng.Location = new System.Drawing.Point(27, 187);
-            this.panelLyricIng.Name = "panelLyricIng";
-            this.panelLyricIng.Size = new System.Drawing.Size(402, 42);
-            this.panelLyricIng.TabIndex = 5;
-            // 
-            // labelLyricIng
-            // 
-            this.labelLyricIng.Font = new System.Drawing.Font("幼圆", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyricIng.ForeColor = System.Drawing.Color.Yellow;
-            this.labelLyricIng.Location = new System.Drawing.Point(0, 0);
-            this.labelLyricIng.Name = "labelLyricIng";
-            this.labelLyricIng.Size = new System.Drawing.Size(402, 42);
-            this.labelLyricIng.TabIndex = 4;
-            this.labelLyricIng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.labelLyricIng, "歌词有误？右键点击打开菜单删除吧");
-            // 
-            // labelLyric1
-            // 
-            this.labelLyric1.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric1.ForeColor = System.Drawing.Color.White;
-            this.labelLyric1.Location = new System.Drawing.Point(44, 26);
-            this.labelLyric1.Name = "labelLyric1";
-            this.labelLyric1.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric1.TabIndex = 4;
-            this.labelLyric1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelLyric2
-            // 
-            this.labelLyric2.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric2.ForeColor = System.Drawing.Color.White;
-            this.labelLyric2.Location = new System.Drawing.Point(44, 66);
-            this.labelLyric2.Name = "labelLyric2";
-            this.labelLyric2.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric2.TabIndex = 4;
-            this.labelLyric2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelLyric3
-            // 
-            this.labelLyric3.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric3.ForeColor = System.Drawing.Color.White;
-            this.labelLyric3.Location = new System.Drawing.Point(44, 106);
-            this.labelLyric3.Name = "labelLyric3";
-            this.labelLyric3.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric3.TabIndex = 4;
-            this.labelLyric3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.labelLyric3, "歌词有误？右键点击打开菜单删除吧");
-            // 
-            // labelLyric4
-            // 
-            this.labelLyric4.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric4.ForeColor = System.Drawing.Color.White;
-            this.labelLyric4.Location = new System.Drawing.Point(44, 146);
-            this.labelLyric4.Name = "labelLyric4";
-            this.labelLyric4.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric4.TabIndex = 4;
-            this.labelLyric4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.labelLyric4, "歌词有误？右键点击打开菜单删除吧");
-            // 
-            // labelLyric6
-            // 
-            this.labelLyric6.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric6.ForeColor = System.Drawing.Color.White;
-            this.labelLyric6.Location = new System.Drawing.Point(44, 248);
-            this.labelLyric6.Name = "labelLyric6";
-            this.labelLyric6.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric6.TabIndex = 4;
-            this.labelLyric6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.labelLyric6, "歌词有误？右键点击打开菜单删除吧");
-            // 
-            // labelLyric5
-            // 
-            this.labelLyric5.Font = new System.Drawing.Font("幼圆", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric5.ForeColor = System.Drawing.Color.White;
-            this.labelLyric5.Location = new System.Drawing.Point(27, 187);
-            this.labelLyric5.Name = "labelLyric5";
-            this.labelLyric5.Size = new System.Drawing.Size(402, 42);
-            this.labelLyric5.TabIndex = 4;
-            this.labelLyric5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelLyric7
-            // 
-            this.labelLyric7.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric7.ForeColor = System.Drawing.Color.White;
-            this.labelLyric7.Location = new System.Drawing.Point(44, 288);
-            this.labelLyric7.Name = "labelLyric7";
-            this.labelLyric7.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric7.TabIndex = 4;
-            this.labelLyric7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.labelLyric7, "歌词有误？右键点击打开菜单删除吧");
-            // 
-            // labelLyric8
-            // 
-            this.labelLyric8.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric8.ForeColor = System.Drawing.Color.White;
-            this.labelLyric8.Location = new System.Drawing.Point(44, 328);
-            this.labelLyric8.Name = "labelLyric8";
-            this.labelLyric8.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric8.TabIndex = 4;
-            this.labelLyric8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.labelLyric8, "歌词有误？右键点击打开菜单删除吧");
-            // 
-            // labelLyric9
-            // 
-            this.labelLyric9.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric9.ForeColor = System.Drawing.Color.White;
-            this.labelLyric9.Location = new System.Drawing.Point(44, 368);
-            this.labelLyric9.Name = "labelLyric9";
-            this.labelLyric9.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric9.TabIndex = 4;
-            this.labelLyric9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelLyric10
-            // 
-            this.labelLyric10.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric10.ForeColor = System.Drawing.Color.White;
-            this.labelLyric10.Location = new System.Drawing.Point(44, 408);
-            this.labelLyric10.Name = "labelLyric10";
-            this.labelLyric10.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric10.TabIndex = 4;
-            this.labelLyric10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelLyric11
-            // 
-            this.labelLyric11.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelLyric11.ForeColor = System.Drawing.Color.White;
-            this.labelLyric11.Location = new System.Drawing.Point(44, 448);
-            this.labelLyric11.Name = "labelLyric11";
-            this.labelLyric11.Size = new System.Drawing.Size(357, 23);
-            this.labelLyric11.TabIndex = 4;
-            this.labelLyric11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pbLyricClose
-            // 
-            this.pbLyricClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbLyricClose.Image = global::QQ_piracy.Properties.Resources.lyricClose;
-            this.pbLyricClose.Location = new System.Drawing.Point(937, 12);
-            this.pbLyricClose.Name = "pbLyricClose";
-            this.pbLyricClose.Size = new System.Drawing.Size(40, 40);
-            this.pbLyricClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbLyricClose.TabIndex = 3;
-            this.pbLyricClose.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbLyricClose, "收起");
-            this.pbLyricClose.Click += new System.EventHandler(this.LyricButtonClick);
-            this.pbLyricClose.MouseEnter += new System.EventHandler(this.LyricButtonEnter);
-            this.pbLyricClose.MouseLeave += new System.EventHandler(this.LyricButtonLeave);
-            // 
-            // pbLyricMin
-            // 
-            this.pbLyricMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbLyricMin.Image = global::QQ_piracy.Properties.Resources.lyricMin;
-            this.pbLyricMin.Location = new System.Drawing.Point(878, 12);
-            this.pbLyricMin.Name = "pbLyricMin";
-            this.pbLyricMin.Size = new System.Drawing.Size(40, 40);
-            this.pbLyricMin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbLyricMin.TabIndex = 3;
-            this.pbLyricMin.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbLyricMin, "最小化");
-            this.pbLyricMin.Click += new System.EventHandler(this.LyricButtonClick);
-            this.pbLyricMin.MouseEnter += new System.EventHandler(this.LyricButtonEnter);
-            this.pbLyricMin.MouseLeave += new System.EventHandler(this.LyricButtonLeave);
             // 
             // tbMusicVolume
             // 
@@ -916,6 +404,7 @@ namespace QQ_piracy.MusicForms
             this.tsmiSong.Name = "tsmiSong";
             this.tsmiSong.Size = new System.Drawing.Size(148, 22);
             this.tsmiSong.Text = "显示桌面歌词";
+            this.tsmiSong.Click += new System.EventHandler(this.pbLyric_Click);
             // 
             // tsmiShowMain
             // 
@@ -1090,9 +579,9 @@ namespace QQ_piracy.MusicForms
             this.panelMusicRecommend.Controls.Add(this.recommendBox2);
             this.panelMusicRecommend.Controls.Add(this.recommendBox1);
             this.panelMusicRecommend.Controls.Add(this.imagePanel);
-            this.panelMusicRecommend.Location = new System.Drawing.Point(185, 56);
+            this.panelMusicRecommend.Location = new System.Drawing.Point(188, 54);
             this.panelMusicRecommend.Name = "panelMusicRecommend";
-            this.panelMusicRecommend.Size = new System.Drawing.Size(803, 469);
+            this.panelMusicRecommend.Size = new System.Drawing.Size(800, 471);
             this.panelMusicRecommend.TabIndex = 8;
             // 
             // LabelRecommendBox1
@@ -1131,6 +620,46 @@ namespace QQ_piracy.MusicForms
             this.LabelRecommendBox4.TabIndex = 4;
             this.LabelRecommendBox4.Text = "私人电台";
             // 
+            // recommendBox4
+            // 
+            this.recommendBox4.Image = global::QQ_piracy.Properties.Resources.recommendBox4;
+            this.recommendBox4.Location = new System.Drawing.Point(608, 293);
+            this.recommendBox4.Name = "recommendBox4";
+            this.recommendBox4.Size = new System.Drawing.Size(188, 100);
+            this.recommendBox4.TabIndex = 3;
+            this.recommendBox4.TabStop = false;
+            this.toolTip1.SetToolTip(this.recommendBox4, "暂未开发w(ﾟДﾟ)w");
+            // 
+            // recommendBox3
+            // 
+            this.recommendBox3.Image = global::QQ_piracy.Properties.Resources.recommendBox3;
+            this.recommendBox3.Location = new System.Drawing.Point(407, 293);
+            this.recommendBox3.Name = "recommendBox3";
+            this.recommendBox3.Size = new System.Drawing.Size(188, 100);
+            this.recommendBox3.TabIndex = 3;
+            this.recommendBox3.TabStop = false;
+            this.toolTip1.SetToolTip(this.recommendBox3, "暂未开发w(ﾟДﾟ)w");
+            // 
+            // recommendBox2
+            // 
+            this.recommendBox2.Image = global::QQ_piracy.Properties.Resources.recommendBox2;
+            this.recommendBox2.Location = new System.Drawing.Point(206, 293);
+            this.recommendBox2.Name = "recommendBox2";
+            this.recommendBox2.Size = new System.Drawing.Size(188, 100);
+            this.recommendBox2.TabIndex = 3;
+            this.recommendBox2.TabStop = false;
+            this.toolTip1.SetToolTip(this.recommendBox2, "暂未开发w(ﾟДﾟ)w");
+            // 
+            // recommendBox1
+            // 
+            this.recommendBox1.Image = global::QQ_piracy.Properties.Resources.recommendBox1;
+            this.recommendBox1.Location = new System.Drawing.Point(6, 293);
+            this.recommendBox1.Name = "recommendBox1";
+            this.recommendBox1.Size = new System.Drawing.Size(188, 100);
+            this.recommendBox1.TabIndex = 3;
+            this.recommendBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.recommendBox1, "暂未开发w(ﾟДﾟ)w");
+            // 
             // imagePanel
             // 
             this.imagePanel.Controls.Add(this.pbRecommend1);
@@ -1140,6 +669,39 @@ namespace QQ_piracy.MusicForms
             this.imagePanel.Name = "imagePanel";
             this.imagePanel.Size = new System.Drawing.Size(692, 227);
             this.imagePanel.TabIndex = 2;
+            // 
+            // pbRecommend1
+            // 
+            this.pbRecommend1.BackColor = System.Drawing.Color.White;
+            this.pbRecommend1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbRecommend1.Location = new System.Drawing.Point(125, 0);
+            this.pbRecommend1.Name = "pbRecommend1";
+            this.pbRecommend1.Size = new System.Drawing.Size(440, 200);
+            this.pbRecommend1.TabIndex = 0;
+            this.pbRecommend1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbRecommend1, "暂未开发╰(￣ω￣ｏ)");
+            // 
+            // pbRecommend3
+            // 
+            this.pbRecommend3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbRecommend3.Image = global::QQ_piracy.Properties.Resources.backgroundMask;
+            this.pbRecommend3.Location = new System.Drawing.Point(252, 26);
+            this.pbRecommend3.Name = "pbRecommend3";
+            this.pbRecommend3.Size = new System.Drawing.Size(440, 174);
+            this.pbRecommend3.TabIndex = 0;
+            this.pbRecommend3.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbRecommend3, "w(ﾟДﾟ)w");
+            // 
+            // pbRecommend2
+            // 
+            this.pbRecommend2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbRecommend2.Image = global::QQ_piracy.Properties.Resources.backgroundMask;
+            this.pbRecommend2.Location = new System.Drawing.Point(0, 26);
+            this.pbRecommend2.Name = "pbRecommend2";
+            this.pbRecommend2.Size = new System.Drawing.Size(440, 174);
+            this.pbRecommend2.TabIndex = 0;
+            this.pbRecommend2.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbRecommend2, "(^^ゞ");
             // 
             // panelUser
             // 
@@ -1157,9 +719,9 @@ namespace QQ_piracy.MusicForms
             this.panelUser.Controls.Add(this.labelUserNickName);
             this.panelUser.Controls.Add(this.labelUserId);
             this.panelUser.Controls.Add(this.pbBackGroundUser);
-            this.panelUser.Location = new System.Drawing.Point(185, 54);
+            this.panelUser.Location = new System.Drawing.Point(188, 54);
             this.panelUser.Name = "panelUser";
-            this.panelUser.Size = new System.Drawing.Size(803, 470);
+            this.panelUser.Size = new System.Drawing.Size(800, 470);
             this.panelUser.TabIndex = 7;
             // 
             // labelFavoriteListUser
@@ -1201,6 +763,32 @@ namespace QQ_piracy.MusicForms
             this.labelLocalListUser.TabIndex = 7;
             this.labelLocalListUser.Text = "本地音乐";
             this.labelLocalListUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbFavoriteUser
+            // 
+            this.pbFavoriteUser.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.pbFavoriteUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbFavoriteUser.Image = global::QQ_piracy.Properties.Resources.starUser;
+            this.pbFavoriteUser.Location = new System.Drawing.Point(198, 278);
+            this.pbFavoriteUser.Name = "pbFavoriteUser";
+            this.pbFavoriteUser.Size = new System.Drawing.Size(125, 125);
+            this.pbFavoriteUser.TabIndex = 6;
+            this.pbFavoriteUser.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbFavoriteUser, "打开收藏音乐列表");
+            this.pbFavoriteUser.Click += new System.EventHandler(this.pbUserLocal_Click);
+            // 
+            // pbUserLocal
+            // 
+            this.pbUserLocal.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.pbUserLocal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbUserLocal.Image = global::QQ_piracy.Properties.Resources.listUser;
+            this.pbUserLocal.Location = new System.Drawing.Point(36, 278);
+            this.pbUserLocal.Name = "pbUserLocal";
+            this.pbUserLocal.Size = new System.Drawing.Size(125, 125);
+            this.pbUserLocal.TabIndex = 6;
+            this.pbUserLocal.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbUserLocal, "打开本地音乐列表");
+            this.pbUserLocal.Click += new System.EventHandler(this.pbUserLocal_Click);
             // 
             // separator2
             // 
@@ -1263,6 +851,17 @@ namespace QQ_piracy.MusicForms
             this.labelUserId.TabIndex = 1;
             this.labelUserId.Text = "用户ID : ";
             this.labelUserId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pbBackGroundUser
+            // 
+            this.pbBackGroundUser.BackColor = System.Drawing.Color.Transparent;
+            this.pbBackGroundUser.Image = global::QQ_piracy.Properties.Resources.Ps123_Net_0663;
+            this.pbBackGroundUser.Location = new System.Drawing.Point(35, 16);
+            this.pbBackGroundUser.Name = "pbBackGroundUser";
+            this.pbBackGroundUser.Size = new System.Drawing.Size(731, 203);
+            this.pbBackGroundUser.TabIndex = 0;
+            this.pbBackGroundUser.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbBackGroundUser, "部分功能尚未完善，Σ(っ °Д °;)っ");
             // 
             // panelListSong
             // 
@@ -1416,6 +1015,51 @@ namespace QQ_piracy.MusicForms
             this.pbFace.TabIndex = 27;
             this.pbFace.TabStop = false;
             // 
+            // pbMinForm
+            // 
+            this.pbMinForm.Image = ((System.Drawing.Image)(resources.GetObject("pbMinForm.Image")));
+            this.pbMinForm.Location = new System.Drawing.Point(878, 15);
+            this.pbMinForm.Name = "pbMinForm";
+            this.pbMinForm.Padding = new System.Windows.Forms.Padding(6);
+            this.pbMinForm.Size = new System.Drawing.Size(30, 30);
+            this.pbMinForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMinForm.TabIndex = 22;
+            this.pbMinForm.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbMinForm, "最小化");
+            this.pbMinForm.Click += new System.EventHandler(this.FormControlButton_Click);
+            this.pbMinForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
+            this.pbMinForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
+            // 
+            // pbMaxForm
+            // 
+            this.pbMaxForm.Image = ((System.Drawing.Image)(resources.GetObject("pbMaxForm.Image")));
+            this.pbMaxForm.Location = new System.Drawing.Point(909, 16);
+            this.pbMaxForm.Name = "pbMaxForm";
+            this.pbMaxForm.Padding = new System.Windows.Forms.Padding(6);
+            this.pbMaxForm.Size = new System.Drawing.Size(28, 28);
+            this.pbMaxForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMaxForm.TabIndex = 23;
+            this.pbMaxForm.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbMaxForm, "最大化");
+            this.pbMaxForm.Click += new System.EventHandler(this.FormControlButton_Click);
+            this.pbMaxForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
+            this.pbMaxForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
+            // 
+            // pbCloseForm
+            // 
+            this.pbCloseForm.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseForm.Image")));
+            this.pbCloseForm.Location = new System.Drawing.Point(938, 15);
+            this.pbCloseForm.Name = "pbCloseForm";
+            this.pbCloseForm.Padding = new System.Windows.Forms.Padding(8);
+            this.pbCloseForm.Size = new System.Drawing.Size(30, 30);
+            this.pbCloseForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCloseForm.TabIndex = 24;
+            this.pbCloseForm.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbCloseForm, "关闭");
+            this.pbCloseForm.Click += new System.EventHandler(this.FormControlButton_Click);
+            this.pbCloseForm.MouseEnter += new System.EventHandler(this.MoveEnter_PanelSeting);
+            this.pbCloseForm.MouseLeave += new System.EventHandler(this.MoveLeave_PanelSeting);
+            // 
             // panelPlayControl
             // 
             this.panelPlayControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -1440,6 +1084,87 @@ namespace QQ_piracy.MusicForms
             this.panelPlayControl.TabIndex = 18;
             this.panelPlayControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.panelPlayControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // labelListCount
+            // 
+            this.labelListCount.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelListCount.ForeColor = System.Drawing.Color.Silver;
+            this.labelListCount.Location = new System.Drawing.Point(946, 30);
+            this.labelListCount.Name = "labelListCount";
+            this.labelListCount.Size = new System.Drawing.Size(41, 25);
+            this.labelListCount.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.labelListCount, "播放列表");
+            this.labelListCount.Click += new System.EventHandler(this.btnSongList_Click);
+            this.labelListCount.MouseLeave += new System.EventHandler(this.pbListCount_MouseLeave);
+            this.labelListCount.MouseHover += new System.EventHandler(this.pbListCount_MouseHover);
+            // 
+            // pbHiFi
+            // 
+            this.pbHiFi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbHiFi.Image = global::QQ_piracy.Properties.Resources.HiFi;
+            this.pbHiFi.Location = new System.Drawing.Point(777, 12);
+            this.pbHiFi.Name = "pbHiFi";
+            this.pbHiFi.Size = new System.Drawing.Size(48, 48);
+            this.pbHiFi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbHiFi.TabIndex = 19;
+            this.pbHiFi.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbHiFi, "开启HiFi独占模式（功能暂未开启）");
+            this.pbHiFi.MouseLeave += new System.EventHandler(this.pbHiFi_MouseLeave);
+            this.pbHiFi.MouseHover += new System.EventHandler(this.pbHiFi_MouseHover);
+            // 
+            // pbMusicStyle
+            // 
+            this.pbMusicStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbMusicStyle.Image = global::QQ_piracy.Properties.Resources.音效;
+            this.pbMusicStyle.Location = new System.Drawing.Point(713, 12);
+            this.pbMusicStyle.Name = "pbMusicStyle";
+            this.pbMusicStyle.Size = new System.Drawing.Size(48, 48);
+            this.pbMusicStyle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbMusicStyle.TabIndex = 19;
+            this.pbMusicStyle.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbMusicStyle, "点击开启音效（功能暂未开启）");
+            this.pbMusicStyle.MouseLeave += new System.EventHandler(this.pbMusicStyle_MouseLeave);
+            this.pbMusicStyle.MouseHover += new System.EventHandler(this.pbMusicStyle_MouseHover);
+            // 
+            // pbListCount
+            // 
+            this.pbListCount.Image = global::QQ_piracy.Properties.Resources.列表;
+            this.pbListCount.Location = new System.Drawing.Point(926, 24);
+            this.pbListCount.Name = "pbListCount";
+            this.pbListCount.Size = new System.Drawing.Size(25, 25);
+            this.pbListCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbListCount.TabIndex = 19;
+            this.pbListCount.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbListCount, "播放列表");
+            this.pbListCount.Click += new System.EventHandler(this.btnSongList_Click);
+            this.pbListCount.MouseLeave += new System.EventHandler(this.pbListCount_MouseLeave);
+            this.pbListCount.MouseHover += new System.EventHandler(this.pbListCount_MouseHover);
+            // 
+            // pbLike
+            // 
+            this.pbLike.Image = global::QQ_piracy.Properties.Resources.收藏;
+            this.pbLike.Location = new System.Drawing.Point(883, 24);
+            this.pbLike.Name = "pbLike";
+            this.pbLike.Size = new System.Drawing.Size(22, 22);
+            this.pbLike.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLike.TabIndex = 19;
+            this.pbLike.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbLike, "收藏");
+            this.pbLike.Click += new System.EventHandler(this.pbLikeBtnClick);
+            // 
+            // pbLyric
+            // 
+            this.pbLyric.Image = global::QQ_piracy.Properties.Resources.词;
+            this.pbLyric.Location = new System.Drawing.Point(841, 21);
+            this.pbLyric.Name = "pbLyric";
+            this.pbLyric.Size = new System.Drawing.Size(30, 30);
+            this.pbLyric.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLyric.TabIndex = 19;
+            this.pbLyric.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbLyric, "显示桌面歌词");
+            this.pbLyric.Click += new System.EventHandler(this.pbLyric_Click);
+            this.pbLyric.MouseLeave += new System.EventHandler(this.pbLyric_MouseLeave);
+            this.pbLyric.MouseHover += new System.EventHandler(this.pbLyric_MouseHover);
             // 
             // pbVolume
             // 
@@ -1467,6 +1192,22 @@ namespace QQ_piracy.MusicForms
             this.tackBarMove.Scroll += new System.EventHandler(this.tackBarMove_Scroll);
             this.tackBarMove.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tackBarMove_MouseDown);
             // 
+            // btnPlayMode
+            // 
+            this.btnPlayMode.BackgroundImage = global::QQ_piracy.Properties.Resources.随机播放;
+            this.btnPlayMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPlayMode.FlatAppearance.BorderSize = 0;
+            this.btnPlayMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlayMode.Location = new System.Drawing.Point(621, 25);
+            this.btnPlayMode.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPlayMode.Name = "btnPlayMode";
+            this.btnPlayMode.Size = new System.Drawing.Size(25, 25);
+            this.btnPlayMode.TabIndex = 19;
+            this.toolTip1.SetToolTip(this.btnPlayMode, "随机播放");
+            this.btnPlayMode.UseVisualStyleBackColor = true;
+            this.btnPlayMode.BackgroundImageChanged += new System.EventHandler(this.btnPlayMode_BackgroundImageChanged);
+            this.btnPlayMode.Click += new System.EventHandler(this.btnPlayMode_Click);
+            // 
             // labelMusicTimer
             // 
             this.labelMusicTimer.AutoSize = true;
@@ -1478,6 +1219,80 @@ namespace QQ_piracy.MusicForms
             this.labelMusicTimer.Size = new System.Drawing.Size(98, 13);
             this.labelMusicTimer.TabIndex = 21;
             this.labelMusicTimer.Text = "00:00 / 03:50";
+            // 
+            // labelMusicDetail
+            // 
+            this.labelMusicDetail.AutoSize = true;
+            this.labelMusicDetail.BackColor = System.Drawing.Color.Transparent;
+            this.labelMusicDetail.Font = new System.Drawing.Font("幼圆", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelMusicDetail.ForeColor = System.Drawing.Color.White;
+            this.labelMusicDetail.Location = new System.Drawing.Point(255, 18);
+            this.labelMusicDetail.Name = "labelMusicDetail";
+            this.labelMusicDetail.Size = new System.Drawing.Size(98, 13);
+            this.labelMusicDetail.TabIndex = 20;
+            this.labelMusicDetail.Text = "音乐名 - 歌手";
+            this.toolTip1.SetToolTip(this.labelMusicDetail, "音乐名 - 歌手");
+            // 
+            // pbSmallAlbum
+            // 
+            this.pbSmallAlbum.BackgroundImage = global::QQ_piracy.Properties.Resources.zzz;
+            this.pbSmallAlbum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbSmallAlbum.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pbSmallAlbum.Location = new System.Drawing.Point(185, 3);
+            this.pbSmallAlbum.Name = "pbSmallAlbum";
+            this.pbSmallAlbum.Size = new System.Drawing.Size(64, 64);
+            this.pbSmallAlbum.TabIndex = 19;
+            this.pbSmallAlbum.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbSmallAlbum, "打开音乐详情页");
+            this.pbSmallAlbum.Click += new System.EventHandler(this.pbSmallAlbum_Click);
+            // 
+            // pbNext
+            // 
+            this.pbNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbNext.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pbNext.Image = global::QQ_piracy.Properties.Resources.下一首;
+            this.pbNext.Location = new System.Drawing.Point(133, 18);
+            this.pbNext.Name = "pbNext";
+            this.pbNext.Size = new System.Drawing.Size(35, 35);
+            this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbNext.TabIndex = 17;
+            this.pbNext.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbNext, "下一首");
+            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
+            this.pbNext.MouseLeave += new System.EventHandler(this.pbNext_MouseLeave);
+            this.pbNext.MouseHover += new System.EventHandler(this.pbNext_MouseHover);
+            // 
+            // pbBack
+            // 
+            this.pbBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbBack.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pbBack.Image = global::QQ_piracy.Properties.Resources.上一首;
+            this.pbBack.Location = new System.Drawing.Point(18, 18);
+            this.pbBack.Name = "pbBack";
+            this.pbBack.Size = new System.Drawing.Size(35, 35);
+            this.pbBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbBack.TabIndex = 16;
+            this.pbBack.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbBack, "上一首");
+            this.pbBack.Click += new System.EventHandler(this.pbBack_Click);
+            this.pbBack.MouseLeave += new System.EventHandler(this.pbBack_MouseLeave);
+            this.pbBack.MouseHover += new System.EventHandler(this.pbBack_MouseHover);
+            // 
+            // pbPlay
+            // 
+            this.pbPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbPlay.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pbPlay.Image = global::QQ_piracy.Properties.Resources.播放;
+            this.pbPlay.Location = new System.Drawing.Point(67, 9);
+            this.pbPlay.Name = "pbPlay";
+            this.pbPlay.Size = new System.Drawing.Size(50, 50);
+            this.pbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPlay.TabIndex = 15;
+            this.pbPlay.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbPlay, "播放/暂停");
+            this.pbPlay.Click += new System.EventHandler(this.pbPlay_Click);
+            this.pbPlay.MouseLeave += new System.EventHandler(this.pbPlay_MouseLeave);
+            this.pbPlay.MouseHover += new System.EventHandler(this.pbPlay_MouseHover);
             // 
             // panelLyrc
             // 
@@ -1496,6 +1311,192 @@ namespace QQ_piracy.MusicForms
             this.panelLyrc.Visible = false;
             this.panelLyrc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.panelLyrc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // panelLyricLabels
+            // 
+            this.panelLyricLabels.ContextMenuStrip = this.cmsLyricDelete;
+            this.panelLyricLabels.Controls.Add(this.panelLyricIng);
+            this.panelLyricLabels.Controls.Add(this.labelLyric1);
+            this.panelLyricLabels.Controls.Add(this.labelLyric2);
+            this.panelLyricLabels.Controls.Add(this.labelLyric3);
+            this.panelLyricLabels.Controls.Add(this.labelLyric4);
+            this.panelLyricLabels.Controls.Add(this.labelLyric6);
+            this.panelLyricLabels.Controls.Add(this.labelLyric5);
+            this.panelLyricLabels.Controls.Add(this.labelLyric7);
+            this.panelLyricLabels.Controls.Add(this.labelLyric8);
+            this.panelLyricLabels.Controls.Add(this.labelLyric9);
+            this.panelLyricLabels.Controls.Add(this.labelLyric10);
+            this.panelLyricLabels.Controls.Add(this.labelLyric11);
+            this.panelLyricLabels.Location = new System.Drawing.Point(281, 4);
+            this.panelLyricLabels.Name = "panelLyricLabels";
+            this.panelLyricLabels.Size = new System.Drawing.Size(461, 515);
+            this.panelLyricLabels.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.panelLyricLabels, "歌词有误？右键点击打开菜单删除吧");
+            this.panelLyricLabels.Visible = false;
+            // 
+            // panelLyricIng
+            // 
+            this.panelLyricIng.Controls.Add(this.labelLyricIng);
+            this.panelLyricIng.Location = new System.Drawing.Point(27, 187);
+            this.panelLyricIng.Name = "panelLyricIng";
+            this.panelLyricIng.Size = new System.Drawing.Size(402, 42);
+            this.panelLyricIng.TabIndex = 5;
+            // 
+            // labelLyricIng
+            // 
+            this.labelLyricIng.Font = new System.Drawing.Font("幼圆", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyricIng.ForeColor = System.Drawing.Color.Yellow;
+            this.labelLyricIng.Location = new System.Drawing.Point(0, 0);
+            this.labelLyricIng.Name = "labelLyricIng";
+            this.labelLyricIng.Size = new System.Drawing.Size(402, 42);
+            this.labelLyricIng.TabIndex = 4;
+            this.labelLyricIng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.labelLyricIng, "歌词有误？右键点击打开菜单删除吧");
+            // 
+            // labelLyric1
+            // 
+            this.labelLyric1.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric1.ForeColor = System.Drawing.Color.White;
+            this.labelLyric1.Location = new System.Drawing.Point(44, 26);
+            this.labelLyric1.Name = "labelLyric1";
+            this.labelLyric1.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric1.TabIndex = 4;
+            this.labelLyric1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric2
+            // 
+            this.labelLyric2.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric2.ForeColor = System.Drawing.Color.White;
+            this.labelLyric2.Location = new System.Drawing.Point(44, 66);
+            this.labelLyric2.Name = "labelLyric2";
+            this.labelLyric2.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric2.TabIndex = 4;
+            this.labelLyric2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric3
+            // 
+            this.labelLyric3.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric3.ForeColor = System.Drawing.Color.White;
+            this.labelLyric3.Location = new System.Drawing.Point(44, 106);
+            this.labelLyric3.Name = "labelLyric3";
+            this.labelLyric3.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric3.TabIndex = 4;
+            this.labelLyric3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.labelLyric3, "歌词有误？右键点击打开菜单删除吧");
+            // 
+            // labelLyric4
+            // 
+            this.labelLyric4.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric4.ForeColor = System.Drawing.Color.White;
+            this.labelLyric4.Location = new System.Drawing.Point(44, 146);
+            this.labelLyric4.Name = "labelLyric4";
+            this.labelLyric4.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric4.TabIndex = 4;
+            this.labelLyric4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.labelLyric4, "歌词有误？右键点击打开菜单删除吧");
+            // 
+            // labelLyric6
+            // 
+            this.labelLyric6.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric6.ForeColor = System.Drawing.Color.White;
+            this.labelLyric6.Location = new System.Drawing.Point(44, 248);
+            this.labelLyric6.Name = "labelLyric6";
+            this.labelLyric6.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric6.TabIndex = 4;
+            this.labelLyric6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.labelLyric6, "歌词有误？右键点击打开菜单删除吧");
+            // 
+            // labelLyric5
+            // 
+            this.labelLyric5.Font = new System.Drawing.Font("幼圆", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric5.ForeColor = System.Drawing.Color.White;
+            this.labelLyric5.Location = new System.Drawing.Point(27, 187);
+            this.labelLyric5.Name = "labelLyric5";
+            this.labelLyric5.Size = new System.Drawing.Size(402, 42);
+            this.labelLyric5.TabIndex = 4;
+            this.labelLyric5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric7
+            // 
+            this.labelLyric7.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric7.ForeColor = System.Drawing.Color.White;
+            this.labelLyric7.Location = new System.Drawing.Point(44, 288);
+            this.labelLyric7.Name = "labelLyric7";
+            this.labelLyric7.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric7.TabIndex = 4;
+            this.labelLyric7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.labelLyric7, "歌词有误？右键点击打开菜单删除吧");
+            // 
+            // labelLyric8
+            // 
+            this.labelLyric8.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric8.ForeColor = System.Drawing.Color.White;
+            this.labelLyric8.Location = new System.Drawing.Point(44, 328);
+            this.labelLyric8.Name = "labelLyric8";
+            this.labelLyric8.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric8.TabIndex = 4;
+            this.labelLyric8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.labelLyric8, "歌词有误？右键点击打开菜单删除吧");
+            // 
+            // labelLyric9
+            // 
+            this.labelLyric9.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric9.ForeColor = System.Drawing.Color.White;
+            this.labelLyric9.Location = new System.Drawing.Point(44, 368);
+            this.labelLyric9.Name = "labelLyric9";
+            this.labelLyric9.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric9.TabIndex = 4;
+            this.labelLyric9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric10
+            // 
+            this.labelLyric10.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric10.ForeColor = System.Drawing.Color.White;
+            this.labelLyric10.Location = new System.Drawing.Point(44, 408);
+            this.labelLyric10.Name = "labelLyric10";
+            this.labelLyric10.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric10.TabIndex = 4;
+            this.labelLyric10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelLyric11
+            // 
+            this.labelLyric11.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLyric11.ForeColor = System.Drawing.Color.White;
+            this.labelLyric11.Location = new System.Drawing.Point(44, 448);
+            this.labelLyric11.Name = "labelLyric11";
+            this.labelLyric11.Size = new System.Drawing.Size(357, 23);
+            this.labelLyric11.TabIndex = 4;
+            this.labelLyric11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbLyricClose
+            // 
+            this.pbLyricClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbLyricClose.Image = global::QQ_piracy.Properties.Resources.lyricClose;
+            this.pbLyricClose.Location = new System.Drawing.Point(937, 12);
+            this.pbLyricClose.Name = "pbLyricClose";
+            this.pbLyricClose.Size = new System.Drawing.Size(40, 40);
+            this.pbLyricClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLyricClose.TabIndex = 3;
+            this.pbLyricClose.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbLyricClose, "收起");
+            this.pbLyricClose.Click += new System.EventHandler(this.LyricButtonClick);
+            this.pbLyricClose.MouseEnter += new System.EventHandler(this.LyricButtonEnter);
+            this.pbLyricClose.MouseLeave += new System.EventHandler(this.LyricButtonLeave);
+            // 
+            // pbLyricMin
+            // 
+            this.pbLyricMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbLyricMin.Image = global::QQ_piracy.Properties.Resources.lyricMin;
+            this.pbLyricMin.Location = new System.Drawing.Point(878, 12);
+            this.pbLyricMin.Name = "pbLyricMin";
+            this.pbLyricMin.Size = new System.Drawing.Size(40, 40);
+            this.pbLyricMin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLyricMin.TabIndex = 3;
+            this.pbLyricMin.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbLyricMin, "最小化");
+            this.pbLyricMin.Click += new System.EventHandler(this.LyricButtonClick);
+            this.pbLyricMin.MouseEnter += new System.EventHandler(this.LyricButtonEnter);
+            this.pbLyricMin.MouseLeave += new System.EventHandler(this.LyricButtonLeave);
             // 
             // labelNoLyric
             // 
@@ -1523,7 +1524,7 @@ namespace QQ_piracy.MusicForms
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(989, 597);
+            this.ClientSize = new System.Drawing.Size(989, 590);
             this.Controls.Add(this.panelMusicRecommend);
             this.Controls.Add(this.panelUser);
             this.Controls.Add(this.panelMusicVlume);
@@ -1545,33 +1546,7 @@ namespace QQ_piracy.MusicForms
             this.Load += new System.EventHandler(this.MusicMainForm_Load);
             this.Shown += new System.EventHandler(this.MusicMainForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recommendBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFavoriteUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUserLocal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBackGroundUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHiFi)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMusicStyle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbListCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLike)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLyric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSmallAlbum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).EndInit();
-            this.panelLyricLabels.ResumeLayout(false);
             this.cmsLyricDelete.ResumeLayout(false);
-            this.panelLyricIng.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbLyricClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMusicVolume)).EndInit();
             this.panelMusicVlume.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbAddSong)).EndInit();
@@ -1580,20 +1555,46 @@ namespace QQ_piracy.MusicForms
             this.cmsPlayModeMenu.ResumeLayout(false);
             this.cmsListSongMenu.ResumeLayout(false);
             this.panelMusicRecommend.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recommendBox1)).EndInit();
             this.imagePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecommend2)).EndInit();
             this.panelUser.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbFavoriteUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUserLocal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserFace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBackGroundUser)).EndInit();
             this.panelListSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbListSongClose)).EndInit();
             this.panelMenu.ResumeLayout(false);
             this.panelSetting.ResumeLayout(false);
             this.panelSetting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMaxForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseForm)).EndInit();
             this.panelPlayControl.ResumeLayout(false);
             this.panelPlayControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHiFi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMusicStyle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbListCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLike)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSmallAlbum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).EndInit();
             this.panelLyrc.ResumeLayout(false);
+            this.panelLyricLabels.ResumeLayout(false);
+            this.panelLyricIng.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLyricMin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

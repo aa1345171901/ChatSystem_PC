@@ -160,6 +160,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Model\SongsInfo.cs" />
+    <Compile Include="Model\TransparentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MusicForms\DeleteSongFormList.cs">
       <SubType>Form</SubType>
     </Compile>
