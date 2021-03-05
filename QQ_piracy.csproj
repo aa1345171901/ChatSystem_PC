@@ -166,6 +166,12 @@
     <Compile Include="MusicForms\DeleteSongFormList.Designer.cs">
       <DependentUpon>DeleteSongFormList.cs</DependentUpon>
     </Compile>
+    <Compile Include="MusicForms\LyricDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusicForms\LyricDesktop.Designer.cs">
+      <DependentUpon>LyricDesktop.cs</DependentUpon>
+    </Compile>
     <Compile Include="MusicForms\MusicMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,9 @@
     <EmbeddedResource Include="MusicForms\DeleteSongFormList.resx">
       <DependentUpon>DeleteSongFormList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MusicForms\LyricDesktop.resx">
+      <DependentUpon>LyricDesktop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MusicForms\MusicMainForm.resx">
       <DependentUpon>MusicMainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -271,6 +280,7 @@
     <None Include="Resources\recommendBox4.png" />
     <Content Include="Resources\star.png" />
     <None Include="Resources\starUser.png" />
+    <None Include="Resources\transparent.png" />
     <Content Include="Resources\user.png" />
     <Content Include="Resources\wallhaven-12422.jpg" />
     <None Include="Resources\zzz.jpg" />

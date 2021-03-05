@@ -1554,6 +1554,9 @@
             LyricMoveByTackBar();
         }
 
+        /// <summary>
+        /// 歌词直接跳转到当前播放时间
+        /// </summary>
         private void LyricMoveByTackBar()
         {
             // lrc数组不为空时，拖动滑动条改变歌词
@@ -1586,11 +1589,11 @@
                 labelLyricIng.Text = labelLyric5.Text;
                 if (14 - labelLyric5.Text.Length > 1)
                 {
-                    offset = (14 - labelLyric5.Text.Length) * 20 + 10;   // 总共最多可以显示有14个歌词
+                    offset = (14 - labelLyric5.Text.Length) * 20;   // 总共最多可以显示有14个歌词
                 }
                 else
                 {
-                    offset = 30;   // panel左边有一点缝隙
+                    offset = 20;   // panel左边有一点缝隙
                 }
                 panelLyricIng.Width = offset;
             }
@@ -2491,11 +2494,11 @@
                 labelLyricIng.Text = labelLyric5.Text;
                 if (14 - labelLyric5.Text.Length >= 1)
                 {
-                    offset = (14 - labelLyric5.Text.Length) * 20 + 10;   // 总共最多可以显示有14个歌词
+                    offset = (14 - labelLyric5.Text.Length) * 20;   // 总共最多可以显示有14个歌词
                 }
                 else
                 {
-                    offset = 30;
+                    offset = 20;
                 }
 
                 // panelLyricIng 黄字，先设0，走满就继续滚动歌词，长度402
@@ -2545,11 +2548,11 @@
                 labelLyricIng.Text = labelLyric5.Text;
                 if (14 - labelLyric5.Text.Length >= 1)
                 {
-                    offset = (14 - labelLyric5.Text.Length) * 20 + 10;   // 总共最多可以显示有14个歌词
+                    offset = (14 - labelLyric5.Text.Length) * 20 - 10;   // 总共最多可以显示有14个歌词
                 }
                 else
                 {
-                    offset = 30;
+                    offset = 20;
                 }
                 panelLyricIng.Width = offset;
             }
@@ -2625,6 +2628,19 @@
                 timerLyrc.Start();
             }
 
+            // 直接跳转歌词时间，不通过计时器跳转
+            LyricMoveByTackBar();
+            // 设置两个列表的歌词路径
+            setLyric();
+
+            SaveSongsListHistory(localSongsFilePath, localSongsList);
+        }
+
+        /// <summary>
+        /// 设置歌词到两个歌曲列表
+        /// </summary>
+        private void setLyric()
+        {
             for (int i = 0; i < localSongsList.Count; i++)
             {
                 if (localSongsList[i].FileName == listSong[currIndex].FileName)
@@ -2640,8 +2656,6 @@
                     favoriteSongsList[i].FilePathLrc = listSong[currIndex].FilePathLrc;
                 }
             }
-
-            SaveSongsListHistory(localSongsFilePath, localSongsList);
         }
 
         /// <summary>
@@ -2756,6 +2770,37 @@
                 pbRecommend2.BackgroundImage = images[imageIndex - 1];
                 pbRecommend3.BackgroundImage = images[imageIndex + 1];
             }
+        }
+
+        /// <summary>
+        /// 歌词右键子菜单-删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiLyricDelete_Click(object sender, EventArgs e)
+        {
+            if (lrc != null)
+            {
+                lrc = null;
+                listSong[currIndex].FilePathLrc = " "; //歌词置空
+
+                // 设置各种显示
+                labelNoLyric.Visible = true;
+                linkLabelAddLyrc.Visible = true;
+                panelLyricLabels.Visible = false;
+                timerLyrc.Stop();
+                setLyric();
+            }
+
+        }
+
+        /// <summary>
+        /// 桌面歌词点击
+        /// </summary>
+        private void pbLyric_Click(object sender, EventArgs e)
+        {
+            LyricDesktop lyricDesktop = new LyricDesktop();
+            lyricDesktop.Show();
         }
     }
 }
