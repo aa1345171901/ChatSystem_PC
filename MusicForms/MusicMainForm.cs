@@ -23,7 +23,7 @@
         private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
 
         private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
-        private string backGroundPath = Application.StartupPath + "\\BackGround\\"; // 获取保存头像的文件
+        private string backGroundPath = Application.StartupPath + "\\BackGround\\"; // 获取保存推荐背景的文件
 
         SongsInfo currSelectedSong = new SongsInfo(null);       // 用于查看详情，打开本地歌曲右键菜单
         SongsInfo currPlaySong = new SongsInfo(null);       // 记录当前选中播放的歌曲
@@ -100,7 +100,21 @@
             cmsSongListMenu.ForeColor = Color.White;
             cmsSongListMenu.BackColor = Color.FromArgb(48, 47, 51);
 
-            pbAddSong.Visible = false;
+            // 暂停按钮
+            ttbbtnPlayPause = new ThumbnailToolbarButton(Properties.Resources.播放1, "播放");
+            ttbbtnPlayPause.Enabled = true;
+            ttbbtnPlayPause.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(pbPlay_Click);
+
+            // 上一首按钮
+            ttbbtnPre = new ThumbnailToolbarButton(Properties.Resources.上一首1, "上一首");
+            ttbbtnPre.Enabled = true;
+            ttbbtnPre.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(pbBack_Click);
+
+            // 下一首按钮
+            ttbbtnNext = new ThumbnailToolbarButton(Properties.Resources.下一首1, "下一首");
+            ttbbtnNext.Enabled = true;
+            ttbbtnNext.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(pbNext_Click);
+            TaskbarManager.Instance.ThumbnailToolbars.AddButtons(this.Handle, ttbbtnPre, ttbbtnPlayPause, ttbbtnNext);
 
             // 获取桌面歌词第一次出现的位置
             int w = Screen.PrimaryScreen.Bounds.Width;  // 获取屏幕的宽
@@ -170,7 +184,7 @@
 
             // 设置昵称
             this.labelNickName.Text = UserHelper.NickName;
-            this.labelUserNickName.Text = UserHelper.NickName;
+            this.labelUserNickName.Text = "NickName : " + UserHelper.NickName;
 
             // 设置用户Id
             this.labelUserId.Text = "用户ID : " + UserHelper.LoginId.ToString();
@@ -206,27 +220,12 @@
         {
             SaveSettings();
             MyMusic.Visible = false;
-            Application.Exit();
             this.Dispose();
         }
 
         private void MusicMainForm_Shown(object sender, EventArgs e)
         {
-            // 暂停按钮
-            ttbbtnPlayPause = new ThumbnailToolbarButton(Properties.Resources.播放1, "播放");
-            ttbbtnPlayPause.Enabled = true;
-            ttbbtnPlayPause.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(pbPlay_Click);
 
-            // 上一首按钮
-            ttbbtnPre = new ThumbnailToolbarButton(Properties.Resources.上一首1, "上一首");
-            ttbbtnPre.Enabled = true;
-            ttbbtnPre.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(pbBack_Click);
-
-            // 下一首按钮
-            ttbbtnNext = new ThumbnailToolbarButton(Properties.Resources.下一首1, "下一首");
-            ttbbtnNext.Enabled = true;
-            ttbbtnNext.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(pbNext_Click);
-            TaskbarManager.Instance.ThumbnailToolbars.AddButtons(this.Handle, ttbbtnPre, ttbbtnPlayPause, ttbbtnNext);
         }
 
         /// <summary>

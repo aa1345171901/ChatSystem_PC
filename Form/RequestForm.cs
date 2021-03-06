@@ -19,6 +19,8 @@
         public int FromUserId = 0;
         public int FaceId;
 
+        private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestForm"/> class.
         /// 界面加载
@@ -38,16 +40,14 @@
             {
                 IsRequest = 0;
 
-                this.pbFace.BackgroundImage = ilFaces.Images[FaceId];
-
-                // string appPath = Application.StartupPath + @"\" + FaceId + ".jpg";
+                string appPath = faceFilePath + FaceId + ".jpg";
 
                 // 图片需跟exe同一路径下
-                // if (File.Exists(appPath))
-                // {
-                //    Image img = Image.FromFile(appPath);
-                //    this.pbFace.BackgroundImage = img;
-                // }
+                if (File.Exists(appPath))
+                {
+                    Image img = Image.FromFile(appPath);
+                    this.pbFace.BackgroundImage = img;
+                }
                 this.userMsg.Text = NickName + "     (" + FromUserId + ")";
                 this.systemMsg.Text = "请求添加您为好友";
                 this.btnAllow.Visible = true;

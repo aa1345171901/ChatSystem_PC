@@ -10,6 +10,8 @@
     {
         private MainForm mainForm;  // 主窗体
 
+        private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonalInfoForm"/> class.
         /// 界面初始化
@@ -18,6 +20,10 @@
         {
             InitializeComponent();
             this.mainForm = mainForm;
+
+            // 添加移动窗体事件
+            this.pictureBox1.MouseMove += PictureBox1_MouseMove;
+            this.panel1.MouseMove += PictureBox1_MouseMove;
         }
 
         /// <summary>
@@ -63,16 +69,14 @@
         /// </summary>
         public void ShowFace(int currentFaceId)
         {
-            string appPath = Application.StartupPath + @"\" + currentFaceId + ".jpg";
+            string appPath = faceFilePath + currentFaceId + ".jpg";
 
             // 图片需跟exe同一路径下
             if (File.Exists(appPath))
             {
                 Image img = Image.FromFile(appPath);
-                touxiang.Image = img;
+                touxiang.BackgroundImage = img.GetThumbnailImage(60, 60, null, IntPtr.Zero);
             }
-
-            touxiang.Image = ilFaces.Images[currentFaceId];
 
             touxiang.Tag = currentFaceId;
         }

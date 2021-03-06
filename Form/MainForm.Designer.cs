@@ -56,7 +56,6 @@ namespace QQ_piracy
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.IlMessage = new System.Windows.Forms.ImageList(this.components);
-            this.ilFaces = new System.Windows.Forms.ImageList(this.components);
             this.tmrMessage = new System.Windows.Forms.Timer(this.components);
             this.tmrAddFriend = new System.Windows.Forms.Timer(this.components);
             this.tmrChatRequest = new System.Windows.Forms.Timer(this.components);
@@ -72,6 +71,7 @@ namespace QQ_piracy
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.selfMessage = new System.Windows.Forms.PictureBox();
             this.sbFriends = new Aptech.UI.SideBar();
+            this.ilFaces = new System.Windows.Forms.ImageList(this.components);
             this.nickName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SyncTimer = new System.Windows.Forms.Timer(this.components);
@@ -168,7 +168,7 @@ namespace QQ_piracy
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(44, 35);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Text = "更多";
             // 
             // toolStripMenuItem1
             // 
@@ -177,7 +177,7 @@ namespace QQ_piracy
             this.toolStripMenuItem3,
             this.toolStripMenuItem4});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem1.Text = "超级会员";
             // 
             // toolStripMenuItem2
@@ -206,7 +206,7 @@ namespace QQ_piracy
             this.toolStripMenuItem7,
             this.toolStripMenuItem8});
             this.anquan.Name = "anquan";
-            this.anquan.Size = new System.Drawing.Size(124, 22);
+            this.anquan.Size = new System.Drawing.Size(180, 22);
             this.anquan.Text = "安全";
             // 
             // toolStripM3enuItem5
@@ -236,25 +236,25 @@ namespace QQ_piracy
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem5.Text = "帮助";
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem9.Text = "升级";
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem10.Text = "设置";
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem11.Text = "退出";
             this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click);
             // 
@@ -298,112 +298,6 @@ namespace QQ_piracy
             this.IlMessage.TransparentColor = System.Drawing.Color.Transparent;
             this.IlMessage.Images.SetKeyName(0, "1.ico");
             this.IlMessage.Images.SetKeyName(1, "message.png");
-            // 
-            // ilFaces
-            // 
-            this.ilFaces.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilFaces.ImageStream")));
-            this.ilFaces.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilFaces.Images.SetKeyName(0, "1.bmp");
-            this.ilFaces.Images.SetKeyName(1, "2.bmp");
-            this.ilFaces.Images.SetKeyName(2, "3.bmp");
-            this.ilFaces.Images.SetKeyName(3, "4.bmp");
-            this.ilFaces.Images.SetKeyName(4, "5.bmp");
-            this.ilFaces.Images.SetKeyName(5, "6.bmp");
-            this.ilFaces.Images.SetKeyName(6, "7.bmp");
-            this.ilFaces.Images.SetKeyName(7, "8.bmp");
-            this.ilFaces.Images.SetKeyName(8, "9.bmp");
-            this.ilFaces.Images.SetKeyName(9, "10.bmp");
-            this.ilFaces.Images.SetKeyName(10, "11.bmp");
-            this.ilFaces.Images.SetKeyName(11, "12.bmp");
-            this.ilFaces.Images.SetKeyName(12, "13.bmp");
-            this.ilFaces.Images.SetKeyName(13, "14.bmp");
-            this.ilFaces.Images.SetKeyName(14, "15.bmp");
-            this.ilFaces.Images.SetKeyName(15, "16.bmp");
-            this.ilFaces.Images.SetKeyName(16, "17.bmp");
-            this.ilFaces.Images.SetKeyName(17, "18.bmp");
-            this.ilFaces.Images.SetKeyName(18, "19.bmp");
-            this.ilFaces.Images.SetKeyName(19, "20.bmp");
-            this.ilFaces.Images.SetKeyName(20, "21.bmp");
-            this.ilFaces.Images.SetKeyName(21, "22.bmp");
-            this.ilFaces.Images.SetKeyName(22, "23.bmp");
-            this.ilFaces.Images.SetKeyName(23, "24.bmp");
-            this.ilFaces.Images.SetKeyName(24, "25.bmp");
-            this.ilFaces.Images.SetKeyName(25, "26.bmp");
-            this.ilFaces.Images.SetKeyName(26, "27.bmp");
-            this.ilFaces.Images.SetKeyName(27, "28.bmp");
-            this.ilFaces.Images.SetKeyName(28, "29.bmp");
-            this.ilFaces.Images.SetKeyName(29, "30.bmp");
-            this.ilFaces.Images.SetKeyName(30, "31.bmp");
-            this.ilFaces.Images.SetKeyName(31, "32.bmp");
-            this.ilFaces.Images.SetKeyName(32, "33.bmp");
-            this.ilFaces.Images.SetKeyName(33, "34.bmp");
-            this.ilFaces.Images.SetKeyName(34, "35.bmp");
-            this.ilFaces.Images.SetKeyName(35, "36.bmp");
-            this.ilFaces.Images.SetKeyName(36, "37.bmp");
-            this.ilFaces.Images.SetKeyName(37, "38.bmp");
-            this.ilFaces.Images.SetKeyName(38, "39.bmp");
-            this.ilFaces.Images.SetKeyName(39, "40.bmp");
-            this.ilFaces.Images.SetKeyName(40, "41.bmp");
-            this.ilFaces.Images.SetKeyName(41, "42.bmp");
-            this.ilFaces.Images.SetKeyName(42, "43.bmp");
-            this.ilFaces.Images.SetKeyName(43, "44.bmp");
-            this.ilFaces.Images.SetKeyName(44, "45.bmp");
-            this.ilFaces.Images.SetKeyName(45, "46.bmp");
-            this.ilFaces.Images.SetKeyName(46, "47.bmp");
-            this.ilFaces.Images.SetKeyName(47, "48.bmp");
-            this.ilFaces.Images.SetKeyName(48, "49.bmp");
-            this.ilFaces.Images.SetKeyName(49, "50.bmp");
-            this.ilFaces.Images.SetKeyName(50, "51.bmp");
-            this.ilFaces.Images.SetKeyName(51, "52.bmp");
-            this.ilFaces.Images.SetKeyName(52, "53.bmp");
-            this.ilFaces.Images.SetKeyName(53, "54.bmp");
-            this.ilFaces.Images.SetKeyName(54, "55.bmp");
-            this.ilFaces.Images.SetKeyName(55, "56.bmp");
-            this.ilFaces.Images.SetKeyName(56, "57.bmp");
-            this.ilFaces.Images.SetKeyName(57, "58.bmp");
-            this.ilFaces.Images.SetKeyName(58, "59.bmp");
-            this.ilFaces.Images.SetKeyName(59, "60.bmp");
-            this.ilFaces.Images.SetKeyName(60, "61.bmp");
-            this.ilFaces.Images.SetKeyName(61, "62.bmp");
-            this.ilFaces.Images.SetKeyName(62, "63.bmp");
-            this.ilFaces.Images.SetKeyName(63, "64.bmp");
-            this.ilFaces.Images.SetKeyName(64, "65.bmp");
-            this.ilFaces.Images.SetKeyName(65, "66.bmp");
-            this.ilFaces.Images.SetKeyName(66, "67.bmp");
-            this.ilFaces.Images.SetKeyName(67, "68.bmp");
-            this.ilFaces.Images.SetKeyName(68, "69.bmp");
-            this.ilFaces.Images.SetKeyName(69, "70.bmp");
-            this.ilFaces.Images.SetKeyName(70, "71.bmp");
-            this.ilFaces.Images.SetKeyName(71, "72.bmp");
-            this.ilFaces.Images.SetKeyName(72, "73.bmp");
-            this.ilFaces.Images.SetKeyName(73, "74.bmp");
-            this.ilFaces.Images.SetKeyName(74, "75.bmp");
-            this.ilFaces.Images.SetKeyName(75, "76.bmp");
-            this.ilFaces.Images.SetKeyName(76, "77.bmp");
-            this.ilFaces.Images.SetKeyName(77, "78.bmp");
-            this.ilFaces.Images.SetKeyName(78, "79.bmp");
-            this.ilFaces.Images.SetKeyName(79, "80.bmp");
-            this.ilFaces.Images.SetKeyName(80, "81.bmp");
-            this.ilFaces.Images.SetKeyName(81, "82.bmp");
-            this.ilFaces.Images.SetKeyName(82, "83.bmp");
-            this.ilFaces.Images.SetKeyName(83, "84.bmp");
-            this.ilFaces.Images.SetKeyName(84, "85.bmp");
-            this.ilFaces.Images.SetKeyName(85, "86.bmp");
-            this.ilFaces.Images.SetKeyName(86, "87.bmp");
-            this.ilFaces.Images.SetKeyName(87, "88.bmp");
-            this.ilFaces.Images.SetKeyName(88, "89.bmp");
-            this.ilFaces.Images.SetKeyName(89, "90.bmp");
-            this.ilFaces.Images.SetKeyName(90, "91.bmp");
-            this.ilFaces.Images.SetKeyName(91, "92.bmp");
-            this.ilFaces.Images.SetKeyName(92, "93.bmp");
-            this.ilFaces.Images.SetKeyName(93, "94.bmp");
-            this.ilFaces.Images.SetKeyName(94, "95.bmp");
-            this.ilFaces.Images.SetKeyName(95, "96.bmp");
-            this.ilFaces.Images.SetKeyName(96, "97.bmp");
-            this.ilFaces.Images.SetKeyName(97, "98.bmp");
-            this.ilFaces.Images.SetKeyName(98, "99.bmp");
-            this.ilFaces.Images.SetKeyName(99, "100.bmp");
-            this.ilFaces.Images.SetKeyName(100, "`0@$}L(Y_LIHD~M4B2682C4.png");
             // 
             // tmrMessage
             // 
@@ -501,7 +395,9 @@ namespace QQ_piracy
             // selfMessage
             // 
             this.selfMessage.BackColor = System.Drawing.Color.White;
+            this.selfMessage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.selfMessage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.selfMessage.Image = global::QQ_piracy.Properties.Resources.Mask3;
             this.selfMessage.Location = new System.Drawing.Point(12, 28);
             this.selfMessage.Name = "selfMessage";
             this.selfMessage.Size = new System.Drawing.Size(60, 60);
@@ -534,6 +430,161 @@ namespace QQ_piracy
             this.sbFriends.VisibleGroupChanged += new Aptech.UI.SbGroupEventHandler(this.sbFriends_VisibleGroupChanged);
             this.sbFriends.ItemDoubleClick += new Aptech.UI.SbItemEventHandler(this.sbFriends_ItemDoubleClick);
             // 
+            // ilFaces
+            // 
+            this.ilFaces.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilFaces.ImageStream")));
+            this.ilFaces.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilFaces.Images.SetKeyName(0, "1.jpg");
+            this.ilFaces.Images.SetKeyName(1, "2.jpg");
+            this.ilFaces.Images.SetKeyName(2, "3.jpg");
+            this.ilFaces.Images.SetKeyName(3, "4.jpg");
+            this.ilFaces.Images.SetKeyName(4, "5.jpg");
+            this.ilFaces.Images.SetKeyName(5, "6.jpg");
+            this.ilFaces.Images.SetKeyName(6, "7.jpg");
+            this.ilFaces.Images.SetKeyName(7, "8.jpg");
+            this.ilFaces.Images.SetKeyName(8, "9.jpg");
+            this.ilFaces.Images.SetKeyName(9, "10.jpg");
+            this.ilFaces.Images.SetKeyName(10, "11.jpg");
+            this.ilFaces.Images.SetKeyName(11, "12.jpg");
+            this.ilFaces.Images.SetKeyName(12, "13.jpg");
+            this.ilFaces.Images.SetKeyName(13, "14.jpg");
+            this.ilFaces.Images.SetKeyName(14, "15.jpg");
+            this.ilFaces.Images.SetKeyName(15, "16.jpg");
+            this.ilFaces.Images.SetKeyName(16, "17.jpg");
+            this.ilFaces.Images.SetKeyName(17, "18.jpg");
+            this.ilFaces.Images.SetKeyName(18, "19.jpg");
+            this.ilFaces.Images.SetKeyName(19, "20.jpg");
+            this.ilFaces.Images.SetKeyName(20, "21.jpg");
+            this.ilFaces.Images.SetKeyName(21, "22.jpg");
+            this.ilFaces.Images.SetKeyName(22, "23.jpg");
+            this.ilFaces.Images.SetKeyName(23, "24.jpg");
+            this.ilFaces.Images.SetKeyName(24, "25.jpg");
+            this.ilFaces.Images.SetKeyName(25, "26.jpg");
+            this.ilFaces.Images.SetKeyName(26, "27.jpg");
+            this.ilFaces.Images.SetKeyName(27, "28.jpg");
+            this.ilFaces.Images.SetKeyName(28, "29.jpg");
+            this.ilFaces.Images.SetKeyName(29, "30.jpg");
+            this.ilFaces.Images.SetKeyName(30, "31.jpg");
+            this.ilFaces.Images.SetKeyName(31, "32.jpg");
+            this.ilFaces.Images.SetKeyName(32, "33.jpg");
+            this.ilFaces.Images.SetKeyName(33, "34.jpg");
+            this.ilFaces.Images.SetKeyName(34, "35.jpg");
+            this.ilFaces.Images.SetKeyName(35, "36.jpg");
+            this.ilFaces.Images.SetKeyName(36, "37.jpg");
+            this.ilFaces.Images.SetKeyName(37, "38.jpg");
+            this.ilFaces.Images.SetKeyName(38, "39.jpg");
+            this.ilFaces.Images.SetKeyName(39, "40.jpg");
+            this.ilFaces.Images.SetKeyName(40, "41.jpg");
+            this.ilFaces.Images.SetKeyName(41, "42.jpg");
+            this.ilFaces.Images.SetKeyName(42, "43.jpg");
+            this.ilFaces.Images.SetKeyName(43, "44.jpg");
+            this.ilFaces.Images.SetKeyName(44, "45.jpg");
+            this.ilFaces.Images.SetKeyName(45, "46.jpg");
+            this.ilFaces.Images.SetKeyName(46, "47.jpg");
+            this.ilFaces.Images.SetKeyName(47, "48.jpg");
+            this.ilFaces.Images.SetKeyName(48, "49.jpg");
+            this.ilFaces.Images.SetKeyName(49, "50.jpg");
+            this.ilFaces.Images.SetKeyName(50, "51.jpg");
+            this.ilFaces.Images.SetKeyName(51, "52.jpg");
+            this.ilFaces.Images.SetKeyName(52, "53.jpg");
+            this.ilFaces.Images.SetKeyName(53, "54.jpg");
+            this.ilFaces.Images.SetKeyName(54, "55.jpg");
+            this.ilFaces.Images.SetKeyName(55, "56.jpg");
+            this.ilFaces.Images.SetKeyName(56, "57.jpg");
+            this.ilFaces.Images.SetKeyName(57, "58.jpg");
+            this.ilFaces.Images.SetKeyName(58, "59.jpg");
+            this.ilFaces.Images.SetKeyName(59, "60.jpg");
+            this.ilFaces.Images.SetKeyName(60, "61.jpg");
+            this.ilFaces.Images.SetKeyName(61, "62.jpg");
+            this.ilFaces.Images.SetKeyName(62, "63.jpg");
+            this.ilFaces.Images.SetKeyName(63, "64.jpg");
+            this.ilFaces.Images.SetKeyName(64, "65.jpg");
+            this.ilFaces.Images.SetKeyName(65, "66.jpg");
+            this.ilFaces.Images.SetKeyName(66, "67.jpg");
+            this.ilFaces.Images.SetKeyName(67, "68.jpg");
+            this.ilFaces.Images.SetKeyName(68, "69.jpg");
+            this.ilFaces.Images.SetKeyName(69, "70.jpg");
+            this.ilFaces.Images.SetKeyName(70, "71.jpg");
+            this.ilFaces.Images.SetKeyName(71, "72.jpg");
+            this.ilFaces.Images.SetKeyName(72, "73.jpg");
+            this.ilFaces.Images.SetKeyName(73, "74.jpg");
+            this.ilFaces.Images.SetKeyName(74, "75.jpg");
+            this.ilFaces.Images.SetKeyName(75, "76.jpg");
+            this.ilFaces.Images.SetKeyName(76, "77.jpg");
+            this.ilFaces.Images.SetKeyName(77, "78.jpg");
+            this.ilFaces.Images.SetKeyName(78, "79.jpg");
+            this.ilFaces.Images.SetKeyName(79, "80.jpg");
+            this.ilFaces.Images.SetKeyName(80, "81.jpg");
+            this.ilFaces.Images.SetKeyName(81, "82.jpg");
+            this.ilFaces.Images.SetKeyName(82, "83.jpg");
+            this.ilFaces.Images.SetKeyName(83, "84.jpg");
+            this.ilFaces.Images.SetKeyName(84, "85.jpg");
+            this.ilFaces.Images.SetKeyName(85, "86.jpg");
+            this.ilFaces.Images.SetKeyName(86, "87.jpg");
+            this.ilFaces.Images.SetKeyName(87, "88.jpg");
+            this.ilFaces.Images.SetKeyName(88, "89.jpg");
+            this.ilFaces.Images.SetKeyName(89, "90.jpg");
+            this.ilFaces.Images.SetKeyName(90, "91.jpg");
+            this.ilFaces.Images.SetKeyName(91, "92.jpg");
+            this.ilFaces.Images.SetKeyName(92, "93.jpg");
+            this.ilFaces.Images.SetKeyName(93, "94.jpg");
+            this.ilFaces.Images.SetKeyName(94, "95.jpg");
+            this.ilFaces.Images.SetKeyName(95, "96.jpg");
+            this.ilFaces.Images.SetKeyName(96, "97.jpg");
+            this.ilFaces.Images.SetKeyName(97, "98.jpg");
+            this.ilFaces.Images.SetKeyName(98, "99.jpg");
+            this.ilFaces.Images.SetKeyName(99, "100.jpg");
+            this.ilFaces.Images.SetKeyName(100, "101.jpg");
+            this.ilFaces.Images.SetKeyName(101, "102.jpg");
+            this.ilFaces.Images.SetKeyName(102, "103.jpg");
+            this.ilFaces.Images.SetKeyName(103, "104.jpg");
+            this.ilFaces.Images.SetKeyName(104, "105.jpg");
+            this.ilFaces.Images.SetKeyName(105, "106.jpg");
+            this.ilFaces.Images.SetKeyName(106, "107.jpg");
+            this.ilFaces.Images.SetKeyName(107, "108.jpg");
+            this.ilFaces.Images.SetKeyName(108, "109.jpg");
+            this.ilFaces.Images.SetKeyName(109, "110.jpg");
+            this.ilFaces.Images.SetKeyName(110, "111.jpg");
+            this.ilFaces.Images.SetKeyName(111, "112.jpg");
+            this.ilFaces.Images.SetKeyName(112, "113.jpg");
+            this.ilFaces.Images.SetKeyName(113, "114.jpg");
+            this.ilFaces.Images.SetKeyName(114, "115.jpg");
+            this.ilFaces.Images.SetKeyName(115, "116.jpg");
+            this.ilFaces.Images.SetKeyName(116, "117.jpg");
+            this.ilFaces.Images.SetKeyName(117, "118.jpg");
+            this.ilFaces.Images.SetKeyName(118, "119.jpg");
+            this.ilFaces.Images.SetKeyName(119, "120.jpg");
+            this.ilFaces.Images.SetKeyName(120, "121.jpg");
+            this.ilFaces.Images.SetKeyName(121, "122.jpg");
+            this.ilFaces.Images.SetKeyName(122, "123.jpg");
+            this.ilFaces.Images.SetKeyName(123, "124.jpg");
+            this.ilFaces.Images.SetKeyName(124, "125.jpg");
+            this.ilFaces.Images.SetKeyName(125, "126.jpg");
+            this.ilFaces.Images.SetKeyName(126, "127.jpg");
+            this.ilFaces.Images.SetKeyName(127, "128.jpg");
+            this.ilFaces.Images.SetKeyName(128, "129.jpg");
+            this.ilFaces.Images.SetKeyName(129, "130.jpg");
+            this.ilFaces.Images.SetKeyName(130, "131.jpg");
+            this.ilFaces.Images.SetKeyName(131, "132.jpg");
+            this.ilFaces.Images.SetKeyName(132, "133.jpg");
+            this.ilFaces.Images.SetKeyName(133, "134.jpg");
+            this.ilFaces.Images.SetKeyName(134, "135.jpg");
+            this.ilFaces.Images.SetKeyName(135, "136.jpg");
+            this.ilFaces.Images.SetKeyName(136, "137.jpg");
+            this.ilFaces.Images.SetKeyName(137, "138.jpg");
+            this.ilFaces.Images.SetKeyName(138, "139.jpg");
+            this.ilFaces.Images.SetKeyName(139, "140.jpg");
+            this.ilFaces.Images.SetKeyName(140, "141.jpg");
+            this.ilFaces.Images.SetKeyName(141, "142.jpg");
+            this.ilFaces.Images.SetKeyName(142, "143.jpg");
+            this.ilFaces.Images.SetKeyName(143, "144.jpg");
+            this.ilFaces.Images.SetKeyName(144, "145.jpg");
+            this.ilFaces.Images.SetKeyName(145, "146.jpg");
+            this.ilFaces.Images.SetKeyName(146, "147.jpg");
+            this.ilFaces.Images.SetKeyName(147, "148.jpg");
+            this.ilFaces.Images.SetKeyName(148, "149.jpg");
+            this.ilFaces.Images.SetKeyName(149, "150.jpg");
+            // 
             // nickName
             // 
             this.nickName.AutoSize = true;
@@ -548,7 +599,6 @@ namespace QQ_piracy
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // SyncTimer
@@ -573,7 +623,7 @@ namespace QQ_piracy
             this.toolStrip2.Location = new System.Drawing.Point(221, 588);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(73, 42);
+            this.toolStrip2.Size = new System.Drawing.Size(42, 42);
             this.toolStrip2.TabIndex = 22;
             this.toolStrip2.Text = "toolStrip2";
             this.toolStrip2.Visible = false;
@@ -622,18 +672,6 @@ namespace QQ_piracy
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            this.toolStripMenuItem2.Click += Sorry_Click;
-            this.toolStripMenuItem3.Click += Sorry_Click;
-            this.toolStripMenuItem4.Click += Sorry_Click;
-            this.toolStripM3enuItem5.Click += Sorry_Click;
-            this.toolStripMenuItem6.Click += Sorry_Click;
-            this.toolStripMenuItem7.Click += Sorry_Click;
-            this.toolStripMenuItem8.Click += Sorry_Click;
-            this.toolStripMenuItem5.Click += Sorry_Click;
-            this.toolStripMenuItem9.Click += Sorry_Click;
-            this.toolStripButton2.Click += Sorry_Click;
-            this.toolStripButton3.Click += Sorry_Click;
-            this.pictureBox1.MouseMove += PictureBox1_MouseMove;
         }
 
 
@@ -651,23 +689,6 @@ namespace QQ_piracy
         //this.pictureBox1.MouseMove += PictureBox1_MouseMove;
         // 控制无边框窗体的移动
         //using System.Runtime.InteropServices;
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-
-        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            //常量
-            int WM_SYSCOMMAND = 0x0112;
-
-            //窗体移动
-            int SC_MOVE = 0xF010;
-            int HTCAPTION = 0x0002;
-
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
-        }
 
         #endregion
 
@@ -693,7 +714,6 @@ namespace QQ_piracy
         private ToolStripMenuItem toolStripMenuItem10;
         private ToolStripMenuItem toolStripMenuItem11;
         private ImageList IlMessage;
-        private ImageList ilFaces;
         private Timer tmrMessage;
         private Timer tmrAddFriend;
         private Timer tmrChatRequest;
@@ -715,5 +735,6 @@ namespace QQ_piracy
         private Timer ConnectNet;
         private ToolStrip toolStrip2;
         private ToolStripButton toolStripButton1;
+        private ImageList ilFaces;
     }
 }

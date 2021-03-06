@@ -6,6 +6,7 @@
     using System.Drawing;
     using System.IO;
     using System.Media;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using Aptech.UI;
     using QQ_piracy.Manager.Request;
@@ -53,13 +54,15 @@
 
         int messageImageIndex = 0;  // 工具栏中的消息图标的索引
 
-        bool isXF = true;              // 在最小化的时候设定不能启用悬浮 //需要在designer里更改状态
+        bool isXF = false;              // 在最小化的时候设定不能启用悬浮 //需要在designer里更改状态
 
         Icon icon1 = null;
         Icon icon2 = null;
         Icon icon3 = null;
 
         int timerRun = 0; // 获取自动连接的时间
+
+        private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
@@ -71,6 +74,41 @@
             icon1 = new Icon("1.ico");
             icon2 = new Icon("2.ico");
             icon3 = new Icon("3.ico");
+
+            // 给按钮添加事件
+            this.toolStripMenuItem2.Click += Sorry_Click;
+            this.toolStripMenuItem3.Click += Sorry_Click;
+            this.toolStripMenuItem4.Click += Sorry_Click;
+            this.toolStripM3enuItem5.Click += Sorry_Click;
+            this.toolStripMenuItem6.Click += Sorry_Click;
+            this.toolStripMenuItem7.Click += Sorry_Click;
+            this.toolStripMenuItem8.Click += Sorry_Click;
+            this.toolStripMenuItem5.Click += Sorry_Click;
+            this.toolStripMenuItem9.Click += Sorry_Click;
+            this.toolStripButton2.Click += Sorry_Click;
+            this.pictureBox1.MouseMove += PictureBox1_MouseMove;
+
+        }
+
+        // 控制无边框窗体的移动
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //常量
+            int WM_SYSCOMMAND = 0x0112;
+
+            //窗体移动
+            int SC_MOVE = 0xF010;
+            int HTCAPTION = 0x0002;
+
+            isXF = true; //设置能悬浮
+
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
 
         /// <summary>
@@ -85,17 +123,14 @@
             // 在窗体标题显示登录的昵称、号码
             this.Text = UserHelper.LoginId.ToString();
 
-            this.selfMessage.Image = ilFaces.Images[faceId];
+            string appPath = faceFilePath + faceId + ".jpg";
 
-            // string appPath = Application.StartupPath + @"\" + faceId + ".jpg";
-
-            // // 图片需跟exe同一路径下
-            // if (File.Exists(appPath))
-            // {
-            //    Image img = Image.FromFile(appPath);
-            //    this.selfMessage.Image = img;
-            // }
-            // }
+            // 设置头像
+            if (File.Exists(appPath))
+            {
+                Image img = Image.FromFile(appPath);
+                this.selfMessage.BackgroundImage = img.GetThumbnailImage(60, 60, null, IntPtr.Zero);
+            }
             this.nickName.Text = nickName;
             this.notifyIcon1.Text = "QQ:" + nickName + "(" + id + ")" + "\n声音：开启" + "\n消息提醒框：关闭" + "\n会话消息：任务栏头像不闪动";
         }
@@ -195,6 +230,16 @@
                     sbFriends.Groups[0].Items.Add(item); // 向SideBar的“我的好友”组中添加项
                 }
             }
+        }
+
+        /*todo
+         * SbItem item = new SbItem(it.Value.Item1, it.Value.Item2);
+         */
+        public void AddIlfaces(Image img) // 用于添加用户自定义头像,网络上收到的头像保存到本地,初始化再存入
+        {
+            ilFaces.Images.Add(img);
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            // dic.Add(FaceId, index); FaceId对应index //保存到dic
         }
 
         public void ResponseDelete()
@@ -669,9 +714,9 @@
                     {
                         if (Convert.ToInt32(sbFriends.Groups[i].Items[j].Tag) == item.Key)
                         {
-                            if (sbFriends.Groups[i].Items[j].ImageIndex != 100)
+                            if (sbFriends.Groups[i].Items[j].ImageIndex != 150)
                             {
-                                sbFriends.Groups[i].Items[j].ImageIndex = 100; // 索引为100的图片是一个空白图片
+                                sbFriends.Groups[i].Items[j].ImageIndex = 150; // 索引为150的图片是一个空白图片
                             }
                             else
                             {

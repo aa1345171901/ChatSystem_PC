@@ -363,21 +363,6 @@
             this.tsB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            this.toolStripButton1.Click += sorry_Click;
-            this.toolStripButton2.Click += sorry_Click;
-            this.toolStripButton3.Click += sorry_Click;
-            this.toolStripButton4.Click += sorry_Click;
-            this.toolStripButton5.Click += sorry_Click;
-            this.toolStripButton6.Click += sorry_Click;
-            this.toolStripButton7.Click += sorry_Click;
-            this.toolStripButton8.Click += sorry_Click;
-            this.toolStripButton9.Click += sorry_Click;
-            this.toolStripButton10.Click += sorry_Click;
-            this.more.Click += sorry_Click;
-            this.shiping.Click += sorry_Click;
-            this.ToolStripMenuItem.Click += sorry_Click;
-            this.ToolStripMenuItem2.Click += sorry_Click;
         }
 
         //this.toolStripButton1.Click += sorry_Click;

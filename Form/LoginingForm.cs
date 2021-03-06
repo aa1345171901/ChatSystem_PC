@@ -1,6 +1,7 @@
 ﻿namespace QQ_piracy
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     public partial class LoginingForm : Form
@@ -14,12 +15,32 @@
             this.LoginForm = loginForm;
             InitializeComponent();
 
-            // 创建主窗体
+            pictureBox1.MouseMove += PictureBox1_MouseMove;
+        }
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //常量
+            int WM_SYSCOMMAND = 0x0112;
+
+            //窗体移动
+            int SC_MOVE = 0xF010;
+            int HTCAPTION = 0x0002;
+
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
 
         private void LoginingForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;    // 隐藏窗体边框
+
+            IsLogin = true; // 设置正常登录
         }
 
         private void min_Click(object sender, EventArgs e)
@@ -46,7 +67,7 @@
         }
 
         // 延时
-        public static bool Delay(int delayTime)
+        public bool Delay(int delayTime)
         {
             DateTime now = DateTime.Now;
             int s;

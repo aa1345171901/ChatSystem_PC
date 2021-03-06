@@ -124,24 +124,6 @@ namespace QQ_piracy
             this.ResumeLayout(false);
 
         }
-        //pictureBox1.MouseMove += PictureBox1_MouseMove;
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-
-        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            //常量
-            int WM_SYSCOMMAND = 0x0112;
-
-            //窗体移动
-            int SC_MOVE = 0xF010;
-            int HTCAPTION = 0x0002;
-
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
-        }
 
         #endregion
         private System.Windows.Forms.Button giveupButton;

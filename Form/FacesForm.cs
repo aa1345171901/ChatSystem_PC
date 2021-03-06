@@ -47,7 +47,7 @@
         /// </summary>
         private void sure_Click(object sender, EventArgs e)
         {
-            int faceId = lvFace.SelectedItems[0].ImageIndex;  // 获得当前选中的头像的索引
+            int faceId = lvFace.SelectedItems[0].ImageIndex + 1;  // 获得当前选中的头像的索引
             try
             {
                 int dataId = UserHelper.DataId;

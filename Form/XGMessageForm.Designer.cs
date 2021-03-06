@@ -224,13 +224,6 @@
             this.Load += new System.EventHandler(this.XGMessageForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            this.tbNick.Click += Button_Click;
-            this.tbAge.Click += Button_Click;
-            this.tbname.Click += Button_Click;
-            this.star.Click += Button_Click;
-            this.bloodtype.Click += Button_Click;
-            this.cbsex.Click += Button_Click;
         }
 
         #endregion

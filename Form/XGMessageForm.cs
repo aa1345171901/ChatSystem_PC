@@ -20,6 +20,14 @@
         {
             InitializeComponent();
             this.personalInfoForm = personalInfoForm;
+
+            // 给按钮添加事件
+            this.tbNick.Click += Button_Click;
+            this.tbAge.Click += Button_Click;
+            this.tbname.Click += Button_Click;
+            this.star.Click += Button_Click;
+            this.bloodtype.Click += Button_Click;
+            this.cbsex.Click += Button_Click;
         }
 
         /// <summary>

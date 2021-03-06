@@ -1,6 +1,7 @@
 ﻿namespace QQ_piracy
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using QQ_piracy.Manager.Request;
 
@@ -19,6 +20,29 @@
         {
             InitializeComponent();
             loginRequest = new LoginRequest(this);
+
+            // 为窗口添加移动事件
+            this.pictureBox1.MouseMove += PictureBox1_MouseMove;
+        }
+
+        // 控制无边框窗体的移动
+        //using System.Runtime.InteropServices;
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //常量
+            int WM_SYSCOMMAND = 0x0112;
+
+            //窗体移动
+            int SC_MOVE = 0xF010;
+            int HTCAPTION = 0x0002;
+
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
 
         /// <summary>
@@ -32,7 +56,7 @@
                 LoginingForm loginingForm = new LoginingForm(this);
                 loginingForm.Show();
                 this.Visible = false;
-                if (LoginingForm.Delay(2))
+                if (loginingForm.Delay(2))
                 {
                     MainForm mainForm = new MainForm();
                     mainForm.Show();  // 显示窗体
