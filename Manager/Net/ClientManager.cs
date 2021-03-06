@@ -10,7 +10,7 @@
     /// </summary>
     public class ClientManager : BaseManager
     {
-        private const string Ip = "127.0.0.1";
+        private const string Ip = "47.119.134.12";
         private const int Port = 8888;
 
         private Socket clientSocket;

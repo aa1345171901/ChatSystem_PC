@@ -3,6 +3,7 @@
     using System;
     using System.Data;
     using System.Windows.Forms;
+    using ChatSystemServer.Helper;
     using QQ_piracy.Manager.Request;
 
     public partial class SearchFriendForm : Form
@@ -35,13 +36,14 @@
             {
                 IsSearch = 0;
                 dgvBasicResult.DataSource = DataSet.Tables[0];
+                dgvBasicResult.ClearSelection();
             }
             else if (IsSearch == 2)
             {
                 IsSearch = 0;
                 DataSet.Tables[0].Clear();
                 dgvBasicResult.DataSource = DataSet.Tables[0];
-
+                dgvBasicResult.ClearSelection();
                 // MessageBox.Show("服务器无法响应，请稍后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -75,6 +77,18 @@
             // 指定DataGridView的数据源
             // dgvBasicResult.DataSource = DataSet.Tables[0];
             // DataSet.Tables[0].Clear();
+            dgvBasicResult.ClearSelection();
+            DataSet ds = DataHelper.DataSetFromString(
+@"<NewDataSet>
+    <userdata_x002C_user>
+        <Id>53</Id>
+        <NickName>hello</NickName>
+        <Age>0</Age>
+        <Sex>女</Sex>
+    </userdata_x002C_user>
+</NewDataSet>");
+            dgvBasicResult.DataSource = ds.Tables[0];// datagridview第一次设置，设置的位置可能不一样
+            ds.Tables[0].Clear();
         }
 
         /// <summary>
@@ -195,6 +209,10 @@
         {
             int friendId = GetSelectedFriendId();  // 获得选中的好友的Id
 
+            if (friendId == -1)
+            {
+                return;
+            }
             try
             {
                 int id = UserHelper.LoginId;
@@ -213,18 +231,24 @@
         private int GetSelectedFriendId()
         {
             int friendId = -1;  // 好友的号码
-
-            // 没有选中任何一行
-            if (dgvBasicResult.SelectedRows.Count == 0)
+            try
             {
-                MessageBox.Show("请选择一个好友！", "操作", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 没有选中任何一行
+                if (dgvBasicResult.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("请选择一个好友！", "操作", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // 确保第一个单元格有值
+                else if (dgvBasicResult.SelectedRows[0].Cells[0] != null)
+                {
+                    // 获得DataGridView中选中的行的第一个单元格的值
+                    friendId = int.Parse(dgvBasicResult.SelectedRows[0].Cells[0].Value.ToString());
+                }
             }
-
-            // 确保第一个单元格有值
-            else if (dgvBasicResult.SelectedRows[0].Cells[0] != null)
+            catch (Exception e)
             {
-                // 获得DataGridView中选中的行的第一个单元格的值
-                friendId = int.Parse(dgvBasicResult.SelectedRows[0].Cells[0].Value.ToString());
+                Console.WriteLine(e.Message);
             }
 
             return friendId;
