@@ -1,6 +1,7 @@
 ﻿namespace QQ_piracy
 {
     using System;
+    using System.IO;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using QQ_piracy.Manager.Request;
@@ -11,6 +12,10 @@
         public int IsLogin = 0;
 
         private LoginRequest loginRequest;
+
+        private string passAutoFilePath = Application.StartupPath + @"\auto.pws.dll"; //保存自动登录的地址
+
+        private MainForm mainForm = null; // 保证mainform唯一
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginForm"/> class.
@@ -23,6 +28,7 @@
 
             // 为窗口添加移动事件
             this.pictureBox1.MouseMove += PictureBox1_MouseMove;
+            ReadAutoPsw();
         }
 
         // 控制无边框窗体的移动
@@ -58,10 +64,25 @@
                 this.Visible = false;
                 if (loginingForm.Delay(2))
                 {
-                    MainForm mainForm = new MainForm();
-                    mainForm.Show();  // 显示窗体
-                    loginRequest.Close();
-                    loginingForm.Close();
+                    if (mainForm == null)
+                    {
+                        mainForm = new MainForm();
+                        mainForm.Show();  // 显示窗体
+                        loginRequest.Close();
+                        loginingForm.Close();
+                        SaveAutoPswFile();   // 保存用户设置
+                    }
+                    else
+                    {
+                        mainForm.Show();  // 显示窗体
+                        loginRequest.Close();
+                        loginingForm.Close();
+                        SaveAutoPswFile();   // 保存用户设置
+                    }
+                }
+                else
+                {
+                    mainForm = null;
                 }
             }
             else if (IsLogin == 2)
@@ -90,6 +111,75 @@
                 {
                     MessageBox.Show(ex.Message, "连接服务器出错，请检查你的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 用于保存用户的状态，是否自动登录，是否记住密码
+        /// </summary>
+        private void SaveAutoPswFile()
+        {
+            int id = int.Parse(textBox1.Text.Trim());
+            string password = forgetPsw.Checked ? textBox2.Text.Trim() : "";
+            int autoBox = autoLogin.Checked == true ? 1 : 0;  // 选定自动登录为1 否则为0
+            string data = id + "};{" + password + "};{" + autoBox;
+            File.WriteAllText(passAutoFilePath, data);
+        }
+
+        /// <summary>
+        /// 读取用户设置
+        /// </summary>
+        private void ReadAutoPsw()
+        {
+            string readString = "";
+            if (File.Exists(passAutoFilePath))
+            {
+                readString = File.ReadAllText(passAutoFilePath);
+                if (readString != "")
+                {
+                    try
+                    {
+                        string[] arr = readString.Split(new string[] { "};{" }, StringSplitOptions.None);
+                        int id = int.Parse(arr[0]);
+                        textBox1.Text = id.ToString();
+                        string password = arr[1];
+                        if (password != "")
+                        {
+                            forgetPsw.Checked = true;
+                            textBox2.Text = password;
+                        }
+
+                        //控制textbox上的label是否显示
+                        if (!string.IsNullOrEmpty(textBox1.Text))
+                        {
+                            userLabel.Visible = false;
+                        }
+
+                        if (!string.IsNullOrEmpty(textBox2.Text))
+                        {
+                            PasswordLabel.Visible = false;
+                        }
+
+                        int autoLoginFlag = int.Parse(arr[2]);
+                        if (autoLoginFlag == 0)
+                        {
+                            autoLogin.Checked = false;
+                        }
+                        else if (password != "")
+                        {
+                            autoLogin.Checked = true;
+                            loginRequest.SendRequest(id + "," + password);  // 自动登录，直接发送请求
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
+            else
+            {
+                File.Create(passAutoFilePath);
             }
         }
 

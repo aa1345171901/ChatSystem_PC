@@ -40,7 +40,7 @@ namespace QQ_piracy
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.userLabel = new System.Windows.Forms.Label();
             this.PasswordLabel = new System.Windows.Forms.Label();
-            this.atuoLogin = new System.Windows.Forms.CheckBox();
+            this.autoLogin = new System.Windows.Forms.CheckBox();
             this.forgetPsw = new System.Windows.Forms.CheckBox();
             this.getPsw = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
@@ -107,7 +107,6 @@ namespace QQ_piracy
             // 
             // PasswordLabel
             // 
-            this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.PasswordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.PasswordLabel.Font = new System.Drawing.Font("幼圆", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -115,21 +114,21 @@ namespace QQ_piracy
             this.PasswordLabel.Location = new System.Drawing.Point(115, 202);
             this.PasswordLabel.MinimumSize = new System.Drawing.Size(202, 26);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(202, 26);
+            this.PasswordLabel.Size = new System.Drawing.Size(202, 28);
             this.PasswordLabel.TabIndex = 3;
             this.PasswordLabel.Text = "密码";
             this.PasswordLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // atuoLogin
+            // autoLogin
             // 
-            this.atuoLogin.AutoSize = true;
-            this.atuoLogin.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.atuoLogin.Location = new System.Drawing.Point(100, 243);
-            this.atuoLogin.Name = "atuoLogin";
-            this.atuoLogin.Size = new System.Drawing.Size(72, 16);
-            this.atuoLogin.TabIndex = 4;
-            this.atuoLogin.Text = "自动登录";
-            this.atuoLogin.UseVisualStyleBackColor = true;
+            this.autoLogin.AutoSize = true;
+            this.autoLogin.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.autoLogin.Location = new System.Drawing.Point(100, 243);
+            this.autoLogin.Name = "autoLogin";
+            this.autoLogin.Size = new System.Drawing.Size(72, 16);
+            this.autoLogin.TabIndex = 4;
+            this.autoLogin.Text = "自动登录";
+            this.autoLogin.UseVisualStyleBackColor = true;
             // 
             // forgetPsw
             // 
@@ -241,7 +240,7 @@ namespace QQ_piracy
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.getPsw);
             this.Controls.Add(this.forgetPsw);
-            this.Controls.Add(this.atuoLogin);
+            this.Controls.Add(this.autoLogin);
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
@@ -256,6 +255,7 @@ namespace QQ_piracy
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -265,7 +265,7 @@ namespace QQ_piracy
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Label PasswordLabel;
-        private System.Windows.Forms.CheckBox atuoLogin;
+        private System.Windows.Forms.CheckBox autoLogin;
         private System.Windows.Forms.CheckBox forgetPsw;
         private System.Windows.Forms.Label getPsw;
         private System.Windows.Forms.Button loginButton;
