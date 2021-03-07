@@ -1459,21 +1459,13 @@
         /// </summary>
         private void Play(int index)
         {
-            if (axWindowsMediaPlayer1.playState.ToString() != "wmppsPaused")
-            {
-                // 生成随机序列
-                BuildRandomList(listSong.Count);
-                jumpSongIndex = index;
-                // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
-                currPlaySong = listSong[index];
-                axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
-                axWindowsMediaPlayer1.Ctlcontrols.play();
-                return;
-            }
-            else
-            {
-                axWindowsMediaPlayer1.Ctlcontrols.play();
-            }
+            // 生成随机序列
+            BuildRandomList(listSong.Count);
+            jumpSongIndex = index;
+            // currPlaySong = new SongsInfo(lvSongList.SelectedItems[0].SubItems[7].Text);
+            currPlaySong = listSong[index];
+            axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
 
             pbPlay.Image = Resources.暂停hover;
             ttbbtnPlayPause.Icon = Resources.暂停1;
