@@ -151,6 +151,7 @@ namespace QQ_piracy.MusicForms
             this.tackBarMove = new System.Windows.Forms.TrackBar();
             this.labelMusicTimer = new System.Windows.Forms.Label();
             this.panelLyrc = new QQ_piracy.Model.NewPanel(this.components);
+            this.newPanel1 = new QQ_piracy.Model.NewPanel(this.components);
             this.labelNoLyric = new System.Windows.Forms.Label();
             this.linkLabelAddLyrc = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
@@ -201,6 +202,7 @@ namespace QQ_piracy.MusicForms
             ((System.ComponentModel.ISupportInitialize)(this.pbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).BeginInit();
             this.panelLyrc.SuspendLayout();
+            this.newPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // axWindowsMediaPlayer1
@@ -786,7 +788,6 @@ namespace QQ_piracy.MusicForms
             this.lvSongList.MultiSelect = false;
             this.lvSongList.Name = "lvSongList";
             this.lvSongList.OwnerDraw = true;
-            this.lvSongList.Scrollable = false;
             this.lvSongList.Size = new System.Drawing.Size(800, 427);
             this.lvSongList.TabIndex = 0;
             this.lvSongList.UseCompatibleStateImageBehavior = false;
@@ -1485,11 +1486,7 @@ namespace QQ_piracy.MusicForms
             this.panelLyrc.BackColor = System.Drawing.Color.Transparent;
             this.panelLyrc.BackgroundImage = global::QQ_piracy.Properties.Resources.wallhaven_12422;
             this.panelLyrc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelLyrc.Controls.Add(this.panelLyricLabels);
-            this.panelLyrc.Controls.Add(this.pbLyricClose);
-            this.panelLyrc.Controls.Add(this.pbLyricMin);
-            this.panelLyrc.Controls.Add(this.labelNoLyric);
-            this.panelLyrc.Controls.Add(this.linkLabelAddLyrc);
+            this.panelLyrc.Controls.Add(this.newPanel1);
             this.panelLyrc.Location = new System.Drawing.Point(0, 0);
             this.panelLyrc.Name = "panelLyrc";
             this.panelLyrc.Size = new System.Drawing.Size(990, 524);
@@ -1497,6 +1494,20 @@ namespace QQ_piracy.MusicForms
             this.panelLyrc.Visible = false;
             this.panelLyrc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.panelLyrc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
+            // 
+            // newPanel1
+            // 
+            this.newPanel1.BackgroundImage = global::QQ_piracy.Properties.Resources.LyricBackGroundMask;
+            this.newPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.newPanel1.Controls.Add(this.panelLyricLabels);
+            this.newPanel1.Controls.Add(this.pbLyricClose);
+            this.newPanel1.Controls.Add(this.pbLyricMin);
+            this.newPanel1.Controls.Add(this.labelNoLyric);
+            this.newPanel1.Controls.Add(this.linkLabelAddLyrc);
+            this.newPanel1.Location = new System.Drawing.Point(0, 0);
+            this.newPanel1.Name = "newPanel1";
+            this.newPanel1.Size = new System.Drawing.Size(990, 524);
+            this.newPanel1.TabIndex = 7;
             // 
             // labelNoLyric
             // 
@@ -1525,6 +1536,7 @@ namespace QQ_piracy.MusicForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(989, 590);
+            this.Controls.Add(this.panelLyrc);
             this.Controls.Add(this.panelMusicRecommend);
             this.Controls.Add(this.panelUser);
             this.Controls.Add(this.panelMusicVlume);
@@ -1536,7 +1548,6 @@ namespace QQ_piracy.MusicForms
             this.Controls.Add(this.panelSetting);
             this.Controls.Add(this.panelPlayControl);
             this.Controls.Add(this.axWindowsMediaPlayer1);
-            this.Controls.Add(this.panelLyrc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MusicMainForm";
@@ -1595,6 +1606,7 @@ namespace QQ_piracy.MusicForms
             ((System.ComponentModel.ISupportInitialize)(this.pbVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tackBarMove)).EndInit();
             this.panelLyrc.ResumeLayout(false);
+            this.newPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1729,5 +1741,6 @@ namespace QQ_piracy.MusicForms
         private System.Windows.Forms.Label LabelRecommendBox4;
         private System.Windows.Forms.ContextMenuStrip cmsLyricDelete;
         private System.Windows.Forms.ToolStripMenuItem tsmiLyricDelete;
+        private NewPanel newPanel1;
     }
 }

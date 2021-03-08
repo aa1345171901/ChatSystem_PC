@@ -1648,14 +1648,25 @@
                 // 设置桌面歌词
                 if (lyricDesktop != null)
                 {
+                    // 日文歌词可能会有中文，分割出来显示桌面歌词时
+                    string lyric1 = labelLyric5.Text;
+                    string lyric2 = labelLyric6.Text;
+                    if (lyric1.Contains(","))
+                    {
+                        lyric1 = lyric1.Split(',')[0];
+                    }
+                    if (lyric2.Contains(","))
+                    {
+                        lyric2 = lyric2.Split(',')[0];
+                    }
                     if (currLyricIndex % 2 == 0)
                     {
-                        lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                        lyricDesktop.SetLyric(lyric1, lyric2);
                         lyricDesktop.SetLyricIng(10, 0);
                     }
                     else
                     {
-                        lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
+                        lyricDesktop.SetLyric(lyric2, lyric1);
                         lyricDesktop.SetLyricIng(0, (int)(offset * 3));
                     }
                 }
@@ -2134,7 +2145,7 @@
 
             #region 绘制字体转换成图片
             string numStr = "";
-            if (index < 10)
+            if (index < 9)
             {
                 numStr = "0" + (index + 1);
             }
@@ -2313,6 +2324,7 @@
             listSong.Clear();
             labelListSong.Text = "   播放列表为空";
             labelListCount.Text = "";
+            labelNoLyric.Text = "暂未找到歌词";
             currPlaySong = null;
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             lbListSong.ClearSelected();
@@ -2413,6 +2425,7 @@
                 listSong.Clear();
                 labelListSong.Text = "   播放列表为空";
                 labelListCount.Text = "";
+                labelNoLyric.Text = "暂未找到歌词";
                 currPlaySong = null;
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
                 lbListSong.ClearSelected();
@@ -2488,7 +2501,7 @@
                     return;
                 }
 
-                using (StreamReader sr = new StreamReader(listSong[currIndex].FilePathLrc, Encoding.Default))
+                using (StreamReader sr = new StreamReader(listSong[currIndex].FilePathLrc, GetType(listSong[currIndex].FilePathLrc)))
                 {
                     string line;
 
@@ -2540,6 +2553,96 @@
             }
         }
 
+        /// <summary>
+        /// 给定文件的路径，读取文件的二进制数据，判断文件的编码类型
+        /// </summary>
+        /// <param name="FILE_NAME">文件路径</param>
+        /// <returns>文件的编码类型</returns>
+        public static System.Text.Encoding GetType(string FILE_NAME)
+        {
+            FileStream fs = new FileStream(FILE_NAME, FileMode.Open, FileAccess.Read);
+            Encoding r = GetType(fs);
+            fs.Close();
+            return r;
+        }
+
+        /// <summary>
+        /// 通过给定的文件流，判断文件的编码类型
+        /// </summary>
+        /// <param name="fs">文件流</param>
+        /// <returns>文件的编码类型</returns>
+        public static System.Text.Encoding GetType(FileStream fs)
+        {
+            byte[] Unicode = new byte[] { 0xFF, 0xFE, 0x41 };
+            byte[] UnicodeBIG = new byte[] { 0xFE, 0xFF, 0x00 };
+            byte[] UTF8 = new byte[] { 0xEF, 0xBB, 0xBF }; //带BOM
+            Encoding reVal = Encoding.Default;
+
+            BinaryReader r = new BinaryReader(fs, System.Text.Encoding.Default);
+            int i;
+            int.TryParse(fs.Length.ToString(), out i);
+            byte[] ss = r.ReadBytes(i);
+            if (IsUTF8Bytes(ss) || (ss[0] == 0xEF && ss[1] == 0xBB && ss[2] == 0xBF))
+            {
+                reVal = Encoding.UTF8;
+            }
+            else if (ss[0] == 0xFE && ss[1] == 0xFF && ss[2] == 0x00)
+            {
+                reVal = Encoding.BigEndianUnicode;
+            }
+            else if (ss[0] == 0xFF && ss[1] == 0xFE && ss[2] == 0x41)
+            {
+                reVal = Encoding.Unicode;
+            }
+            r.Close();
+            return reVal;
+        }
+
+        /// <summary>
+        /// 判断是否是不带 BOM 的 UTF8 格式
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private static bool IsUTF8Bytes(byte[] data)
+        {
+            int charByteCounter = 1; //计算当前正分析的字符应还有的字节数
+            byte curByte; //当前分析的字节.
+            for (int i = 0; i < data.Length; i++)
+            {
+                curByte = data[i];
+                if (charByteCounter == 1)
+                {
+                    if (curByte >= 0x80)
+                    {
+                        //判断当前
+                        while (((curByte <<= 1) & 0x80) != 0)
+                        {
+                            charByteCounter++;
+                        }
+                        //标记位首位若为非0 则至少以2个1开始 如:110XXXXX...........1111110X 
+                        if (charByteCounter == 1 || charByteCounter > 6)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    //若是UTF-8 此时第一位必须为1
+                    if ((curByte & 0xC0) != 0x80)
+                    {
+                        return false;
+                    }
+                    charByteCounter--;
+                }
+            }
+            if (charByteCounter > 1)
+            {
+                throw new Exception("非预期的byte格式");
+            }
+            return true;
+        }
+
         int currLyricIndex = 0; // 记录歌词的当前时间索引
         double lyricTime = 0; // 获取当前歌词的剩余时间长度
         int offset = 0;     // 设置panel 歌词前的大概长度，使黄字滚动稍微准确一些
@@ -2558,7 +2661,7 @@
                 lyricDesktopPoint = lyricDesktop.Location;
             }
 
-            if (currLyricIndex > lrcCount || lrc == null)
+            if (currLyricIndex > lrcCount || lrc == null || lrcCount == 0)
             {
                 return;
             }
@@ -2589,7 +2692,18 @@
                 // 设置桌面歌词
                 if (lyricDesktop != null)
                 {
-                    lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                    // 日文歌词可能会有中文，分割出来显示桌面歌词时
+                    string lyric1 = labelLyric5.Text;
+                    string lyric2 = labelLyric6.Text;
+                    if (lyric1.Contains(","))
+                    {
+                        lyric1 = lyric1.Split(',')[0];
+                    }
+                    if (lyric2.Contains(","))
+                    {
+                        lyric2 = lyric2.Split(',')[0];
+                    }
+                    lyricDesktop.SetLyric(lyric1, lyric2);
                     lyricDesktop.SetLyricIng(20, 0);  // 前面那条歌词居左显示，不需要设置，右边的播放他时设置
                 }
             }
@@ -2675,14 +2789,25 @@
             // 设置桌面歌词
             if (lyricDesktop != null)
             {
+                // 日文歌词可能会有中文，分割出来显示桌面歌词时
+                string lyric1 = labelLyric5.Text;
+                string lyric2 = labelLyric6.Text;
+                if (lyric1.Contains(","))
+                {
+                    lyric1 = lyric1.Split(',')[0];
+                }
+                if (lyric2.Contains(","))
+                {
+                    lyric2 = lyric2.Split(',')[0];
+                }
                 if (currLyricIndex % 2 == 0)
                 {
-                    lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                    lyricDesktop.SetLyric(lyric1, lyric2);
                     lyricDesktop.SetLyricIng(10, 0);
                 }
                 else
                 {
-                    lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
+                    lyricDesktop.SetLyric(lyric2, lyric1);
                     lyricDesktop.SetLyricIng(0, (int)(offset * 3));
                 }
             }
@@ -2869,15 +2994,26 @@
             }
             else
             {
+                // 日文歌词可能会有中文，分割出来显示桌面歌词时
+                string lyric1 = labelLyric5.Text;
+                string lyric2 = labelLyric6.Text;
+                if (lyric1.Contains(","))
+                {
+                    lyric1 = lyric1.Split(',')[0];
+                }
+                if (lyric2.Contains(","))
+                {
+                    lyric2 = lyric2.Split(',')[0];
+                }
                 if (currLyricIndex % 2 == 0)
                 {
-                    lyricDesktop.SetLyric(labelLyric5.Text, labelLyric6.Text);
+                    lyricDesktop.SetLyric(lyric1, lyric2);
                     lyricDesktop.SetLyricIng(10, 0);
                 }
                 else
                 {
-                    lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
-                    lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20));
+                    lyricDesktop.SetLyric(lyric2, lyric1);
+                    lyricDesktop.SetLyricIng(0, (int)(offset * 3));
                 }
             }
             toolTip1.SetToolTip(pbLyric, "隐藏桌面歌词");
@@ -2963,6 +3099,7 @@
 
                 // 设置各种显示
                 labelNoLyric.Visible = true;
+                labelNoLyric.Text = "暂未找到歌词";
                 linkLabelAddLyrc.Visible = true;
                 panelLyricLabels.Visible = false;
                 setLyric();

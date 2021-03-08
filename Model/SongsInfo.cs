@@ -142,8 +142,8 @@
                 if (file.Tag.Pictures.Length > 0)
                 {
                     var bin = (byte[])file.Tag.Pictures[0].Data.Data;
-                    albumImage = Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(1000, 1000, null, IntPtr.Zero);
-                    albumImage = Cut((Bitmap)albumImage, 20, 215, 990, 530);
+                    albumImage = Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(990, 990, null, IntPtr.Zero);
+                    albumImage = Cut((Bitmap)albumImage, 0, 100, 990, 530);
                     smallAblum = Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(64, 64, null, IntPtr.Zero);
                     return;
                 }

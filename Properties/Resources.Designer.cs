@@ -153,6 +153,16 @@ namespace QQ_piracy.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap LyricBackGroundMask {
+            get {
+                object obj = ResourceManager.GetObject("LyricBackGroundMask", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap lyricClose {
             get {
                 object obj = ResourceManager.GetObject("lyricClose", resourceCulture);

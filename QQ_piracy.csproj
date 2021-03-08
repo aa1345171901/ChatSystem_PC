@@ -274,6 +274,7 @@
     <None Include="Resources\Mask2.png" />
     <None Include="Resources\listUser.png" />
     <None Include="Resources\Mask3.png" />
+    <None Include="Resources\LyricBackGroundMask1.png" />
     <Content Include="Resources\message.png" />
     <Content Include="Resources\musicLibrary.png" />
     <None Include="Resources\Ps123.Net_0663.jpg" />
