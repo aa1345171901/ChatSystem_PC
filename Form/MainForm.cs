@@ -696,6 +696,8 @@
             {// 么有未读系统信息  双击打开面版
                 this.Show();                               // 窗体显示
 
+                isXF = false;  // 关闭悬浮
+
                 this.WindowState = FormWindowState.Normal;  // 窗体状态默认大小
 
                 this.Activate();                           // 激活窗体给予焦点

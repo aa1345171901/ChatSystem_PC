@@ -1656,7 +1656,7 @@
                     else
                     {
                         lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
-                        lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20));
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 3));
                     }
                 }
             }
@@ -2315,6 +2315,10 @@
             lbListSong.ClearSelected();
             lbListSongSetting();
             FavoritePictureSetting();
+            if (lyricDesktop != null)
+            {
+                lyricDesktop.SetLyric("暂无歌词", "");
+            }
 
             this.Text = "音乐播放器";
             MyMusic.Text = "音乐播放器";
@@ -2409,6 +2413,10 @@
                 currPlaySong = null;
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
                 lbListSong.ClearSelected();
+                if (lyricDesktop != null)
+                {
+                    lyricDesktop.SetLyric("暂无歌词", "");
+                }
             }
             else if (currIndex == currIndexSelected)
             {
@@ -2601,7 +2609,7 @@
                     }
                     else
                     {
-                        lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20) + Convert.ToInt32((500 - (offset * 2.5)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 3) + Convert.ToInt32((500 - (offset * 3)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
                     }
                 }
                 return;
@@ -2613,8 +2621,8 @@
         - axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
             }
 
-            // 黄字没有滚动完，就不继续加载歌词 提前0.3秒跳到下一句歌词
-            if (lyricTime > 0.3)
+            // 黄字没有滚动完，就不继续加载歌词 提前0.2秒跳到下一句歌词
+            if (lyricTime > 0.2)
             {
                 double allTimeLyricIng = currLyricIndex == 0 ?
                     TimeStringToDouble(lrc[1, currLyricIndex]) :
@@ -2630,7 +2638,7 @@
                     }
                     else
                     {
-                        lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20) + Convert.ToInt32((500 - (offset * 2.5)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 3) + Convert.ToInt32((500 - (offset * 3)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
                     }
                 }
                 return;
@@ -2672,7 +2680,7 @@
                 else
                 {
                     lyricDesktop.SetLyric(labelLyric6.Text, labelLyric5.Text);
-                    lyricDesktop.SetLyricIng(0, (int)(offset * 2 + 20));
+                    lyricDesktop.SetLyricIng(0, (int)(offset * 3));
                 }
             }
         }

@@ -119,11 +119,18 @@
         /// </summary>
         private void SaveAutoPswFile()
         {
-            int id = int.Parse(textBox1.Text.Trim());
-            string password = forgetPsw.Checked ? textBox2.Text.Trim() : "";
-            int autoBox = autoLogin.Checked == true ? 1 : 0;  // 选定自动登录为1 否则为0
-            string data = id + "};{" + password + "};{" + autoBox;
-            File.WriteAllText(passAutoFilePath, data);
+            try
+            {
+                int id = int.Parse(textBox1.Text.Trim());
+                string password = forgetPsw.Checked ? textBox2.Text.Trim() : "";
+                int autoBox = autoLogin.Checked == true ? 1 : 0;  // 选定自动登录为1 否则为0
+                string data = id + "};{" + password + "};{" + autoBox;
+                File.WriteAllText(passAutoFilePath, data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         /// <summary>
