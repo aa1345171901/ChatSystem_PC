@@ -48,6 +48,7 @@ namespace QQ_piracy
             this.min = new System.Windows.Forms.Button();
             this.register = new System.Windows.Forms.Label();
             this.AsynTimer = new System.Windows.Forms.Timer(this.components);
+            this.ConnectAgain = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -185,7 +186,6 @@ namespace QQ_piracy
             this.close.Size = new System.Drawing.Size(35, 33);
             this.close.TabIndex = 9;
             this.close.Text = "×";
-            this.close.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.close.UseVisualStyleBackColor = false;
             this.close.Click += new System.EventHandler(this.close_Click);
             // 
@@ -204,7 +204,6 @@ namespace QQ_piracy
             this.min.Size = new System.Drawing.Size(35, 33);
             this.min.TabIndex = 10;
             this.min.Text = "-";
-            this.min.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.min.UseVisualStyleBackColor = false;
             this.min.Click += new System.EventHandler(this.min_Click);
             // 
@@ -226,6 +225,12 @@ namespace QQ_piracy
             // 
             this.AsynTimer.Enabled = true;
             this.AsynTimer.Tick += new System.EventHandler(this.AsynTimer_Tick);
+            // 
+            // ConnectAgain
+            // 
+            this.ConnectAgain.Enabled = true;
+            this.ConnectAgain.Interval = 10000;
+            this.ConnectAgain.Tick += new System.EventHandler(this.ConnectAgain_Tick);
             // 
             // LoginForm
             // 
@@ -273,5 +278,6 @@ namespace QQ_piracy
         private System.Windows.Forms.Button min;
         private Label register;
         private Timer AsynTimer;
+        private Timer ConnectAgain;
     }
 }

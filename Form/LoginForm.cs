@@ -110,6 +110,7 @@
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "连接服务器出错，请检查你的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ConnectAgain.Start();
                 }
             }
         }
@@ -314,6 +315,14 @@
         private void AsynTimer_Tick(object sender, EventArgs e)
         {
             ResponseLogin();
+        }
+
+        private void ConnectAgain_Tick(object sender, EventArgs e)
+        {
+            if (ManagerController.Instance.ConnectNetAgain())
+            {
+                ConnectAgain.Stop();
+            }
         }
     }
 }

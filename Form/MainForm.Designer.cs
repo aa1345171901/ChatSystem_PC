@@ -101,7 +101,6 @@ namespace QQ_piracy
             this.min.Size = new System.Drawing.Size(35, 33);
             this.min.TabIndex = 14;
             this.min.Text = "-";
-            this.min.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.min.UseVisualStyleBackColor = false;
             this.min.Click += new System.EventHandler(this.min_Click);
             // 
@@ -120,7 +119,6 @@ namespace QQ_piracy
             this.close.Size = new System.Drawing.Size(35, 33);
             this.close.TabIndex = 13;
             this.close.Text = "×";
-            this.close.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.close.UseVisualStyleBackColor = false;
             this.close.Click += new System.EventHandler(this.close_Click);
             // 

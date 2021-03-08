@@ -17,7 +17,7 @@
     public partial class MusicMainForm : Form
     {
         // 打开文件的默认文件位置
-        private const string DefaultSongsFilePath = @"D:\KwDownload";
+        private string DefaultSongsFilePath = Application.StartupPath + @"\Song\";
         private string localSongsFilePath = Application.StartupPath + "\\songListHistory.txt"; // 本地音乐的记录文件
         private string favoriteSongsFilePath = Application.StartupPath + "\\favoriteSongs.txt"; // 本地音乐的记录文件
         private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
@@ -1783,17 +1783,20 @@
             PictureBox pb = (PictureBox)sender;
             if (pb.Name == "pbLike")
             {
-                pb.Image = Resources.收藏ing;
-                toolTip1.SetToolTip(pb, "取消收藏");
-                pb.Name = "pbUnLike";
+                if (currPlaySong != null && currPlaySong.FilePath != null)
+                {
+                    pb.Image = Resources.收藏ing;
+                    toolTip1.SetToolTip(pb, "取消收藏");
+                    pb.Name = "pbUnLike";
 
-                SongsInfo songInfo = new SongsInfo(currPlaySong.FilePath);
-                songInfo.SaveTime = DateTime.Now.ToString();
-                songInfo.FilePathLrc = currPlaySong.FilePathLrc;
-                favoriteSongsList.Add(songInfo);
-                SaveSongsListHistory(favoriteSongsFilePath, favoriteSongsList);
-                pb.MouseHover -= pbLike_MouseHover;
-                pb.MouseLeave -= pbLike_MouseLeave;
+                    SongsInfo songInfo = new SongsInfo(currPlaySong.FilePath);
+                    songInfo.SaveTime = DateTime.Now.ToString();
+                    songInfo.FilePathLrc = currPlaySong.FilePathLrc;
+                    favoriteSongsList.Add(songInfo);
+                    SaveSongsListHistory(favoriteSongsFilePath, favoriteSongsList);
+                    pb.MouseHover -= pbLike_MouseHover;
+                    pb.MouseLeave -= pbLike_MouseLeave;
+                }
             }
             else
             {
@@ -2717,6 +2720,7 @@
             else
             {
                 labelNoLyric.Visible = true;
+                labelNoLyric.Text = "暂未找到歌词";
                 linkLabelAddLyrc.Visible = true;
                 panelLyricLabels.Visible = false;
                 if (currPlaySong == null || axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsReady)

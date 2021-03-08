@@ -54,6 +54,10 @@
 
         public bool ConnectNetAgain()
         {
+            if (clientSocket.Connected)
+            {
+                return true;
+            }
             msg = new Message();
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             try
@@ -117,6 +121,7 @@
             if (clientSocket != null)
             {
                 clientSocket.Close();
+                clientSocket.Dispose();
             }
         }
     }
