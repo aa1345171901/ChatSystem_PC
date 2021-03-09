@@ -17,7 +17,7 @@
     public partial class MusicMainForm : Form
     {
         // 打开文件的默认文件位置
-        private string DefaultSongsFilePath = Application.StartupPath + @"\Song\";
+        private string DefaultSongsFilePath = Application.StartupPath;
         private string localSongsFilePath = Application.StartupPath + "\\songListHistory.txt"; // 本地音乐的记录文件
         private string favoriteSongsFilePath = Application.StartupPath + "\\favoriteSongs.txt"; // 本地音乐的记录文件
         private string currentSongFilePath = Application.StartupPath + "\\currentSongs.txt"; // 记录退出前播放的歌曲以及部分用户设置
@@ -302,9 +302,6 @@
                         lyricDesktop.SetLyric("暂无歌词", "");
                     }
 
-                    // 重新播放，当前歌词索引设0
-                    currLyricIndex = 0;
-
                     //try
                     //{
                     //    int currIndex = lvSongList.SelectedItems[0].Index;
@@ -369,6 +366,10 @@
                 WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(path);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
                 lbListSongSetting();
+
+                // 重新播放，当前歌词索引设0
+                currLyricIndex = 0;
+                GetLrc();
             }
         }
 
@@ -1012,9 +1013,6 @@
                 ListViewItem lvItem = new ListViewItem(songAry);
                 lvItem.SubItems.Add(song.FilePath);
                 lvSongList.Items.Add(lvItem);
-
-                WMPLib.IWMPMedia media = axWindowsMediaPlayer1.newMedia(song.FilePath);
-                axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
             }
 
             lvSongList.Columns[0].Text = songList.Count.ToString();
@@ -1090,6 +1088,7 @@
                         }
 
                         currIndex = int.Parse(arr[2]);
+                        jumpSongIndex = currIndex;
                         string[] songsPath = arr[3].Split(new string[] { "},{" }, StringSplitOptions.None); // 歌曲文件
                         for (int i = 0; i < songsPath.Length - 1; i++)
                         {
@@ -1241,6 +1240,8 @@
                     {
                         BuildRandomList(listSong.Count);
                         jumpSongIndex = currIndex;
+                        currLyricIndex = 0;
+                        GetLrc();
                         SettingListSong();
                         axWindowsMediaPlayer1.URL = currPlaySong.FilePath;
                     }
@@ -1281,6 +1282,9 @@
                 currPlaySong = new SongsInfo(songFilePath);
                 axWindowsMediaPlayer1.URL = songFilePath;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
+                // 歌词索引设0
+                currLyricIndex = 0;
+                GetLrc();
                 pbPlay.Image = Resources.暂停;
                 ttbbtnPlayPause.Icon = Resources.暂停1;
             }
@@ -1470,6 +1474,10 @@
             pbPlay.Image = Resources.暂停hover;
             ttbbtnPlayPause.Icon = Resources.暂停1;
             ttbbtnPlayPause.Tooltip = "暂停";
+
+            // 歌词索引设0
+            currLyricIndex = 0;
+            GetLrc();
         }
 
         bool isSelected = false; // 判断搜索栏是否选中，选中再执行搜索
@@ -1667,7 +1675,7 @@
                     else
                     {
                         lyricDesktop.SetLyric(lyric2, lyric1);
-                        lyricDesktop.SetLyricIng(0, (int)(offset * 3));
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 8 / 5));
                     }
                 }
             }
@@ -2373,6 +2381,8 @@
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 pbPlay.Image = Resources.暂停;
                 ttbbtnPlayPause.Icon = Resources.暂停1;
+                currLyricIndex = 0;
+                GetLrc();
             }
 
             lbListSongSetting();
@@ -2495,6 +2505,8 @@
         {
             try
             {
+                lrc = null;
+                lrcCount = 0;
                 if (listSong[currIndex].FilePathLrc == " ")
                 {
                     lrc = null;
@@ -2512,9 +2524,27 @@
                         lrcCount = 0;
                         return;
                     }
+                    else
+                    {
+                        lrc = new string[2, 500];
+                        lrcCount = 0;
+                        try
+                        {
+                            TimeStringToDouble(line.Substring(1, 7));
 
-                    lrc = new string[2, 500];
-                    lrcCount = 0;
+                            // 将读取到的歌词存放到数组中
+                            lrc[0, lrcCount] = line.Substring(10, line.Length - 10);
+
+                            // 将读取到的歌词时间存放到数组中
+                            lrc[1, lrcCount] = line.Substring(1, 7);
+
+                            lrcCount++;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
 
                     // 循环读取每一行歌词
                     while ((line = sr.ReadLine()) != null)
@@ -2528,7 +2558,7 @@
                         {
                             try
                             {
-                                TimeStringToDouble(line.Substring(1, 8));
+                                TimeStringToDouble(line.Substring(1, 7));
                             }
                             catch (Exception e)
                             {
@@ -2541,7 +2571,7 @@
                         lrc[0, lrcCount] = line.Substring(10, line.Length - 10);
 
                         // 将读取到的歌词时间存放到数组中
-                        lrc[1, lrcCount] = line.Substring(1, 8);
+                        lrc[1, lrcCount] = line.Substring(1, 7);
 
                         lrcCount++;
                     }
@@ -2726,7 +2756,7 @@
                     }
                     else
                     {
-                        lyricDesktop.SetLyricIng(0, (int)(offset * 3) + Convert.ToInt32((500 - (offset * 3)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 2) + Convert.ToInt32((500) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
                     }
                 }
                 return;
@@ -2744,6 +2774,10 @@
                 double allTimeLyricIng = currLyricIndex == 0 ?
                     TimeStringToDouble(lrc[1, currLyricIndex]) :
                     TimeStringToDouble(lrc[1, currLyricIndex]) - TimeStringToDouble(lrc[1, currLyricIndex - 1]);
+                if (allTimeLyricIng == 0)
+                {
+                    return;
+                }
                 panelLyricIng.Width = offset + Convert.ToInt32((402 - offset) * (allTimeLyricIng - lyricTime) / allTimeLyricIng);
 
                 // 设置桌面歌词
@@ -2755,7 +2789,7 @@
                     }
                     else
                     {
-                        lyricDesktop.SetLyricIng(0, (int)(offset * 3) + Convert.ToInt32((500 - (offset * 3)) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
+                        lyricDesktop.SetLyricIng(0, (int)(offset * 2) + Convert.ToInt32((500) * (allTimeLyricIng - lyricTime) / allTimeLyricIng));
                     }
                 }
                 return;
@@ -2808,7 +2842,7 @@
                 else
                 {
                     lyricDesktop.SetLyric(lyric2, lyric1);
-                    lyricDesktop.SetLyricIng(0, (int)(offset * 3));
+                    lyricDesktop.SetLyricIng(0, (int)(offset * 8 / 5));
                 }
             }
         }
@@ -3013,7 +3047,7 @@
                 else
                 {
                     lyricDesktop.SetLyric(lyric2, lyric1);
-                    lyricDesktop.SetLyricIng(0, (int)(offset * 3));
+                    lyricDesktop.SetLyricIng(0, (int)(offset * 8 / 5));
                 }
             }
             toolTip1.SetToolTip(pbLyric, "隐藏桌面歌词");

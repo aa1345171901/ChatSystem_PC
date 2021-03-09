@@ -470,13 +470,12 @@ namespace QQ_piracy.MusicForms
             // 
             // labelMusicDetail
             // 
-            this.labelMusicDetail.AutoSize = true;
             this.labelMusicDetail.BackColor = System.Drawing.Color.Transparent;
             this.labelMusicDetail.Font = new System.Drawing.Font("幼圆", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelMusicDetail.ForeColor = System.Drawing.Color.White;
             this.labelMusicDetail.Location = new System.Drawing.Point(255, 18);
             this.labelMusicDetail.Name = "labelMusicDetail";
-            this.labelMusicDetail.Size = new System.Drawing.Size(98, 13);
+            this.labelMusicDetail.Size = new System.Drawing.Size(255, 13);
             this.labelMusicDetail.TabIndex = 20;
             this.labelMusicDetail.Text = "音乐名 - 歌手";
             this.toolTip1.SetToolTip(this.labelMusicDetail, "音乐名 - 歌手");
@@ -563,6 +562,7 @@ namespace QQ_piracy.MusicForms
             this.panelLyricLabels.TabIndex = 6;
             this.toolTip1.SetToolTip(this.panelLyricLabels, "歌词有误？右键点击打开菜单删除吧");
             this.panelLyricLabels.Visible = false;
+            this.panelLyricLabels.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
             // 
             // cmsLyricDelete
             // 
@@ -831,7 +831,7 @@ namespace QQ_piracy.MusicForms
             // columnTime
             // 
             this.columnTime.Text = "添加时间";
-            this.columnTime.Width = 180;
+            this.columnTime.Width = 140;
             // 
             // pbAddSong
             // 
@@ -1508,6 +1508,7 @@ namespace QQ_piracy.MusicForms
             this.newPanel1.Name = "newPanel1";
             this.newPanel1.Size = new System.Drawing.Size(990, 524);
             this.newPanel1.TabIndex = 7;
+            this.newPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
             // 
             // labelNoLyric
             // 

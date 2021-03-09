@@ -32,9 +32,15 @@
             {
                 return;
             }
-
-            SetSongInfo(fPath);
-            SetAlbumArt(fPath);
+            try
+            {
+                SetSongInfo(fPath);
+                SetAlbumArt(fPath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public string FileName { get => fileName; set => fileName = value; }
