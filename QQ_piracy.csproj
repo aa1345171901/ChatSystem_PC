@@ -39,6 +39,10 @@
   <PropertyGroup>
     <ApplicationIcon>图标.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common">
       <HintPath>..\..\ChatSystemServer\Common\bin\Debug\Common.dll</HintPath>

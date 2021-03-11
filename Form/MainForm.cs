@@ -61,6 +61,7 @@
         Icon icon3 = null;
 
         int timerRun = 0; // 获取自动连接的时间
+        int hangupTimer = 0; // 挂起的时间
 
         private string faceFilePath = Application.StartupPath + "\\FaceImage\\"; // 获取保存头像的文件
 
@@ -311,10 +312,19 @@
             {
                 // 获取一条未读消息
                 getUnreadRequest.SendRequest(UserHelper.LoginId.ToString());
+
+                hangupTimer += 1000;
+                // 每20s响应一下服务器，防止不能响应
+                if (hangupTimer >= 20000)
+                {
+                    ManagerController.Instance.CloseClient();
+                    ManagerController.Instance.ConnectNetAgain();
+                    hangupTimer = 0;
+                }
             }
             catch (Exception ex)
             {
-                timerRun += 200;
+                timerRun += 1000;
                 notifyIcon1.Text = "断开网络，将在" + (10 - (this.timerRun / 1000.0)) + "秒后连接";
                 notifyIcon1.Icon = icon3;
                 ConnectNet.Start();
@@ -629,6 +639,7 @@
                 {
                     e.Item.ImageIndex = userFaceIdDic[Convert.ToInt32(e.Item.Tag)];
                     userFaceIdDic.Remove((int)e.Item.Tag);
+                    sbFriends.Invalidate();
                 }
 
                 ChatForm chatForm = new ChatForm();

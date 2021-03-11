@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net.Sockets;
+    using System.Threading;
     using Common;
     using QQ_piracy.Manager.Net;
 
@@ -116,10 +117,12 @@
         /// <summary>
         /// 关闭时释放资源
         /// </summary>
-        private void Close()
+        public void Close()
         {
             if (clientSocket != null)
             {
+                clientSocket.Shutdown(SocketShutdown.Both);
+                Thread.Sleep(10);
                 clientSocket.Close();
                 clientSocket.Dispose();
             }

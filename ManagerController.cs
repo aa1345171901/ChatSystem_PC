@@ -81,5 +81,10 @@
         {
             requestManager.RemoveRequest(actionCode);
         }
+
+        public void CloseClient()
+        {
+            clientManager.Close();
+        }
     }
 }

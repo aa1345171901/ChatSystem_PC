@@ -300,7 +300,7 @@ namespace QQ_piracy
             // tmrMessage
             // 
             this.tmrMessage.Enabled = true;
-            this.tmrMessage.Interval = 200;
+            this.tmrMessage.Interval = 1000;
             this.tmrMessage.Tick += new System.EventHandler(this.tmrMessage_Tick);
             // 
             // tmrAddFriend

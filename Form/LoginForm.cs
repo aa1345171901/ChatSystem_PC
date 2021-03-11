@@ -110,7 +110,6 @@
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "连接服务器出错，请检查你的网络", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ConnectAgain.Start();
                 }
             }
         }
@@ -321,7 +320,7 @@
         {
             if (ManagerController.Instance.ConnectNetAgain())
             {
-                ConnectAgain.Stop();
+                // ConnectAgain.Stop();
             }
         }
     }
