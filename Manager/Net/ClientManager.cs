@@ -37,7 +37,6 @@
             }
             catch (Exception e)
             {
-                Close();
                 Console.WriteLine("无法连接服务器，请减查您的网络:" + e.Message);
             }
         }
@@ -69,7 +68,6 @@
             }
             catch (Exception)
             {
-                Close();
                 return false;
             }
         }

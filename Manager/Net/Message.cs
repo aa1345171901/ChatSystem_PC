@@ -68,6 +68,7 @@
                 return;
             }
 
+            // 先读取前面8个字节，获取本次数据长度，和action方法
             if (startIndex >= 8 && count == 0)
             {
                 count = BitConverter.ToInt32(data, 0);
@@ -78,7 +79,8 @@
                 allCount += 4;
             }
 
-            if (startIndex >= 0)
+            // 读取后面的数据
+            if (startIndex >= 0 && count != 0)
             {
                 allCount += newCount;
                 dataStr += Encoding.UTF8.GetString(data, 0, newCount);
