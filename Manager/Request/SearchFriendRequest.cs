@@ -44,6 +44,7 @@
             else
             {
                 DataSet dataSet = DataHelper.DataSetFromString(strs[1]);
+                dataSet.Tables[0].Columns.Remove("faceid");
                 searchFriendForm.DataSet = dataSet;
                 searchFriendForm.IsSearch = 1;
             }
