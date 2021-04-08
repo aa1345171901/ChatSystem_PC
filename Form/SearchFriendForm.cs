@@ -41,9 +41,12 @@
             else if (IsSearch == 2)
             {
                 IsSearch = 0;
-                DataSet.Tables[0].Clear();
-                dgvBasicResult.DataSource = DataSet.Tables[0];
-                dgvBasicResult.ClearSelection();
+                if (DataSet != null)
+                {
+                    DataSet.Tables[0].Clear();
+                    dgvBasicResult.DataSource = DataSet.Tables[0];
+                    dgvBasicResult.ClearSelection();
+                }
                 // MessageBox.Show("服务器无法响应，请稍后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -78,17 +81,17 @@
             // dgvBasicResult.DataSource = DataSet.Tables[0];
             // DataSet.Tables[0].Clear();
             dgvBasicResult.ClearSelection();
-            DataSet ds = DataHelper.DataSetFromString(
-@"<NewDataSet>
-    <userdata_x002C_user>
-        <Id>53</Id>
-        <NickName>hello</NickName>
-        <Age>0</Age>
-        <Sex>女</Sex>
-    </userdata_x002C_user>
-</NewDataSet>");
-            dgvBasicResult.DataSource = ds.Tables[0];// datagridview第一次设置，设置的位置可能不一样
-            ds.Tables[0].Clear();
+//            DataSet ds = DataHelper.DataSetFromString(
+//@"<NewDataSet>
+//    <userdata_x002C_user>
+//        <Id>53</Id>
+//        <NickName>hello</NickName>
+//        <Age>0</Age>
+//        <Sex>女</Sex>
+//    </userdata_x002C_user>
+//</NewDataSet>");
+//            dgvBasicResult.DataSource = ds.Tables[0];// datagridview第一次设置，设置的位置可能不一样
+//            ds.Tables[0].Clear();
         }
 
         /// <summary>
