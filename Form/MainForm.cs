@@ -220,6 +220,8 @@
             if (IsGetFriends == 1)
             {
                 IsGetFriends = 0;
+                // 清空原来的列表
+                sbFriends.Groups[0].Items.Clear();
                 foreach (var it in FriendDic)
                 {
                     // 创建一个SideBar项
@@ -230,6 +232,7 @@
                     // Groups[0]表示SideBar中的第一个组，也就是“我的好友”组
                     sbFriends.Groups[0].Items.Add(item); // 向SideBar的“我的好友”组中添加项
                 }
+                MessageBox.Show("好友列表刷新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -337,8 +340,6 @@
         /// </summary>
         private void ShowFriendList()
         {
-            // 清空原来的列表
-            sbFriends.Groups[0].Items.Clear();
             try
             {
                 getFriends.SendRequest(UserHelper.LoginId.ToString());
