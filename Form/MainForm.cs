@@ -232,7 +232,7 @@
                     // Groups[0]表示SideBar中的第一个组，也就是“我的好友”组
                     sbFriends.Groups[0].Items.Add(item); // 向SideBar的“我的好友”组中添加项
                 }
-                MessageBox.Show("好友列表刷新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("好友列表刷新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

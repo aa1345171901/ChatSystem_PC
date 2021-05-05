@@ -183,7 +183,6 @@
         /// </summary>
         private void showmsg_Tick(object sender, EventArgs e)
         {
-            ShowMessage();
             ResponseSend();
             ResponseReceive();
         }
